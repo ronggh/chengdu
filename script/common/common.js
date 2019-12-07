@@ -219,6 +219,7 @@ function loginAjaxRequest(param, fields, type) {
     // console.log(JSON.stringify(postdata))
     return postFnajax(postdata)
 }
+
 // ajax 数据请求函数
 function postFnajax(postbody) {
     return new Promise(function (resolve, reject) {
