@@ -1,0 +1,561 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* 重置页面背景色 */
+html,
+body {
+	width: 100%;
+	height: 100%;
+	background: #f0f2f5;
+	font-family: 'Microsoft YaHei', 'PingFangSC', Arial;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+textarea,
+p,
+blockquote,
+th,
+td,
+input,
+select,
+textarea,
+button {
+	margin: 0;
+	padding: 0;
+}
+
+/* 初始化标签在所有浏览器中的margin、padding值 */
+fieldset,
+img {
+	border: 0 none;
+}
+
+/* 重置fieldset（表单分组）、图片的边框为0*/
+dl,
+ul,
+ol,
+menu,
+li {
+	list-style: none;
+}
+
+/* 重置类表前导符号为none,menu在HTML5中有效 */
+blockquote,
+q {
+	quotes: none;
+}
+
+/* 重置嵌套引用的引号类型 */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+/* 重置嵌套引用*/
+input,
+select,
+textarea,
+button {
+	vertical-align: middle;
+}
+
+/* 重置表单控件垂直居中*/
+button {
+	border: 0 none;
+	cursor: pointer;
+}
+
+/* 重置页面文字属性 */
+a {
+	text-decoration: none;
+	font-weight: 500;
+	color: white;
+}
+
+/* 重置链接a标签 */
+a:active,
+a:hover {
+	text-decoration: none;
+}
+
+/* 重置链接a标签的鼠标滑动效果 */
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* 重置样式标签的样式 */
+caption {
+	display: none;
+}
+
+/* 重置表格标题为隐藏 */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layout: fixed;
+}
+
+/* 重置table属性 */
+img {
+	vertical-align: middle;
+}
+
+/* 图片在当前行内的垂直位置 */
+/* 页面设置 */
+/* 取消a标签点击后的虚线框 */
+a {
+	outline: none;
+}
+
+/*文字超长截断*/
+p {
+	word-break: break-all;
+}
+
+/*清除浮动*/
+.clear {
+	clear: both;
+}
+
+/*清除浮动--推荐使用*/
+.clearfix:before,
+.clearfix:after {
+	content: '';
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.pr {
+	position: relative;
+}
+
+.pa {
+	position: absolute;
+}
+
+.pf {
+	position: fixed;
+}
+
+.pyc {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*禁止文字被选中样式*/
+.textnoselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none !important;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+}
+
+:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.25);
+}
+
+::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.25);
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.25);
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.25);
+}
+
+input {
+	border: 1px solid #b7b9be;
+	border-radius: 3px;
+	padding-left: 5px;
+}
+
+::-ms-clear {
+	display: none;
+}
+
+::-ms-reveal {
+	display: none;
+}
+
+.iconfont {
+	font-family: "iconfont" !important;
+	font-size: 14px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 40px;
+	margin-right: 20px;
+}
+
+.hidetext {
+	width: 100%;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+
+.m0 {
+	margin: 0;
+}
+
+.p0 {
+	padding: 0;
+}
+
+.hidden {
+	display: none !important;
+}
+
+i {
+	font-style: normal;
+}
+
+.c_red {
+	color: #FF5722;
+}
+
+/* header right的 ul li */
+.headerRight {
+	background: rgba(27, 170, 254, 0.1);
+}
+
+/* ------------------------------------------  子页面中的通用样式  --------------------------------------*/
+/* 出现滚动条时设置滚动条的样式 */
+.OutermostLayer::-webkit-scrollbar {
+	/*//先改变body的滚动条宽度 */
+	width: 1px;
+}
+
+.OutermostLayer::-webkit-scrollbar-track {
+	/*//再改变body的滚动条轨道颜色*/
+	/* background: rgb(200, 200, 200); */
+	border-radius: 1px;
+}
+
+.OutermostLayer::-webkit-scrollbar-thumb {
+	/*//最后改变body的滚动条滑轨相关的样式*/
+	/* background: #0291e3; */
+	border-radius: 1px;
+}
+
+/* 子页面最外层div OutermostLayer样式 */
+.OutermostLayer {
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	box-sizing: border-box;
+	padding: 24px 32px;
+	overflow-y: scroll;
+}
+
+/*  所有的查询、重置按钮样式 */
+.fr .layui-btn {
+	height: 32px;
+	line-height: 32px;
+}
+
+.queryBtn {
+	background-color: #0291e3;
+}
+
+.ResetBtn {
+	background-color: #fff;
+	color: rgba(0, 0, 0, 0.65);
+	border: 1px solid rgba(204, 204, 204, 1);
+	border-radius: 4px;
+}
+
+.ResetBtn:hover {
+	color: rgba(0, 0, 0, 0.65);
+}
+
+/* 查询 input输入框的样式 */
+#inboxTime,
+#outBoxTime,
+.landTimeIcon {
+	background: url(../../images/DateIcon.png) no-repeat 210px 6px;
+}
+
+.layui-form-item {
+	display: inline-block;
+	line-height: 40px;
+}
+
+.layui-form-item .layui-form-label {
+	text-align: center;
+	display: inline-block;
+	line-height: 32px;
+	padding: 9px 10px;
+	width: 85px;
+	font-size: 14px;
+	font-family: Microsoft YaHei;
+	font-weight: 400;
+	color: rgba(102, 102, 102, 1);
+	line-height: 20px;
+}
+
+.layui-form-item .layui-input-block {
+	display: inline-block;
+	line-height: 32px;
+	margin-left: 0px;
+}
+
+.layui-table[n] tr:nth-child(even) {
+	background-color: #fff;
+}
+
+.layui-form-item .layui-input-block input {
+	width: 250px;
+	height: 32px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 3px;
+	padding-left: 5px;
+}
+
+/* 新增创建消息按钮 */
+.Establish {
+	width: 100%;
+	height: 30px;
+	text-align: center;
+	float: right;
+	margin:8px 0 6px 0;
+	border: 1px dashed #D9D9D9;
+}
+.Establish:hover{
+	border:#0291E3 1px dashed;
+}
+
+.Establish .layui-btn {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background-color: #fff;
+	color: rgb(0, 0, 0, 0.65);
+}
+.Establish:hover .layui-btn{
+	color:#0291E3;
+	
+}
+
+/* 表格中的编辑删除按钮 */
+.btn_primary {
+	color: #1E9FFF;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.btn_warn {
+	color: #f55d54;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+
+/* --------------------------------------   子页面弹窗的公共样式   --------------------------------------*/
+/* 弹出框 PopupLayer */
+.PopupLayer {
+	box-sizing: border-box;
+}
+
+.PopupLayer .layui-form-item {
+	margin-bottom: 0px;
+	margin-top: 24px;
+}
+
+
+.PopupLayer .layui-form-item .layui-form-label {
+	margin-left: 40px;
+	display: inline-block;
+	line-height: 32px;
+	text-align: right;
+	font-size: 14px;
+	color: rgba(102, 102, 102, 1);
+	padding: 0;
+}
+
+
+.PopupLayer .layui-form-item .layui-input-block input {
+	margin-left: 15px;
+	width: 300px;
+	height: 32px;
+	border: 1px solid rgba(183, 185, 190, 1);
+	border-radius: 3px;
+	padding-left: 5px;
+}
+
+.PopupLayer .layui-textarea {
+	margin-left: 15px;
+	width: 300px;
+}
+
+
+.PopupLayer .popup_Org {
+	width: 300px;
+	margin-left: 16px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid rgba(183, 185, 190, 1);
+	padding-left: 10px;
+	box-sizing: border-box;
+}
+
+.PopupLayer .popup_Org>.value_ft {
+	color: #ccc;
+}
+
+.PopupLayer .popup_Org>.value_ft.active {
+	color: #666
+}
+
+.PopupLayer p {
+	position: absolute;
+	line-height: 40px;
+	width: 50px;
+	right: 0px;
+	top: 30px;
+	color: #1E9FFF;
+	cursor: pointer;
+}
+
+
+.PopupLayer .popup_Area .treeArea,
+.PopupLayer .popup_Org .treeOrg {
+	width: 98%;
+	position: absolute;
+	z-index: 999;
+	max-height: 200px;
+	overflow-y: auto;
+	background-color: #fff;
+	border: 1px solid #d2d2d2;
+	top: 40px;
+	left: -2px;
+}
+
+.ztree {
+	width: 280px;
+}
+
+/* --------------------------------------   子页面弹窗的公共样式 end  --------------------------------------*/
+/* 弹出框中的 按钮 */
+.sunmitBtn {
+	display: block;
+	height: 64px;
+	line-height: 64px;
+	text-align: center;
+	margin-top: 15px;
+	border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.sunmitBtn .layui-btn {
+	height: 32px;
+	line-height: 32px;
+	margin: 0px 40px 0px 40px;
+}
+
+/* 子页面删除的样式 */
+.popup_inner {
+	line-height: 40px;
+	text-indent: 2em;
+	color: rgba(0, 0, 0, 0.65);
+	font-size: 14px;
+}
+
+.lay-ext-mulitsel .layui-input.multiple {
+	width: 300px;
+	margin-left: 15px;
+}
+
+/* --------------------------------------   子页列表修改的公共样式   --------------------------------------*/
+.layui-table td, .layui-table th, .layui-table-col-set, .layui-table-fixed-r, .layui-table-grid-down, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-total, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row]{
+	border-left: none;
+	border-right: none;
+}
+.layui-table-header .layui-table thead tr{
+	background-color: #FAFAFA;
+	width: 100%;
+}
+.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even) {
+    background-color: #fff;
+}
+.layui-table tr{
+	height: 54px;
+}
+.layui-laypage{
+	margin: 6px 0 0 0;
+}
+.layui-table-body table tbody tr:hover{
+	background: #e6f8ff;
+}

@@ -1,0 +1,112 @@
+<!----- 终端管理  设备  结构 equipmentManagement -------->
+<style>
+    .layui-form-select dl {
+        z-index: 9999;
+    }
+
+    .layui-table-cell {
+        overflow: visible;
+    }
+
+    .layui-table-box {
+        overflow: visible;
+    }
+
+    .layui-table-body {
+        overflow: visible;
+    }
+</style>
+<div id="equipmentManagement" class="OutermostLayer">
+    <div class="layui-form" lay-filter="equipment_form">
+        <div class="layui-form-item">
+            <input type="hidden" name="deverID" />
+            <label class="layui-form-label">设备名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="equipment_searchName" placeholder="请输入设备名称" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备类型</label>
+            <div class="layui-input-block">
+                <select name="select_form">
+                    <option value="0">全部</option>
+                    <option value="CONTROLLER">控制器</option>
+                    <option value="SENSOR">传感器</option>
+                    <option value="INTEGRATED">综合设备</option>
+                </select>
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="equipment_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="equipmentFn.addEquipment('insert')">+
+            新增</button>
+    </div>
+    <!-- 表格 -->
+    <div>
+        <table class="EquipmentTable" id="EquipmentTable" lay-filter="EquipmentTable"></table>
+    </div>
+    <!-- 分页 -->
+    <div id="Equipment_pagenation" class="fr"></div>
+</div>
+<!-- 设备操作 -->
+<script type="text/html" id="table_Equipment">
+    <div>
+        <span class="btn_primary" onclick="equipmentFn.addEquipment('update','{{d.DeviceID}}')">编辑</span>
+        <span class="btn_warn" onclick="equipmentFn.delDevicePop('{{d.DeviceName}}','{{d.DeviceID}}')">删除</span>
+    </div>
+</script>
+<!--删除设备-->
+<script type="text/html" id="del_dev_popup">
+    <div class="popup_inner">请确认删除{{d.DeviceName}}？</div>
+</script>
+<!-- 新增和编辑设备 -->
+<div id="addEdit_device" class="layui-form clearfix OutermostLayer" style="display:none">
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span class="c_red">*&nbsp;</span>设备名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="deviceName" lay-verify="required" placeholder="请输入设备名称" autocomplete="off"
+                class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span class="c_red">*&nbsp;</span>类型名称</label>
+        <div class="layui-input-block">
+            <select id="devicetype_selectName" lay-verify="required" name="device_selectName"
+                lay-filter="device_selectName">
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备备注</label>
+        <div class="layui-input-block">
+            <input type="text" name="device_Remarks" placeholder="请输入设备备注" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备标签</label>
+        <div class="layui-input-block">
+            <select id="tagData" name="device_tagData" lay-filter="device_tagData">
+            </select>
+        </div>
+    </div>
+    <!-- 通道 table -->
+    <div id="deviceSlotsTable">
+        <table class="DevTypetable" id="DevTypetable" lay-filter="DevTypetable"></table>
+    </div>
+    <div class="sunmitBtn">
+        <button class="layui-btn" lay-submit="" lay-filter="submitEquipment"
+            onclick="equipmentFn.EquipmentAddUpdata()">确定</button>
+        <button type="layui-btn" onclick="equipmentFn.quxiao()" class="layui-btn layui-btn-primary">取消</button>
+    </div>
+</div>
+<!-- 表格中的下拉框 -->
+<script type="text/html" id="titleTpl">
+    <select name="deviceSelect" lay-verify="required" id="deviceSelect" class="deviceSelect" lay-filter="deviceSelect">
+    </select>
+</script>
+<script type="text/javascript" src="../../script/farmManage/equipmentManage.js"></script>

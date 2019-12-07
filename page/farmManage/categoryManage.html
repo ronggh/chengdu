@@ -1,0 +1,75 @@
+<!-- 类别部分 -->
+<div class="category_box OutermostLayer">
+    <!--查询条件，品类按钮-->
+    <div class="layui-form" lay-filter=category_look>
+        <div class="layui-form-item">
+            <label class="layui-form-label">类别</label>
+            <div class="layui-input-block">
+                <input type="text" name="category_searchName" placeholder="请输入类别" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <select name="um_searchState">
+                    <option value="">所有</option>
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="category_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="categoryFn.AddcategoryFn('insert')">+
+            新增</button>
+    </div>
+    <div>
+        <table class="categoryTable" id="categoryTable" lay-filter="categoryTable"></table>
+    </div>
+    <div id="category_pagenation" class="fr"></div>
+</div>
+<!--类别的操作-->
+<script type="text/html" id="table_category">
+    <div>
+        <span class="btn_primary"
+            onclick="categoryFn.AddcategoryFn('update','{{d.ID}}','{{d.IsValid}}','{{d.CategoryName}}')">编辑</span>
+        <span class="btn_primary"
+            onclick="categoryFn.categoryState('{{d.ID}}','{{d.IsValid}}')">{{d.IsValid == 1?'禁用':'启用'}}</span>
+        <span class="btn_primary" onclick="LoadAction('varieties', '0','{{d.ID}}')">品种</span>
+        <span class="btn_warn" onclick="categoryFn.delcategoryPop('{{d.CategoryName}}','{{d.ID}}')">删除</span>
+    </div>
+</script>
+<!--删除类别-->
+<script type="text/html" id="delete_category">
+    <div class="popup_inner">请确认删除{{d.CategoryName}}？</div>
+</script>
+<!--新增、编辑类别弹窗-->
+<script type="text/html" id="category_name">
+    <div class="layui-form add_category_name PopupLayer">
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>类别：</label>
+            <div class="layui-input-block">
+                <input type="text" name="category_name" value="" lay-verify="required" placeholder="请输入类别"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>状态：</label>
+            <div class="layui-input-block">
+                <select name="IsValid" lay-verify="required" id="category_IsValid">
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="Addcategory">确认</button>
+        </div>
+    </div>
+</script>
+<script type="text/javascript" src="../../script/farmManage/categoryManage.js"></script>

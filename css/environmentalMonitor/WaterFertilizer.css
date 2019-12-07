@@ -1,0 +1,1282 @@
+
+    #farmlivevideo p {
+            font-size: 14px;
+            line-height: 16px;
+            color: #393d49;
+            text-indent: 14px;
+            border-left: 2px solid #389bff;
+            margin: 26px 0 12px;
+        }
+    
+            #farmlivevideo p span {
+                font-size: 12px;
+                color: #00c1de;
+                padding-left: 48px;
+                cursor: pointer;
+                background: url('../../images/za_farm_img3.png') right center no-repeat;
+                padding-right: 15px;
+            }
+    
+                #farmlivevideo p span.rotateimg {
+                    background-image: url('../../images/za_farm_img3plus.png');
+                }
+    
+                #farmlivevideo p span img {
+                    padding: 0 0 2px 5px;
+                }
+    
+        #farmlivevideo .videoitem {
+            text-align: center;
+            background-color: #222;
+            width: 815px;
+            height: 366px;
+            margin: 0 auto;
+        }
+    
+            #farmlivevideo .videoitem #livevideo {
+                width: 550px;
+                height: 366px;
+                float: left;
+            }
+    
+            #farmlivevideo .videoitem .livecontrol {
+                width: 265px;
+                height: 366px;
+                float: left;
+                background: url('../../images/za_farm_img (30).png') center center no-repeat;
+                background-size: 100% 100%;
+                position: relative;
+            }
+    
+        .livecontrol .livecontrol_arrow {
+            position: relative;
+            width: 182px;
+            height: 182px;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 57px auto 0;
+        }
+    
+            .livecontrol .livecontrol_arrow .clearfloat {
+                width: 182px;
+                height: 182px;
+                border-radius: 91px;
+                overflow: hidden;
+            }
+    
+                .livecontrol .livecontrol_arrow .clearfloat div {
+                    width: 50%;
+                    height: 50%;
+                    float: left;
+                    cursor: pointer;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+    
+            .livecontrol .livecontrol_arrow .livevideo_top {
+                background: url(../../images/za_farm_img15.png) center center no-repeat;
+            }
+    
+                .livecontrol .livecontrol_arrow .livevideo_top:hover {
+                    background-image: url(../../images/za_farm_img17.png);
+                }
+    
+                .livecontrol .livecontrol_arrow .livevideo_top.videoactive {
+                    background-image: url(../../images/za_farm_img16.png);
+                }
+    
+            .livecontrol .livecontrol_arrow .livevideo_right {
+                background-image: url(../../images/za_farm_img31.png);
+            }
+    
+                .livecontrol .livecontrol_arrow .livevideo_right:hover {
+                    background-image: url(../../images/za_farm_img33.png);
+                }
+    
+                .livecontrol .livecontrol_arrow .livevideo_right.videoactive {
+                    background-image: url(../../images/za_farm_img32.png);
+                }
+    
+            .livecontrol .livecontrol_arrow .livevideo_bottom {
+                background-image: url(../../images/za_farm_img36.png);
+            }
+    
+                .livecontrol .livecontrol_arrow .livevideo_bottom:hover {
+                    background-image: url(../../images/za_farm_img38.png);
+                }
+    
+                .livecontrol .livecontrol_arrow .livevideo_bottom.videoactive {
+                    background-image: url(../../images/za_farm_img37.png);
+                }
+    
+            .livecontrol .livecontrol_arrow .livevideo_left {
+                background-image: url(../../images/za_farm_img27.png);
+            }
+    
+                .livecontrol .livecontrol_arrow .livevideo_left:hover {
+                    background-image: url(../../images/za_farm_img29.png);
+                }
+    
+                .livecontrol .livecontrol_arrow .livevideo_left.videoactive {
+                    background-image: url(../../images/za_farm_img28.png);
+                }
+    
+            .livecontrol .livecontrol_arrow .livevideo_center {
+                position: absolute;
+                background-image: url(../../images/za_farm_img24.png);
+                border-radius: 50%;
+                transform: rotate(-45deg);
+                top: 46px;
+                left: 46px;
+            }
+    
+                .livecontrol .livecontrol_arrow .livevideo_center:hover {
+                    background-image: url(../../images/za_farm_img25.png);
+                }
+    
+                .livecontrol .livecontrol_arrow .livevideo_center:active {
+                    background-image: url(../../images/za_farm_img26.png);
+                }
+    
+        .livecontrol .livecontrol_size {
+            width: 100%;
+            height: 66px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    
+            .livecontrol .livecontrol_size > div {
+                width: 50%;
+                height: 66px;
+                float: left;
+                cursor: pointer;
+            }
+    
+            .livecontrol .livecontrol_size .livevideo_big {
+                background: url('../../images/za_farm_img (4).png') center no-repeat;
+            }
+    
+                .livecontrol .livecontrol_size .livevideo_big:hover {
+                    background: url('./../images/za_farm_img (6).png') center no-repeat;
+                }
+    
+                .livecontrol .livecontrol_size .livevideo_big:active {
+                    background: url('../../images/za_farm_img (5).png') center no-repeat;
+                }
+    
+            .livecontrol .livecontrol_size .livevideo_small {
+                background: url('../../images/za_farm_img (20).png') center no-repeat;
+            }
+    
+                .livecontrol .livecontrol_size .livevideo_small:hover {
+                    background: url('../../images/za_farm_img (22).png') center no-repeat;
+                }
+    
+                .livecontrol .livecontrol_size .livevideo_small:active {
+                    background: url('../../images/za_farm_img (21).png') center no-repeat;
+                }
+    
+        #equirementcontrol {
+            margin-top: 11px;
+        }
+    
+            #equirementcontrol p.equirecon_title {
+                font-size: 14px;
+                color: #393d49;
+                border-left: 2px solid #389bff;
+                text-indent: 14px;
+                line-height: 16px;
+                margin: 23px 0 12px;
+            }
+    
+                #equirementcontrol p.equirecon_title span {
+                    float: right;
+                    font-size: 12px;
+                    color: #00c1de;
+                    cursor: pointer;
+                }
+    
+            #equirementcontrol .equirecon {
+                margin: 0 auto;
+            }
+    
+                #equirementcontrol .equirecon .equireitem {
+                    min-width: 300px;
+                    border: 1px solid #bebebe;
+                    float: left;
+                    font-size: 14px;
+                    color: #666;
+                    height: 52px;
+                    box-sizing: border-box;
+                    line-height: 52px;
+                    text-indent: 14px;
+                    margin: 10px;
+                }
+    
+                    #equirementcontrol .equirecon .equireitem span {
+                        display: inline-block;
+                        float: left;
+                        height: 50px;
+                    }
+    
+                    #equirementcontrol .equirecon .equireitem > span:first-child {
+                        width: 44%;
+                        height: 50px;
+                        font-size: 14px;
+                        align-items: center;
+                        line-height: 20px;
+                        justify-content: center;
+                        text-indent: 0px;
+                        padding-left: 11px;
+                        box-sizing: border-box;
+                        display: flex;
+                        white-space: nowrap\9;
+                        overflow: hidden\9;
+                        text-overflow: ellipsis\9;
+                        line-height: 50px\9;
+                    }
+    
+                    #equirementcontrol .equirecon .equireitem span.controlswitch {
+                        width: 33%;
+                        height: 32px;
+                        border: 1px solid #b5b5b5;
+                        border-radius: 15px;
+                        margin-top: 10px;
+                        box-sizing: border-box;
+                        margin-right: 10%;
+                        position: relative;
+                    }
+    
+                        #equirementcontrol .equirecon .equireitem span.controlswitch span {
+                            float: left;
+                            width: 33.2%;
+                            height: 30px;
+                            text-align: center;
+                            line-height: 31px;
+                            text-indent: 0;
+                            cursor: pointer;
+                            position: relative;
+                            z-index: 99;
+                            font-size: 12px;
+                        }
+    
+                            #equirementcontrol .equirecon .equireitem span.controlswitch span.switch {
+                                content: '.';
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                width: 33%;
+                                display: block;
+                                height: 30px;
+                                background-color: red;
+                                border-radius: 50%;
+                                z-index: 1;
+                            }
+    
+                            #equirementcontrol .equirecon .equireitem span.controlswitch span.active {
+                                color: #fff;
+                                font-size: 15px;
+                                text-indent: -1px;
+                            }
+    
+                    #equirementcontrol .equirecon .equireitem span.olddata {
+                        width: 13%;
+                        height: 50px;
+                        text-align: center;
+                        display: inline-block;
+                        background: url('../../images/za_farm_img (11).png') 0 center no-repeat;
+                        cursor: pointer;
+                    }
+    
+                        #equirementcontrol .equirecon .equireitem span.olddata:hover {
+                            background-image: url('../../images/za_farm_img11plus.png');
+                        }
+    
+                #equirementcontrol .equirecon div.unlive {
+                    background-color: #f5f5f5;
+                    border: 1px solid #eee;
+                }
+    
+                #equirementcontrol .equirecon .unlive span.unlive {
+                    display: block;
+                    width: 33%;
+                    height: 30px;
+                    margin-right: 10%;
+                    margin-top: 10px;
+                    background: url('../../images/za_farm_img (13).png') 24px 10px no-repeat;
+                    line-height: 30px;
+                    text-indent: 13%;
+                    font-size: 12px;
+                    color: #393d49;
+                }
+    
+        #chart .chartbtn {
+            margin-top: 10px;
+            padding: 0 15px;
+        }
+        #dateTime,#dateTime2{height: 23px;width: 180px;padding-left: 10px;margin-left: 10px;}
+       
+        #echartcontain {
+            height: 360px;
+            margin: 5px auto 10px;
+        }
+        .popboxselect {
+            width: 230px;
+            position: absolute;
+            top: 44px;
+            left: 54px;
+            color: #666;
+            box-shadow: 0 1px 11px -3px rgba(120,120,120,0.9);
+            -webkit-box-shadow: 0 1px 11px -3px rgba(120,120,120,0.9);
+            box-sizing: border-box;
+            background-color: #fff;
+            z-index: 9999;
+            display: none;
+            padding: 5px 0;
+        }
+    
+            .popboxselect::after {
+                display: block;
+                content: '.';
+                font-size: 0;
+                width: 21px;
+                height: 14px;
+                background: url(../../images/selectboxs.png) 0 0 no-repeat;
+                position: absolute;
+                top: -14px;
+                left: 105px;
+            }
+    
+            .popboxselect ul li {
+                float: left;
+                width: 100%;
+                line-height: 36px;
+                box-sizing: border-box;
+                padding: 0 10px;
+            }
+    
+                .popboxselect ul li a {
+                    display: inline-block;
+                    color: #666;
+                }
+    
+        #farmlivevideo .popboxselect {
+            width: 180px;
+            top: 30px;
+            left: 74px;
+        }
+    
+            #farmlivevideo .popboxselect::after {
+                left: 79px;
+            }
+    
+        #za_content .layui-layer-title {
+            background-color: #eee;
+        }
+    
+        .layui-table[lay-skin=line] th {
+            color: #333;
+            font-weight: 400;
+        }
+    
+        .layui-table thead tr {
+            background-color: #f9f9f9;
+        }
+    
+        .layui-table[lay-skin=line] td, .layui-table[lay-skin=line] th {
+            border-color: #eee;
+        }
+    
+        .clearfix:before {
+            zoom: 1;
+        }
+    
+        .clearfix:before, .clearfix:after {
+            display: table;
+            line-height: 0;
+            content: '';
+        }
+    
+        .clearfix:after {
+            clear: both;
+        }
+    
+        .mt25 {
+            margin-top: 25px;
+        }
+    
+        .refresh {
+            animation: rotate .5s linear;
+            -webkit-animation: rotate .3s linear;
+        }
+    
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+    
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+    
+        @-webkit-keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+    
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+    
+        .za_conmian {
+            box-sizing: border-box;
+        }
+    
+        #za_realData {
+            margin-top: 12px;
+        }
+    
+            #za_realData .title .fl, #za_machine .title .fl, #za_weather .title .fl {
+                height: 18px;
+                line-height: 18px;
+                font-size: 14px;
+                border-left: 2px solid #389BFF;
+                padding-left: 12px;
+            }
+    
+            #za_realData .title .reload, #za_machine .title .reload, #za_weather .title .reload {
+                cursor: pointer;
+                color: #00c1de;
+            }
+    
+            #za_realData .content {
+                margin-top: -25px;
+            }
+    
+        .content .level_one .sub_tit {
+            position: relative;
+            width: 300px;
+            height: 22px;
+            margin: 3px auto 25px;
+        }
+    
+            .content .level_one .sub_tit p {
+                position: absolute;
+                bottom: -11px;
+                left: 118px;
+                font-size: 14px;
+                text-align: center;
+                width: 64px;
+                height: 22px;
+                border-radius: 11px;
+            }
+    
+        .land_line {
+            border-bottom: 1px solid #FFF0D7;
+        }
+    
+        .water_line {
+            border-bottom: 1px solid #D7F5FF;
+        }
+    
+        .weather_line {
+            border-bottom: 1px solid #F7EAFA;
+        }
+    
+        .air_line {
+            border-bottom: 1px solid #E6F7E7;
+        }
+    
+        .land {
+            background: #FFF0D7;
+            color: #de965f;
+        }
+    
+        .water {
+            background: #D7F5FF;
+            color: #00b7ee;
+        }
+    
+        .weather {
+            background: #F7EAFA;
+            color: #c360e4;
+        }
+    
+        .air {
+            background: #E6F7E7;
+            color: #2daf61;
+        }
+    
+        .secondary .level_two {
+            float: left;
+            width: 230px;
+            margin: 0 22px 10px;
+        }
+    
+            .secondary .level_two .label {
+                height: 40px;
+                line-height: 40px;
+                font-size: 14px;
+                text-align: center;
+                background: #6e7385;
+                color: #fff;
+            }
+    
+                .secondary .level_two .label img {
+                    margin-top: -2px;
+                    margin-right: 2px;
+                }
+    
+            .secondary .level_two .wrap_border {
+                border: 1px solid #CACACA;
+            }
+    
+            .secondary .level_two .detail {
+                height: 132px;
+                box-sizing: border-box;
+                padding: 25px 50px 15px;
+            }
+    
+            .secondary .level_two .offline_detail {
+                height: 132px;
+                background: url(../../images/offline.png)no-repeat center;
+            }
+    
+            .secondary .level_two .detail .creact_num {
+                height: 45px;
+                font-size: 30px;
+                font-weight: 700;
+                color: #389bff;
+            }
+    
+                .secondary .level_two .detail .creact_num sup {
+                    font-size: 14px;
+                    color: #c6c6c6;
+                    font-weight: 400;
+                    padding: 0 0 0 5px;
+                }
+    
+            .secondary .level_two .detail .progress_line {
+                position: relative;
+                width: 100%;
+                height: 0;
+                border: 1px solid #a0ccff;
+                background-color: #a0ccff;
+                box-shadow: 0 0 2px #a0ccff;
+                margin: 10px 0;
+            }
+    
+            .secondary .level_two .detail .progress_circle {
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                background: #389bff;
+                border-radius: 4px;
+                top: -4px;
+                left: 0;
+                box-shadow: 0 0 3px #389bff;
+            }
+    
+            .secondary .level_two .detail .normal_area {
+                height: 25px;
+                line-height: 25px;
+                text-align: center;
+                font-size: 12px;
+                color: #999;
+            }
+    
+            .secondary .level_two .fresh_time {
+                border-bottom: 1px solid #CACACA;
+                font-size: 12px;
+                color: #c6c6c6;
+                padding: 6px 8px;
+            }
+    
+                .secondary .level_two .fresh_time .normal_status {
+                    color: #00a344;
+                }
+    
+                .secondary .level_two .fresh_time .offline_status {
+                    color: #333;
+                }
+    
+            .secondary .level_two .operate div {
+                cursor: pointer;
+                width: 50%;
+                height: 30px;
+                line-height: 30px;
+                color: #999;
+                text-align: center;
+            }
+    
+            .secondary .level_two .operate .fl img {
+                margin-top: -6px;
+                display: none;
+            }
+    
+            .secondary .level_two .operate .fr img {
+                margin-top: -4px;
+                display: none;
+            }
+    
+            .secondary .level_two .operate .fl {
+                border-right: 1px solid #CACACA;
+                box-sizing: border-box;
+                /* display: none;    */
+            }
+    
+            .secondary .level_two.danger .wrap_border {
+                border: 1px solid #fe4d4d;
+            }
+    
+            .secondary .level_two.danger .label {
+                background: #fe4d4d;
+            }
+    
+            .secondary .level_two.danger .detail .progress_line {
+                border: 1px solid #fe4d4d;
+                box-shadow: 0 0 1px #fe4d4d;
+                background-color: #fe4d4d;
+            }
+    
+            .secondary .level_two.danger .detail .progress_circle {
+                background: #fe4d4d;
+                box-shadow: 0 0 3px #fe4d4d;
+            }
+    
+            .secondary .level_two.danger .fresh_time {
+                border-bottom: 1px solid #fe4d4d;
+            }
+    
+            .secondary .level_two.danger .operate .fl {
+                border-right: 1px solid #fe4d4d;
+    
+            }
+    
+        .machine_con {
+            border: 1px solid #eee;
+            padding-top: 40px;
+        }
+    
+            .machine_con .container {
+                width: 770px;
+                height: 360px;
+                z-index: 6;
+                margin: 0 auto;
+            }
+    
+                .machine_con .container .top_left {
+                    top: 0;
+                    left: 0;
+                    z-index: 6;
+                }
+    
+                    .machine_con .container .top_left li {
+                        cursor: pointer;
+                        float: left;
+                        text-align: center;
+                        margin-right: 15px;
+                    }
+    
+                        .machine_con .container .top_left li.total p:first-child {
+                            background: #389bff;
+                            color: #fff;
+                            font-size: 12px;
+                            padding: 0 8px;
+                        }
+    
+                        .machine_con .container .top_left li.total p:last-child {
+                            border: 1px solid #389bff;
+                            color: #389bff;
+                            font-size: 16px;
+                        }
+    
+                        .machine_con .container .top_left li p:first-child {
+                            background: #eaedf1;
+                            font-size: 12px;
+                            color: #999;
+                            padding: 0 3px;
+                        }
+    
+                        .machine_con .container .top_left li p:last-child {
+                            border: 1px solid #eaedf1;
+                            font-size: 16px;
+                            color: #389bff;
+                        }
+    
+                .machine_con .container .top_right {
+                    top: 0;
+                    right: 0;
+                    z-index: 6;
+                }
+    
+                    .machine_con .container .top_right li {
+                        cursor: pointer;
+                        float: right;
+                        margin-left: 15px;
+                        text-align: center;
+                    }
+    
+                .machine_con .container .bottom_left {
+                    bottom: 82px;
+                    left: 0;
+                    z-index: 6;
+                }
+    
+                    .machine_con .container .bottom_left li {
+                        cursor: pointer;
+                        float: right;
+                        text-align: center;
+                    }
+    
+                        .machine_con .container .bottom_left li p:first-child {
+                            background: #389bff;
+                            font-size: 12px;
+                            color: #fff;
+                            padding: 0 8px;
+                        }
+    
+                        .machine_con .container .bottom_left li p:last-child {
+                            border: 1px solid #389bff;
+                            font-size: 16px;
+                            color: #389bff;
+                        }
+    
+                .machine_con .container .bottom_right {
+                    right: 54px;
+                    bottom: 20px;
+                    width: 670px;
+                    height: 300px;
+                }
+    
+                    .machine_con .container .bottom_right div.tong_item, .machine_con .container .bottom_right .bg, .machine_con .container .bottom_right .tong_item .tong .p1_text {
+                        position: absolute;
+                        z-index: 3;
+                    }
+    
+                    .machine_con .container .bottom_right .bg {
+                        top: -22px;
+                        left: 50px;
+                        width: 680px;
+                        height: 320px;
+                        z-index: 4;
+                    }
+    
+                    .machine_con .container .bottom_right .p1 {
+                        bottom: 134px;
+                        left: 56px;
+                        width: 70px;
+                        height: 130px;
+                        z-index: 5;
+                    }
+    
+                    .machine_con .container .bottom_right .p2 {
+                        bottom: 134px;
+                        left: 138px;
+                        width: 70px;
+                        height: 130px;
+                        z-index: 5;
+                    }
+    
+                    .machine_con .container .bottom_right .p3 {
+                        bottom: 134px;
+                        left: 219px;
+                        width: 70px;
+                        height: 130px;
+                        z-index: 5;
+                    }
+    
+                    .machine_con .container .bottom_right .p4 {
+                        bottom: 134px;
+                        left: 300px;
+                        width: 70px;
+                        height: 130px;
+                        z-index: 5;
+                    }
+        /* 水肥一体机的背景图状态 */
+        .work_bucket {
+            background: url("../../images/work_bucket.gif") no-repeat center;
+            color: #FFF;
+        }
+    
+        .work_bucket {
+            background: url("../../images/work_bucket.gif") no-repeat center;
+            color: #FFF;
+        }
+    
+        .static_bucket {
+            background: url("../../images/static_bucket.png") no-repeat center;
+            color: #FFF;
+        }
+    
+        .empty_bucket {
+            background: url("../../images/empty_bucket.png") no-repeat center;
+            color: #389bff;
+        }
+    
+        .stop_machine {
+            background: url("../../images/stop_machine.png") no-repeat center;
+        }
+    
+        .work_machine {
+            background: url("../../images/work_machine.gif") no-repeat center;
+        }
+    
+        .machine_con .container .bottom_right .tong_item:nth-of-type(1) {
+            bottom: 134px;
+            left: 56px;
+            width: 70px;
+            height: 150px;
+            z-index: 5;
+        }
+    
+        .machine_con .container .bottom_right .tong_item:nth-of-type(2) {
+            bottom: 134px;
+            left: 138px;
+            width: 70px;
+            height: 150px;
+            z-index: 5;
+        }
+    
+        .machine_con .container .bottom_right .tong_item:nth-of-type(3) {
+            bottom: 134px;
+            left: 219px;
+            width: 70px;
+            height: 150px;
+            z-index: 5;
+        }
+    
+        .machine_con .container .bottom_right .tong_item:nth-of-type(4) {
+            bottom: 134px;
+            left: 300px;
+            width: 70px;
+            height: 150px;
+            z-index: 5;
+        }
+    
+        .machine_con .container .bottom_right .tong_item .tong {
+            width: 70px;
+            height: 130px;
+        }
+    
+        .machine_con .container .bottom_right .tong_item .tongnum {
+            bottom: 265px;
+            left: 82px;
+            color: #999;
+            z-index: 6;
+            text-align: center;
+        }
+    
+        .machine_con .container .bottom_right .tong_item:nth-of-type(2) .tongnum {
+            left: 165px;
+        }
+    
+        .machine_con .container .bottom_right .tong_item:nth-of-type(3) .tongnum {
+            left: 246px;
+        }
+    
+        .machine_con .container .bottom_right .tong_item:nth-of-type(4) .tongnum {
+            left: 328px;
+        }
+    
+        .machine_con .container .bottom_right .tong_item .tong .p1_text {
+            width: 50px;
+            text-align: center;
+            top: 70px;
+            left: 10px;
+            z-index: 6;
+        }
+    
+        .weather_con {
+            border: 1px solid #eee;
+            padding-top: 20px;
+        }
+    
+            .weather_con .container {
+                width: 800px;
+                height: 420px;
+                margin: 0 auto;
+            }
+    
+            .weather_con .common {
+                width: 113px;
+                cursor: pointer;
+                text-align: center;
+                position: absolute;
+            }
+    
+            .weather_con .w1 {
+                bottom: 218px;
+                left: 12px;
+                z-index: 2;
+            }
+    
+            .weather_con .w2 {
+                bottom: 150px;
+                left: 12px;
+                z-index: 2;
+            }
+    
+            .weather_con .w3 {
+                bottom: 55px;
+                left: 12px;
+                z-index: 2;
+            }
+    
+            .weather_con .w4 {
+                top: 25px;
+                left: 130px;
+                z-index: 2;
+            }
+    
+            .weather_con .w5 {
+                top: 25px;
+                right: 175px;
+                z-index: 2;
+            }
+    
+            .weather_con .w6 {
+                width: 70px;
+                top: 155px;
+                right: 96px;
+                z-index: 2;
+            }
+    
+            .weather_con .w7 {
+                width: 70px;
+                top: 155px;
+                right: 10px;
+                z-index: 2;
+            }
+    
+            .weather_con .w8 {
+                bottom: 155px;
+                right: 52px;
+                z-index: 2;
+            }
+    
+            .weather_con .bottom {
+                top: 0;
+                left: 100px;
+                width: 360px;
+                height: 300px;
+            }
+    
+                .weather_con .bottom .head {
+                    top: 0;
+                    left: 0;
+                }
+    
+                .weather_con .bottom .body {
+                    top: 68px;
+                    left: 0;
+                }
+    
+            .weather_con .common:hover, .machine_con .container li.fertilizer:hover, .machine_con .container .top_left li:hover {
+                box-shadow: 0 0 13px -2px rgba(120,120,120,0.6);
+                -webkit-box-shadow: 0 0 13px -2px rgba(120,120,120,0.6);
+            }
+    
+        .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            z-index: 3;
+            overflow-y: auto;
+            padding: 30px 10%;
+        }
+    
+        #echarts {
+            width: 80%;
+            height: 300px;
+            background: #fff !important;
+            border-radius: 10px;
+        }
+    
+        p.footer {
+            width: 100%;
+            font-size: 12px;
+            color: #c6c6c6;
+            line-height: 54px;
+            margin-top: 3px;
+            text-align: center;
+        }
+    
+        p.poptitle {
+            line-height: 40px;
+            font-size: 14px;
+            font-family: "microsoft yahei",Arial, Helvetica, sans-serif;
+        }
+    
+            p.poptitle span.fl {
+                font-weight: 700;
+                font-size: 18px;
+            }
+    
+            p.poptitle span.flfirst {
+                float: left;
+                font-size: 27px;
+                padding-right: 12px;
+                margin-top: -2px;
+            }
+    
+        p.poptext {
+            font-size: 14px;
+            line-height: 24px;
+        }
+    
+        .layui-table[lay-skin=line] td.open {
+            color: #5cb948;
+        }
+    
+        .layui-table[lay-skin=line] td.stop {
+            color: #f9b72c;
+        }
+    
+        .layui-form-select dl dd.layui-this {
+            background-color: #00c1de;
+        }
+    
+        .za_farmheader .za_farmselect .layui-form-select .layui-input, p.poptitle span.fr {
+            padding-left: 20px;
+        }
+    
+        .za_farmselect form, #za_realData .title, #za_machine .title, #za_weather .title {
+            height: 30px;
+        }
+    
+        #farmlivevideo, .pr {
+            position: relative;
+        }
+    
+        #equirementcontrol p.equirecon_title span img, #za_realData .title .reload img, #za_machine .title .reload img, #za_weather .title .reload img {
+            vertical-align: -6px;
+        }
+    
+        #equirementcontrol .equirecon .unlive span.controlswitch, #chart, .hidden {
+            display: none;
+        }
+    
+        .popboxselect ul li:hover, .secondary .level_two .operate .fl:hover, .secondary .level_two .operate .fr:hover {
+            background-color: #f5f5f5;
+        }
+    
+        .layui-table thead tr th, .layui-table[lay-skin=line] td {
+            color: #666;
+        }
+    
+        .pa, .machine_con .container .bottom_right img {
+            position: absolute;
+        }
+    
+        #za_machine .title .reload, #za_realData .title .reload {
+            color: #00c1de;
+        }
+    
+        .secondary .level_two .fresh_time .abnormal_status, .secondary .level_two.danger .detail .creact_num, .secondary .level_two.danger .fresh_time .status, .layui-table[lay-skin=line] td.close, .layui-table[lay-skin=line] td.failure {
+            color: #fe4d4d;
+        }
+    
+        .machine_con .container .top_right li p:first-child, .weather_con .common p:first-child {
+            background: #eaedf1;
+            font-size: 12px;
+            color: #999;
+        }
+    
+        .machine_con .container .top_right li p:last-child, .weather_con .common p:last-child {
+            border: 1px solid #eaedf1;
+            font-size: 16px;
+            color: #389bff;
+            padding: 0 10px;
+        }
+    
+    
+    
+    
+        #equirementcontrol .equirecon .twoswitch span.controlswitch span:nth-of-type(2) {
+            float: right;
+            text-indent: 1px;
+        }
+    
+    
+    
+    .za_farmheader {line-height: 40px;margin-bottom: 20px;}
+    .Refresh {float: right; color: #1e9fff;cursor: pointer; position: relative;}
+            
+                    .Refresh img {
+                    position: absolute;
+                    left: -24px;
+                    top: 10px;
+                    /* animation: rotate .5s linear;
+                    -webkit-animation: rotate .3s linear; */
+                }
+                .refresh {
+                    animation: rotate .5s linear;
+                    -webkit-animation: rotate .3s linear;
+                }
+    .za_farmheader .za_farmselect {min-width: 145px;height: 30px;line-height: 30px;margin-top: 6px;margin-left: 10px;display: inline-block;}
+    .za_farmheader a.selectadd {color: #00c1de;padding-left: 10px;font-size: 14px;}
+    .za_farmselect form .layui-form-data .layui-input-block {margin-left: 0; }
+    .za_farmselect form .layui-form-select dl dd, .za_farmselect form .layui-form-select dl dt {padding: 0 15px;}
+    .za_farmselect form .layui-form-data .layui-input, .za_farmselect form .layui-form-data .layui-select {line-height: 30px;height: 30px;}
+    #za_realData .title .fl, #za_machine .title .fl, #za_weather .title .fl {
+                    height: 18px;
+                    line-height: 18px;
+                    font-size: 14px;
+                    border-left: 2px solid #389BFF;
+                    padding-left: 12px;
+                }
+                #equirementcontrol {
+                    margin-top: 11px;
+                }
+    
+    
+            #equirementcontrol p.equirecon_title {
+                font-size: 14px;
+                color: #393d49;
+                border-left: 2px solid #389bff;
+                text-indent: 14px;
+                line-height: 16px;
+                margin: 23px 0 12px;
+            }
+    
+                #equirementcontrol p.equirecon_title span {
+                    float: right;
+                    font-size: 12px;
+                    color: #00c1de;
+                    cursor: pointer;
+                }
+    
+            #equirementcontrol .equirecon {
+                margin: 0 auto;
+            }
+    
+                #equirementcontrol .equirecon .equireitem {
+                    min-width: 300px;
+                    border: 1px solid #bebebe;
+                    float: left;
+                    font-size: 14px;
+                    color: #666;
+                    height: 52px;
+                    box-sizing: border-box;
+                    line-height: 52px;
+                    text-indent: 14px;
+                    margin: 10px;
+                }
+    
+                    #equirementcontrol .equirecon .equireitem span {
+                        display: inline-block;
+                        float: left;
+                        height: 50px;
+                    }
+    
+                    #equirementcontrol .equirecon .equireitem > span:first-child {
+                        width: 44%;
+                        height: 50px;
+                        font-size: 14px;
+                        align-items: center;
+                        line-height: 20px;
+                        justify-content: center;
+                        text-indent: 0px;
+                        padding-left: 11px;
+                        box-sizing: border-box;
+                        display: flex;
+                        white-space: nowrap\9;
+                        overflow: hidden\9;
+                        text-overflow: ellipsis\9;
+                        line-height: 50px\9;
+                    }
+    
+                    #equirementcontrol .equirecon .equireitem span.controlswitch {
+                        width: 33%;
+                        height: 32px;
+                        border: 1px solid #b5b5b5;
+                        border-radius: 15px;
+                        margin-top: 10px;
+                        box-sizing: border-box;
+                        margin-right: 10%;
+                        position: relative;
+                    }
+    
+                        #equirementcontrol .equirecon .equireitem span.controlswitch span {
+                            float: left;
+                            width: 33.2%;
+                            height: 30px;
+                            text-align: center;
+                            line-height: 31px;
+                            text-indent: 0;
+                            cursor: pointer;
+                            position: relative;
+                            z-index: 99;
+                            font-size: 12px;
+                        }
+    
+                            #equirementcontrol .equirecon .equireitem span.controlswitch span.switch {
+                                content: '.';
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                width: 33%;
+                                display: block;
+                                height: 30px;
+                                background-color: red;
+                                border-radius: 50%;
+                                z-index: 1;
+                            }
+    
+                            #equirementcontrol .equirecon .equireitem span.controlswitch span.active {
+                                color: #fff;
+                                font-size: 15px;
+                                text-indent: -1px;
+                            }
+    
+                    #equirementcontrol .equirecon .equireitem span.olddata {
+                        width: 13%;
+                        height: 50px;
+                        text-align: center;
+                        display: inline-block;
+                        background: url('../../images/za_farm_img (11).png') 0 center no-repeat;
+                        cursor: pointer;
+                    }
+    
+                        #equirementcontrol .equirecon .equireitem span.olddata:hover {
+                            background-image: url('../../images/za_farm_img11plus.png');
+                        }
+    
+                #equirementcontrol .equirecon div.unlive {
+                    background-color: #f5f5f5;
+                    border: 1px solid #eee;
+                }
+    
+                #equirementcontrol .equirecon .unlive span.unlive {
+                    display: block;
+                    width: 33%;
+                    height: 30px;
+                    margin-right: 10%;
+                    margin-top: 10px;
+                    background: url('../../images/za_farm_img (13).png') 24px 10px no-repeat;
+                    line-height: 30px;
+                    text-indent: 13%;
+                    font-size: 12px;
+                    color: #393d49;
+                }
+    
+                #equirementcontrol p.equirecon_title span img, #za_realData .title .reload img, #za_machine .title .reload img, #za_weather .title .reload img {
+            vertical-align: -6px;
+        }
+    
+        #equirementcontrol .equirecon .unlive span.controlswitch, #chart, .hidden {
+            display: none;
+        }
+        .control_equipment,.dev_title{height: 40px;width: 100%;margin-top: 20px;float: left;}
+        .dev_title{margin-bottom: 15px;}
+        .dev_title span{line-height: 40px;border-left: 2px solid #1e9fff;padding-left: 30px;color: black;font-size: 18px;}
+        .control_equipment span{line-height: 20px;border-left: 2px solid #1e9fff;padding-left: 30px;color: black;font-size: 18px;}

@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="../../css/croppingModel/modelExperiment.css">
+<link rel="stylesheet" href="../../css/croppingModel/RecommendMoxing.css">
+<!-- 标准化生产 初始化页面 -->
+<div class="Production_box OutermostLayer">
+    <div>
+        <table class="standTable" id="standTable" lay-filter="standTable"></table>
+    </div>
+    <!--操作-->
+    <script type="text/html" id="stand_table">
+        <div>
+            <span class="btn_primary" onclick="standProduct.AddstandProduct('look','{{d.ID}}')">查看</span>
+        </div>
+    </script>
+    <!--新增弹窗-->
+    <script type="text/html" id="add_modelstand">
+        <div class="layui-form model_experiment">
+            <div class="growthStage">
+                <ul class="tab clearfix" id='stage'>
+                </ul>
+                <ul class="tabcon" id='stage_params'>
+                </ul>
+            </div>
+        </div>
+    </script>
+</div>
+<script type="text/javascript" src="../../script/croppingModel/RecommendMoxing.js"></script>

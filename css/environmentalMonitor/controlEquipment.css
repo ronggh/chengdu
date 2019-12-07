@@ -1,0 +1,174 @@
+/* 数据内容 */
+#equirementcontrol {
+    margin-top: 11px;
+}
+
+#equirementcontrol p.equirecon_title {
+    font-size: 14px;
+    color: #393d49;
+    border-left: 2px solid #389bff;
+    text-indent: 14px;
+    line-height: 16px;
+    margin: 23px 0 12px;
+}
+
+#equirementcontrol p.equirecon_title span {
+    float: right;
+    font-size: 12px;
+    color: #00c1de;
+    cursor: pointer;
+}
+
+#equirementcontrol .equirecon {
+    margin: 0 auto;
+    width: 1090px;
+    padding-left: 10px;
+}
+
+#equirementcontrol .equirecon .equireitem {
+    min-width: 338px;
+    border: 1px solid #bebebe;
+    float: left;
+    font-size: 14px;
+    color: #666;
+    height: 52px;
+    box-sizing: border-box;
+    line-height: 58px;
+    text-indent: 14px;
+    margin: 10px;
+}
+
+#equirementcontrol .equirecon .equireitem span {
+    display: inline-block;
+    float: left;
+    height: 50px;
+}
+
+#equirementcontrol .equirecon .equireitem>span:first-child {
+    width: 44%;
+    height: 50px;
+    font-size: 14px;
+    align-items: center;
+    line-height: 20px;
+    justify-content: center;
+    text-indent: 0px;
+    padding-left: 11px;
+    box-sizing: border-box;
+    display: flex;
+    white-space: nowrap\9;
+    overflow: hidden\9;
+    text-overflow: ellipsis\9;
+    line-height: 50px\9;
+}
+
+#equirementcontrol .equirecon .equireitem span.controlswitch {
+    width: 33%;
+    height: 32px;
+    border: 1px solid #b5b5b5;
+    border-radius: 15px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    margin-right: 10%;
+    position: relative;
+}
+
+#equirementcontrol .equirecon .equireitem span.controlswitch span {
+    float: left;
+    width: 33.2%;
+    height: 30px;
+    text-align: center;
+    line-height: 31px;
+    text-indent: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 99;
+    font-size: 12px;
+}
+
+#equirementcontrol .equirecon .equireitem span.controlswitch span.switch {
+    content: '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    display: block;
+    height: 30px;
+    background-color: red;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+#equirementcontrol .equirecon .equireitem span.controlswitch span.active {
+    color: #fff;
+    font-size: 15px;
+    text-indent: -1px;
+}
+
+#equirementcontrol .equirecon .equireitem span.olddata {
+    width: 13%;
+    height: 50px;
+    text-align: center;
+    display: inline-block;
+    background: url('../../images/za_farm_img (11).png') 0 center no-repeat;
+    cursor: pointer;
+}
+
+#equirementcontrol .equirecon .equireitem span.olddata:hover {
+    background-image: url('../../images/za_farm_img11plus.png');
+}
+
+#equirementcontrol .equirecon div.unlive {
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
+}
+
+#equirementcontrol .equirecon .unlive span.unlive {
+    display: block;
+    width: 33%;
+    height: 30px;
+    margin-right: 10%;
+    margin-top: 10px;
+    background: url('../../images/za_farm_img (13).png') 24px 10px no-repeat;
+    line-height: 30px;
+    text-indent: 13%;
+    font-size: 12px;
+    color: #393d49;
+}
+
+#equirementcontrol p.equirecon_title span img,
+#za_realData .title .reload img,
+#za_machine .title .reload img,
+#za_weather .title .reload img {
+    vertical-align: -6px;
+}
+
+#equirementcontrol .equirecon .unlive span.controlswitch,
+#chart,
+.hidden {
+    display: none;
+}
+
+#equirementcontrol .equirecon .equireitem span.controlswitch span.conitem:nth-of-type(3) {
+    float: right;
+    text-indent: 1px;
+}
+
+#equirementcontrol .equirecon .twoswitch span.controlswitch span:nth-of-type(2) {
+    float: right;
+    text-indent: 1px;
+}
+.secondary .level_two .fresh_time .abnormal_status,
+.secondary .level_two.danger .detail .creact_num,
+.secondary .level_two.danger .fresh_time .status,
+.layui-table[lay-skin=line] td.close,
+.layui-table[lay-skin=line] td.failure {
+    color: #fe4d4d;
+}
+
+.layui-table[lay-skin=line] td.stop {
+    color: #f9b72c;
+}
+
+.layui-table[lay-skin=line] td.open {
+    color: #5cb948;
+}

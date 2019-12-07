@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="../../css/landManage/landManage.css">
+<div id="landManageOne" class="OutermostLayer">
+    <div class="landnext">
+        <div class="landnext1">
+            <span>1</span>
+            <p>填写地块信息</p>
+        </div>
+        <div class="xian"></div>
+        <div class="landnext2">
+            <span>2</span>
+            <p>绘制地块</p>
+        </div>
+        <div class="xian"></div>
+        <div class="landnext3">
+            <span>3</span>
+            <p>选择地块设备</p>
+        </div>
+    </div>
+    <!-- 地块第一步 -->
+    <div class="layui-form landfirst">
+        <input type="hidden" name="landId" />
+        <input type="hidden" name="raiseCrops_instal" />
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>地块名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="landName" lay-verify="required" placeholder="请输入地块名称" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地块负责人</label>
+            <div class="layui-input-block">
+                <select id="landPerson_re">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">种植作物</label>
+            <div class="layui-input-block layui-form-select" id="popup_Org">
+                <div class="value_ft">请选择种植作物 </div>
+                <i class="layui-edge"></i>
+                <!--可选择区域-->
+                <div id="plandBox" class="hidden">
+                    <ul id="treeOrg" class="treeOrg ztree">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>地块介绍</label>
+            <div class="layui-input-block">
+                <textarea name="landIntroduce" lay-verify="required" placeholder="请输入地块介绍" autocomplete="off"
+                    class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="nextBtn">
+            <button class="layui-btn" lay-submit lay-filter="submitAddland" onclick="landOne.landSure()">下一步</button>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../../script/farmManage/landOne.js"></script>

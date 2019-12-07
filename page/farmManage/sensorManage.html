@@ -1,0 +1,70 @@
+<!----- 终端管理  传感器  结构sensorManagement -------->
+<div id="sensorManagement" class="OutermostLayer">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">传感器名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="sensor_searchName" placeholder="请输入传感器名称" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="sensor_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="sensorFn.addSensor('insert')">+
+            新增</button>
+    </div>
+    <!-- 表格 -->
+    <div>
+        <table class="deviceTable" id="SensorTable" lay-filter="SensorTable"></table>
+    </div>
+    <!-- 分页 -->
+    <div id="Sensor_pagenation" class="fr"></div>
+</div>
+<!--新增传感器弹窗-->
+<script type="text/html" id="add_Sensor">
+    <div class="layui-form PopupLayer" id="add_Sensor_pop">
+        <input type="hidden" name="SUID" /><!-- 传感器ID -->
+        <input type="hidden" name="SensorTelNum" /><!-- 终端号 -->
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>传感器类型</label>
+            <div class="layui-input-block">
+                <select name="SensorType" lay-verify="required" id="SensorType">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>传感器名称</label>
+            <div class="layui-input-block">
+                <input type="text" id="sensorName" name="sensorName" lay-verify="required" placeholder="请输入传感器名称"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>通道</label>
+            <div class="layui-input-block">
+                <input type="text" id="passageway" name="passageway" lay-verify="required" placeholder="请输入通道号"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="submitSensor">确认</button>
+        </div>
+    </div>
+</script>
+<!-- 传感器操作 -->
+<script type="text/html" id="table_Sensor">
+    <div>
+        <span class="btn_primary" onclick="sensorFn.addSensor('update')">编辑</span>
+        <span class="btn_warn" onclick="sensorFn.delSensor('{{d.DevName}}','{{d.Suid}}')">删除</span>
+    </div>
+</script>
+<!-- 删除传感器 -->
+<script type="text/html" id="del_Sensor_popup">
+    <div class="popup_inner">请确认删除{{d.DevName}}？</div>
+</script>
+<script type="text/javascript" src="../../script/farmManage/sensorManage.js"></script>

@@ -1,0 +1,70 @@
+<div class="cameraManage OutermostLayer">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">摄像头名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cameraName" placeholder="请输入摄像头名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="camera_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="cameraFunction.addCamera('insert')">+
+            新增</button>
+    </div>
+    <div>
+        <table class="cameraTable" id="cameraTable" lay-filter="cameraTable"></table>
+    </div>
+    <div id="camera_pagenation" class="fr"></div>
+    <script type="text/html" id="table_operate">
+        <div>
+            <span class="btn_primary" onclick="cameraFunction.addCamera('update')">编辑</span>
+            <span class="btn_warn" onclick="cameraFunction.delcamera('{{d.CameraID}}')">删除</span>
+        </div>
+    </script>
+</div>
+
+</div>
+<!-- 摄像头列表 删除提醒-->
+<script type="text/html" id="del_camera_popup">
+    <div class="popup_inner">请确认删除：{{d.CameraName}}？</div>
+</script>
+<!--新增弹窗-->
+<script type="text/html" id="add_Camera">
+    <div class="layui-form add_Camera_pop PopupLayer" id="add_Camera_pop">
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>摄像头名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cameraNameadd" camera_id="CameraID" lay-verify="required"
+                    placeholder="请输入摄像头名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>序列号</label>
+            <div class="layui-input-block">
+                <input type="text" name="DeviceSerial" lay-verify="required" placeholder="请输入序列号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>通道号</label>
+            <div class="layui-input-block">
+                <input type="number" name="ChannelNo" lay-verify="required" placeholder="请输入通道号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>直播地址</label>
+            <div class="layui-input-block">
+                <textarea type="text" name="LiveUrl" lay-verify="required" placeholder="请输入直播地址"
+                    class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="submitAddcamera">确认</button>
+        </div>
+    </div>
+</script>
+<script type="text/javascript" src="../../script/farmManage/cameraManage.js?v= 1.01"></script>

@@ -1,0 +1,46 @@
+/* #layui-laydate1 {
+    left: 0px;
+    right: 40px !important;
+} */
+
+/* 查看消息弹窗样式 */
+.manage_window h3 {
+    line-height: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+}
+
+.manage_window .manage_cont {
+    margin: 0px 20px;
+}
+
+.manage_window .manage_cont p {
+    line-height: 18px;
+    text-indent: 2em;
+}
+
+.manage_window span {
+    width: 90%;
+    line-height: 60px;
+    text-align: right;
+    display: block;
+    margin-right: 40px;
+}
+
+/* Tree弹窗 */
+#changeUserTree {
+    height: 300px;
+}
+
+.Userselect .allElection {
+    margin: 15px 0px 0px -15px;
+}
+
+.Userselect .layui-input-block {
+    margin-left: 60px;
+}
+
+.Userselect .layui-tree-main .layui-icon-file {
+    display: none;
+}

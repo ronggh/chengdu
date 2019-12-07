@@ -1,0 +1,287 @@
+<link rel="stylesheet" href="../../css/environmentalMonitor/Mapoverview.css">
+<script src="../../libs/echarts-2.2.7/build/dist/echarts.js"></script>
+<script src="../../libs/jquery.blockUI.js"></script>
+<script src="../../libs/jquery.slimscroll.min.js"></script>
+<script src="../../libs/homedetail.js"></script>
+<script src="../../libs/winddirection.js"></script>
+<script src="../../script/environmentalMonitor/Mapoverview.js"></script>
+<script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js" type="text/javascript" charset="utf-8">
+</script>
+<script
+    src="http://ditu.google.cn/maps/api/js?v=3.25&key=AIzaSyDAqZRYTWTlGZtQbF9bj7qWSePgcfn13R0&&libraries=places&&libraries=drawing"
+    async defer></script>
+
+<div class="OutermostLayer">
+    <div class="za_farmheader">
+        <div class="za_farmselect">
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-data">
+                    <div class="layui-input-block">
+                        <select name="quiz" lay-filter="quiz" id="area"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="Refresh">
+            <span><img src="../../images/refresh.png" alt=""> 刷新</span>
+        </div>
+    </div>
+    <div class="za_equipmentvalue">
+        <ul class="clearfloat">
+            <li>
+                <p><img src="../../images/za_farm_img (3).png" alt="">传感设备</p>
+                <div>
+                    <p class="state"><span>在线</span><span>离线</span></p>
+                    <p class="statenum clearfloat">
+                        <span class="znum" id="sensorin">0</span><span class="line"></span><span class="znumunlive"
+                            id="sensorout">0</span>
+                        <span class="result"><span>总数</span><i id="sensor_total">0</i></span>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <p><img src="../../images/za_farm_img (10).png" alt="">控制设备</p>
+                <div>
+                    <p class="state"><span>在线</span><span>离线</span></p>
+                    <p class="statenum clearfloat">
+                        <span class="znum" id="controllerin">0</span><span class="line"></span><span class="znumunlive"
+                            id="controllerout">0</span>
+                        <span class="result"><span>总数</span><i id="controller_total">0</i></span>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <p><img src="../../images/za_farm_img (18).png" alt="">摄像头</p>
+                <div>
+                    <p class="state"><span>在线</span><span>离线</span></p>
+                    <p class="statenum clearfloat">
+                        <span class="znum" id="camerain">0</span><span class="line"></span><span class="znumunlive"
+                            id="cameraout">0</span>
+                        <span class="result"><span>总数</span><i id="camera_total">0</i></span>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <p><img src="../../images/za_farm_img (35).png" alt="">综合设备</p>
+                <div>
+                    <p class="state"><span>在线</span><span>离线</span></p>
+                    <p class="statenum clearfloat">
+                        <span class="znum" id="integratedin">0</span><span class="line"></span><span class="znumunlive"
+                            id="integratedout">0</span>
+                        <span class="result"><span>总数</span><i id="integrated_total">0</i></span>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="maps" style="margin-top: 160px;">
+        <!--地图监控点-->
+        <div id="rootsmap" class="boxs">
+            <div class="canshuvideo">
+                <!-- 种植品种 -->
+                <div class="plants pa">
+                    <p class="tit"><span class="active">地块介绍</span></p>
+                    <div class="itemjspz itemjspzshow">
+                        <div class="companycon" id="jianjie">
+                            <dl>
+                                <dt>地块名称：<em>这是一号地块</em></dt>
+                                <dt>种植作物：<em>玉米</em></dt>
+                                <dt>地块负责人：<em>李四</em></dt>
+                                <dt>地块介绍：<em>这是一号地块</em></dt>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <!-- 各种设备 -->
+                <div class="equipment pa">
+                    <ul class="equip_tit clearfix">
+                        <!--<li class="company" data-type="11" style="display:none;"></li>-->
+                        <li class="camera on" data-type="11">
+                            <img src="../../images/governmenthomedeteal/camera_ico.png" alt="">
+                            <img src="../../images/governmenthomedeteal/camera_ico_on.png" alt="">
+                        </li>
+                        <li class="sensor" data-type="22">
+                            <img src="../../images/governmenthomedeteal/sensor_ico.png" alt="">
+                            <img src="../../images/governmenthomedeteal/sensor_ico_on.png" alt="">
+                        </li>
+                        <li class="control" data-type="33">
+                            <img src="../../images/governmenthomedeteal/control_ico.png" alt="">
+                            <img src="../../images/governmenthomedeteal/control_ico_on.png" alt="">
+                        </li>
+                        <li class="combine" data-type="44">
+                            <img src="../../images/governmenthomedeteal/combine_ico.png" alt="">
+                            <img src="../../images/governmenthomedeteal/combine_ico_on.png" alt="">
+                        </li>
+                    </ul>
+                    <ul class="equip_con">
+                        <!-- 摄像头 -->
+                        <li class="camera_con">
+                            <div class="commonbox">
+                                <div class="commoncon">
+                                </div>
+                            </div>
+                        </li>
+                        <!-- 传感器 -->
+                        <li class="sensor_con">
+                            <div class="commonbox">
+                                <div class="commoncon">
+                                </div>
+                            </div>
+                        </li>
+                        <!-- 控制设备 -->
+                        <li class="control_con">
+                            <div class="commonbox">
+                                <div class="commoncon">
+                                </div>
+                            </div>
+                        </li>
+                        <!-- 综合设备 -->
+                        <li class="combine_con">
+                            <div class="weather">
+                                <div class="clearfix">
+                                    <span class="fl">气象站</span>
+                                    <span class="fr run"><img src="../../images/governmenthomedeteal/run_point.png"
+                                            alt="">运行中</span>
+                                </div>
+                                <div class="view_detail" onclick="viewWeather()">查看详情</div>
+                            </div>
+                            <div class="machine">
+                                <div class="clearfix">
+                                    <span class="fl">水肥机</span>
+                                    <span class="fr unrun"><img src="../../images/governmenthomedeteal/unrun_point.png"
+                                            alt="">暂未运行</span>
+                                </div>
+                                <div class="view_detail" onclick="viewMachine()">查看详情</div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 地图容器 -->
+            <div id="mapcontain"></div>
+            <!-- 气象站 -->
+            <div id="weather_box" style="display:none;">
+                <div class="weather_con">
+                    <div class="container pr">
+                        <div class="w1 common" id="SlotID7">
+                            <p>光照度</p>
+                            <p>12501Lux</p>
+                        </div>
+                        <div class="w2 common" id="SlotID8">
+                            <p>PM2.5</p>
+                            <p>40ug/m<sup>3</sup></p>
+                        </div>
+                        <div class="w3 common" id="SlotID3">
+                            <p>雨量</p>
+                            <p>150mm</p>
+                        </div>
+                        <div class="w4 common" id="SlotID2">
+                            <p>风向</p>
+                            <p>东南</p>
+                        </div>
+                        <div class="w5 common" id="SlotID1">
+                            <p>风速</p>
+                            <p>2.17m/s</p>
+                        </div>
+                        <div class="w6 common" id="SlotID5">
+                            <p>空气湿度</p>
+                            <p>80%</p>
+                        </div>
+                        <div class="w7 common" id="SlotID4">
+                            <p>空气温度</p>
+                            <p>34℃</p>
+                        </div>
+                        <div class="w8 common" id="SlotID6">
+                            <p>大气压力</p>
+                            <p>992mbar</p>
+                        </div>
+                        <div class="bottom pa">
+                            <img class="body pa" src="../../images/governmenthomedeteal/weather.png" alt="">
+                            <img class="head pa" src="../../images/governmenthomedeteal/weather_head.gif" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 水肥一体机 -->
+            <div id="machine_box" style="display:none;">
+                <div class="machine_con">
+                    <div class="container pr">
+                        <ul class="top_left pa clearfix">
+                            <li class="total fertilizer" data-typeid="7288" id="machine6">
+                                <p>今日用肥总量</p>
+                                <p>33L</p>
+                            </li>
+                            <li class="fertilizer" data-typeid="7288" id="machine7">
+                                <p>今日用肥量</p>
+                                <p>15L</p>
+                            </li>
+                            <li class="fertilizer" data-typeid="7288" id="machine8">
+                                <p>今日用肥量</p>
+                                <p>10L</p>
+                            </li>
+                            <li class="fertilizer" data-typeid="7288" id="machine9">
+                                <p>今日用肥量</p>
+                                <p>8L</p>
+                            </li>
+                            <li class="fertilizer" data-typeid="7288" id="machine10">
+                                <p>今日用肥量</p>
+                                <p>0L</p>
+                            </li>
+                        </ul>
+                        <ul class="top_right pa clearfix">
+                            <li class="fertilizer" data-typeid="7288" id="machine2">
+                                <p>EC值</p>
+                                <p>2.17us/cm</p>
+                            </li>
+                            <li class="fertilizer" data-typeid="7288" id="machine1">
+                                <p>PH值</p>
+                                <p>7.5</p>
+                            </li>
+                        </ul>
+                        <ul class="bottom_left pa">
+                            <li class="fertilizer" data-typeid="7288" id="machine5">
+                                <p>今日用水总量</p>
+                                <p>150L</p>
+                            </li>
+                        </ul>
+                        <div class="bottom_right pa">
+                            <!--桶有 三种状态-->
+                            <!-- work_bucket 运行且不为空  -->
+                            <div class="tong_item">
+                                <div class="tongnum">1#</div>
+                                <div class="tong work_bucket">
+                                    <div class="p1_text">艾可收 高氮配方</div>
+                                </div>
+                            </div>
+                            <!-- empty_bucket 空 -->
+                            <div class="tong_item">
+                                <div class="tongnum">2#</div>
+                                <div class="tong empty_bucket">
+                                    <div class="p1_text">空</div>
+                                </div>
+                            </div>
+                            <!-- static_bucket 没有运行 切不为空 -->
+                            <div class="tong_item">
+                                <div class="tongnum">3#</div>
+                                <div class="tong static_bucket">
+                                    <div class="p1_text">喜冲冲 高钾配方</div>
+                                </div>
+                            </div>
+                            <div class="tong_item">
+                                <div class="tongnum">4#</div>
+                                <div class="tong work_bucket">
+                                    <div class="p1_text">纽崔精钙</div>
+                                </div>
+                            </div>
+                            <!-- 机身背景 -->
+                            <!--机子运行时bg work_machine  机子停止运行时bg stop_machine  下面div 2选1-->
+                            <div class="bg work_machine"></div>
+                            <!--<div class="bg stop_machine"></div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

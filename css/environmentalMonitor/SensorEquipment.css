@@ -1,0 +1,428 @@
+/* 设备类别 */
+#za_realData {
+    margin-top: 12px;
+}
+
+#za_realData .title .fl,
+#za_machine .title .fl,
+#za_weather .title .fl {
+    height: 18px;
+    line-height: 18px;
+    font-size: 14px;
+    border-left: 2px solid #389BFF;
+    padding-left: 12px;
+}
+
+#za_realData .title .reload,
+#za_machine .title .reload,
+#za_weather .title .reload {
+    cursor: pointer;
+    color: #00c1de;
+}
+
+#za_realData .content {
+    margin-top: -25px;
+}
+
+.content .level_one .sub_tit {
+    position: relative;
+    width: 300px;
+    height: 22px;
+    margin: 3px auto 25px;
+}
+
+.content .level_one .sub_tit p {
+    position: absolute;
+    bottom: -11px;
+    left: 118px;
+    font-size: 14px;
+    text-align: center;
+    width: 64px;
+    height: 22px;
+    border-radius: 11px;
+}
+
+/* 设备类别的线 */
+.land_line {
+    border-bottom: 1px solid #FFF0D7;
+}
+
+.water_line {
+    border-bottom: 1px solid #D7F5FF;
+}
+
+.weather_line {
+    border-bottom: 1px solid #F7EAFA;
+}
+
+.air_line {
+    border-bottom: 1px solid #E6F7E7;
+}
+
+.land {
+    background: #FFF0D7;
+    color: #de965f;
+}
+
+.water {
+    background: #D7F5FF;
+    color: #00b7ee;
+}
+
+.weather {
+    background: #F7EAFA;
+    color: #c360e4;
+}
+
+.air {
+    background: #E6F7E7;
+    color: #2daf61;
+}
+
+/* 存储设备的框 */
+.secondary .level_two {
+    float: left;
+    width: 230px;
+    margin: 0 22px 10px;
+}
+
+.secondary .level_two .label {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    text-align: center;
+    background: #6e7385;
+    color: #fff;
+}
+
+.secondary .level_two .label img {
+    margin-top: -2px;
+    margin-right: 2px;
+}
+
+.secondary .level_two .wrap_border {
+    border: 1px solid #CACACA;
+}
+
+.secondary .level_two .detail {
+    height: 132px;
+    box-sizing: border-box;
+    padding: 25px 50px 15px;
+}
+
+.secondary .level_two .offline_detail {
+    height: 132px;
+    background: url(../../images/offline.png)no-repeat center;
+}
+
+.secondary .level_two .detail .creact_num {
+    height: 45px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #389bff;
+}
+
+.secondary .level_two .detail .creact_num sup {
+    font-size: 14px;
+    color: #c6c6c6;
+    font-weight: 400;
+    padding: 0 0 0 5px;
+}
+
+.secondary .level_two .detail .progress_line {
+    position: relative;
+    width: 100%;
+    height: 0;
+    border: 1px solid #a0ccff;
+    background-color: #a0ccff;
+    box-shadow: 0 0 2px #a0ccff;
+    margin: 10px 0;
+}
+
+.secondary .level_two .detail .progress_circle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #389bff;
+    border-radius: 4px;
+    top: -4px;
+    left: 0;
+    box-shadow: 0 0 3px #389bff;
+}
+
+.secondary .level_two .detail .normal_area {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+
+.secondary .level_two .fresh_time {
+    border-bottom: 1px solid #CACACA;
+    font-size: 12px;
+    color: #c6c6c6;
+    padding: 6px 8px;
+}
+
+.secondary .level_two .fresh_time .normal_status {
+    color: #00a344;
+}
+
+.secondary .level_two .fresh_time .offline_status {
+    color: #333;
+}
+
+.secondary .level_two .operate div {
+    cursor: pointer;
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    color: #999;
+    text-align: center;
+}
+
+.secondary .level_two .operate .fl img {
+    margin-top: -6px;
+}
+
+.secondary .level_two .operate .fr img {
+    margin-top: -4px;
+}
+
+.secondary .level_two .operate .fl {
+    border-right: 1px solid #CACACA;
+    box-sizing: border-box;
+}
+
+.secondary .level_two.danger .wrap_border {
+    border: 1px solid #fe4d4d;
+}
+
+.secondary .level_two.danger .label {
+    background: #fe4d4d;
+}
+
+.secondary .level_two.danger .detail .progress_line {
+    border: 1px solid #fe4d4d;
+    box-shadow: 0 0 1px #fe4d4d;
+    background-color: #fe4d4d;
+}
+
+.secondary .level_two.danger .detail .progress_circle {
+    background: #fe4d4d;
+    box-shadow: 0 0 3px #fe4d4d;
+}
+
+.secondary .level_two.danger .fresh_time {
+    border-bottom: 1px solid #fe4d4d;
+}
+
+.secondary .level_two.danger .operate .fl {
+    border-right: 1px solid #fe4d4d;
+}
+
+.popboxselect ul li:hover,
+.secondary .level_two .operate .fl:hover,
+.secondary .level_two .operate .fr:hover {
+    background-color: #f5f5f5;
+}
+
+.secondary .level_two .fresh_time .abnormal_status,
+.secondary .level_two.danger .detail .creact_num,
+.secondary .level_two.danger .fresh_time .status {
+    color: #fe4d4d;
+}
+
+/* #echarts {
+    width: 80%;
+    height: 300px;
+    background: #fff !important;
+    border-radius: 10px;
+} */
+
+p.footer {
+    width: 100%;
+    font-size: 12px;
+    color: #c6c6c6;
+    line-height: 54px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+p.poptitle {
+    line-height: 40px;
+    font-size: 14px;
+    font-family: "microsoft yahei", Arial, Helvetica, sans-serif;
+}
+
+p.poptitle span.fl {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+p.poptitle span.flfirst {
+    float: left;
+    font-size: 27px;
+    padding-right: 12px;
+    margin-top: -2px;
+}
+
+p.poptext {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+#za_realData .title,
+#za_machine .title,
+#za_weather .title {
+    height: 30px;
+}
+
+#farmlivevideo,
+.pr {
+    position: relative;
+}
+
+#equirementcontrol p.equirecon_title span img,
+#za_realData .title .reload img,
+#za_machine .title .reload img,
+#za_weather .title .reload img {
+    vertical-align: -6px;
+}
+
+.pa,
+.machine_con .container .bottom_right img {
+    position: absolute;
+}
+
+.weather_con .common p:first-child {
+    background: #eaedf1;
+    font-size: 12px;
+    color: #999;
+}
+
+.weather_con .common p:last-child {
+    border: 1px solid #eaedf1;
+    font-size: 16px;
+    color: #389bff;
+    padding: 0 10px;
+}
+
+
+.content .level_one .sub_tit {
+    position: relative;
+    width: 300px;
+    height: 22px;
+    margin: 3px auto 25px;
+}
+
+.content .level_one .sub_tit p {
+    position: absolute;
+    bottom: -11px;
+    left: 118px;
+    font-size: 14px;
+    text-align: center;
+    width: 64px;
+    height: 22px;
+    border-radius: 11px;
+}
+
+.layui-tab-title .layui-this:after {
+    border: 1px solid #389bff;
+    height: 73px;
+    border-bottom: none;
+}
+
+.layui-tab-title {
+    border-bottom: 1px solid #389bff;
+    height: 77px;
+    transition: all 0 !important;
+}
+
+.layui-tab-title li {
+    text-align: center;
+    height: 70px;
+    width: 90px;
+    margin-right: 6px;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    line-height: 36px;
+    color: #999;
+    font-size: 13px;
+    position: relative;
+    padding: 0;
+}
+
+.layui-tab-title li.selected::before {
+    content: url('../../images/select (2).png');
+    position: absolute;
+    top: -7px;
+    right: 1px;
+}
+
+.layui-tab-title li img:nth-child(1) {
+    padding-top: 5px;
+}
+
+.layui-tab-title li .rec {
+    padding-top: 5px;
+    display: none;
+    z-index: 99;
+    height: 5px;
+    width: 100%;
+}
+
+.layui-tab-content {
+    border: 1px solid #389bff;
+    border-top: none;
+    width: 472px;
+    padding: 0;
+}
+
+.layui-tab-title .layui-this {
+    border: none;
+    border-top: 1px solid #fff;
+    color: #389bff;
+}
+
+.layui-tab-bar {
+    position: static !important;
+    display: none;
+}
+
+.layui-tab[overflow]>.layui-tab-title {
+    overflow: inherit;
+}
+
+.layui-tab-content .layui-tab-item img {
+    text-align: center;
+    margin-top: 27px;
+}
+
+.layui-tab-content .layui-tab-item input {
+    width: 60px;
+    height: 20px;
+    border-radius: 2px;
+    color: #389bff;
+    display: inline-block;
+    font-size: 12px;
+    padding-left: 2px;
+    border-color: #c2c2c2;
+    line-height: 21px;
+    text-align: center;
+}
+
+.layui-tab-content .layui-tab-item {
+    text-align: center;
+    height: 128px;
+}
+
+.layui-tab-content .layui-tab-item>div {
+    display: inline-block;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    line-height: 21px;
+    margin: 11px 37px 14px 23px;
+}

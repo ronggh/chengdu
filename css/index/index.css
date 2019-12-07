@@ -1,0 +1,313 @@
+@charset "UTF-8";
+
+#za_mian {
+  width: 100%;
+  height: 100%;
+  background: #F0F2F5;
+}
+
+#za_mian #za_title {
+  height: 64px;
+  width: 100%;
+  background: #fff;
+  font-size: 16px;
+  position: relative;
+  box-shadow: 0px 1px 4px 0px rgba(0, 21, 41, 0.12);
+}
+
+#za_mian #za_title .za_tc_logo {
+  height: 64px;
+  width: 18%;
+  float: left;
+  background: #03507D;
+  color: #fff;
+}
+
+#za_mian #za_title .za_tc_logo span {
+  text-align: left;
+  line-height: 100%;
+  display: inline-block;
+}
+
+#za_mian #za_title .za_tc_logo span img {
+  width: 32px;
+  height: 32px;
+}
+
+#za_mian #za_title .orgName a {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+#za_mian #za_title .za_tc_logo span:first-child {
+  margin: 16px 10px 16px 24px;
+}
+#za_mian #za_title .za_tc_middle {
+  float: left;
+  width: 700px;
+  height: 60px;
+  line-height: 60x;
+  font-size: 14px;
+  color: #fe4d4d;
+  margin-left: 30px;
+}
+#za_mian #za_title .za_tc_middle .moveAlarem{
+  width: 100%;
+  line-height: 60px;
+}
+
+#za_mian #za_title .za_tc_menu {
+  float: right;
+  width: 150px;
+  height: 64px;
+  position: relative;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+#za_mian #za_title .za_tc_menu .user_avatar {
+  margin: 15px 0px 0px 10px;
+  text-align: left;
+  width: 100px;
+  cursor: pointer;
+}
+
+#za_mian #za_title .za_tc_menu .user_avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: -5px;
+}
+
+#za_mian #za_title .za_tc_menu .user_avatar span {
+  width: 90px;
+  font-size: 14px;
+  position: relative;
+  top: -30px;
+  left: 44px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+#za_mian #za_title .za_tc_menu .user_avatarList {
+  position: absolute;
+  width: 160px;
+  height: 150px;
+  background: white;
+  box-shadow: 0px 0px 16px 0px rgba(15, 15, 20, 0.15);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  top: 70px;
+  left: -55px;
+  display: none;
+}
+
+#za_mian #za_title .za_tc_menu .user_avatarList ul li {
+  width: 100%;
+  height: 36px;
+  font-size: 12px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#za_mian #za_title .za_tc_menu .user_avatarList ul li .iconfont {
+  margin-right: 10px;
+}
+
+#za_mian #za_title .massageAleam {
+  float: right;
+  height: 64px;
+  width: 40px;
+  margin-right: 5px;
+  position: relative;
+}
+
+#za_mian #za_title .massageAleam span {
+  line-height: 70px;
+  width: 40px;
+  font-size: 20px;
+}
+
+#za_mian #za_title .massageAleam i {
+  position: absolute;
+  display: block;
+  color: #fff;
+  width: 4px;
+  height: 4px;
+  border-radius: 10px;
+  top: 26px;
+  left: 16px;
+  text-align: center;
+  line-height: 16px;
+  font-size: 12px;
+}
+
+.bag {
+  background: red;
+}
+
+#za_mian #za_slide {
+  float: left;
+  height: 100%;
+  width: 18%;
+  background: #02304a url("../../images/index/bjt_02.png") no-repeat bottom;
+  /* box-sizing: border-box; */
+}
+
+#za_mian #za_slide ul {
+  padding-top: 12px;
+  margin-bottom: 20px;
+}
+
+#za_mian #za_slide ul li i {
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 40px;
+  padding-left: 24px;
+  box-sizing: border-box;
+}
+
+#za_mian #za_slide ul li i:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+#za_mian #za_slide .nLi .sub {
+  display: none;
+}
+
+#za_mian #za_slide .nLi .sub li {
+  height: 40px;
+  line-height: 40px;
+  list-style: none;
+  text-align: left;
+  padding-left: 55px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #01273D;
+
+}
+
+#za_mian #za_slide .nLi .sub li a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+#za_mian #za_slide .nLi .sub li:hover {
+  background: #1BAAFE;
+}
+
+#za_mian #za_slide .nLi .sub .active {
+  background-color: #1BAAFE;
+  color: rgba(255, 255, 255, 1);
+}
+
+#za_mian #za_slide .nLi .sub .active a {
+  color: rgba(255, 255, 255, 1);
+}
+
+#za_mian #za_slide .nLi .sub li:hover a {
+  color: rgba(255, 255, 255, 1);
+}
+
+#za_mian #za_content_cont {
+  float: right;
+  width: 82%;
+  height: 100%;
+  box-sizing: border-box;
+  /* background: rosybrown; */
+  overflow: hidden;
+}
+
+#za_mian #za_contentTop {
+  float: right;
+  height: 128px;
+  width: 100%;
+  box-sizing: border-box;
+  background: white;
+  padding: 24px 0px 0px 32px;
+}
+
+#za_mian #za_contentTop ul li {
+  float: left;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+
+}
+
+#za_mian #za_contentTop ul li a {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+}
+
+#za_mian #za_contentTop ul li a:hover {
+  color: #0291E3;
+}
+
+#za_mian #za_contentTop dl dt {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 44px;
+}
+
+#za_mian #za_contentTop dl dd {
+  font-size: 14px;
+  color: #848684;
+
+}
+
+#za_mian #za_content {
+  width: 100%;
+  font-size: 14px;
+  background-color: #f1f2f6;
+  padding: 20px;
+  overflow: hidden;
+  float: right;
+  box-sizing: border-box;
+}
+
+/*  header 鼠标经过的弹窗   */
+#tip {
+  display: none;
+  position: absolute;
+  line-height: 30px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0px 5px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+  top: 30px;
+  right: 210px;
+}
+
+/*   修改头像   */
+.uploadHeadImg .attachment_item {
+  margin: 20px auto;
+  width: 130px;
+  height: 130px;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+}
+
+.uploadHeadImg .attachment_item img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.uploadHeadImg .mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.uploadHeadImg .layui-btn {
+  padding: 0 !important;
+  width: 90px;
+}

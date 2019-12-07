@@ -1,0 +1,113 @@
+<!-- 消息管理 -->
+<link rel="stylesheet" href="../../css/messageManage/messageManages.css?v=1.19">
+<div class="Manage_box OutermostLayer">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="rm_searchTitle" placeholder="请输入标题名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block">
+                <input type="text" name="rm_searchName" placeholder="请输入部分内容" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">时间</label>
+            <div class="layui-input-block">
+                <input name="timechName" type="text" class="layui-input" id="outBoxTime" placeholder=" 开始日期 - 结束日期"
+                    autocomplete="off">
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="outBox_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="messageManageFn.addmessage()">+ 创建消息</button>
+    </div>
+    <!-- 表格 -->
+    <div>
+        <table class="manageTable" id="manageTable" lay-filter="manageTable"></table>
+    </div>
+    <!-- 分页 -->
+    <div id="manage_pagenation" class="fr"></div>
+</div>
+<!--操作-->
+<script type="text/html" id="manage_operate">
+    <div>
+        <span class="btn_primary" lay-event="edit">查看</span>
+        <span class="btn_warn" lay-event="del">删除</span>
+    </div>
+</script>
+<!-- 查看信息的弹窗 -->
+<script type="text/html" id="add_manage_popup">
+    <div class="manage_window">
+        <h3>{{d.MsgName}}</h3>
+        <div class="manage_cont">
+            <p>{{d.MsgContent}}</p>
+        </div>
+        <span>{{d.SendTime}}</span>
+    </div>
+</script>
+<!--删除信息弹窗-->
+<script type="text/html" id="del_roles_popup">
+    <div class="popup_inner">请确认删除《{{d.MsgName}}》？</div>
+</script>
+<!-- 新增消息弹窗 -->
+<script type="text/html" id="add_message">
+    <div class="layui-form message_add_popup PopupLayer">
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>接收人</label>
+            <div class="layui-input-block">
+                <input onclick="messageManageFn.changeUser()" type="text" name="Receiver" lay-verify="required"
+                    placeholder="请选择接收人" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="LoginName" lay-verify="required" placeholder="请输入内容标题" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>正文</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" name="mainText" lay-verify="required" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="submitAddUser">确认</button>
+        </div>
+    </div>
+</script>
+<!-- 选择接收人弹窗 -->
+<script type="text/html" id="changeUserselect">
+    <div class="Userselect">
+        <div class="allElection">
+            <span class="layui-tree-iconClick"></span>
+            <div id="quanxuan" class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                <i class="layui-icon layui-icon-ok"></i>
+            </div>
+            <span class="layui-tree-txt">全选</span>
+        </div>
+        <div id="changeUserTree" class="demo-tree-more"></div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn UserselectOpen" lay-demo="getChecked">确定</button>
+                <button type="button" class="layui-btn layui-btn-primary UserselectOpen1">取消</button>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="check_massage">
+    <div style="padding: 30px 40px; font-size: 14px;max-height: 300px;overflow-y: auto;">
+        <div id="Viewing_massage_tree" class="ztree" data-id="0"></div>
+    </div>
+</script>
+<script type="text/javascript" src="../../script/messageManage/Outbox.js"></script>

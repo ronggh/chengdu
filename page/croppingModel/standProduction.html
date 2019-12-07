@@ -1,0 +1,161 @@
+<link rel="stylesheet" href="../../css/croppingModel/modelExperiment.css">
+<link rel="stylesheet" href="../../css/croppingModel/standProduction.css">
+<!-- 标准化生产 初始化页面 -->
+<div class="Production_box OutermostLayer">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">使用模型</label>
+            <div class="layui-input-block">
+                <input type="text" name="modelchName" placeholder="请输入模型名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">种植日期</label>
+            <div class="layui-input-block">
+                <input name="timechName" type="text" class="layui-input landTimeIcon" id="time_Production"
+                    placeholder="请输入开始种植日期" autocomplete="off">
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit
+                lay-filter="experiment_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="standProduct.AddstandProduct('insert')">+
+            新增</button>
+    </div>
+    <div>
+        <table class="standTable" id="standTable" lay-filter="standTable"></table>
+    </div>
+    <div id="um_pagenation" class="fr"></div>
+    <!--操作-->
+    <script type="text/html" id="stand_table">
+        <div>
+            {{# if(d.Status == "未开始"){ }}
+            <span class="btn_primary" onclick="standProduct.AddstandProduct('update','{{d.ID}}')">编辑</span>
+            {{#} }}
+            {{# if(d.Status == "生产中" || d.Status == "已结束"){ }}
+            <span class="btn_primary" onclick="standProduct.AddstandProduct('look','{{d.ID}}')">查看</span>
+            {{#} }}
+            <span class="btn_warn" lay-event="del">删除</span>
+        </div>
+    </script>
+    <!--删除信息弹窗-->
+    <script type="text/html" id="del_exper_popup">
+        <div class="popup_inner">请确认删除{{d.Name}}？</div>
+    </script>
+    <!--新增弹窗-->
+    <script type="text/html" id="add_modelstand">
+        <div class="layui-form model_experiment">
+            <div class="plandModel">
+                <div class="layui-form-item land">
+                    <label class="layui-form-label">种植地块:</label>
+                    <div class="layui-input-block">
+                        <select lay-verify="required" id="plandProduction" name="plandProduction" lay-filter="plandProduction">
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">模型名称:</label>
+                    <div class="layui-input-block">
+                        <select lay-verify="required" id="plandModelName" name="plandModelName" lay-filter="plandModelName">
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开始种植日期:</label>
+                    <div class="layui-input-block">
+                        <input lay-verify="required" name="timechName" type="text" class="layui-input landTimeIcon" id="plantStart"
+                            placeholder="请选择开始种植日期">
+                    </div>
+                </div>
+            </div>
+            <p class="first_p"></p>
+            <div class="seriosType" id='sensor'>
+            </div>
+            <p>生长阶段</p>
+            <div class="growthStage">
+                <ul class="tab clearfix" id='stage'>
+                    <!-- <li class="first_current">
+                    <span>定植</span>
+                </li>
+                <li class="center_editable">
+                    <span>成活</span>
+                </li>
+                <li class="center_editable">
+                    <span>结果</span>
+                </li>
+                <li class="center_editable">
+                    <span>一阶段采收</span>
+                </li>
+                <li class="center_editable">
+                    <span>二阶段采收</span>
+                </li>
+                <li class=" center_editable">
+                    <span>三阶段采收</span>
+                </li>
+                <li class="center_editable">
+                    <span>结束</span>
+                </li> -->
+                </ul>
+                <ul class="tabcon" id='stage_params'>
+                    <!-- 第一步的li -->
+                    <!-- <li class="document_info">
+                    <div class="Model_popurBottom">
+                        <div class="popurTop">
+                            <span>持续周期：</span>
+                            <input type="text"> &nbsp天
+                            <p class="timeD">自：2019年11月13日 ~ 2019年11月13日</p>
+                        </div>
+                        <div class="popurMiddle">
+                            <div class="popurMiddleTop">
+                                <span>温度(℃)</span>
+                                <input type="text">
+                                <i></i>
+                                <input type="text">
+                            </div>
+                            <div class="popurMiddleTop">
+                                <span>温度(℃)</span>
+                                <input type="text">
+                                <i></i>
+                                <input type="text">
+                            </div>
+                            <div class="popurMiddleTop">
+                                <span>温度(℃)</span>
+                                <input type="text">
+                                <i></i>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="popurBottom">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">关联自动化:</label>
+                                <div class="layui-input-block">
+                                    <select id="plandModelLand" name="plantchName">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li> -->
+                    <!-- 第二步的li -->
+
+                    <!-- 第三步的li -->
+
+                </ul>
+            </div>
+            <div class="sunmitBtn">
+                <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+                <button class="layui-btn site-action" lay-submit lay-filter="submitAddstand">确认</button>
+            </div>
+        </div>
+    </script>
+</div>
+<!--历史数据dom-->
+<div id="chartStand">
+    <div id='echartcontainStand'></div>
+</div>
+<script src="../../libs/echarts-2.2.7/build/dist/echarts.js"></script>
+<script type="text/javascript" src="../../script/croppingModel/standProduction.js"></script>

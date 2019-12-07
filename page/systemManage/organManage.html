@@ -1,0 +1,134 @@
+<div class="organManage_box OutermostLayer">
+    <!--查询条件，新增机构按钮-->
+    <div class="layui-form" lay-filter="organManage_ser">
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="orgname" placeholder="请输入机构名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="address" placeholder="请输入机构地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">法人代表</label>
+            <div class="layui-input-block">
+                <input type="text" name="legalperson" placeholder="请输入法人代表" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <select name="State" id="chaxun">
+                    <option value="">所有</option>
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="org_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="organManageFn.addOrgPop('insert')">+
+            新增</button>
+    </div>
+    <div>
+        <table class="organTable" id="organManageTable" lay-filter="organManageTable"></table>
+    </div>
+    <div id="og_pagenation" class="fr"></div>
+</div>
+
+<!--机构操作-->
+<script type="text/html" id="table_operate">
+    <div>
+        <span class="btn_primary" onclick="organManageFn.addOrgPop('update')">编辑</span>
+        <span class="btn_primary"
+            onclick="organManageFn.stateChangeFn('{{d.ID}}','{{d.IsValid}}')">{{d.IsValid == 1?'禁用':'启用'}}</span>
+        <span class="btn_warn" onclick="organManageFn.delOrganPop('{{d.OrgName}}','{{d.ID}}')">删除</span>
+    </div>
+</script>
+
+<!--新增机构弹窗-->
+<script type="text/html" id="add_organ_popup">
+    <div class="layui-form organ_popup PopupLayer">
+        <input type="hidden" name="OrgId" />
+        <!--机构id-->
+        <!--<input type="hidden" name="AreaCode" />  区域代码-->
+        <input type="hidden" name="FatherId" />
+        <!--上级机构-->
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>机构名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="OrgName" lay-verify="required" placeholder="请输入机构名称" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="OrgAddress" lay-verify="required" placeholder="请输入机构地址" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">法人代表</label>
+            <div class="layui-input-block">
+                <input type="text" name="LegalPerson" placeholder="请输入机构法人代表" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">注册资金(万元)</label>
+            <div class="layui-input-block">
+                <input id="RegisteredCapital" type="number" name="RegisteredCapital" placeholder="请输入机构注册资金"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>手机号码</label>
+            <div class="layui-input-block">
+                <input type="tel" name="OrgMobile" lay-verify="required|phone" placeholder="请输入手机号码" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级机构</label>
+            <div class="layui-input-block popup_Org pr layui-form-select">
+                <div class="value_ft">请选择上级机构 </div>
+                <i class="layui-edge"></i>
+                <div id="OrgBox" class="hidden">
+                    <ul id="treeOrg" class="treeOrg ztree">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <select name="IsValid" lay-verify="required">
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="submitAddOrg">确定</button>
+        </div>
+    </div>
+</script>
+
+<!--删除机构-->
+<script type="text/html" id="del_org_popup">
+    <div class="popup_inner">请确认删除{{d.orgName}}？</div>
+</script>
+<link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.excheck.js"></script>
+<script src="../../libs/jQuery.md5.js"></script>
+<script type="text/javascript" src="../../script/systemManage/organmanage.js"></script>

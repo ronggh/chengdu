@@ -1,0 +1,73 @@
+<!-- 品种部分 -->
+<div class="varieties_box OutermostLayer">
+    <input type="hidden" name="id_category" />
+    <input type="hidden" name="name_category" />
+    <div class="layui-form" lay-filter="category_na">
+        <div class="layui-form-item">
+            <label class="layui-form-label">品种</label>
+            <div class="layui-input-block">
+                <input type="text" name="um_searchName" placeholder="请输入品种" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block select_state">
+                <select name="um_searchState">
+                    <option value="">所有</option>
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="um_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="varieties.addcategoryPop('insert')">+
+            新增</button>
+    </div>
+    <div>
+        <table class="userTable" id="manageTable" lay-filter="manageTable"></table>
+    </div>
+    <div id="um_pagenation" class="fr"></div>
+</div>
+<script type="text/html" id="table_operate">
+    <div>
+        <span class="btn_primary" onclick="varieties.addcategoryPop('update')">编辑</span>
+        <span class="btn_primary"
+            onclick="varieties.stateChangeFn('{{d.CropID}}','{{d.Status}}')">{{d.Status == 1?'禁用':'启用'}}</span>
+        <span class="btn_warn" onclick="varieties.delcropPop('{{d.CropName}}','{{d.CropID}}')">删除</span>
+    </div>
+</script>
+<script type="text/html" id="add_category">
+    <div class="layui-form add_category_popup PopupLayer">
+        <input type="hidden" name="CropID" />
+        <input type="hidden" name="OrgID" />
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>品种</label>
+            <div class="layui-input-block">
+                <input type="text" name="CropName" value="" lay-verify="required" placeholder="请输入品种" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>状态</label>
+            <div class="layui-input-block">
+                <select name="IsValid" lay-verify="required" id="IsValid">
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn" lay-submit lay-filter="submitAddcategory">确定</button>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="del_category_popup">
+    <div class="popup_inner">请确认删除{{d.CropName}}？</div>
+</script>
+<script type="text/javascript" src="../../script/farmManage/varieties.js"></script>

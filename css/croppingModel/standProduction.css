@@ -1,0 +1,26 @@
+.model_experiment .Model_popurBottom .popurMiddle .popurMiddleTop input {
+    width: 130px;
+    height: 26px;
+}
+.model_experiment .Model_popurBottom .popurMiddle .popurMiddleTop em {
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 50px;
+    background: #389bff;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 50px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/* 查验 */
+#echartcontainStand {
+    height: 360px;
+    margin: 5px auto 10px;
+}
+
+#chart {
+    display: none;
+}

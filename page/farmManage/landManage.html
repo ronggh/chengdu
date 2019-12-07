@@ -1,0 +1,57 @@
+<!-- 地块管理 初始化页面 -->
+<div class="Manage_box OutermostLayer">
+    <div class="layui-form" lay-filter="land_form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">地块名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="landchName" placeholder="请输入地块名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">种植作物</label>
+            <div class="layui-input-block">
+                <select id="raiseCrops" name="plantchName">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地块负责人</label>
+            <div class="layui-input-block">
+                <select id="landPerson" name="personchName">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间段</label>
+            <div class="layui-input-block">
+                <input name="timechName" type="text" class="layui-input landTimeIcon" id="date_3"
+                    placeholder=" 开始日期 - 结束日期" autocomplete="off">
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="land_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="LoadAction('landOne', '0','insert')">+
+            新增</button>
+    </div>
+
+    <div>
+        <table class="landTable" id="landTable" lay-filter="landTable"></table>
+    </div>
+    <div id="um_pagenation" class="fr"></div>
+    <!--操作-->
+    <script type="text/html" id="table_operate">
+        <div>
+            <span class="btn_primary" onclick="LoadAction('landOne', '0','{{d.LandID}}')">编辑</span>
+            <span class="btn_warn" lay-event="del">删除</span>
+        </div>
+    </script>
+    <!--删除信息弹窗-->
+    <script type="text/html" id="del_land_popup">
+        <div class="popup_inner">请确认删除{{d.LandName}}？</div>
+    </script>
+</div>
+<script type="text/javascript" src="../../script/farmManage/landManage.js"></script>

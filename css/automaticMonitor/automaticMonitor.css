@@ -1,0 +1,56 @@
+.layui-layer-demo>.layui-layer-content {
+    height: 135px !important;
+}
+
+.za_con .layui-select-title input {
+    height: 40px;
+    width: 230px;
+    display: inline-block;
+    position: relative;
+    border-color: #e6e6e6;
+}
+
+
+.btn .cancel {
+    height: 30px;
+    line-height: 29px;
+    border: 1px solid #dedede;
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 2px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+.time_ico {
+    background: url('../../images/automation/opt_clock.png')no-repeat center;
+}
+
+.air_ico {
+    background: url('../../images/automation/opt_air.png')no-repeat center;
+}
+
+.temper_ico {
+    background: url('../../images/automation/opt_temper.png')no-repeat center;
+}
+
+.fan_ico {
+    background: url('../../images/automation/opt_fan.png')no-repeat center;
+}
+
+.link {
+    width: 30px;
+    height: 20px;
+    margin: 20px 10px 0;
+    background: url('../../images/automation/link.png')no-repeat center;
+}
+
+.auto table.grouptable form.layui-form .layui-form-item .layui-input-block {
+    margin: 0 auto 0;
+}
+
+.layui-layer-dialog .layui-layer-content {
+    text-align: center;
+}

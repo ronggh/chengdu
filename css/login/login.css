@@ -1,0 +1,239 @@
+@charset "UTF-8";
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  height: 100%;
+  color: #000;
+  font-family: "microsoft yahei", Arial, Helvetica, sans-serif;
+  background-color: #fff;
+  font-size: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  outline: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+input:-ms-input-placeholder {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+input:-moz-placeholder {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+input::-webkit-input-placeholder {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+input {
+  outline: none;
+}
+
+/* 验证码的边框及圆角 */
+#verifyCanvas {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+.layui-layer-content .layui-form input {
+  float: left;
+  line-height: 35px;
+  width: 80%;
+  margin: 20px 10% 0px 10%;
+  box-sizing: border-box;
+  padding-left: 15px;
+  border: 1px solid #c8c8c8;
+  border-radius: 5px;
+}
+
+.layui-layer-content .layui-form input:nth-child(2) {
+  width: 45%;
+}
+
+.layui-layer-content .layui-form input:last-child {
+  background: #2372c6;
+  padding-left: 0px;
+  margin: 30px 10% 0px 10%;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+}
+
+.layui-layer-content .layui-form input:nth-child(3) {
+  float: left;
+  width: 30%;
+  line-height: 35px;
+  padding-left: 0px;
+  border: 1px solid #c8c8c8;
+  color: #cdcdcd;
+  text-align: center;
+  border-radius: 5px;
+  margin: 20px 0px 0px -22px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.layui-layer-content .layui-form input:hover {
+  border: 1px solid #2372c6;
+}
+
+.layui-layer-content .layui-form input:nth-child(3):hover {
+  border: 1px solid #2372c6;
+  color: #2372c6;
+  background: #fff;
+}
+
+.layui-layer-content .layui-form .erro {
+  border: 1px solid red;
+  color: red;
+  background: #fff url("../../images/login/denglu_04.png") no-repeat center right 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/* 火狐去除箭头  */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.formLeft {
+  float: left;
+  width: 35%;
+  height: 100%;
+  background: url("../../images/login/dl_01.png") no-repeat 10px center;
+  background-size: 100%;
+}
+
+.formLeft .logoTop {
+  margin: 48px 33% 0px 60px;
+  width: 290px;
+  height: 36px;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.formLeft .logoTop span {
+  display: block;
+  line-height: 36px;
+  text-align: center;
+  background: url("../../images/login/dl_04.png") no-repeat top left;
+  background-size: 36px;
+  padding-left: 5px;
+}
+
+.formLeft .logo {
+  margin: 100px 33% 15px 60px;
+  width: 280px;
+  height: 60px;
+  background: url("../../images/login/dl_03.png") no-repeat top left;
+}
+
+.formLeft .logoForm {
+  margin: 20px 33% 1px 60px;
+  width: 310px;
+  height: 380px;
+  position: relative;
+}
+
+.formLeft .logoForm i {
+  font-style: normal;
+  display: inline-block;
+  line-height: 20px;
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #999;
+}
+
+.formLeft .logoForm input {
+  box-sizing: border-box;
+  padding: 0px 15px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+}
+
+.formLeft .logoForm .erro {
+  border: 1px solid red;
+  color: red;
+  background: #fff url("../../images/login/denglu_04.png") no-repeat center right 10px;
+}
+
+.formLeft .logoForm span {
+  position: absolute;
+  display: inline-block;
+  top: 160px;
+  left: 244px;
+  border-bottom: 1px solid #55b2f7;
+  line-height: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #55b2f7;
+  cursor: pointer;
+}
+
+.formLeft .logoForm input:nth-child(7) {
+  width: 190px;
+}
+
+.formLeft .logoForm em {
+  position: absolute;
+  border-radius: 5px;
+  width: 100px;
+  right: 0px;
+  height: 40px;
+  top: 245px;
+}
+
+.formLeft .logoForm input:last-child {
+  margin-top: 32px;
+  padding-left: 0px;
+  background-color: #2372c6;
+  color: #fff;
+  cursor: pointer;
+}
+
+.formLeft .logoBottom {
+  margin: 1px 60px 10px 70px;
+  width: 280px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.imgRight {
+  float: right;
+  width: 65%;
+  height: 100%;
+  background: #fff url("../../images/login/dl_02.jpg") no-repeat 10px center;
+  background-size: 100% 100%;
+  opacity: 0.95;
+}

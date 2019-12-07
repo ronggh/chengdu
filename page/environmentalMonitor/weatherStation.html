@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="../../css/environmentalMonitor/resetEnviron.css">
+<link rel="stylesheet" href="../../css/environmentalMonitor/weatherStation.css">
+<script src="../../libs/echarts-2.2.7/build/dist/echarts.js"></script>
+<!-- 气象站 -->
+<div class="OutermostLayer">
+    <div class="za_farmheader">
+        <div class="za_farmselect">
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-data">
+                    <div class="layui-input-block">
+                        <select name="quiz" lay-filter="quiz" id="area"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="Refresh">
+            <span><img src="../../images/refresh.png" alt=""> 刷新</span>
+        </div>
+    </div>
+    <div id="za_weather" style="display: none;">
+        <div class="weather_con">
+            <div class="container pr">
+                <div class="w1 common" id="SlotID7">
+                    <p>光照度</p>
+                    <p></p>
+                </div>
+                <div class="w2 common" id="SlotID8">
+                    <p>PM2.5</p>
+                    <p></p>
+                </div>
+                <div class="w3 common" id="SlotID3">
+                    <p>雨量</p>
+                    <p></p>
+                </div>
+                <div class="w4 common" id="SlotID2">
+                    <p>风向</p>
+                    <p></p>
+                </div>
+                <div class="w5 common" id="SlotID1">
+                    <p>风速</p>
+                    <p></p>
+                </div>
+                <div class="w6 common" id="SlotID5">
+                    <p>空气湿度</p>
+                    <p></p>
+                </div>
+                <div class="w7 common" id="SlotID4">
+                    <p>空气温度</p>
+                    <p></p>
+                </div>
+                <div class="w8 common" id="SlotID6">
+                    <p>大气压力</p>
+                    <p></p>
+                </div>
+                <div class="bottom pa">
+                    <img class="body pa" src="../../images/weather.png" alt="">
+                    <img class="head pa" src="../../images/weather_head.gif" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--历史数据dom-->
+    <div id="chart">
+        <div class='chartbtn clearfloat'>
+            <ul>
+                <li time=-1>近一天</li>
+                <li time=-7>近一周</li>
+                <li time=-30>近一个月</li>
+                <li id="date_3">自定义时间</li>
+            </ul>
+            <div id="dateTimeDiv">
+                <img src="../../images/date.png" alt="" srcset="">
+                <input type="text" id="dateTime" placeholder="自定义时间" autocomplete="off">
+            </div>
+            <span class="btnexcel">导出为Excel</span>
+        </div>
+        <div id='echartcontain'></div>
+    </div>
+</div>
+<script type="text/javascript" src="../../script/environmentalMonitor/weatherStation.js"></script>

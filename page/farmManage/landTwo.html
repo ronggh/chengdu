@@ -1,0 +1,247 @@
+<link rel="stylesheet" href="../../css/landManage/landManage.css">
+<div id="landManageTwo" class="OutermostLayer">
+    <div class="landnext">
+        <div class="landnext1">
+            <span>1</span>
+            <p>填写地块信息</p>
+        </div>
+        <div class="xian"></div>
+        <div class="landnext2">
+            <span>2</span>
+            <p>绘制地块</p>
+        </div>
+        <div class="xian"></div>
+        <div class="landnext3">
+            <span>3</span>
+            <p>选择地块设备</p>
+        </div>
+    </div>
+    <!-- 地块定位的省市区三级联动 -->
+    <!--谷歌地图选点-->
+    <div class="createmarker">
+        <div class="address">
+            <span>请选择地址：</span>
+            <div data-toggle="distpicker" id="companypicker">
+                <select class="pa"></select>
+                <select class="pb"></select>
+                <select class="pc"></select>
+            </div>
+            <div class="wrap">
+                <input type="text" placeholder="请填写企业详细地址" class="whiteaddress">
+            </div>
+        </div>
+    </div>
+    <!-- 地块第二部的地图容器 -->
+    <div id="createmap">
+        <div id="createmaparea"></div>
+        <div class="maphelp">
+            <p>请先拖动地图至农场所在地，然后开始绘制地块</p>
+        </div>
+        <div class="maphelptext"><img src="../../images/icon8_03.png"
+                alt=""><span>请拖动地图至农场所在地，然后点击“开始绘制地块”按钮进行地块区域绘制。</span>
+        </div>
+        <div class="mapcomplete">
+            <span class="mc_edit mc_edit_exit" onclick="landTwo.exitpolygonpathfn()">重新绘制</span>
+            <span class="mc_edit mc_edit_save" onclick="landTwo.savepolygonpathfn()">下一步</span>
+            <span class="mc_edit mc_edit_new" onclick="landTwo.newpolygonareafn()">开始绘制地块</span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../libs/distpicker.data.min.js"></script>
+<script type="text/javascript" src="./libs/distpicker.js"></script>
+<script type="text/javascript" src="../../script/farmManage/landTwo.js"></script>
+<style>
+    #createmap .maphelp {
+        width: 100%;
+        height: 568px;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        cursor: pointer;
+    }
+
+    #createmap .maphelp p {
+        color: #fff;
+        line-height: 568px;
+        font-size: 28px;
+        text-align: center;
+        transition: color .4s;
+        -webkit-transition: color .4s;
+    }
+
+    #createmap .maphelptext {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        cursor: pointer;
+        color: #fff;
+        font-size: 14px;
+        text-indent: 14px;
+        display: none;
+    }
+
+    #createmap .maphelptext img {
+        vertical-align: -4px;
+        font-size: 16px;
+        padding: 0 6px;
+    }
+
+    #createmap .mapcomplete {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        position: absolute;
+        top: 58px;
+        left: 20px;
+        z-index: 999;
+        display: none;
+    }
+
+    #createmap .mapcomplete span.mc_edit {
+        width: 104px;
+        height: 30px;
+        border-radius: 3px;
+        display: inline-block;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        color: #fff;
+        margin-right: 9px;
+        cursor: pointer;
+        transition: all .4s;
+        -webkit-transition: all .4s;
+        display: none;
+    }
+
+    #createmap .mapcomplete span.mc_edit:hover {
+        text-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+        -webkit-text-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    #createmap .mapcomplete span.mc_edit_exit {
+        background-color: rgba(255, 59, 48, 0.7);
+        border: 1px solid #ff3b30;
+    }
+
+    #createmap .mapcomplete span.mc_edit_save {
+        background-color: rgba(58, 213, 105, 0.7);
+        border: 1px solid #3ad569;
+    }
+
+    #createmap .mapcomplete span.mc_edit_new {
+        background-color: rgba(56, 155, 255, 0.7);
+        border: 1px solid #389bff;
+        display: block;
+    }
+
+    /* 三级联动 */
+    .createmarker {
+        width: 876px;
+        height: 40px;
+        margin: 20px auto;
+    }
+
+    .createmarker input::-webkit-input-placeholder {
+        color: #c6c6c6;
+    }
+
+    .createmarker input::-moz-placeholder {
+        color: #c6c6c6;
+    }
+
+    .createmarker input::-ms-input-placeholder {
+        color: #c6c6c6;
+    }
+
+    .createmarker input {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .address span {
+        display: block;
+        width: 110px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 16px;
+        color: #808080;
+    }
+
+    #companypicker {
+        position: absolute;
+        left: 120px;
+        top: 1px;
+    }
+
+    .address .wrap {
+        height: 40px;
+        width: 160px;
+        position: absolute;
+        top: 1px;
+        left: 600px;
+    }
+
+    .address .wrap input {
+        height: 36px;
+        border: 1px solid #eee;
+        padding-left: 15px;
+        width: 240px;
+    }
+
+    #companypicker select {
+        display: inline-block;
+    }
+
+    #companypicker select {
+        font-size: 14px;
+        color: #c6c6c6;
+        width: 158px;
+        height: 38px;
+        border: 1px solid #eee;
+        border-radius: 3px;
+        line-height: 40px;
+        text-indent: 10px;
+        box-shadow: none;
+        text-shadow: none;
+        margin-right: 10px;
+    }
+
+    #companypicker select {
+        position: absolute;
+    }
+
+    #companypicker select.pa {
+        top: 0;
+        left: 0;
+    }
+
+    #companypicker select.pb {
+        top: 0;
+        left: 160px;
+    }
+
+    #companypicker select.pc {
+        top: 0;
+        left: 320px;
+    }
+
+    #companypicker select:last-child {
+        margin-right: 0;
+    }
+
+    .address {
+        height: 40px;
+        position: relative;
+    }
+
+    #companypicker option {
+        line-height: 24px;
+    }
+</style>

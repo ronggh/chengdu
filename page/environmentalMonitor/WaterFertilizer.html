@@ -1,0 +1,191 @@
+<link rel="stylesheet" href="../../css/environmentalMonitor/resetEnviron.css">
+<link rel="stylesheet" href="../../css/environmentalMonitor/WaterFertilizer.css">
+<script src="../../libs/echarts-2.2.7/build/dist/echarts.js"></script>
+<script src="../../libs/jquery.blockUI.js"></script>
+<div class="OutermostLayer">
+    <div class="za_farmheader">
+        <div class="za_farmselect">
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-data">
+                    <div class="layui-input-block">
+                        <select name="quiz" lay-filter="quiz" id="area"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="Refresh">
+            <span class="reload"><img src="../../images/refresh.png" alt=""> 刷新</span>
+        </div>
+    </div>
+    <div class="control_equipment"><span>控制设备</span></div>
+    <div id="equirementcontrol">
+        <div class="equirecon clearfloat" id="tabNav2">
+        </div>
+    </div>
+    <div class=dev_title><span>传感设备</span></div>
+    <div id="za_realData" style="display: block;">
+        <div class="content">
+            <ul class="primary">
+                <!-- 土壤指标 -->
+                <li class="level_one" id="turang">
+                    <div class="sub_tit land_line">
+                        <!-- <p class="land">土壤类</p> -->
+                    </div>
+                    <ul class="secondary clearfix"></ul>
+                </li>
+                <!-- /土壤指标 -->
+                <!-- 水质指标 -->
+                <li class="level_one" id="shuizhi">
+                    <div class="sub_tit water_line">
+                        <!-- <p class="water">水质类</p> -->
+                    </div>
+                    <ul class="secondary clearfix"></ul>
+                </li>
+                <!-- /水质指标 -->
+                <!-- 气象指标 -->
+                <li class="level_one" id="qixiang">
+                    <div class="sub_tit weather_line">
+                        <!-- <p class="weather">气象类</p> -->
+                    </div>
+                    <ul class="secondary clearfix"></ul>
+                </li>
+                <!-- /气象指标 -->
+                <!-- 空气指标 -->
+                <li class="level_one" id="kongqi">
+                    <div class="sub_tit air_line">
+                        <!-- <p class="air">空气类</p> -->
+                    </div>
+                    <ul class="secondary clearfix"></ul>
+                </li>
+                <!-- /空气指标 -->
+                <!--其他指标-->
+                <li class="level_one" id="qita">
+                    <div class="sub_tit air_line">
+                        <!-- <p class="other">其他类</p> -->
+                    </div>
+                    <ul class="secondary clearfix"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 报警设置 -->
+<script type="text/html" id="alerm_popup">
+    <div class="layui-tab" style="width:474px; margin-left: auto; margin-right: auto; margin-top:30px;">
+        <ul class="layui-tab-title">
+            <li class="layui-this selected"><img src="../../images/automation/higher.png" /><br />高于某个值时<br /><img
+                    src="../../images/automation/rec.png" style="display: block;" / class="rec"></li>
+            <li><img src="../../images/automation/lower.png" /><br />低于某个值时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
+            <li><img src="../../images/automation/between.png" /><br />在两值之间时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
+            <li><img src="../../images/automation/equal.png" /><br />等于某个值时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
+            <li><img src="../../images/automation/besides.png" /><br />在两值之外时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <img src="../../images/automation/higher-p.png" />
+                <br />
+                <div style="margin-left: 33px;">
+                    <input value="" class="layui-input" />
+                    <p>阈值</p>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <img src="../../images/automation/lower-p.png" />
+                <br />
+                <div style="margin-left:34px;">
+                    <input value="" class="layui-input" />
+                    <p>阈值</p>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <img src="../../images/automation/between-p.png" />
+                <br />
+                <div class="">
+                    <input value="" class="layui-input" />
+                    <p>低阈值</p>
+                </div>
+                <div class="">
+                    <input value="" class="layui-input" />
+                    <p>高阈值</p>
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <img src="../../images/automation/equal-p.png" />
+                <br />
+                <div class="">
+                    <input value="" class="layui-input" />
+                    <p>触发值</p>
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <img src="../../images/automation/besides-p.png" />
+                <br />
+                <div class="">
+                    <input value="" class="layui-input" />
+                    <p>低阈值</p>
+                </div>
+                <div class="">
+                    <input value="" class="layui-input" />
+                    <p>高阈值</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="margin-top:30px;">
+            <button class="layui-btn" onclick="alermSure()" lay-submit lay-filter="submitAddcategory">确定</button>
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button type="layui-btn" onclick="clearAlerm()" class="layui-btn layui-btn-primary">清除</button>
+        </div>
+    </div>
+</script>
+<!--历史数据dom-->
+<div id="chart">
+    <div class='chartbtn clearfloat'>
+        <ul>
+            <li time=-1>近一天</li>
+            <li time=-7>近一周</li>
+            <li time=-30>近一个月</li>
+            <li id="date_3">自定义时间</li>
+        </ul>
+        <div id="dateTimeDiv">
+            <img src="../../images/date.png" alt="" srcset="">
+            <input type="text" id="dateTime" placeholder="自定义时间" autocomplete="off">
+        </div>
+        <span class="btnexcel">导出为Excel</span>
+    </div>
+    <div id='echartcontain'></div>
+</div>
+<!--开关操作 记录dom-->
+<div id="switch" style="display: none">
+    <div class="switchTime">
+        <ul>
+            <li time=-1>近一天</li>
+            <li time=-7>近一周</li>
+            <li time=-30>近一个月</li>
+            <li>自定义时间</li>
+        </ul>
+    </div>
+    <div id="dateswitch">
+        <img src="../../images/date.png" alt="" srcset="">
+        <input type="text" id="dateTime2" placeholder="自定义时间" autocomplete="off">
+    </div>
+    <table class="layui-table" lay-skin="line" id="swichtable">
+        <thead>
+            <tr>
+                <th style="width:90px;">操作人</th>
+                <th>操作</th>
+                <th>操作时间</th>
+                <th>操作结果</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<script type="text/javascript" src="../../script/environmentalMonitor/WaterFertilizer.js"></script>

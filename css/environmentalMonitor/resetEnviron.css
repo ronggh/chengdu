@@ -1,0 +1,206 @@
+/* 地块下拉框 */
+.za_farmheader {
+    line-height: 40px;
+    margin-bottom: 15px;
+    padding: 0px 60px 0px 20px;
+}
+
+.za_farmheader .za_farmselect {
+    min-width: 145px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 6px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.za_farmselect form .layui-form-data .layui-input-block {
+    margin-left: 0;
+}
+
+.za_farmselect form .layui-form-select dl dd,
+.za_farmselect form .layui-form-select dl dt {
+    padding: 0 15px;
+}
+
+.za_farmselect form .layui-form-data .layui-input,
+.za_farmselect form .layui-form-data .layui-select {
+    line-height: 30px;
+    height: 30px;
+}
+
+/* 刷新按钮 */
+.Refresh {
+    float: right;
+    color: #1e9fff;
+    cursor: pointer;
+    position: relative;
+}
+
+.Refresh img {
+    position: absolute;
+    left: -24px;
+    top: 10px;
+}
+
+.refresh {
+    animation: rotate .5s linear;
+    -webkit-animation: rotate .3s linear;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+/* 开关操作记录 */
+#dateTime2 {
+    height: 25px;
+    width: 180px;
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+#switch .switchTime {
+    margin: 20px 0px;
+}
+
+#switch .switchTime ul {
+    float: left;
+    border-radius: 3px;
+    border: 1px solid #999;
+}
+
+#switch .switchTime ul li {
+    width: 80px;
+    float: left;
+    /* display: inline-block; */
+    border-right: 1px solid #999;
+    line-height: 25px;
+    padding: 0px;
+    text-align: center;
+    margin-left: 0px;
+}
+
+#switch .switchTime ul li:hover {
+    background-color: #389bff;
+    color: #fff;
+    border: 0px;
+}
+
+#switch .switchTime ul li.active {
+    background-color: #389bff;
+    color: #fff;
+    border: 0px;
+}
+
+#switch .switchTime ul li:last-child {
+    border-right: none;
+}
+/* chart 表格 */
+#echartcontain {
+    height: 330px;
+    margin: 5px auto 10px;
+}
+
+#chart,
+.hidden {
+    display: none;
+}
+#switch {
+    width: 600px;
+    display: none;
+    margin: 0;
+}
+
+#switch table {
+        width: 600px;
+        border: none;
+        margin: 0 auto;
+    }
+
+#chart .chartbtn {
+    margin: 20px 0px;
+}
+#switch ul,#chart .chartbtn ul {
+    float: left;
+    border-radius: 3px;
+    border: 1px solid #999;
+    margin-left: 30px;
+}
+#switch ul li,#chart .chartbtn ul li {
+    width: 80px;
+    float: left;
+    border-right: 1px solid #999;
+    line-height: 25px;
+    padding: 0px;
+    text-align: center;
+    margin-left: 0px;
+}
+#switch ul li:hover,#chart .chartbtn ul li:hover {
+    background-color: #389bff;
+    color: #fff;
+    border: 0px;
+}
+
+#chart .chartbtn ul li.active {
+    background-color: #389bff;
+    color: #fff;
+    border: 0px;
+}
+#switch ul li:last-child,#chart .chartbtn ul li:last-child {
+    border-right: none;
+}
+
+#chart .chartbtn span {
+    float: right;
+    margin-right: 20px;
+    line-height: 25px;
+    width: 100px;
+    background-color: #389bff;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+}
+#dateswitch,#chart .chartbtn #dateTimeDiv{
+    height: 25px;
+    width: 180px;
+    position: relative;
+    float: left;
+}
+#dateswitch img,#chart .chartbtn #dateTimeDiv img{
+    position: absolute;
+    left: 15px;
+    top: 5px;
+}
+#dateswitch #dateTime2,#chart .chartbtn #dateTime {
+    height: 25px;
+    width: 180px;
+    padding-left: 30px;
+    margin-left: 10px;
+}
+#dateswitch:after,#dateTimeDiv:after {
+    width: 10px;
+    height: 7px;
+    display: block;
+    content: '.';
+    font-size: 0;
+    background: url('../../images/left_sanjiao.png') center center no-repeat;
+    position: absolute;
+    top: 10px;
+    left: 4px;
+}

@@ -1,0 +1,148 @@
+<div class="userManage_box OutermostLayer">
+    <div class="layui-form" lay-filter="user_manage">
+        <div class="layui-form-item" lay-filter="user_manage">
+            <label class="layui-form-label">用户</label>
+            <div class="layui-input-block">
+                <input type="text" name="um_searchName" placeholder="请输入用户名/姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <select name="um_searchState">
+                    <option value="">所有</option>
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="um_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="manageFn.addUserPop('insert')">+ 新建</button>
+    </div>
+    <div>
+        <table class="userTable" id="manageTable" lay-filter="manageTable"></table>
+    </div>
+    <div id="um_pagenation" class="fr"></div>
+</div>
+
+<!-- 查看可用功能 -->
+<script type="text/html" id="Use_Function">
+    <span class="btn_primary" onclick="manageFn.Use_fun('{{d.UserID}}')">查看</span>
+</script>
+<script type="text/html" id="Use_Fu">
+    <div style="padding: 30px 40px; font-size: 14px;max-height: 300px;overflow-y: auto;">
+        <div id="Use_Function_tree" class="ztree" data-id="0"></div>
+    </div>
+</script>
+<!--操作-->
+<script type="text/html" id="table_operate">
+    <div>
+        <span class="btn_primary" onclick="manageFn.addUserPop('update')">编辑</span>
+        <span class="btn_primary"
+            onclick="manageFn.stateChangeFn('{{d.UserID}}','{{d.UserValid}}')">{{d.UserValid == 1?'禁用':'启用'}}</span>
+        <span class="btn_warn" onclick="manageFn.dUserPop()">修改密码</span>
+        <span class="btn_warn" onclick="manageFn.delUserPop('{{d.UserName}}','{{d.UserID}}')">删除</span>
+    </div>
+</script>
+<!--删除用户-->
+<script type="text/html" id="del_user_popup">
+    <div class="popup_inner">请确认删除用户{{d.username}}？</div>
+</script>
+<!--新增用户弹窗-->
+<script type="text/html" id="add_user_popup">
+    <div class="layui-form user_add_popup PopupLayer">
+        <input type="hidden" name="UserId" />
+        <input type="hidden" name="OrgId" />
+        <input type="hidden" name="pId" />
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserName" value="" lay-verify="required" placeholder="请输入用户名"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="LoginName" lay-verify="required" placeholder="请输入姓名" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>手机号码</label>
+            <div class="layui-input-block">
+                <input type="tel" name="phone" lay-verify="required|phone" placeholder="请输入手机号码" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="password" lay-verify="required" placeholder="请输入密码" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">隶属机构</label>
+            <div class="layui-input-block popup_Org layui-form-select">
+                <div class="value_ft">请选择隶属机构 </div>
+                <i class="layui-edge"></i>
+                <!--可选择区域-->
+                <div id="OrgBox" class="hidden">
+                    <ul id="treeOrg" class="treeOrg ztree">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" id="use">
+            <label class="layui-form-label">用户角色</label>
+            <div class="layui-input-block" id="userRoles"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>用户状态</label>
+            <div class="layui-input-block">
+                <select name="IsValid" lay-verify="required" class="IsValid">
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="submitAddUser">确认</button>
+        </div>
+    </div>
+</script>
+<!-- 修改密码弹出框 -->
+<script type="text/html" id="editPass">
+    <div class="layui-form editPass_popup PopupLayer">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="user" name="before" lay-verify="required" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>新密码</label>
+            <div class="layui-input-block">
+                <input type="text" id="after" name="after" lay-verify="required" placeholder="请输入新密码" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="submitPass">确认</button>
+        </div>
+    </div>
+</script>
+
+<link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.excheck.js"></script>
+<script src="../../libs/jQuery.md5.js"></script>
+<script type="text/javascript" src="../../script/systemManage/usermanage.js"></script>

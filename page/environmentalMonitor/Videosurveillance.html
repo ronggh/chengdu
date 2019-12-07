@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="../../css/environmentalMonitor/resetEnviron.css">
+<link rel="stylesheet" href="../../css/environmentalMonitor/Videosurveillance.css">
+<div class="OutermostLayer">
+    <div class="za_farmheader">
+        <div class="za_farmselect">
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-data">
+                    <div class="layui-input-block">
+                        <select name="quiz" lay-filter="quiz" id="area"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="Refresh">
+            <span><img src="../../images/refresh.png" alt=""> 刷新</span>
+        </div>
+    </div>
+    <!-- 视频监控样式  -->
+    <div id="farmlivevideo" style="display: none;">
+        <p>视频监控<span id="Camera"></span></p>
+        <div class="popboxselect">
+            <ul class="clearfloat" id="Cameras"></ul>
+        </div>
+        <div class="videoitem clearfloat" videotitle="视频名称1">
+            <div class="video_img" id="div_video" style="width:550px;height:366px;float:left;">
+                <div id="playercontainer">
+                    <div class="vcp-player vcp-playing" style="width: 550px; height: 366px;">
+                        <div class="vcp-error-tips" style="display: none;"></div>
+                        <div class="vcp-loading" style="display:none;"></div><video preload="auto" autoplay="true"
+                            webkit-playsinline="" playsinline="" x-webkit-airplay="allow"
+                            x5-video-player-fullscreen="true" x5-mse-live-streaming=""
+                            src=""
+                            style="width: 550px; height: 366px;"></video>
+                            <!-- blob:http://www.nyypt.cn/2b2fc6d8-195b-441b-bf4e-b9c2262c886c -->
+                        <div class="vcp-poster" style="display: block;"><img class="vcp-poster-pic stretch"
+                                src="../../images/poster.jpg"></div>
+                        <div class="vcp-bigplay"></div>
+                        <div class="vcp-controls-panel hide">
+                            <div class="vcp-panel-bg"></div>
+                            <div class="vcp-playtoggle"></div><span class="vcp-timelabel"></span>
+                            <div class="vcp-timeline" style="display: none;">
+                                <div class="vcp-slider">
+                                    <div class="vcp-slider-track"></div>
+                                    <div class="vcp-slider-thumb"></div>
+                                </div>
+                            </div>
+                            <div class="vcp-fullscreen-toggle"></div>
+                            <div class="vcp-volume">
+                                <div class="vcp-volume-bg"></div>
+                                <div class="vcp-slider-vertical">
+                                    <div class="vcp-slider-track"></div>
+                                    <div class="vcp-slider-thumb"></div>
+                                </div><span class="vcp-volume-icon"></span>
+                            </div>
+                            <div class="vcp-reflashbtn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="livecontrol">
+                <div class="livecontrol_arrow">
+                    <div class="clearfloat">
+                        <div class="livevideoitem livevideo_top" title="向上旋转"></div>
+                        <div class="livevideoitem livevideo_right" title="向右旋转"></div>
+                        <div class="livevideoitem livevideo_bottom" title="向左旋转"></div>
+                        <div class="livevideoitem livevideo_left" title="向下旋转"></div>
+                        <div class="livevideoitem livevideo_center" title="暂停旋转"></div>
+                    </div>
+                </div>
+                <div class="livecontrol_size">
+                    <div class="livevideo_small" title="缩小"></div>
+                    <div class="livevideo_big" title="放大"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../script/environmentalMonitor/Videosurveillance.js"></script>

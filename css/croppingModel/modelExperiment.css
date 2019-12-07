@@ -1,0 +1,325 @@
+.model_experiment {
+    box-sizing: border-box;
+    height: 649px;
+    width: 670px;
+}
+
+.model_experiment p {
+    display: inline-block;
+    width: 670px;
+    height: 34px;
+    box-sizing: border-box;
+    line-height: 34px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    padding-left: 30px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_experiment .plandModel {
+    height: 120px;
+    width: 650px;
+    margin: 0px auto;
+}
+
+.model_experiment .plandModel .layui-form-item {
+    margin-top: 12px;
+    margin-bottom: 0px;
+}
+
+.model_experiment .plandModel .land input {
+    width: 517px;
+    height: 30px;
+    border: 1px solid rgba(183, 185, 190, 1);
+    border-radius: 3px;
+    padding-left: 5px;
+}
+
+.model_experiment .seriosType {
+    width: 630px;
+    height: 115px;
+    margin: 0px auto;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.model_experiment .seriosType::-webkit-scrollbar {
+    /*//先改变body的滚动条宽度 */
+    width: 2px;
+}
+
+.model_experiment .seriosType::-webkit-scrollbar-track {
+    /*//再改变body的滚动条轨道颜色*/
+    /* background: rgb(200, 200, 200); */
+    border-radius: 1px;
+}
+
+.model_experiment .seriosType::-webkit-scrollbar-thumb {
+    /*//最后改变body的滚动条滑轨相关的样式*/
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 1px;
+}
+
+.model_experiment .seriosType .layui-form-item {
+    margin-top: 12px;
+    margin-bottom: 0px;
+}
+
+.model_experiment .layui-form-item input {
+    width: 207px;
+    height: 30px;
+    border: 1px solid rgba(183, 185, 190, 1);
+    border-radius: 3px;
+    padding-left: 5px;
+}
+
+.model_experiment .Model_popurBottom {
+    width: 630px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.model_experiment .Model_popurBottom .popurTop {
+    width: 560px;
+    height: 40px;
+    line-height: 50px;
+    margin: 0px auto;
+    margin-bottom: 10px;
+}
+
+.model_experiment .Model_popurBottom .popurTop span {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_experiment .Model_popurBottom .popurTop input {
+    width: 70px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.model_experiment .Model_popurBottom .popurTop p {
+    float: right;
+    line-height: 60px;
+    font-size: 14px;
+    width: 295px;
+    border: none;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_experiment .Model_popurBottom .popurMiddle {
+    width: 630px;
+    height: 130px;
+    padding-bottom: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.model_experiment .Model_popurBottom .popurMiddle::-webkit-scrollbar {
+    /*//先改变body的滚动条宽度 */
+    width: 2px;
+}
+
+.model_experiment .Model_popurBottom .popurMiddle::-webkit-scrollbar-track {
+    /*//再改变body的滚动条轨道颜色*/
+    /* background: rgb(200, 200, 200); */
+    border-radius: 1px;
+}
+
+.model_experiment .Model_popurBottom .popurMiddle::-webkit-scrollbar-thumb {
+    /*//最后改变body的滚动条滑轨相关的样式*/
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 1px;
+}
+
+.model_experiment .Model_popurBottom .popurMiddle .popurMiddleTop {
+    width: 600px;
+    height: 26px;
+    margin: 15px auto;
+    margin-bottom: 0px;
+}
+
+.model_experiment .Model_popurBottom .popurMiddle .popurMiddleTop span {
+    display: inline-block;
+    width: 60px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_experiment .Model_popurBottom .popurMiddle .popurMiddleTop input {
+    width: 160px;
+    height: 26px;
+}
+
+.model_experiment .Model_popurBottom .popurMiddle .popurMiddleTop i {
+    display: inline-block;
+    line-height: 1px;
+    width: 50px;
+    height: 1px;
+    margin: 0px 45px;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.model_experiment .Model_popurBottom .popurBottom {
+    height: 45px;
+    border-top: 1px solid rgba(0, 0, 0, 0.25);
+    padding-top: 10px;
+}
+
+.model_experiment .Model_popurBottom .popurBottom .layui-form-item input {
+    width: 460px;
+    height: 30px;
+    border: 1px solid rgba(183, 185, 190, 1);
+    border-radius: 3px;
+    padding-left: 5px;
+}
+
+
+
+.model_experiment .layui-form-item .layui-form-label {
+    text-align: center;
+    display: inline-block;
+    line-height: 30px;
+    width: 90px;
+    padding: 9px 5px;
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 20px;
+}
+
+/* ----------------------------步骤tab---------------------------- */
+.model_experiment .growthStage {
+    width: 630px;
+    height: 290px;
+    margin: 0px auto;
+    box-sizing: border-box;
+
+}
+
+.model_experiment .growthStage .tab {
+    margin: 14px 0;
+}
+
+.model_experiment .growthStage .tab>li {
+    cursor: pointer;
+    float: left;
+    width: 13%;
+    height: 26px;
+    line-height: 26px;
+    font-size: 14px;
+    margin-right: 7px;
+    text-align: center;
+    background: url('../../images/kuang_05.png')no-repeat center;
+    background-size: 100% 100%;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_experiment .growthStage .tab li:first-child {
+    background: url('../../images/k1_03.png')no-repeat center;
+    background-size: 100% 100%;
+    margin-left: 0;
+}
+
+.model_experiment .growthStage .tab>li p {
+    display: inline-block;
+}
+
+/* 第一个li */
+.model_experiment .growthStage .tab>li.first_current {
+    background: url('../../images/kuang_03.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.first_current p {
+    color: #fff;
+}
+
+/* 最后一个利 */
+
+.model_experiment .growthStage .tab>li.last_current {
+    background: url('../../images/kuang_07.png')no-repeat center;
+    background-size: 100% 100%;
+    /* color: #389bff; */
+}
+
+.model_experiment .growthStage .tab>li.last_current p {
+    color: #389bff;
+}
+
+/* 中间的li */
+.model_experiment .growthStage .tab>li.center_complete {
+    background: url('../../images/kuang_05.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.center_complete p {
+    color: #389bff;
+}
+
+/* 点击的li */
+.model_experiment .growthStage .tab>li.firstki_current {
+    background: url('../../images/k1_03.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.firstki_current p {
+    color: #666;
+}
+
+.model_experiment .growthStage .tab>li.lastki_current {
+    background: url('../../images/k1_07.png')no-repeat center;
+    background-size: 100% 100%;
+    /* color: #389bff; */
+}
+
+.model_experiment .growthStage .tab>li.lastki_current p {
+    color: #666;
+}
+
+.model_experiment .growthStage .tab>li.centerki_complete {
+    background: url('../../images/k1_05.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.centerki_complete p {
+    color: #666;
+}
+
+/* 除去第1和最后一步外，中间步骤的已完成、正在编辑、可编辑和不可编辑四种状态 */
+.model_experiment .growthStage .tab>li.center_complete {
+    background: url('../../images/center_white_bg.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.center_complete p {
+    color: #389bff;
+    background: url('../../images/complete_icon.png')no-repeat right center;
+}
+
+.model_experiment .growthStage .tab>li.center_editable {
+    background: url('../../images/center_white_bg.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.center_editable span {
+    color: #389bff;
+}
+
+.model_experiment .growthStage .tab>li.center_current {
+    background: url('../../images/center_blue_bg.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.center_current p {
+    color: #fff;
+}
+
+.model_experiment .growthStage .tab>li.center_disable {
+    cursor: default;
+    background: url('../../images/center_gray_bg.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_experiment .growthStage .tab>li.center_disable p {
+    color: #666;
+}

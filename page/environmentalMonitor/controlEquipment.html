@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="../../css/environmentalMonitor/resetEnviron.css">
+<link rel="stylesheet" href="../../css/environmentalMonitor/controlEquipment.css">
+<div class="OutermostLayer">
+    <div class="za_farmheader">
+        <div class="za_farmselect">
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-data">
+                    <div class="layui-input-block">
+                        <select name="quiz" lay-filter="quiz" id="area"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="Refresh">
+            <span><img src="../../images/refresh.png" alt=""> 刷新</span>
+        </div>
+    </div>
+    <div id="equirementcontrol" class="clearfix">
+        <div class="equirecon clearfix" id="tabNav2">
+        </div>
+    </div>
+</div>
+<!--开关操作 记录dom-->
+<div id="switch" style="display: none">
+    <div class="switchTime">
+        <ul>
+            <li time=-1>近一天</li>
+            <li time=-7>近一周</li>
+            <li time=-30>近一个月</li>
+            <li>自定义时间</li>
+    </ul>
+    <div id="dateswitch">
+        <img src="../../images/date.png" alt="" srcset="">
+        <input type="text" id="dateTime2" placeholder="自定义时间" autocomplete="off">
+    </div>
+    <table class="layui-table" lay-skin="line">
+        <thead>
+            <tr>
+                <th style="width:90px;">操作人</th>
+                <th>操作</th>
+                <th>操作时间</th>
+                <th>操作结果</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<script type="text/javascript" src="../../script/environmentalMonitor/controlEquipment.js"></script>

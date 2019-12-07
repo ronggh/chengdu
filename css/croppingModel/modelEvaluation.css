@@ -1,0 +1,246 @@
+.model_Evaluation .layui-form-item {
+    margin-top: 12px;
+    margin-bottom: 0px;
+}
+
+.model_Evaluation .layui-form-item input {
+    width: 207px;
+    height: 30px;
+    border: 1px solid rgba(183, 185, 190, 1);
+    border-radius: 3px;
+    padding-left: 5px;
+}
+
+.model_Evaluation .Model_popurBottom {
+    width: 630px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.model_Evaluation .Model_popurBottom .popurTop {
+    width: 560px;
+    height: 40px;
+    line-height: 50px;
+    margin: 0px auto;
+    margin-bottom: 10px;
+}
+
+.model_Evaluation .Model_popurBottom .popurTop span {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_Evaluation .Model_popurBottom .popurTop input {
+    width: 70px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.model_Evaluation .Model_popurBottom .popurTop p {
+    float: right;
+    line-height: 60px;
+    font-size: 14px;
+    width: 295px;
+    border: none;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle {
+    width: 630px;
+    height: 130px;
+    padding-bottom: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle::-webkit-scrollbar {
+    /*//先改变body的滚动条宽度 */
+    width: 2px;
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle::-webkit-scrollbar-track {
+    /*//再改变body的滚动条轨道颜色*/
+    /* background: rgb(200, 200, 200); */
+    border-radius: 1px;
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle::-webkit-scrollbar-thumb {
+    /*//最后改变body的滚动条滑轨相关的样式*/
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 1px;
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle .popurMiddleTop {
+    width: 600px;
+    height: 26px;
+    /* margin: 15px auto; */
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle .popurMiddleTop span {
+    display: inline-block;
+    width: 60px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle .popurMiddleTop input {
+    width: 60px;
+    height: 26px;
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle .popurMiddleTop em {
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 50px;
+    background: #389bff;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 50px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.model_Evaluation .Model_popurBottom .popurMiddle .popurMiddleTop i {
+    display: inline-block;
+    line-height: 1px;
+    width: 50px;
+    height: 1px;
+    margin: 0px 45px;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* ----------------------------步骤tab---------------------------- */
+.model_Evaluation .growthStage {
+    width: 630px;
+    height: 250px;
+    margin: 0px auto;
+    box-sizing: border-box;
+
+}
+
+.model_Evaluation .growthStage .tab {
+    margin: 14px 0;
+}
+
+.model_Evaluation .growthStage .tab>li {
+    cursor: pointer;
+    float: left;
+    width: 13%;
+    height: 26px;
+    line-height: 26px;
+    font-size: 14px;
+    margin-right: 7px;
+    text-align: center;
+    background: url('../../images/kuang_05.png')no-repeat center;
+    background-size: 100% 100%;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.model_Evaluation .growthStage .tab li:first-child {
+    background: url('../../images/k1_03.png')no-repeat center;
+    background-size: 100% 100%;
+    margin-left: 0;
+}
+
+.model_Evaluation .growthStage .tab>li p {
+    display: inline-block;
+}
+
+/* 第一个li */
+.model_Evaluation .growthStage .tab>li.first_current {
+    background: url('../../images/kuang_03.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_Evaluation .growthStage .tab>li.first_current p {
+    color: #fff;
+}
+
+/* 最后一个利 */
+
+.model_Evaluation .growthStage .tab>li.last_current {
+    background: url('../../images/kuang_07.png')no-repeat center;
+    background-size: 100% 100%;
+    /* color: #389bff; */
+}
+
+.model_Evaluation .growthStage .tab>li.last_current p {
+    color: #389bff;
+}
+
+/* 中间的li */
+.model_Evaluation .growthStage .tab>li.center_complete {
+    background: url('../../images/kuang_05.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_Evaluation .growthStage .tab>li.center_complete p {
+    color: #389bff;
+}
+
+/* 点击的li */
+.model_Evaluation .growthStage .tab>li.firstki_current {
+    background: url('../../images/k1_03.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_Evaluation .growthStage .tab>li.firstki_current p {
+    color: #666;
+}
+
+.model_Evaluation .growthStage .tab>li.lastki_current {
+    background: url('../../images/k1_07.png')no-repeat center;
+    background-size: 100% 100%;
+    /* color: #389bff; */
+}
+
+.model_Evaluation .growthStage .tab>li.lastki_current p {
+    color: #666;
+}
+
+.model_Evaluation .growthStage .tab>li.centerki_complete {
+    background: url('../../images/k1_05.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_Evaluation .growthStage .tab>li.centerki_complete p {
+    color: #666;
+}
+
+/* 除去第1和最后一步外，中间步骤的已完成、正在编辑、可编辑和不可编辑四种状态 */
+.model_Evaluation .growthStage .tab>li.center_complete {
+    background: url('../../images/kuang_05.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_Evaluation .growthStage .tab>li.center_editable {
+    background: url('../../images/kuang_05.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_Evaluation .growthStage .tab>li.center_editable span {
+    color: #389bff;
+}
+
+.model_Evaluation .growthStage .tab>li.center_current {
+    background: url('../../images/k1_05.png')no-repeat center;
+    background-size: 100% 100%;
+}
+
+.model_Evaluation .growthStage .tab>li.center_current p {
+    color: #fff;
+}
+
+/* 查验 */
+#echartcontain {
+    height: 360px;
+    margin: 5px auto 10px;
+}
+
+#chart {
+    display: none;
+}

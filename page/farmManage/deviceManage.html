@@ -1,0 +1,64 @@
+<!-- 终端管理 结构TerminalManagement -->
+<div id="TerminalManagement" class="OutermostLayer">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">终端号/名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="device_searchName" placeholder="请输入终端号/名称" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="fr">
+            <button class="layui-btn layui-btn-normal queryBtn" lay-submit lay-filter="Terminal_formSearch">查询</button>
+            <button class="layui-btn layui-btn-normal ResetBtn" lay-submit lay-filter="ResetBtn">重置</button>
+        </div>
+    </div>
+    <div class="Establish">
+        <button class="EstablishBtn layui-btn layui-btn-normal" onclick="TerminalFn.addTerminal('insert')">+
+            新增</button>
+    </div>
+    <!-- 表格 -->
+    <div>
+        <table class="deviceTable" id="TerminalTable" lay-filter="TerminalTable"></table>
+    </div>
+    <!-- 分页 -->
+    <div id="um_pagenation" class="fr"></div>
+</div>
+<!-- 终端操作 -->
+<script type="text/html" id="table_Terminal">
+    <div>
+        <span class="btn_primary" onclick="TerminalFn.addTerminal('update')">编辑</span>
+        <span class="btn_primary" onclick="LoadAction('sensorManage','0','{{d.TerminalNum}}')">传感器</span>
+        <span class="btn_primary" onclick="LoadAction('equipmentManage','0','{{d.TerminalNum}}')">设备</span>
+        <span class="btn_warn" onclick="TerminalFn.delTerminal('{{d.TerminalName}}','{{d.ID}}')">删除</span>
+    </div>
+</script>
+<!--删除终端-->
+<script type="text/html" id="del_Terminal_popup">
+    <div class="popup_inner">请确认删除{{d.TerminalName}}？</div>
+</script>
+<!--新增终端弹窗-->
+<script type="text/html" id="add_Terminal">
+    <div class="layui-form add_Terminal_pop PopupLayer" id="">
+        <input type="hidden" name="TerminalID" />
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>终端号</label>
+            <div class="layui-input-block">
+                <input type="text" name="TerminaNo" lay-verify="required" placeholder="请输入终端号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="c_red">*&nbsp;</span>终端名称</label>
+            <div class="layui-input-block">
+                <input type="text" id="TerminaName" name="TerminaName" lay-verify="required" placeholder="请输入终端名称"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="submitTerminal">确认</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript" src="../../script/farmManage/deviceMange.js"></script>
