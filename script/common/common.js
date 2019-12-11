@@ -6,7 +6,7 @@ var urlaction = "/index.html";
 var stateObject = {};
 var menu = GetQueryString("menu");
 var oneMenu = ['systemManage', 'farmManage', 'environmentalMonitor', "automaticMonitor", "messageManage", "plantingManage", "croppingModel", "taskManage"] //一级菜单集合；
-var twoMenu = ["userManage", "funregister", "organManage", "roleManage", "modelExperiment","RecommendMoxing", "modelEvaluation", "standProduction", "Inbox", "Outbox", "Mapoverview", "Videosurveillance", "SensorEquipment", "controlEquipment", "weatherStation", "WaterFertilizer", "olddatamode", "categoryManage", "deviceManage", "cameraManage", "landManage", "varieties"]; //二级菜单集合
+var twoMenu = ["automaticMonitor","userManage", "funregister", "organManage", "roleManage", "modelExperiment","RecommendMoxing", "modelEvaluation", "standProduction", "Inbox", "Outbox", "Mapoverview", "Videosurveillance", "SensorEquipment", "controlEquipment", "weatherStation", "WaterFertilizer", "olddatamode", "categoryManage", "deviceManage", "equipmentManage", "sensorManage", "cameraManage", "landManage", "landOne", "landTwo", "landThree", "varieties"]; //二级菜单集合
 var menuArray = [{
     "id": "systemManage",
     "name": "系统管理",
@@ -48,26 +48,46 @@ var menuArray = [{
     "fid": "farmManage",
     "remark": "设备管理",
 }, {
-    "id": "landManage",
-    "name": "地块管理",
-    "fid": "farmManage",
-    "remark": "地块管理",
-}, {
-    "id": "categoryManage",
-    "name": "品类管理",
-    "fid": "farmManage",
-    "remark": "品类管理",
-}, {
     "id": "equipmentManage",
     "name": "设备",
     "fid": "deviceManage",
     "remark": "设备",
-}, {
-    "id": "111",
-    "name": "新增设备",
-    "fid": "equipmentManage",
-    "remark": "新增设备",
-}, {
+},{
+    "id": "sensorManage",
+    "name": "传感器",
+    "fid": "deviceManage",
+    "remark": "传感器",
+},{
+    "id": "landManage",
+    "name": "地块管理",
+    "fid": "farmManage",
+    "remark": "地块管理",
+},{
+    "id": "landOne",
+    "name": "地块信息",
+    "fid": "landManage",
+    "remark": "地块信息",
+},{
+    "id": "landTwo",
+    "name": "绘制地块",
+    "fid": "landManage",
+    "remark": "绘制地块",
+},{
+    "id": "landThree",
+    "name": "添加设备",
+    "fid": "landManage",
+    "remark": "添加设备",
+},{
+    "id": "categoryManage",
+    "name": "品类管理",
+    "fid": "farmManage",
+    "remark": "品类管理",
+},{
+    "id": "varieties",
+    "name": "品种管理",
+    "fid": "categoryManage",
+    "remark": "品种管理",
+},{
     "id": "automaticMonitor",
     "name": "自动化控制",
     "fid": "",
@@ -150,37 +170,38 @@ var menuArray = [{
 }];
 
 /*----------------------------------------------------  输入框验证集合 -------- ----------------------------------- */
-var serNumber = /^[a-z0-9A-Z]{2,10}$/; //序列号
-var wayNumber = /^[0-9]{1,4}$/; //通道号
+var serNumber = /^[a-z0-9A-Z]{2,20}$/; //序列号
+var wayNumber = /^[0-9]{1,20}$/; //通道号
 var videoUrl = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/; //直播地址
 var userName = /^[a-z0-9A-Z]{2,20}$/; //用户名
-var two_tenName = /^[a-z0-9A-Z\u2E80-\u9FFF]{2,10}$/; //角色名称、传感器名称、设备名称、摄像头名称、地块名称
-var one_tenName = /^[a-z0-9A-Z\u2E80-\u9FFF]{1,10}$/; //类别、品种、终端号、终端名称
-var one_fiveName = /^[a-z0-9A-Z\u2E80-\u9FFF]{1,50}$/; //角色说明
-var two_fiveName = /^[a-z0-9A-Z\u2E80-\u9FFF]{2,50}$/; //机构名称、地址、角色说明
-var one_twoName = /^[a-z0-9A-Z\u2E80-\u9FFF]{1,200}$/; //地块介绍、信息正文
-var one_Person = /^[a-z0-9A-Z\u2E80-\u9FFF]{2,20}$/; //法人、姓名、自动化名称、信息标题、模型名称
-var capitalNumbwe = /^[0-9]{1,10}$/; //注册资金
+var two_tenName = /^[a-z0-9A-Z\u4e00-\u9fa5]{2,30}$/; //角色名称、传感器名称、设备名称、摄像头名称、地块名称
+var one_tenName = /^[a-z0-9A-Z\u4e00-\u9fa5]{1,30}$/; //类别、品种、终端号、终端名称
+var one_fiveName = /^[a-z0-9A-Z\u4e00-\u9fa5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]{1,50}$/; //角色说明
+var two_fiveName = /^[a-z0-9A-Z\u4e00-\u9fa5]{2,50}$/; //机构名称、地址、角色说明
+var one_twoName = /^[a-z0-9A-Z\u4e00-\u9fa5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]{1,200}$/; //地块介绍、信息正文
+var one_Person = /^[a-z0-9A-Z\u4e00-\u9fa5]{2,20}$/; //法人、姓名、自动化名称、信息标题、模型名称
+var capitalNumbwe = /^([1-9]{1}[0-9]{0,9})$/; //注册资金
 var myIphone = /^[1][3,4,5,7,8][0-9]{9}$/; //验证手机号
-var functionName = /^[\u2E80-\u9FFF]{2,6}$/; //功能名称
+var functionName = /^[\u4e00-\u9fa5]{2,6}$/; //功能名称
 var functionUrl = /^[a-zA-Z]{3,20}$/; //功能名称
 var inOut_res = /^([1-9]{1}[0-9]{1,5})(\.[0-9]{2}?)?$/;
-// var passWord = /
+var setUPFer_res = /((^[1-9]\d*)|^0)(\.\d{0,1}){0,1}$/;
 var myRegcode = /^[a-z0-9A-Z]{6,12}$/; //限制长度6-12位 
 
 /*---------------------------------------- 成都项目 数据请求函数 start ---------------------------------------- */
 // 数据请求接口地址
-var baseUrl = "http://open.chengdu.nyypt.cn";
-// var baseUrl = "http://112.19.241.99:5100";
+// var baseUrl = "http://192.168.2.126:8003";
+// var baseUrl = "http://open.chengdu.nyypt.cn";
+var baseUrl = "http://112.19.241.99:18002";
 var methodUrl = baseUrl + "/api/method";
 
 //请求时携带的参数token
 var paramList = {};
 var paramLoginList = {};
-paramList["accessToken"] = localStorage.getItem('ACCESS_TOKEN');
 
 // 每次请求携带的参数
 function GetPostData(paramList, category, method) {
+    paramList["accessToken"] = localStorage.getItem('ACCESS_TOKEN');
     if (category != 'sys' || method != 'getAccessToken') {
         if (localStorage.getItem('ACCESS_TOKEN') == null || localStorage.getItem('REFRESH_TOKEN') == null) {
             window.location.href = "./login.html";
@@ -196,6 +217,7 @@ function GetPostData(paramList, category, method) {
         method: method,
         url: methodUrl
     };
+    // console.log(JSON.stringify(postdata));
     return postdata;
 };
 // 登录时不需要携带参数Token
@@ -211,19 +233,37 @@ function GetLoginData(paramLoginList, category, method) {
 // 页面ajax
 function AjaxRequest(param, fields, type) {
     var postdata = GetPostData(param, fields, type);
+    // console.log(postdata);
     return postFnajax(postdata)
 }
 //登录ajax
 function loginAjaxRequest(param, fields, type) {
     var postdata = GetLoginData(param, fields, type);
-    // console.log(JSON.stringify(postdata))
     return postFnajax(postdata)
 }
-
 // ajax 数据请求函数
 function postFnajax(postbody) {
     return new Promise(function (resolve, reject) {
         $.ajax({
+            url: baseUrl + "/v1/iot/Method",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(postbody),
+            success: function (res) {
+                resolve(res);
+            },
+            error: function (err) {
+                reject(err);
+            }
+        });
+    });
+};
+
+// 前置等待ajax
+function afterFnajax(postbody) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            beforeSend: function () {layer.msg('加载中...', { icon: 16, shade: 0.01, time: 60 * 1000 }); },
             url: baseUrl + "/v1/iot/Method",
             type: "POST",
             contentType: "application/json",
@@ -418,18 +458,207 @@ function TimeReplice(str) {
     var newStr = str.replace("T", " ");
     return newStr;
 }
+
+//echart 弹出框的宽度
+function iframeW() {
+    var iframeW = $("body").width() - $("#za_slide").width() - 30;
+    return iframeW;
+}
+//echart表格加载
+function echartinitfn(deviceId, slotId, timeDate) {
+    var deviceId = deviceId;
+    var Unit = "";
+    var time;
+    if (timeDate.length > 10) {
+        time = timeDate.split(" - ")
+    }
+    var XAxisData = [];
+    var series = [];
+    var legendData = [];
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: './libs/echarts-2.2.7/build/dist'
+        }
+    });
+    // 使用
+    require(
+        [
+            'echarts',
+            'echarts/chart/line'
+        ],
+        function (ec) {
+            var param = cloneObjectFn(paramList);
+            param["deviceId"] = deviceId;
+            if (time) {
+                param["start"] = time[0];
+                param["end"] = time[1];
+            } else {
+                param["day"] = timeDate;
+            }
+            param["slot"] = slotId;
+            var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
+            postFnajax(postdata).then(function (res) {
+                // console.log("<<<<<<<< 实时数据 >>>>>>>>")
+                // console.log(param);
+                // console.log(res);
+                var result = JSON.parse(res);
+                var data = [];
+                Unit = result.data.Unit;
+                var elcelData = result.data.HistoryData;
+                $.each(result.data.HistoryData, function (i, item) {
+                    XAxisData.push((item.Time).replace(/T/g, " "));
+                    data.push(item.Data);
+                });
+                timeHistoryData = elcelData;
+                series.push(new SetList(result.data.DeviceName, 'line', data));
+                legendData.push(result.data.DeviceName);
+                var ww = iframeW();
+                layer.open({
+                    title: '历史数据',
+                    type: 1,
+                    area: [ww * 0.7 + "px", '520px'],
+                    content: $("#chart"),
+                    btn: ['关闭'],
+                    yes: function (index, layero) {
+                        layer.closeAll();
+                        $("#chart").css("display", "none");
+                        $(".layui-layer-shade").remove();
+                        //按钮【按钮二】的回调
+                        //return false 开启该代码可禁止点击该按钮关闭
+                    },
+                    cancel: function () {
+                        $("#chart").css("display", "none");
+                        $(".layui-layer-shade").remove();
+                    },
+                    success:function(){
+                        $.each($(".layui-layer-shade"),function(index,item){
+                            if(index>0){
+                                $(this).remove();
+                            }
+                        })
+                        var mask = $(".layui-layer-shade");
+                        mask.appendTo($(".OutermostLayer").parent());
+                        //其中：layero是弹层的DOM对象
+                        $(".layui-layer-shade").css({'z-index':2000});
+                        $("#chart").css({'z-index':200000})
+                    },
+                });
+                $("#chart").css("display", "block")
+                $("#echartcontain").css({
+                    "width": ww * 0.65 + "px"
+                });
+                echartfn('', legendData, Unit, XAxisData, series, ec);
+            });
+        }
+    );
+}
+function echartfn(qname, legendData, danwei, time, series, obj) {
+    // 基于准备好的dom，初始化echarts实例
+    // console.log("<<<<<<<<<<>>>>>>>>>");
+    // console.log(qname);
+    // console.log(legendData);
+    // console.log(danwei);
+    // console.log(time);
+    // console.log(series);
+    // console.log(obj);
+    deviceName = legendData;
+    var myChart = obj.init(document.getElementById('echartcontain'));
+    var option = {
+        animation: true,
+        title: {
+            text: qname,
+            subtext: danwei,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: legendData
+        },
+        toolbox: {
+            show: false,
+            feature: {
+                mark: {
+                    show: true
+                },
+                dataZoom: {
+                    show: true
+                },
+                dataView: {
+                    show: true
+                },
+                magicType: {
+                    show: true,
+                    type: ['line', 'bar', 'stack', 'tiled']
+                },
+                restore: {
+                    show: true
+                },
+                saveAsImage: {
+                    show: true
+                }
+            }
+        },
+        calculable: true,
+        dataZoom: {
+            show: true,
+            realtime: true,
+            start: 60,
+            end: 100
+        },
+        xAxis: [{
+            name: '时间',
+            type: 'category',
+            boundaryGap: false,
+            data: time,
+            nameTextStyle: {
+                color: "#999"
+            }
+        }],
+        yAxis: [{
+            type: 'value'
+        }],
+        series: series
+    };
+    myChart.setOption(option);
+}
+
 // 当刷新时判断当前页，展开左侧边栏
 //document.onreadystatechange = subSomething; //当页面加载状态改变的时候执行这个方法.
 function subSomething() {
     var value = "cameraManage";
-    if (menu != "")
+    var id = ""
+    if (menu != ""){
         value = decodeURIComponent(atob(menu)); //对字段地址进行解码
+    }
+    if (location.href.indexOf("&id=") != -1 ) {
+        id = decodeURIComponent(atob(location.href.split("&id=")[1]))
+    }
     $.each(twoMenu, function (index, item) {
         if (value == item) {
-            $("[pagename = '" + value + "']").addClass("active").parent(".sub").slideDown(300, function () {
-                $("[pagename = '" + value + "']").parent(".sub").parent(".nLi").addClass("on");
-            });
-            $("[pagename = '" + value + "']").click();
+            if(value == "varieties"){
+                var value1 = "categoryManage"
+                $("[pagename = '" + value1 + "']").addClass("active").parent(".sub").slideDown(300, function () {
+                    $("[pagename = '" + value1 + "']").parent(".sub").parent(".nLi").addClass("on");
+                });
+            }else if(value == "landOne" || value == "landTwo" || value == "landThree"){
+                var value1 = "landManage"
+                $("[pagename = '" + value1 + "']").addClass("active").parent(".sub").slideDown(300, function () {
+                    $("[pagename = '" + value1 + "']").parent(".sub").parent(".nLi").addClass("on");
+                });
+            }else if(value == "equipmentManage" || value == "sensorManage"){
+                var value1 = "deviceManage"
+                $("[pagename = '" + value1 + "']").addClass("active").parent(".sub").slideDown(300, function () {
+                    $("[pagename = '" + value1 + "']").parent(".sub").parent(".nLi").addClass("on");
+                });
+            }else{
+                $("[pagename = '" + value + "']").addClass("active").parent(".sub").slideDown(300, function () {
+                    $("[pagename = '" + value + "']").parent(".sub").parent(".nLi").addClass("on");
+                });
+            }
+            // $("[pagename = '" + value + "']").click();
+            LoadAction(value,"",id)
         }
     })
 }
@@ -446,12 +675,11 @@ function GetQueryString(name) {
 }
 // 加载子页面
 function LoadAction(url, urlParameter, paramid) {
-    // $(".active").parent(".sub").siblings("i").text()
     if (urlParameter == 0) {
         var value = urlaction + "?menu=" + btoa(encodeURIComponent(url)); //对字段地址进行编码
         history.pushState(stateObject, "", value);
     }
-    if (paramid != undefined) {
+    if (paramid) {
         var value = (location.href).split("&")[0] + "&id=" + btoa(encodeURIComponent(paramid));
         history.pushState(stateObject, '', value);
     } else {

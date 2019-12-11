@@ -19,8 +19,9 @@ $(function () {
 
     //查询
     form.on('submit(land_formSearch)', function (data) {
+        // console.log(data)
         var name = data.field.landchName;
-        var crop = data.field.plantchName;
+        var crop = $('input[name="raiseCrops_instal"]').val();
         var person = data.field.personchName;
         if (data.field.timechName != "") {
             var start = data.field.timechName.split(' - ')[0];
@@ -121,6 +122,7 @@ var sellstatisticsFn = {
         }
         var postdata = GetPostData(param, "land", "getLandListPage");
         postFnajax(postdata).then(function (res) {
+            // console.log(res);
             // console.log(param)
             var res = JSON.parse(res);
             $.each(res.data, function (index, item) {
@@ -213,13 +215,74 @@ var sellstatisticsFn = {
         var postdata = GetPostData(param, "crop", "getCropListPage");
         postFnajax(postdata).then(function (res) {
             // console.log(res);
-            var cropSelectData = JSON.parse(res);
-            $.each(cropSelectData.data, function (index, item) {
-                raiseCropSelect = raiseCropSelect + '<option value=' + item.CropID + '>' + item.CropName + '</option>';
+            var res = JSON.parse(res);
+            setTimeout(function () {
+                form.render();
+                //zTree配置
+                var settingOrg = {
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    callback: {
+                        onClick: onClickOrg,
+                        beforeClick : function(treeId, treeNode) {
+                            if (treeNode.children) {
+                                return false;
+                            }
+                        }       
+                    },          
+                };
+                var id='';
+                var dataArr = [];
+                $.each(res.data, function (index, item) {
+                    if(item.IsValid == 1){
+                        if(id!=item.CropCategory){
+                            dataArr.push({
+                                id: item.CropCategory,
+                                name: item.CategoryName,
+                                pId: "",
+                                open: true,
+                                click:false,
+                            });
+                            id = item.CropCategory;
+                        }
+                        dataArr.push({
+                            id: item.CropID,
+                            name: item.CropName,
+                            pId: item.CropCategory,
+                            open: true
+                        });
+                    }
+                })
+                $.fn.zTree.init($("#treeOrg"), settingOrg, dataArr);
+            });
+            //上级机构点击后的回调
+            function onClickOrg(e, treeId, treeNode) {
+                $('#popup_Org .value_ft').html(treeNode.name).addClass('active');
+                $('input[name="raiseCrops_instal"]').val(treeNode.id);
+                $('#plandBox').addClass('hidden');
+            }
+            $('#popup_Org .value_ft').on('click', function () {
+                showMenuOrg();
             })
-            $('#raiseCrops').html(raiseCropSelect);
-            $('#raiseCrops_instal').html(raiseCropSelect);
-            form.render('select');
+
+            function showMenuOrg() {
+                $('#plandBox').removeClass('hidden');
+                $("body").bind("mousedown", onBodyDownOrg);
+            }
+
+            function hideMenuOrg() {
+                $('#plandBox').addClass('hidden');
+                $("body").unbind("mousedown", onBodyDownOrg);
+            }
+
+            function onBodyDownOrg(event) {
+                if (!(event.target.id == "plandBox" || event.target.id == "treeOrg" || $(event.target).parents("#plandBox").length > 0)) {
+                    hideMenuOrg();
+                }
+            }
         });
     },
     // 重置
@@ -228,9 +291,12 @@ var sellstatisticsFn = {
             $('input[name="landchName"]').val('');
             $('input[name="timechName"]').val('');
             form.val("land_form", {
-                "plantchName": -1,
+                // "plantchName": -1,
                 "personchName": -1,
             })
+            $("#popup_Org div").removeClass("active");
+            $("#popup_Org .value_ft").html("请选择种植作物");
+            $('input[name="raiseCrops_instal"]').val("");
             sellstatisticsFn.getList();
         })
     },

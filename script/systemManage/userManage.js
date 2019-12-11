@@ -283,7 +283,24 @@ var manageFn = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitAddUser)', function (data) {
-            // console.log(data);
+            if (!userName.test(data.field.UserName)) {
+                layer.msg("请输入2-20位英文、数字组合的用户名", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!one_Person.test(data.field.LoginName)) {
+                layer.msg("请输入2-20位英文、数字、汉字组合的姓名", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!myRegcode.test(data.field.password)) {
+                layer.msg("请输入6-12位英文、数字组合的密码", {
+                    time: 1500
+                });
+                return false;
+            }
             var roles = [];
             if (data.field.userRoles != "") {
                 var arrRoles = data.field.userRoles.split(",")

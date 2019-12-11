@@ -26,19 +26,32 @@ var landOne = {
     },
     landSure: function () {
         form.on('submit(submitAddland)', function (data) {
+            console.log(data);
+            if (!two_tenName.test(data.field.landName)) {
+                layer.msg("请输入2-30位英文、数字、汉字组合的地块名称", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!one_twoName.test(data.field.landIntroduce)) {
+                layer.msg("请输入1-200位英文、数字、汉字组合的地块介绍", {
+                    time: 1500
+                });
+                return false;
+            }
             if (data.field.landIntroduce != "" && data.field.landName != "") {
                 var entityJson = {
-                    "LandName": data.field.landName,
+                    "LandName": data.field.landName,//地块名称
                     "ResponsiblePerson": $("#landPerson_re").val(),
                     "PlantCrop": $('input[name="raiseCrops_instal"]').val(),
-                    "LandDesc": data.field.landIntroduce,
+                    "LandDesc": data.field.landIntroduce,//地块介绍
                 }
                 if (landOne.landID == "insert") {
                     entityJson.LandID = guid();
                 } else {
                     entityJson.LandID = landOne.landID;
                 }
-                if ($("#landPerson_re").val() == -1) {
+                if ($("#landPerson_re").val() == "") {
                     delete entityJson.ResponsiblePerson
                 }
                 if ($('input[name="raiseCrops_instal"]').val() == -1) {
@@ -71,7 +84,7 @@ var landOne = {
             var userselectData = JSON.parse(res);
             var landPersonSelect = "";
             if (landPersonParam == 1) {
-                landPersonSelect = '<option value="-1">请选择地块负责人</option>';
+                landPersonSelect = '<option value="">请选择地块负责人</option>';
             } else {
                 $.each(userselectData.data, function (index, item) {
                     if (item.id == landPersonParam) {
@@ -114,7 +127,12 @@ var landOne = {
                     },
                     callback: {
                         onClick: onClickOrg,
-                    }
+                        beforeClick : function(treeId, treeNode) {
+                            if (treeNode.children) {
+                                return false;
+                            }
+                        }       
+                    },          
                 };
                 var id='';
                 var dataArr = [];
@@ -125,8 +143,8 @@ var landOne = {
                                 id: item.CropCategory,
                                 name: item.CategoryName,
                                 pId: "",
-                                // nocheck:true,
-                                open: true
+                                open: true,
+                                click:false,
                             });
                             id = item.CropCategory;
                         }
@@ -138,7 +156,6 @@ var landOne = {
                         });
                     }
                 })
-                // console.log(dataArr)
                 $.fn.zTree.init($("#treeOrg"), settingOrg, dataArr);
             });
             //上级机构点击后的回调
@@ -166,6 +183,6 @@ var landOne = {
                     hideMenuOrg();
                 }
             }
-        }, 0)
+        })
     },
 }

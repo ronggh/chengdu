@@ -172,6 +172,18 @@ var messageManageFn = {
         })
         //确认新增消息
         form.on('submit(submitAddUser)', function (data) {
+            if (!one_Person.test(data.field.LoginName)) {
+                layer.msg("请输入2-20位英文、数字、汉字组合的消息标题", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!one_twoName.test(data.field.mainText)) {
+                layer.msg("请输入1-200位英文、数字、汉字组合的消息正文", {
+                    time: 1500
+                });
+                return false;
+            }
             var Disable = 'layui-btn-disabled';
             $(".site-action").addClass(Disable);
             $('.site-action').attr('disabled', 'disabled');

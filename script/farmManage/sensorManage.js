@@ -96,7 +96,7 @@ var sensorFn = {
                 type: 1,
                 content: html,
                 title: [title, 'font-size:16px;height:46px;line-height:46px;'],
-                area: ['500px', '380px'],
+                area: ['500px', '340px'],
                 success: function (index, layero) {
                     if (opera_type == 'update') {
                         table.on('row(SensorTable)', function (obj) {
@@ -114,7 +114,7 @@ var sensorFn = {
                                 })
                                 var sensorTypeSelect = '<option value = ' + SensorTypeData.SensorTypeID + '>' + SensorTypeData.SensorTypeID + "-" + SensorTypeData.SensorTypeName + "-" + SensorTypeData.PortName + '</option>'
                                 $.each(resSensorList.data, function (index, item) {
-                                    sensorTypeSelect = sensorTypeSelect + '<option value = "' + item.SensorTypeID + '">' + SensorTypeData.SensorTypeID + "-" + item.SensorTypeName + "-" + item.PortName + '</option>'
+                                    sensorTypeSelect = sensorTypeSelect + '<option value = "' + item.SensorTypeID + '">' + item.SensorTypeID + "-" + item.SensorTypeName + "-" + item.PortName + '</option>'
                                 })
                                 $("#SensorType").html(sensorTypeSelect);
                                 form.render('select');
@@ -126,7 +126,7 @@ var sensorFn = {
                         var postdata = GetPostData(param, "sensor", "getSensorTypeList");
                         postFnajax(postdata).then(function (res) {
                             var resSensorList = JSON.parse(res);
-                            var sensorTypeSelect = '<option value = "0">' + '请选择设备类型' + '</option>'
+                            var sensorTypeSelect = '<option value = "">' + '请选择设备类型' + '</option>'
                             $.each(resSensorList.data, function (index, item) {
                                 sensorTypeSelect = sensorTypeSelect + '<option value = "' + item.SensorTypeID + '">' + item.SensorTypeID + "-" + item.SensorTypeName + "-" + item.PortName + '</option>'
                             })
@@ -148,6 +148,18 @@ var sensorFn = {
     //修改
     submitsensor: function (opera_type) {
         form.on('submit(submitSensor)', function (data) {
+            if (!two_tenName.test(data.field.sensorName)) {
+                layer.msg("请输入2-30位英文、数字、汉字组合的传感器名称", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!wayNumber.test(data.field.passageway)) {
+                layer.msg("请输入1-20位数字通道号", {
+                    time: 1500
+                });
+                return false;
+            }
             var entity = {
                 "DevName": data.field.sensorName,
                 "Channel": data.field.passageway,

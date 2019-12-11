@@ -13,6 +13,9 @@
                 </div>
             </form>
         </div>
+        <div class="setUp" onclick="waterFerSet()">
+            <span class="setWaterFer iconfont icon-xitong">设置</span>
+        </div>
         <div class="Refresh">
             <span class="reload"><img src="../../images/refresh.png" alt=""> 刷新</span>
         </div>
@@ -26,38 +29,6 @@
     <div id="za_realData" style="display: block;">
         <div class="content">
             <ul class="primary">
-                <!-- 土壤指标 -->
-                <li class="level_one" id="turang">
-                    <div class="sub_tit land_line">
-                        <!-- <p class="land">土壤类</p> -->
-                    </div>
-                    <ul class="secondary clearfix"></ul>
-                </li>
-                <!-- /土壤指标 -->
-                <!-- 水质指标 -->
-                <li class="level_one" id="shuizhi">
-                    <div class="sub_tit water_line">
-                        <!-- <p class="water">水质类</p> -->
-                    </div>
-                    <ul class="secondary clearfix"></ul>
-                </li>
-                <!-- /水质指标 -->
-                <!-- 气象指标 -->
-                <li class="level_one" id="qixiang">
-                    <div class="sub_tit weather_line">
-                        <!-- <p class="weather">气象类</p> -->
-                    </div>
-                    <ul class="secondary clearfix"></ul>
-                </li>
-                <!-- /气象指标 -->
-                <!-- 空气指标 -->
-                <li class="level_one" id="kongqi">
-                    <div class="sub_tit air_line">
-                        <!-- <p class="air">空气类</p> -->
-                    </div>
-                    <ul class="secondary clearfix"></ul>
-                </li>
-                <!-- /空气指标 -->
                 <!--其他指标-->
                 <li class="level_one" id="qita">
                     <div class="sub_tit air_line">
@@ -69,82 +40,6 @@
         </div>
     </div>
 </div>
-<!-- 报警设置 -->
-<script type="text/html" id="alerm_popup">
-    <div class="layui-tab" style="width:474px; margin-left: auto; margin-right: auto; margin-top:30px;">
-        <ul class="layui-tab-title">
-            <li class="layui-this selected"><img src="../../images/automation/higher.png" /><br />高于某个值时<br /><img
-                    src="../../images/automation/rec.png" style="display: block;" / class="rec"></li>
-            <li><img src="../../images/automation/lower.png" /><br />低于某个值时<br /><img
-                    src="../../images/automation/rec.png" / class="rec"></li>
-            <li><img src="../../images/automation/between.png" /><br />在两值之间时<br /><img
-                    src="../../images/automation/rec.png" / class="rec"></li>
-            <li><img src="../../images/automation/equal.png" /><br />等于某个值时<br /><img
-                    src="../../images/automation/rec.png" / class="rec"></li>
-            <li><img src="../../images/automation/besides.png" /><br />在两值之外时<br /><img
-                    src="../../images/automation/rec.png" / class="rec"></li>
-        </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-                <img src="../../images/automation/higher-p.png" />
-                <br />
-                <div style="margin-left: 33px;">
-                    <input value="" class="layui-input" />
-                    <p>阈值</p>
-                </div>
-            </div>
-            <div class="layui-tab-item">
-                <img src="../../images/automation/lower-p.png" />
-                <br />
-                <div style="margin-left:34px;">
-                    <input value="" class="layui-input" />
-                    <p>阈值</p>
-                </div>
-            </div>
-            <div class="layui-tab-item">
-                <img src="../../images/automation/between-p.png" />
-                <br />
-                <div class="">
-                    <input value="" class="layui-input" />
-                    <p>低阈值</p>
-                </div>
-                <div class="">
-                    <input value="" class="layui-input" />
-                    <p>高阈值</p>
-                </div>
-            </div>
-
-            <div class="layui-tab-item">
-                <img src="../../images/automation/equal-p.png" />
-                <br />
-                <div class="">
-                    <input value="" class="layui-input" />
-                    <p>触发值</p>
-                </div>
-            </div>
-
-            <div class="layui-tab-item">
-                <img src="../../images/automation/besides-p.png" />
-                <br />
-                <div class="">
-                    <input value="" class="layui-input" />
-                    <p>低阈值</p>
-                </div>
-                <div class="">
-                    <input value="" class="layui-input" />
-                    <p>高阈值</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-input-block" style="margin-top:30px;">
-            <button class="layui-btn" onclick="alermSure()" lay-submit lay-filter="submitAddcategory">确定</button>
-            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
-            <button type="layui-btn" onclick="clearAlerm()" class="layui-btn layui-btn-primary">清除</button>
-        </div>
-    </div>
-</script>
 <!--历史数据dom-->
 <div id="chart">
     <div class='chartbtn clearfloat'>
@@ -188,4 +83,104 @@
         <tbody></tbody>
     </table>
 </div>
+<script type="text/html" id="add_waterFer">
+    <div class="layui-form waterFertili">
+        <div class="waterFertiliTop">
+            <input type="hidden" name="MachineID">
+            <div class="layui-form-item">
+                <label class="layui-form-label">A肥速</label>
+                <div class="layui-input-block">
+                    <input type="number" name="ferSpeedA" placeholder="肥速范围0-11.9" autocomplete="off"
+                        class="layui-input">
+                        <em>L/min</em>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">B肥速</label>
+                <div class="layui-input-block">
+                    <input type="number" name="ferSpeedB" placeholder="肥速范围0-11.9" autocomplete="off"
+                        class="layui-input">
+                        <em>L/min</em>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">C肥速</label>
+                <div class="layui-input-block">
+                    <input type="number" name="ferSpeedC" placeholder="肥速范围0-11.9" autocomplete="off"
+                        class="layui-input">
+                        <em>L/min</em>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">D肥速</label>
+                <div class="layui-input-block">
+                    <input type="number" name="ferSpeedD" placeholder="肥速范围0-11.9" autocomplete="off"
+                        class="layui-input">
+                        <em>L/min</em>
+                </div>
+            </div>
+        </div>
+        <div class="waterFertiliM">
+            <span>EC / PH设置</span>
+        </div>
+        <div class="waterFertiliButton">
+            <div class="waterFertiliBL">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">EC调节</label>
+                    <div class="layui-input-block">
+                        <select name="ecEnable" id = "ecEnable">
+                            <option value="1">启用</option>
+                            <option value="0">禁用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">EC最小值</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="ECSmall" placeholder="EC值大于0" autocomplete="off"
+                            class="layui-input">
+                            <em>us/cm</em>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">EC最大值</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="ECbig" placeholder="EC值大于0" autocomplete="off"
+                            class="layui-input">
+                            <em>us/cm</em>
+                    </div>
+                </div>
+            </div>
+            <div class="waterFertiliBR">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">PH调节</label>
+                    <div class="layui-input-block">
+                        <select name="phEnable" id = "phEnable">
+                            <option value="1">启用</option>
+                            <option value="0">禁用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">PH最小值</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="PHsmall" placeholder="PH范围0-14" autocomplete="off"
+                            class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">PH最大值</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="PHbig" placeholder="PH范围0-14" autocomplete="off"
+                            class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sunmitBtn">
+            <button type="layui-btn" onclick="layer.closeAll()" class="layui-btn layui-btn-primary">取消</button>
+            <button class="layui-btn site-action" lay-submit lay-filter="setUpSure">发送</button>
+        </div>
+    </div>
+</script>
 <script type="text/javascript" src="../../script/environmentalMonitor/WaterFertilizer.js"></script>

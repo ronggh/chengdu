@@ -200,11 +200,6 @@ var rolesmanageFn = {
             var postdata = GetPostData(param, "org", "getList");
             postFnajax(postdata).then(function (res) {
                 var res = JSON.parse(res);
-                // for (let i = 0; i < res.data.length; i++) {     //控制编辑中的上级机构
-                //     if(res.data[i].OrgName == $("#organtree").html()){
-                //         $('input[name="FID"]').val(res.data[i].ID)
-                //     }
-                // }
                 var zNodes = [{
                     id: $("input[name = orgid]").val(),
                     name: $("input[name = orgNameone]").val(),
@@ -508,6 +503,21 @@ var rolesmanageFn = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitAddRole)', function (data) {
+            // console.log(data)
+            if (!two_tenName.test(data.field.RoleName)) {
+                layer.msg("请输入2-30位英文、数字、汉字组合的角色名称", {
+                    time: 1500
+                });
+                return false;
+            }
+            if ($("#tarea").val() != "") {
+                if (!one_fiveName.test($("#tarea").val())) {
+                    layer.msg("请输入1-50位英文、数字、汉字组合的角色说明", {
+                        time: 1500
+                    });
+                    return false;
+                }
+            }
             var UserList = [];
             if (data.field.orgeUserT != "") {
                 var arrUser = data.field.orgeUserT.split(",")

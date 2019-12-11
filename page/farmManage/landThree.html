@@ -4,14 +4,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">设备</label>
         <div class="layui-input-block">
-            <select id="deviceSelect" lay-filter="deviceSelect" lay-verify="required">
+            <select id="deviceSelect" lay-filter="deviceSelect" lay-verify="required" lay-search="">
             </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">摄像头</label>
         <div class="layui-input-block">
-            <select id="cameraData" lay-filter="cameraData" lay-verify="required">
+            <select id="cameraData" lay-filter="cameraData" lay-verify="required" lay-search="">
             </select>
         </div>
     </div>
@@ -26,11 +26,11 @@
     <!-- 地图下面的两个表格 -->
     <div class="CameraTab">
         <span>摄像头列表:</span>
-        <table id="cameraTab"></table>
+        <table id="cameraTab" lay-filter="cameraTab"></table>
     </div>
     <div class="deverceTab">
         <span>设备列表:</span>
-        <table id="deverceTab"></table>
+        <table id="deverceTab" lay-filter="deverceTab"></table>
     </div>
 </div>
 

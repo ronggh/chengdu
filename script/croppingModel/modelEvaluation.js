@@ -145,7 +145,7 @@ var ModelEval = {
                                 $.each(item.Params, function (index2, item2) {
                                     if (item2.Type == 'input') {
                                         var temp = '<div class="popurTop">' +
-                                            '<span class= "popurTime">'+ item2.Name + ":"  +'</span>' +
+                                            '<span class= "popurTime">'+ item2.Name +' </span>' +
                                             '<input lay-verify="required" type="number"  value="' + item2.Value + '">' +
                                             '<p class="timeD"></p>' +
                                             '</div>';
@@ -339,7 +339,7 @@ var ModelEval = {
         for (var i = 0; i <= index; i++) {
             day += $(".popurTop input").eq(i).val() * 1;
         }
-        if (ModelEval.date_2 != "" && $(".popurTop input").eq(index).val() != "") {
+        if ($(".popurTop input").eq(index).val() != "") {
             var end = ModelEval.getNewData(ModelEval.startTime, day);
             var start = ModelEval.getNewData(end, today);
             $(".timeD").eq(ModelEval.tabIndex).html("自：" + start + "~" + end);
@@ -525,10 +525,4 @@ function SetList(name, type, data, markLine) {
     this.type = type;
     this.data = data;
     this.markLine = markLine;
-}
-
-// 图表宽度
-function iframeW() {
-    var iframeW = $("body").width() - $("#za_slide").width() - 30;
-    return iframeW;
 }

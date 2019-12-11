@@ -169,6 +169,7 @@ var Modelexperiment = {
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
                             // console.log(res);
                             var modelData = JSON.parse(res);
+                            Modelexperiment.date_2 = modelData.data.StartTime.split("T")[0];
                             Modelexperiment.menuTop(modelData.data.CropStages, "update");
                             Modelexperiment.submitPopup('update', id);
                             Modelexperiment.GetlandList(opera_type, modelData.data.LandID);
@@ -181,6 +182,7 @@ var Modelexperiment = {
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
                             var modelData = JSON.parse(res);
+                            Modelexperiment.date_2 = modelData.data.StartTime.split("T")[0];
                             Modelexperiment.menuTop(modelData.data.CropStages, "update");
                             Modelexperiment.submitPopup('update');
                             Modelexperiment.GetlandList(opera_type, modelData.data.LandID);
@@ -211,7 +213,7 @@ var Modelexperiment = {
             var dayNum = 0;
             // 模型名称
             if (!one_Person.test(data.field.landchName)) {
-                layer.msg('模型名称有误', {
+                layer.msg('请输入2-20位英文、数字、汉字组合的模型名称', {
                     time: 1500
                 });
                 return false;
@@ -331,7 +333,7 @@ var Modelexperiment = {
                     }
                     Modelexperiment.array.push(temp1);
                     var temp = '<div class="layui-form-item">' +
-                        '<label class="layui-form-label deverID" dever_ID = "' + item2.ID + '">' + item2.Name + ':</label>' +
+                        '<label class="layui-form-label deverID" dever_ID = "' + item2.ID + '">' + item2.Name + '</label>' +
                         '<div class="layui-input-block">' +
                         '<select lay-verify="required" id="' + item2.Type + '" type="' + item2.Type + '" name = "' + item2.ID + '" lay-filter="' + item2.ID + '" value="' + item2.Value + '">' +
                         '</select>' +
@@ -363,7 +365,7 @@ var Modelexperiment = {
                 $.each(item.Params, function (index2, item2) {
                     if (item2.Type == 'input') {
                         var temp = '<div class="popurTop">' +
-                            '<span>持续周期：</span>' +
+                            '<span>持续周期 </span>' +
                             '<input lay-verify="required" PlarmID="' + item2.ID + '" type="number" StageID= "' + item.ID + '"  value="' + item2.Value + '"> &nbsp天' +
                             '<p class="timeD"></p>' +
                             '</div>';
@@ -388,7 +390,7 @@ var Modelexperiment = {
                     if (item2.Type == 'select') {
                         var temp = '<div class="popurBottom">' +
                             '<div class="layui-form-item">' +
-                            '<label class="layui-form-label" >关联自动化:</label>' +
+                            '<label class="layui-form-label" >关联自动化</label>' +
                             '<div class="layui-input-block">' +
                             '<select lay-verify="required" PlarmID="' + item2.ID + '" StageID= "' + item.ID + '" lay-filter="' + item.ID + item2.ID + '" id = "' + item2.Value + '" value = "' + item2.Value + '">' +
                             Modelexperiment.selectSuto(item2.Value) +
@@ -438,8 +440,11 @@ var Modelexperiment = {
             });
             Modelexperiment.index++;
         })
+        Modelexperiment.tabIndex = 0;
+        Modelexperiment.SetDateTime();
         $("#stage li").on("click", function (event) {
             Modelexperiment.tabIndex = $(this).index();
+            // console.log(Modelexperiment.tabIndex);
             Modelexperiment.SetDateTime();
             var index = $(this).index();
             $("#stage li").removeClass('first_current').removeClass('centerki_complete').removeClass('lastki_current').removeClass('center_complete');
@@ -499,7 +504,6 @@ var Modelexperiment = {
         param["pageSize"] = listCount;
         param["pageIndex"] = 1;
         AjaxRequest(param, "automation", "getListPage").then(function (res) {
-            // console.log(res);
             var autoData = JSON.parse(res);
             Modelexperiment.autoSelectData = autoData;
         })
@@ -509,7 +513,6 @@ var Modelexperiment = {
         var param = cloneObjectFn(paramList);
         param['landId'] = landId;
         AjaxRequest(param, "iot", "getIotDeviceInfo").then(function (res) {
-            // console.log(res)
             Modelexperiment.sensorData = JSON.parse(res);
             $("#sensor option").remove();
             Modelexperiment.sensorListOption();

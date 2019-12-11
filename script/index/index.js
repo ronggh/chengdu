@@ -272,6 +272,7 @@ function getUserInfoAll() {
     var param = cloneObjectFn(paramList);
     param["userID"] = localStorage.getItem('USER_ID');
     AjaxRequest(param, "user", "getUserInfo").then(function (res) {
+        // console.log(res);
         var userLogin = JSON.parse(res);
         $("input[name = orgid]").val(userLogin.data.OrgID);
         $("input[name = orgNameone]").val(userLogin.data.OrgName);
@@ -289,7 +290,6 @@ function alermInfo(){
     var param = cloneObjectFn(paramList);
     var postdata = GetPostData(param, "iot", "getIotOverView");
     postFnajax(postdata).then(function (res) {
-        // console.log(res);
         var alermCount = "";
         var alermData = JSON.parse(res);
         $.each(alermData.data,function(i,it){
@@ -297,7 +297,6 @@ function alermInfo(){
                 if (item.DeviceCategory == "SENSOR") {
                     $.each(item.Slots,function(index1,item1){
                         if (item1.Alarm != null) {
-                            // console.log(item1.Alarm)
                             var EnableHigh = item1.Alarm.EnableHigh;
                             var HighValue = item1.Alarm.HighValue;
                             var EnableLow = item1.Alarm.EnableLow;
@@ -314,7 +313,7 @@ function alermInfo(){
                                     (HighValue == item1.Data) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
                                 }
                                 if (HighValue > LowValue) {
-                                    (HighValue < item1.Data || item.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
+                                    (HighValue < item1.Data || item1.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
                                 }
                             }
                         }

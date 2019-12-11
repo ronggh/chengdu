@@ -91,7 +91,7 @@ var cameraFunction = {
                 type: 1,
                 content: html,
                 title: [title, 'font-size:16px;height:46px;line-height:46px;'],
-                area: ['500px', '450px'],
+                area: ['500px', '480px'],
                 success: function (index, layero) {
                     if (opera_type == 'update') {
                         table.on('row(cameraTable)', function (obj) {
@@ -120,28 +120,28 @@ var cameraFunction = {
         form.on('submit(submitAddcamera)', function (data) {
             //摄像头校验
             if (!two_tenName.test(data.field.cameraNameadd)) {
-                layer.msg('请输入2-10位英文数字汉字组合的摄像头名称', {
+                layer.msg('请输入2-30位英文数字汉字组合的摄像头名称', {
                     time: 1500
                 });
                 return false;
             }
             //序列号校验
             if (!serNumber.test(data.field.DeviceSerial)) {
-                layer.msg('请输入2-10位英文数字组合的序列号', {
+                layer.msg('请输入2-20位英文数字组合的序列号', {
                     time: 1500
                 });
                 return false;
             }
             //通道号校验
             if (!wayNumber.test(data.field.ChannelNo)) {
-                layer.msg('请输入1-4位数字通道号', {
+                layer.msg('请输入1-20位数字通道号', {
                     time: 1500
                 });
                 return false;
             }
             //直播地址校验
             if (!videoUrl.test(data.field.LiveUrl)) {
-                layer.msg('请输入正确的URL地址', {
+                layer.msg('请输入正确的直播URL地址', {
                     time: 1500
                 });
                 return false;

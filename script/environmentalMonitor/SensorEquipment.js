@@ -171,7 +171,7 @@ $(function () {
     //自动刷新
     setInterval(function () {
         GetArea($("#area").val())
-    }, 30000);
+    }, 180*1000);
 })
 //新增或者编辑报警设置
 function alermSure() {
@@ -359,7 +359,6 @@ function GetArea(landId) { //, status, loading
     var param = cloneObjectFn(paramList);
     param["landId"] = landId;
     var postdata = GetPostData(param, "iot", "getIotDeviceInfo");
-    // delete postdata.params.userID;
     postFnajax(postdata).then(function (res) {
         var SENSOR = 0;
         $("#qita ul").html("");
@@ -387,7 +386,6 @@ function GetArea(landId) { //, status, loading
                     var HighValue = item.Slots[0].Alarm.HighValue;
                     var EnableLow = item.Slots[0].Alarm.EnableLow;
                     var LowValue = item.Slots[0].Alarm.LowValue;
-                    //此处添加站内信
                     if (EnableHigh == true && HighValue != null && EnableLow == false && LowValue ==null) {
                         danger = ((item.Slots[0].Data > HighValue) == true ? "level_two danger" : "level_two");
                     } else if (EnableHigh == false && HighValue == null && EnableLow == true && LowValue != null) {
@@ -491,37 +489,38 @@ function GetArea(landId) { //, status, loading
                     // console.log("<<<<<<<<<<<<<item.Tags>>>>>>>>>>");
                     // console.log(item.Tags);
                     $.each(item.Tags, function (p, item1) {
-                        switch (item1.Tag) {
-                            case "气象类":
-                                index++;
-                                $("#qixiang ul").append(Device);
-                                $("#qixiang").css("display", "block");
-                                break;
-                            case "土壤类":
-                                index++;
-                                $("#turang ul").append(Device);
-                                $("#turang").css("display", "block");
-                                break;
-                            case "水质类":
-                                index++;
-                                $("#shuizhi ul").append(Device);
-                                $("#shuizhi").css("display", "block");
-                                break;
-                            case "空气类":
-                                index++;
-                                $("#kongqi ul").append(Device);
-                                $("#kongqi").css("display", "block");
-                                break;
+                        if (item1.Tag != "水肥机") {
+                            switch (item1.Tag) {
+                                case "气象类":
+                                    index++;
+                                    $("#qixiang ul").append(Device);
+                                    $("#qixiang").css("display", "block");
+                                    break;
+                                case "土壤类":
+                                    index++;
+                                    $("#turang ul").append(Device);
+                                    $("#turang").css("display", "block");
+                                    break;
+                                case "水质类":
+                                    index++;
+                                    $("#shuizhi ul").append(Device);
+                                    $("#shuizhi").css("display", "block");
+                                    break;
+                                case "空气类":
+                                    index++;
+                                    $("#kongqi ul").append(Device);
+                                    $("#kongqi").css("display", "block");
+                                    break;
+                            }
+                            if (index == 0) {
+                                $("#qita ul").append(Device);
+                                $("#qita").css("display", "block");
+                            }
                         }
                     });
-                    if (index == 0) {
-                        $("#qita ul").append(Device);
-                        $("#qita").css("display", "block");
-                    }
                 }
             }
         })
-
     })
 }
 
@@ -540,173 +539,6 @@ function NullEmpty(str) {
     return str;
 }
 
-
-//echart表格加载
-function echartinitfn(deviceId, slotId, timeDate) {
-    var deviceId = deviceId;
-    var time;
-    if (timeDate.length > 10) {
-        time = timeDate.split(' - ')
-    }
-    var Unit = "";
-    var XAxisData = [];
-    var series = [];
-    var legendData = [];
-    // 路径配置
-    require.config({
-        paths: {
-            echarts: './libs/echarts-2.2.7/build/dist'
-        }
-    });
-    // 使用
-    require(
-        [
-            'echarts',
-            'echarts/chart/line'
-        ],
-        function (ec) {
-            var param = cloneObjectFn(paramList);
-            param["deviceId"] = deviceId;
-            if (time) {
-                param["start"] = time[0];
-                param["end"] = time[1];
-            } else {
-                param["day"] = timeDate;
-            }
-            param["slot"] = slotId;
-            var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
-            postFnajax(postdata).then(function (res) {
-                // console.log("<<<<<<<< 实时数据 >>>>>>>>")
-                // console.log(param);
-                // console.log(res);
-                var result = JSON.parse(res);
-                var data = [];
-                Unit = result.data.Unit;
-                var elcelData = result.data.HistoryData;
-                $.each(result.data.HistoryData, function (i, item) {
-                    XAxisData.push((item.Time).replace(/T/g, " "));
-                    data.push(item.Data);
-                });
-                timeHistoryData = elcelData;
-                series.push(new SetList(result.data.DeviceName, 'line', data));
-                legendData.push(result.data.DeviceName);
-                var ww = iframeW();
-                layer.open({
-                    title: '历史数据',
-                    type: 1,
-                    area: [ww * 0.7 + "px", '520px'],
-                    content: $("#chart"),
-                    btn: ['关闭'],
-                    yes: function (index, layero) {
-                        layer.closeAll();
-                        $("#chart").css("display", "none");
-                        $(".layui-layer-shade").remove();
-                        //按钮【按钮二】的回调
-                        //return false 开启该代码可禁止点击该按钮关闭
-                    },
-                    cancel: function () {
-                        $("#chart").css("display", "none");
-                        $(".layui-layer-shade").remove();
-                    },
-                    success:function(){
-                        $.each($(".layui-layer-shade"),function(index,item){
-                            if(index>0){
-                                $(this).remove();
-                            }
-                        })
-                        var mask = $(".layui-layer-shade");
-                        mask.appendTo($(".OutermostLayer").parent());
-                        //其中：layero是弹层的DOM对象
-                        $(".layui-layer-shade").css({'z-index':2000});
-                        $("#chart").css({'z-index':200000})
-                    },
-                });
-
-                $("#chart").css("display", "block")
-                $("#echartcontain").css({
-                    "width": ww * 0.65 + "px"
-                });
-                echartfn('', legendData, Unit, XAxisData, series, ec);
-            });
-        }
-    );
-}
-
-function echartfn(qname, legendData, danwei, time, series, obj) {
-    // console.log(qname);
-    // console.log(legendData);
-    // console.log(danwei);
-    // console.log(time);
-    // console.log(series);
-    // console.log(obj);
-    deviceName = legendData;
-    var myChart = obj.init(document.getElementById('echartcontain'));
-    var option = {
-        animation: true,
-        title: {
-            text: qname,
-            subtext: danwei
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: legendData
-        },
-        toolbox: {
-            show: false,
-            feature: {
-                mark: {
-                    show: true
-                },
-                dataZoom: {
-                    show: true
-                },
-                dataView: {
-                    show: true
-                },
-                magicType: {
-                    show: true,
-                    type: ['line', 'bar', 'stack', 'tiled']
-                },
-                restore: {
-                    show: true
-                },
-                saveAsImage: {
-                    show: true
-                }
-            }
-        },
-        calculable: true,
-        dataZoom: {
-            show: true,
-            realtime: true,
-            start: 60,
-            end: 100
-        },
-        xAxis: [{
-            name: '时间',
-            type: 'category',
-            boundaryGap: false,
-            data: time,
-            nameTextStyle: {
-                color: "#999"
-            }
-        }],
-        yAxis: [{
-            type: 'value'
-        }],
-        series: series
-    };
-    // $(".layui-layer-shade").css("display", "none");
-    myChart.setOption(option, true);
-}
-
-function NullEmpty(str) {
-    if (str == null)
-        return "0";
-    return str;
-}
 //点击历史记录事件
 function GetHistory(deviceId, name, slotId, deviceTypeId) {
     $("#dateTime").val("");
@@ -743,7 +575,13 @@ initLayuifn(['element', 'form', 'table', 'layer', 'laytpl', 'laypage', 'laydate'
         range: true,
         theme: '#389bff',
         done: function (value, date, endDate) {
-            echartinitfn(deviceId, ExcelSlotId, value);
+            var timeStart = value.split(' - ')[0];
+            var timeEnd = value.split(' - ')[1];
+            if (timeStart.slice(0,4) == timeEnd.slice(0,4)) {
+                echartinitfn(deviceId, ExcelSlotId, value);
+            } else {
+                layer.msg("查询日期不能跨年",{time:1500})
+            }
         }
     });
 })
@@ -777,9 +615,4 @@ function SetList(name, type, data) {
     this.name = name;
     this.type = type;
     this.data = data;
-}
-
-function iframeW() {
-    var iframeW = $("body").width() - $("#za_slide").width() - 30;
-    return iframeW;
 }

@@ -118,6 +118,12 @@ var varieties = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitAddcategory)', function (data) {
+            if (!one_tenName.test(data.field.CropName)) {
+                layer.msg("请输入1-30位英文、数字、汉字组合的品种名称", {
+                    time: 1500
+                });
+                return false;
+            }
             var entityJson = {
                 "CropName": data.field.CropName,
                 "CropCategory": varieties.params,

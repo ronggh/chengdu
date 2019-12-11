@@ -1,6 +1,7 @@
 <!-- 地块管理 初始化页面 -->
 <div class="Manage_box OutermostLayer">
     <div class="layui-form" lay-filter="land_form">
+        <input type="hidden" name="raiseCrops_instal">
         <div class="layui-form-item">
             <label class="layui-form-label">地块名称</label>
             <div class="layui-input-block">
@@ -9,9 +10,14 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">种植作物</label>
-            <div class="layui-input-block">
-                <select id="raiseCrops" name="plantchName">
-                </select>
+            <div class="layui-input-block layui-form-select" style="min-height: 32px;" id="popup_Org">
+                <div class="value_ft">请选择种植作物 </div>
+                <i class="layui-edge"></i>
+                <!--可选择区域-->
+                <div id="plandBox" class="hidden">
+                    <ul id="treeOrg" class="treeOrg ztree">
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
@@ -54,4 +60,38 @@
         <div class="popup_inner">请确认删除{{d.LandName}}？</div>
     </script>
 </div>
+<style>
+#popup_Org {
+     width: 250px;
+     height: 32px;
+     line-height: 32px;
+     border: 1px solid #e6e6e6;
+     padding-left: 5px;
+     box-sizing: border-box;
+     /* margin-left: 15px; */
+ }
+
+ #popup_Org>.value_ft {
+     color: #ccc;
+ }
+
+ #popup_Org>.value_ft.active {
+     color: #666
+ }
+
+ #popup_Org .treeOrg {
+     width: 98%;
+     position: absolute;
+     z-index: 999;
+     max-height: 200px;
+     overflow-y: auto;
+     background-color: #fff;
+     border: 1px solid #d2d2d2;
+     top: 40px;
+     left: -2px;
+ }
+</style>
+<link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../../libs/ztree/js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="../../script/farmManage/landManage.js"></script>

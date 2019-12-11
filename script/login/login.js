@@ -103,6 +103,7 @@
              localStorage.setItem('REFRESH_TOKEN', result.data.refresh_token);
              localStorage.setItem('expirationTime', result.data.exp);
              localStorage.setItem('USER_ID', result.data.user_id);
+            
              window.location.href = "./index.html";
          } else {
              layer.msg(result.result.msg, {
@@ -114,6 +115,7 @@
  }
  //忘记密码
  function forgetPass() {
+
      var ForGet_popup_tpl = document.getElementById('ForGet_popup').innerHTML;
      laytpl(ForGet_popup_tpl).render({}, function (html) {
          var forgetOpen = layer.open({

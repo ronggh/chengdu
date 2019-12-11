@@ -2,13 +2,13 @@ $(function () {
     initLayuifn(['element', 'form', 'table', 'layer', 'laytpl', 'laypage', 'laydate', 'upload', 'tree', 'util', 'transfer'], function () {
         form.render();
         form.on('select(cameraData)', function (data) {
-            if (data.value != -1) {
+            if (data.value != "") {
                 threeInfoFn.cameraPintData = data.value;
             }
         });
         //设备下拉框每改变一次可在地块上安装一个
         form.on('select(deviceSelect)', function (data) {
-            if (data.value != -1) {
+            if (data.value != "") {
                 threeInfoFn.deverPintData = data.value;
             }
         });
@@ -552,8 +552,8 @@ var threeInfoFn = {
 
     //渲染设备和摄像头下拉列表
     selectFunction: function (deviceSelectData, cameraSelectData) {
-        var deviceSelect = '<option value="-1">请选择设备</option>';
-        var cameraSelect = '<option value="-1">请选择摄像头</option>';
+        var deviceSelect = '<option value="">请选择设备</option>';
+        var cameraSelect = '<option value="">请选择摄像头</option>';
         // console.log(">>>>>>>>>>>>>>>>>>>>>");
         // console.log(deviceSelectData);
         // console.log(cameraSelectData);

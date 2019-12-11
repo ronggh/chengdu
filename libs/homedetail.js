@@ -23,7 +23,7 @@ $(document).ready(function () {
         }
     });
     // initRemotefn(remoteSensing);
-    zdyscroll($("#jianjie"));
+    // zdyscroll($("#jianjie"));
 })
 
 /*---------------------------------------- 监听checkbox显示内容 start----------------------------------------*/
@@ -165,15 +165,10 @@ function controlinit(data) {
 }
 
 weather = [];
-machine = [];
 
 /*综合设备初始化*/
 function combineinit(data) {
-    // console.log("combine>>>>>>>>>>>>>>>>>")
-    // console.log(data)
-
     $(".equipment .equip_con li.combine_con .weather").remove();
-    $(".equipment .equip_con li.combine_con .machine").remove();
 
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
@@ -192,16 +187,6 @@ function combineinit(data) {
                 $("#za_weather").css("display", "block");
             }
             //console.log(weather);
-            // 水肥机
-            if (data[i].DeviceTypeID == "2102") {
-                machine.push(data[i]);
-                //
-                if (data[i].IsOnline) {
-                    $(".equipment .equip_con li.combine_con").append("<div class=\"machine\"><div class=\"clearfix\"><span class=\"fl\">水肥机</span><span class='fr run'><img src='../images/governmenthomedeteal/run_point.png' alt=''>运行中</span></div><div class=\"view_detail\" onclick=\"viewMachine('" + data[i].DeviceID + "')\">查看详情</div></div>");
-                } else {
-                    $(".equipment .equip_con li.combine_con").append("<div class=\"machine\"><div class=\"clearfix\"><span class=\"fl\">水肥机</span><span class='fr unrun'><img src='../images/governmenthomedeteal/unrun_point.png' alt=''>暂未运行</span></div><div class=\"view_detail\" onclick=\"viewMachine('" + data[i].DeviceID + "')\">查看详情</div></div>");
-                }
-            }
         }
 
         $("#Integrated").next(".layui-form-checkbox").find("span").html("综合设备(" + data.length + "个)");
@@ -666,35 +651,6 @@ function viewWeather(id) {
         closeBtn: 1,//显示关闭按钮
         area: ['850px', '500px'], //宽高
         content: $('#weather_box')
-    });
-}
-
-/*查看水肥机*/
-function viewMachine(id) {
-    $.each(machine, function (index, item2) {
-        if (item2.listId == id) {
-            $.each(item2.typeList[0].slots, function (p, item) {
-                var id = item.SlotID;
-                if (id >= 13 && id <= 16) {//桶
-                    //$("#machine" + result.item[i].Slots[p].SlotID).find("div").eq(1).removeClass();
-                    //if (NullEmpty(result.item[i].Slots[p].Data) == 0) {
-                    //    $("#machine" + result.item[i].Slots[p].SlotID).find("div").eq(1).addClass("tong empty_bucket");
-                    //}
-                }
-                else if (id >= 1 && id <= 10) {
-                    var value = NullEmpty(item.Data) + item.Unit;
-                    $("#machine" + item.SlotID).find("p").eq(1).text(value);
-                }
-            });
-        }
-    })
-    layer.open({
-        title: ['水肥一体机', 'font-size:14px;color:#000;'],
-        type: 1,
-        skin: 'layui-layer-demo', //样式类名
-        closeBtn: 1,//显示关闭按钮
-        area: ['850px', '500px'], //宽高
-        content: $('#machine_box')
     });
 }
 

@@ -114,6 +114,19 @@ var TerminalFn = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitTerminal)', function (data) {
+            // console.log(data)
+            if (!one_tenName.test(data.field.TerminaName)) {
+                layer.msg("请输入1-30位英文、数字、汉字组合的终端名称", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!one_tenName.test(data.field.TerminaNo)) {
+                layer.msg("请输入1-30位英文、数字、汉字组合的终端号", {
+                    time: 1500
+                });
+                return false;
+            }
             var param = cloneObjectFn(paramList);
             var entity = {
                 "ID": guid(),

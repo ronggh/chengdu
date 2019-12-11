@@ -9,7 +9,7 @@ $(function () {
         if (Interval) {
             GetArea($("#area").val());
         }
-    }, 15000);
+    }, 180*1000);
     /*气象站 刷新数据*/
     $(".Refresh").click(function () {
         $(this).find("img").addClass("refresh");
@@ -105,166 +105,7 @@ function numTofixed(num, n, per) {
         }
     }
 }
-//echart表格加载
-function echartinitfn(deviceId, slotId, timeDate) {
-    var deviceId = deviceId;
-    var Unit = "";
-    var time;
-    if (timeDate.length > 10) {
-        time = timeDate.split(" - ")
-    }
-    var XAxisData = [];
-    var series = [];
-    var legendData = [];
-    // 路径配置
-    require.config({
-        paths: {
-            echarts: './libs/echarts-2.2.7/build/dist'
-        }
-    });
-    // 使用
-    require(
-        [
-            'echarts',
-            'echarts/chart/line'
-        ],
-        function (ec) {
-            var param = cloneObjectFn(paramList);
-            param["deviceId"] = deviceId;
-            if (time) {
-                param["start"] = time[0];
-                param["end"] = time[1];
-            } else {
-                param["day"] = timeDate;
-            }
-            param["slot"] = slotId;
-            var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
-            postFnajax(postdata).then(function (res) {
-                var result = JSON.parse(res);
-                var data = [];
-                Unit = result.data.Unit;
-                var elcelData = result.data.HistoryData;
-                $.each(result.data.HistoryData, function (i, item) {
-                    XAxisData.push((item.Time).replace(/T/g, " "));
-                    data.push(item.Data);
-                });
-                timeHistoryData = elcelData;
-                series.push(new SetList(result.data.DeviceName, 'line', data));
-                legendData.push(result.data.DeviceName);
-                var ww = iframeW();
-                layer.open({
-                    title: '历史数据',
-                    type: 1,
-                    area: [ww * 0.7 + "px", '520px'],
-                    content: $("#chart"),
-                    btn: ['关闭'],
-                    yes: function (index, layero) {
-                        layer.closeAll();
-                        $("#chart").css("display", "none");
-                        $(".layui-layer-shade").remove();
-                        //按钮【按钮二】的回调
-                        //return false 开启该代码可禁止点击该按钮关闭
-                    },
-                    cancel: function () {
-                        $("#chart").css("display", "none");
-                        $(".layui-layer-shade").remove();
-                    },
-                    success:function(){
-                        $.each($(".layui-layer-shade"),function(index,item){
-                            if(index>0){
-                                $(this).remove();
-                            }
-                        })
-                        var mask = $(".layui-layer-shade");
-                        mask.appendTo($(".OutermostLayer").parent());
-                        //其中：layero是弹层的DOM对象
-                        $(".layui-layer-shade").css({'z-index':2000});
-                        $("#chart").css({'z-index':200000})
-                    },
-                });
-                $("#chart").css("display", "block")
-                $("#echartcontain").css({
-                    "width": ww * 0.65 + "px"
-                });
-                echartfn('', legendData, Unit, XAxisData, series, ec);
-            });
-        }
-    );
-}
 
-function echartfn(qname, legendData, danwei, time, series, obj) {
-    // 基于准备好的dom，初始化echarts实例
-    // console.log("<<<<<<<<<<>>>>>>>>>");
-    // console.log(qname);
-    // console.log(legendData);
-    // console.log(danwei);
-    // console.log(time);
-    // console.log(series);
-    // console.log(obj);
-    deviceName = legendData;
-    var myChart = obj.init(document.getElementById('echartcontain'));
-    var option = {
-        animation: true,
-        title: {
-            text: qname,
-            subtext: danwei,
-            // default: 'left'
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: legendData
-        },
-        toolbox: {
-            show: false,
-            feature: {
-                mark: {
-                    show: true
-                },
-                dataZoom: {
-                    show: true
-                },
-                dataView: {
-                    show: true
-                },
-                magicType: {
-                    show: true,
-                    type: ['line', 'bar', 'stack', 'tiled']
-                },
-                restore: {
-                    show: true
-                },
-                saveAsImage: {
-                    show: true
-                }
-            }
-        },
-        calculable: true,
-        dataZoom: {
-            show: true,
-            realtime: true,
-            start: 60,
-            end: 100
-        },
-        xAxis: [{
-            name: '时间',
-            type: 'category',
-            boundaryGap: false,
-            data: time,
-            nameTextStyle: {
-                color: "#999"
-            }
-        }],
-        yAxis: [{
-            // name: danwei,
-            type: 'value'
-        }],
-        series: series
-    };
-    // $(".layui-layer-shade").css("display", "none");
-    myChart.setOption(option);
-}
 $(".btnexcel").on("click", function () {
     //列标题，逗号隔开，每一个逗号就是隔开一个单元格
     let str = `日期,数值\n`;
@@ -354,7 +195,13 @@ initLayuifn(['element', 'form', 'table', 'layer', 'laytpl', 'laypage', 'laydate'
         range: true,
         theme: '#389bff',
         done: function (value, date, endDate) {
-            echartinitfn(Device, ExcelSlotId, value);
+            var timeStart = value.split(' - ')[0];
+            var timeEnd = value.split(' - ')[1];
+            if (timeStart.slice(0,4) == timeEnd.slice(0,4)) {
+                echartinitfn(Device, ExcelSlotId, value);
+            } else {
+                layer.msg("查询日期不能跨年",{time:1500})
+            }
         }
     });
 })
@@ -363,9 +210,4 @@ function SetList(name, type, data) {
     this.name = name;
     this.type = type;
     this.data = data;
-}
-
-function iframeW() {
-    var iframeW = $("body").width() - $("#za_slide").width() - 30;
-    return iframeW;
 }

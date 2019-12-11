@@ -129,7 +129,7 @@ var standProduct = {
                 $.each(item.Params, function (index2, item2) {
                     if (item2.Type == 'input') {
                         var temp = '<div class="popurTop">' +
-                            '<span>持续周期：</span>' +
+                            '<span>持续周期 </span>' +
                             '<input PlarmID="' + item2.ID + '" type="text" StageID= "' + item.ID + '"  value="' + item2.Value + '"> &nbsp天' +
                             '<p class="timeD"></p>' +
                             '</div>';

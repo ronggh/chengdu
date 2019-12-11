@@ -263,7 +263,7 @@ var standProduct = {
                     }
                     standProduct.array.push(temp1);
                     var temp = '<div class="layui-form-item">' +
-                        '<label class="layui-form-label deverID" dever_ID = "' + item2.ID + '">' + item2.Name + ':</label>' +
+                        '<label class="layui-form-label deverID" dever_ID = "' + item2.ID + '">' + item2.Name + ' </label>' +
                         '<div class="layui-input-block">' +
                         '<select lay-verify="required" id="' + item2.Type + '" type="' + item2.Type + '" name = "' + item2.ID + '" lay-filter="' + item2.ID + '" value="' + (type=="insert"?'':item2.Value) + '">' +
 
@@ -298,7 +298,7 @@ var standProduct = {
                 $.each(item.Params, function (index2, item2) {
                     if (item2.Type == 'input') {
                         var temp = '<div class="popurTop">' +
-                            '<span>持续周期：</span>' +
+                            '<span>持续周期 </span>' +
                             '<input PlarmID="' + item2.ID + '" type="text" StageID= "' + item.ID + '"  value="' + item2.Value + '"> &nbsp天' +
                             '<p class="timeD"></p>' +
                             '</div>';
@@ -324,7 +324,7 @@ var standProduct = {
                     if (item2.Type == 'select') {
                         var temp = '<div class="popurBottom">' +
                             '<div class="layui-form-item">' +
-                            '<label class="layui-form-label" >关联自动化:</label>' +
+                            '<label class="layui-form-label" >关联自动化 </label>' +
                             '<div class="layui-input-block">' +
                             '<select lay-verify="required" PlarmID="' + item2.ID + '" StageID= "' + item.ID + '" lay-filter="' + item.ID + item2.ID + '" id = "' + item2.Value + '"value = "'+ (type=="insert"?'':item2.Value) +'" >' +
                             // standProduct.autoSelectId +
@@ -826,10 +826,4 @@ function SetList(name, type, data, markLine) {
     this.type = type;
     this.data = data;
     this.markLine = markLine;
-}
-
-// 图表宽度
-function iframeW() {
-    var iframeW = $("body").width() - $("#za_slide").width() - 30;
-    return iframeW;
 }

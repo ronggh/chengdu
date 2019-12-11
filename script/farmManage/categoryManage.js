@@ -62,6 +62,8 @@ var categoryFn = {
             param["status"] = status;
         }
         AjaxRequest(param, "CropCategory", "getListPage").then(function (res) {
+            // console.log(JSON.stringify(param));
+            // console.log(res);
             var result = JSON.parse(res);
             laypage.render({
                 elem: 'category_pagenation',
@@ -109,7 +111,7 @@ var categoryFn = {
                     }
                     form.on('submit(Addcategory)', function (data) {
                         if (!one_tenName.test(data.field.category_name)) {
-                            layer.msg("请输入1-10位英文、数字、汉字组合的类别名称", {
+                            layer.msg("请输入1-30位英文、数字、汉字组合的类别名称", {
                                 time: 1500
                             });
                             return false;
@@ -124,6 +126,9 @@ var categoryFn = {
                         var param = cloneObjectFn(paramList);
                         param["entity"] = getUTF8(entityJson);
                         AjaxRequest(param, "CropCategory", typeIU).then(function (res) {
+                            // console.log(JSON.stringify(entityJson));
+                            // console.log(JSON.stringify(param));
+                            // console.log(res);
                             var resul = JSON.parse(res);
                             if (resul.result.code == 200) {
                                 layer.msg("操作成功", {
@@ -184,6 +189,8 @@ var categoryFn = {
                     var param = cloneObjectFn(paramList);
                     param["id"] = id;
                     AjaxRequest(param, "CropCategory", "delete").then(function (res) {
+                        // console.log(param);
+                        // console.log(res);
                         var result = JSON.parse(res);
                         if (result.result.code == 200) {
                             layer.msg("删除成功", {

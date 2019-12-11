@@ -1203,6 +1203,7 @@ span.rootactivetext {
 
 .slimScrollDiv {
     float: left;
+    height: 100%;
 }
 
 .map_marks {
@@ -1304,10 +1305,26 @@ span.rootactivetext {
     height: 47px;
 }
 
-/* .companycon{ width: 320px; height: 275px;} */
+.companycon{ width: 320px; height: 100%;}
+.companycon dl dt::-webkit-scrollbar {
+    /*//先改变body的滚动条宽度 */
+    width: 2px;
+}
+
+.companycon dl dt::-webkit-scrollbar-track {
+    /*//再改变body的滚动条轨道颜色*/
+    /* background: rgb(200, 200, 200); */
+    border-radius: 1px;
+}
+
+.companycon dl dt::-webkit-scrollbar-thumb {
+    /*//最后改变body的滚动条滑轨相关的样式*/
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 1px;
+}
 #jianjie {
     width: 320px;
-    height: 205px;
+    height: 300px;
     line-height: 20px;
     padding: 30px 20px 15px 1 s0px;
     box-sizing: border-box;
@@ -1322,6 +1339,13 @@ span.rootactivetext {
     overflow: hidden;
     line-height: 20px;
     margin-top: 10px;
+}
+#jianjie dl dt:last-child {
+    margin-left: 10px;
+    overflow: auto;
+    line-height: 20px;
+    margin-top: 10px;
+    height: 260px;
 }
 
 #rootsmap .canshuvideo .title .datatab {

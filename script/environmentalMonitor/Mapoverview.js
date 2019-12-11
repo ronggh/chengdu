@@ -5,14 +5,11 @@ var biga = $("style#biga").detach();
 var bigb = $("style#bigb").detach();
 $(function () {
     GetUserAreaList(); //获取地块
-
     $(".Refresh").click(function () {
         $(this).find("img").addClass("refresh");
         var obj = this;
         setTimeout(function () {
             $(obj).find("img").removeClass("refresh");
-            //alert("刷新数据1");
-            // console.log($("#area").val())
             GetArea($("#area").val())
         }, 500);
     });
@@ -23,36 +20,35 @@ $(function () {
 })
 
 //监听键盘事件
-$(document).keyup(function (event) {
-    $(".equipment").focus();
-    if ($("body").width() > 1680) {
-        //++
-        if (event.keyCode == 187 || event.keyCode == 107 || event.keyCode == 38) {
-            keytimeoldplus = 0;
-            keytimenew = Date.parse(new Date());
-            if (keytimenew - keytimeold <= 800) {
-                if ($("style#biga").length == 1 && $("style#bigb").length != 1) {
-                    $(".za_conmian").append(bigb);
-                } else if ($("style#biga").length != 1 && $("style#bigb").length != 1) {
-                    $(".za_conmian").append(biga);
-                }
-            }
-            keytimeold = keytimenew;
-        }
-        if (event.keyCode == 189 || event.keyCode == 109 || event.keyCode == 40) {
-            keytimeold = 0;
-            keytimenew = Date.parse(new Date());
-            if (keytimenew - keytimeoldplus <= 800) {
-                if ($("style#biga").length == 1 && $("style#bigb").length == 1) {
-                    bigb = $("style#bigb").detach();
-                } else if ($("style#biga").length == 1 && $("style#bigb").length != 1) {
-                    biga = $("style#biga").detach();
-                }
-            }
-            keytimeoldplus = keytimenew;
-        }
-    }
-});
+// $(document).keyup(function (event) {
+//     $(".equipment").focus();
+//     if ($("body").width() > 1680) {
+//         if (event.keyCode == 187 || event.keyCode == 107 || event.keyCode == 38) {
+//             keytimeoldplus = 0;
+//             keytimenew = Date.parse(new Date());
+//             if (keytimenew - keytimeold <= 800) {
+//                 if ($("style#biga").length == 1 && $("style#bigb").length != 1) {
+//                     $(".za_conmian").append(bigb);
+//                 } else if ($("style#biga").length != 1 && $("style#bigb").length != 1) {
+//                     $(".za_conmian").append(biga);
+//                 }
+//             }
+//             keytimeold = keytimenew;
+//         }
+//         if (event.keyCode == 189 || event.keyCode == 109 || event.keyCode == 40) {
+//             keytimeold = 0;
+//             keytimenew = Date.parse(new Date());
+//             if (keytimenew - keytimeoldplus <= 800) {
+//                 if ($("style#biga").length == 1 && $("style#bigb").length == 1) {
+//                     bigb = $("style#bigb").detach();
+//                 } else if ($("style#biga").length == 1 && $("style#bigb").length != 1) {
+//                     biga = $("style#biga").detach();
+//                 }
+//             }
+//             keytimeoldplus = keytimenew;
+//         }
+//     }
+// });
 
 //获取所有的地块
 function GetUserAreaList() {

@@ -142,7 +142,7 @@ var equipmentFn = {
         postFnajax(postdata).then(function (res) {
             var result = JSON.parse(res);
             if (id == undefined && deverName == undefined) {
-                var EquipmentTypeNameSelect = '<option value = "0">' + '请选择设备类型名称' + '</option>'
+                var EquipmentTypeNameSelect = '<option value = "">' + '请选择设备类型名称' + '</option>'
             } else {
                 var EquipmentTypeNameSelect = "<option value = " + id + ">" + id + "-" + deverName + "</option>";               
             }
@@ -189,6 +189,8 @@ var equipmentFn = {
         param["deviceType"] = DeviceTypeID;
         var postdata = GetPostData(param, "device", "getSlotTemplateList");
         postFnajax(postdata).then(function (res) {
+            // console.log(param)
+            // console.log(res);
             var result = JSON.parse(res);
             equipmentFn.DevTypetable(result, PlugSensorData);
         })
@@ -238,6 +240,7 @@ var equipmentFn = {
         param["pageIndex"] = 1;
         param["assigned"] = '0';
         param["type"] = SensorType;
+        param["terminalNum"] = equipmentFn.params;
         var postdata = GetPostData(param, "device", "getSensorListPage");
         // var test = "";
         // //如果是修改 并且 设备类型
@@ -261,6 +264,9 @@ var equipmentFn = {
             contentType: "application/json",
             data: JSON.stringify(postdata),
             success: function (res) {
+                // console.log("<<<<<<<<下拉列表>>>>>>>")
+                // console.log(res);
+                // console.log(param)
                 var result = JSON.parse(res);
                 $.each(result.data, function (index, item) {
                     SensorTypeNameSelect = SensorTypeNameSelect + '<option value = "' + item.Suid + '">' + item.DevName + '</option>'
@@ -289,6 +295,20 @@ var equipmentFn = {
                 });
                 return false;
             }
+            if (!two_tenName.test(data.field.deviceName)) {
+                layer.msg("请输入2-30位英文、数字、汉字组合的设备名称", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (data.field.device_Remarks != "") {
+                if (!two_tenName.test(data.field.device_Remarks)) {
+                    layer.msg("请输入2-30位英文、数字、汉字组合的设备备注", {
+                        time: 1500
+                    });
+                    return false;
+                }
+            }
             var Slots = [];
             for (let index = 0; index < SlotArr.length; index++) {
                 Slots.push({
@@ -313,6 +333,8 @@ var equipmentFn = {
                 param['entity'] = getUTF8(entityJson);
                 var postdata = GetPostData(param, "device", "update");
                 postFnajax(postdata).then(function (res) {
+                    // console.log(res)
+                    // console.log(entityJson);
                     var res = JSON.parse(res);
                     if (res.result.code == 200) {
                         equipmentFn.equipmentPageList();

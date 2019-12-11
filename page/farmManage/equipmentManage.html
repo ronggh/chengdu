@@ -69,22 +69,21 @@
     <div class="layui-form-item">
         <label class="layui-form-label"><span class="c_red">*&nbsp;</span>设备名称</label>
         <div class="layui-input-block">
-            <input type="text" name="deviceName" lay-verify="required" placeholder="请输入设备名称" autocomplete="off"
+            <input type="text" name="deviceName" lay-verify="required" placeholder="请输入2-30位英文、数字、汉字组合" autocomplete="off"
                 class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label"><span class="c_red">*&nbsp;</span>类型名称</label>
         <div class="layui-input-block">
-            <select id="devicetype_selectName" lay-verify="required" name="device_selectName"
-                lay-filter="device_selectName">
+            <select id="devicetype_selectName" lay-verify="required" name="device_selectName" lay-filter="device_selectName" lay-search="">
             </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">设备备注</label>
         <div class="layui-input-block">
-            <input type="text" name="device_Remarks" placeholder="请输入设备备注" autocomplete="off" class="layui-input">
+            <input type="text" name="device_Remarks" placeholder="请输入2-30位英文、数字、汉字组合" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">

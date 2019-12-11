@@ -259,6 +259,35 @@ var organManageFn = {
     tijiao: function (opera_type) {
         //提交
         form.on('submit(submitAddOrg)', function (data) {
+            // console.log(data)
+            if (!two_fiveName.test(data.field.OrgName)) {
+                layer.msg("请输入2-50位英文、数字、汉字组合的机构名称", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!two_fiveName.test(data.field.OrgAddress)) {
+                layer.msg("请输入2-50位英文、数字、汉字组合的地址", {
+                    time: 1500
+                });
+                return false;
+            }
+            if (data.field.LegalPerson != "") {
+                if (!one_Person.test(data.field.LegalPerson)) {
+                    layer.msg("请输入2-20位英文、数字、汉字组合的法人", {
+                        time: 1500
+                    });
+                    return false;
+                }
+            }
+            if (data.field.RegisteredCapital != "") {
+                if (!capitalNumbwe.test(data.field.RegisteredCapital)) {
+                    layer.msg("请输入1-10位数字的注册资金", {
+                        time: 1500
+                    });
+                    return false;
+                }
+            }
             var entityJson = {
                 "OrgName": data.field.OrgName,
                 "IsValid": data.field.IsValid,
@@ -274,7 +303,6 @@ var organManageFn = {
                 param["entity"] = getUTF8(entityJson);
                 var postdata = GetPostData(param, "org", "update");
                 postFnajax(postdata).then(function (res) {
-
                     var res = JSON.parse(res);
                     if (res) {
                         if (res.result.code == 200) {
