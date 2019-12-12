@@ -310,4 +310,6 @@
 .uploadHeadImg .layui-btn {
   padding: 0 !important;
   width: 90px;
+  margin-left: 20px;
+  margin-top: 20px;
 }

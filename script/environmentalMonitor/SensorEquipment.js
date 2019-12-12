@@ -5,15 +5,6 @@ var timeHistoryData = "";
 var deviceName = "";
 $(function () {
     GetUserAreaList(); //获取地块
-    //历史记录 历史记录 历史记录 弹出层 ---------开始-----------
-    $(document).on("click", ".primary .level_one .operate .history", function () {
-        $("#dateTimeDiv").hide();
-        deviceId = $(this).attr("deviceId");
-        var deviceName = $(this).attr("deviceName");
-        var slotId = $(this).attr("slotId");
-        var deviceTypeId = $(this).attr("deviceTypeId");
-        GetHistory(deviceId, name, slotId, deviceTypeId);
-    });
     $(document).on("click", ".primary .level_one .operate .alerm", function () {
         serseid = $(this).attr("suid");
         deviceId = $(this).attr("deviceId");
@@ -521,6 +512,15 @@ function GetArea(landId) { //, status, loading
                 }
             }
         })
+        //历史记录 历史记录 历史记录 弹出层 ---------开始-----------
+        $(".primary .level_one .operate .history").on("click", function () {
+            $("#dateTimeDiv").hide();
+            deviceId = $(this).attr("deviceId");
+            var deviceName = $(this).attr("deviceName");
+            var slotId = $(this).attr("slotId");
+            var deviceTypeId = $(this).attr("deviceTypeId");
+            GetHistory(deviceId, name, slotId, deviceTypeId);
+        });
     })
 }
 
@@ -552,7 +552,7 @@ function GetHistory(deviceId, name, slotId, deviceTypeId) {
     var id = deviceId + ":" + slotId + ",";
     ExcelDeviceId = id;
     //历史记录
-    var timeDate = -1
+    var timeDate = '-1'
     echartinitfn(deviceId, slotId, timeDate);
 }
 $(document).on("click", ".chartbtn ul li", function () {
@@ -592,7 +592,7 @@ $(".btnexcel").on("click", function () {
     $.each(timeHistoryData,function(index,item){
         timeHistoryData[index].Time = TimeReplice(timeHistoryData[index].Time);
     })
-    console.log();
+    // console.log();
     for (let i = 0; i < timeHistoryData.length; i++) {
         for (let item in timeHistoryData[i]) {
             str += `${timeHistoryData[i][item] + '\t'},`;

@@ -172,7 +172,7 @@ var messageManageFn = {
         })
         //确认新增消息
         form.on('submit(submitAddUser)', function (data) {
-            if (!one_Person.test(data.field.LoginName)) {
+            if (!one_Person.test(data.field.LoginName.trim())) {
                 layer.msg("请输入2-20位英文、数字、汉字组合的消息标题", {
                     time: 1500
                 });
@@ -188,7 +188,7 @@ var messageManageFn = {
             $(".site-action").addClass(Disable);
             $('.site-action').attr('disabled', 'disabled');
             var entityJson = {
-                "Title": data.field.LoginName,
+                "Title": data.field.LoginName.trim(),
                 "Content": data.field.mainText,
                 "Receive": messageManageFn.userIDname.toString(),
             };

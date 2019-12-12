@@ -19,14 +19,6 @@ $(function () {
             GetArea($("#area").val())
         }, 500);
     });
-    $(document).on("click", ".secondary .level_two .operate .history,.fertilizer,.common", function () {
-        $("#dateTimeDiv").hide();
-        var deviceId = $(this).attr("deviceId");
-        var deviceName = $(this).attr("deviceName");
-        var slotId = $(this).attr("slotId");
-        var deviceTypeId = $(this).attr("deviceTypeId");
-        GetHistory(deviceId, name, slotId, deviceTypeId);
-    });
 });
 //获取所有的地块
 function GetUserAreaList() {
@@ -85,7 +77,15 @@ function GetArea(landId) { //, status, loading
                     time: 2500
                 });
             }
-        }
+        };
+        $(".secondary .level_two .operate .history,.fertilizer,.common").on("click", function () {
+            $("#dateTimeDiv").hide();
+            var deviceId = $(this).attr("deviceId");
+            var deviceName = $(this).attr("deviceName");
+            var slotId = $(this).attr("slotId");
+            var deviceTypeId = $(this).attr("deviceTypeId");
+            GetHistory(deviceId, name, slotId, deviceTypeId);
+        });
     });
 }
 //保留小数

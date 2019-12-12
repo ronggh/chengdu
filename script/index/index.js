@@ -148,9 +148,10 @@ $('.editAvatar').click(function () {
                 $(".checkAvatar").append(originImg);
                 var uploadInst = upload.render({
                     elem: '#uploadAva',
-                    url: 'http://open.chengdu.nyypt.cn/v1/user/resetImg',
+                    // url: 'http://open.chengdu.nyypt.cn/v1/user/resetImg',
+                    url: baseUrl+'/v1/iot/Method',
                     auto: false, //选择文件后不自动上传
-                    size: 512,
+                    size: 50,
                     acceptMime: 'image/png,image/jpg,image/jpeg',
                     bindAction: '#testListAction', //指向一个按钮触发上传
                     choose: function (obj) {

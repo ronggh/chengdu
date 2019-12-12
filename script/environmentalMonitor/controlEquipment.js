@@ -18,19 +18,7 @@ $(function () {
         }, 500);
     });
 })
-//点击事件调取历史记录
-$(document).on("click", "#equirementcontrol .equirecon .equireitem .olddata", function () {
-    $("#dateswitch").hide();
-    $("#switch tbody").html("");
-    $("#dateTime2").val("");
-    $("#switch .switchTime ul li").removeClass("active");
-    $("#switch .switchTime ul li").eq(0).addClass("active");
-    temp = $(this).closest(".equireitem");
-    DeviceID = temp.attr("DeviceID");
-    title = temp.find("span").eq(0).text();
-    var time = -1
-    tableCont(DeviceID, time, temp, title)
-});
+
 $("#switch .switchTime ul li").click(function () {
     $("#dateTime2").val("");
     $("#switch tbody").html("");
@@ -63,90 +51,6 @@ initLayuifn(['element', 'form', 'table', 'layer', 'laytpl', 'laypage', 'laydate'
         }
     });
 })
-
-//设备可控制开关 样式控制
-$(document).on("click", "#equirementcontrol .equirecon .equireitem .controlswitch span", function () {
-    var str = $(this).closest(".equireitem");
-    var message = "";
-    var temp = $(this);
-    var DeviceID = $(this).closest(".equireitem").attr("DeviceID");
-    var SlotType = $(this).closest(".equireitem").attr("SlotType");
-    var Action = ""
-    var value = $(this).html();
-    if (value == "开") {
-        message = "正在打开……";
-        Action = "OPEN";
-    } else if (value == "关") {
-        message = "正在关闭……";
-        Action = "CLOSE";
-    } else if (value == "停") {
-        message = "正在停止……";
-        Action = "STOP";
-    }
-    var param = cloneObjectFn(paramList);
-    param["deviceId"] = DeviceID;
-    param["slot"] = SlotType;
-    param["action"] = Action;
-    // console.log(value);
-    // console.log($(this).parent().find('.active').html())
-    if (value == $(this).parent().find('.active').html()) {
-        if (value == "开") {
-            layer.msg('不能重复开启', {time: 2000});
-            return false;
-        }
-        if (value == "停") {
-            layer.msg('不能重复停止', {time: 2000});
-            return false;
-        }
-        if (value == "关") {
-            layer.msg('不能重复关闭', {time: 2000});
-            return false;
-        }
-    }
-    
-    var postdata = GetPostData(param, "iot", "sensorControl");
-    // alert(111);
-    // console.log(postdata);
-    afterFnajax(postdata).then(function (res) {
-        var resData = JSON.parse(res);
-        if (resData.result.code == 200) { //操作成功
-            var switchindex = temp.index();
-            temp.addClass("active").siblings("span.conitem").removeClass("active");
-            if (temp.closest(".equireitem").hasClass("twoswitch")) {
-                if (switchindex == 0) {
-                    temp.siblings("span.switch").animate({
-                        "left": "0%"
-                    }, 300).css("background-color", "#fe4d4d");
-                } else if (switchindex == 1) {
-                    temp.siblings("span.switch").animate({
-                        "left": "67%"
-                    }, 300).css("background-color", "#5cb948");
-                }
-            } else if (switchindex == 1) {
-                temp.siblings("span.switch").animate({
-                    "left": switchindex * 33.4 + "%"
-                }, 300).css("background-color", "#f9b72c");
-            } else if (switchindex == 2) {
-                temp.siblings("span.switch").animate({
-                    "left": switchindex * 33.4 + "%"
-                }, 300).css("background-color", "#5cb948");
-            } else {
-                temp.siblings("span.switch").animate({
-                    "left": switchindex * 33.4 + "%"
-                }, 300).css("background-color", "#fe4d4d");
-            }
-            layer.msg('操作成功', {
-                icon: 1,
-                time: 2000
-            })
-        } else {
-            layer.msg('操作失败', {
-                icon: 2,
-                time: 2000
-            });
-        }
-    })
-});
 
 //获取所有的地块
 function GetUserAreaList() {
@@ -260,11 +164,109 @@ function GetArea(landId) { //, status, loading
                 }
             })
         }
+        //设备可控制开关 样式控制
+        $("#equirementcontrol .equirecon .equireitem .controlswitch span").on("click", function () {
+            var str = $(this).closest(".equireitem");
+            var message = "";
+            var temp = $(this);
+            var DeviceID = $(this).closest(".equireitem").attr("DeviceID");
+            var SlotType = $(this).closest(".equireitem").attr("SlotType");
+            var Action = ""
+            var value = $(this).html();
+            if (value == "开") {
+                message = "正在打开……";
+                Action = "OPEN";
+            } else if (value == "关") {
+                message = "正在关闭……";
+                Action = "CLOSE";
+            } else if (value == "停") {
+                message = "正在停止……";
+                Action = "STOP";
+            }
+            var param = cloneObjectFn(paramList);
+            param["deviceId"] = DeviceID;
+            param["slot"] = SlotType;
+            param["action"] = Action;
+            // console.log(value);
+            // console.log($(this).parent().find('.active').html())
+            if (value == $(this).parent().find('.active').html()) {
+                if (value == "开") {
+                    layer.msg('不能重复开启', {time: 2000});
+                    return false;
+                }
+                if (value == "停") {
+                    layer.msg('不能重复停止', {time: 2000});
+                    return false;
+                }
+                if (value == "关") {
+                    layer.msg('不能重复关闭', {time: 2000});
+                    return false;
+                }
+            }
+            
+            var postdata = GetPostData(param, "iot", "sensorControl");
+            // console.log(postdata);
+            afterFnajax(postdata).then(function (res) {
+                var resData = JSON.parse(res);
+                if (resData.result.code == 200) { //操作成功
+                    var switchindex = temp.index();
+                    temp.addClass("active").siblings("span.conitem").removeClass("active");
+                    if (temp.closest(".equireitem").hasClass("twoswitch")) {
+                        if (switchindex == 0) {
+                            temp.siblings("span.switch").animate({
+                                "left": "0%"
+                            }, 300).css("background-color", "#fe4d4d");
+                        } else if (switchindex == 1) {
+                            temp.siblings("span.switch").animate({
+                                "left": "67%"
+                            }, 300).css("background-color", "#5cb948");
+                        }
+                    } else if (switchindex == 1) {
+                        temp.siblings("span.switch").animate({
+                            "left": switchindex * 33.4 + "%"
+                        }, 300).css("background-color", "#f9b72c");
+                    } else if (switchindex == 2) {
+                        temp.siblings("span.switch").animate({
+                            "left": switchindex * 33.4 + "%"
+                        }, 300).css("background-color", "#5cb948");
+                    } else {
+                        temp.siblings("span.switch").animate({
+                            "left": switchindex * 33.4 + "%"
+                        }, 300).css("background-color", "#fe4d4d");
+                    }
+                    layer.msg('操作成功', {
+                        icon: 1,
+                        time: 2000
+                    })
+                } else {
+                    layer.msg('操作失败', {
+                        icon: 2,
+                        time: 2000
+                    });
+                }
+            })
+        });
+        tabHistory();
     })
 }
+function tabHistory(){
+    //点击事件调取历史记录
+    $("#equirementcontrol .equirecon .equireitem .olddata").on("click", function () {
+        $("#dateswitch").hide();
+        $("#switch tbody").html("");
+        $("#dateTime2").val("");
+        $("#switch .switchTime ul li").removeClass("active");
+        $("#switch .switchTime ul li").eq(0).addClass("active");
+        temp = $(this).closest(".equireitem");
+        DeviceID = temp.attr("DeviceID");
+        title = temp.find("span").eq(0).text();
+        var time = -1
+        tableCont(DeviceID, time, temp, title)
+    });
+}
+
 // 绘制table
 function tableCont(DeviceID, time, temp, title) {
-    // alert("3333")
     var param = cloneObjectFn(paramList);
     param["deviceId"] = DeviceID;
     param["slot"] = 1;

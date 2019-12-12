@@ -26,23 +26,7 @@ $(function () {
         $('input[name="timechName"]').val("")
         standProduct.getList();
     });
-    // 查验
-    $(document).on("click", ".popurMiddle .history", function () {
-        var time = $(this).parent().parent().parent().find(".timeD").html().split("：")[1].split("~");
-        // console.log(time);
-        // console.log($(this).parent().index())
-        var deviceId = standProduct.lookArray[$(this).parent().index()].Value;
-        var timeStart = time[0];
-        var timeend = time[1];
-        // 当前时间戳
-        var now = new Date();
-        var old = new Date(timeStart)
-        var inputOne = $(this).parent().find("input").eq(0).val();
-        var inputTwo = $(this).parent().find("input").eq(1).val();
-        if(now > old){
-            echartinitfn(deviceId, timeStart, timeend,inputOne,inputTwo);
-        }
-    });
+    
     table.on('tool(standTable)', function (obj) {
         var data = obj.data;
         if (obj.event === 'del') {
@@ -381,6 +365,7 @@ var standProduct = {
         })
         standProduct.tabIndex = 0;
         standProduct.SetDateTime();
+        stHistoryClick();
         $("#stage li").on("click", function (event) {
             standProduct.tabIndex = $(this).index();
             standProduct.SetDateTime();
@@ -646,8 +631,28 @@ var standProduct = {
         })
     },
 }
+// 查验
+function stHistoryClick(){
+    $(".popurMiddle .history").on("click", function () {
+        var time = $(this).parent().parent().parent().find(".timeD").html().split("：")[1].split("~");
+        // console.log(time);
+        // console.log($(this).parent().index())
+        var deviceId = standProduct.lookArray[$(this).parent().index()].Value;
+        var timeStart = time[0];
+        var timeend = time[1];
+        // 当前时间戳
+        var now = new Date();
+        var old = new Date(timeStart)
+        var inputOne = $(this).parent().find("input").eq(0).val();
+        var inputTwo = $(this).parent().find("input").eq(1).val();
+        if(now > old){
+            stechartinitfn(deviceId, timeStart, timeend,inputOne,inputTwo);
+        }
+    });
+}
+
 //echart表格加载
-function echartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
+function stechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
     var deviceId = deviceId;
     var Unit = "";
     var XAxisData = [];
@@ -727,12 +732,12 @@ function echartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
                 $("#echartcontainStand").css({
                     "width": ww * 0.65 + "px"
                 });
-                echartfn('', legendData, danwei, XAxisData, data, ec,inputOne,inputTwo);
+                stechartfn('', legendData, danwei, XAxisData, data, ec,inputOne,inputTwo);
             });
         }
     );
 }
-function echartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine) {
+function stechartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine) {
     // console.log(qname);
     // console.log(legendData);
     // console.log(danwei);
@@ -821,9 +826,9 @@ function echartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine) 
     };
     myChart.setOption(option, true);
 }
-function SetList(name, type, data, markLine) {
-    this.name = name;
-    this.type = type;
-    this.data = data;
-    this.markLine = markLine;
-}
+// function SetList(name, type, data, markLine) {
+//     this.name = name;
+//     this.type = type;
+//     this.data = data;
+//     this.markLine = markLine;
+// }

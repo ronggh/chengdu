@@ -260,20 +260,20 @@ var organManageFn = {
         //提交
         form.on('submit(submitAddOrg)', function (data) {
             // console.log(data)
-            if (!two_fiveName.test(data.field.OrgName)) {
+            if (!two_fiveName.test(data.field.OrgName.trim())) {
                 layer.msg("请输入2-50位英文、数字、汉字组合的机构名称", {
                     time: 1500
                 });
                 return false;
             }
-            if (!two_fiveName.test(data.field.OrgAddress)) {
+            if (!two_fiveName.test(data.field.OrgAddress.trim())) {
                 layer.msg("请输入2-50位英文、数字、汉字组合的地址", {
                     time: 1500
                 });
                 return false;
             }
             if (data.field.LegalPerson != "") {
-                if (!one_Person.test(data.field.LegalPerson)) {
+                if (!one_Person.test(data.field.LegalPerson.trim())) {
                     layer.msg("请输入2-20位英文、数字、汉字组合的法人", {
                         time: 1500
                     });
@@ -281,7 +281,7 @@ var organManageFn = {
                 }
             }
             if (data.field.RegisteredCapital != "") {
-                if (!capitalNumbwe.test(data.field.RegisteredCapital)) {
+                if (!capitalNumbwe.test(data.field.RegisteredCapital.trim())) {
                     layer.msg("请输入1-10位数字的注册资金", {
                         time: 1500
                     });
@@ -289,13 +289,13 @@ var organManageFn = {
                 }
             }
             var entityJson = {
-                "OrgName": data.field.OrgName,
+                "OrgName": data.field.OrgName.trim(),
                 "IsValid": data.field.IsValid,
                 "FID": data.field.FatherId,
-                "LegalPerson": data.field.LegalPerson,
-                "OrgAddress": data.field.OrgAddress,
+                "LegalPerson": data.field.LegalPerson.trim(),
+                "OrgAddress": data.field.OrgAddress.trim(),
                 "OrgMobile": data.field.OrgMobile,
-                "RegisteredCapital": data.field.RegisteredCapital
+                "RegisteredCapital": data.field.RegisteredCapital.trim(),
             }
             if (opera_type == 'update') {
                 entityJson.ID = data.field.OrgId;

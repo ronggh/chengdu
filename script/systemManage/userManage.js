@@ -283,19 +283,22 @@ var manageFn = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitAddUser)', function (data) {
-            if (!userName.test(data.field.UserName)) {
+            console.log(data.field.UserName.trim());
+            console.log(data.field.UserName.trim().length)
+            console.log(data.field.UserName.length)
+            if (!userName.test(data.field.UserName.trim())) {
                 layer.msg("请输入2-20位英文、数字组合的用户名", {
                     time: 1500
                 });
                 return false;
             }
-            if (!one_Person.test(data.field.LoginName)) {
+            if (!one_Person.test(data.field.LoginName.trim())) {
                 layer.msg("请输入2-20位英文、数字、汉字组合的姓名", {
                     time: 1500
                 });
                 return false;
             }
-            if (!myRegcode.test(data.field.password)) {
+            if (!myRegcode.test(data.field.password.trim())) {
                 layer.msg("请输入6-12位英文、数字组合的密码", {
                     time: 1500
                 });
@@ -312,8 +315,8 @@ var manageFn = {
             }
             var entityJson = {
                 "Roles": roles,
-                "UserName": data.field.UserName,
-                "RealName": data.field.LoginName,
+                "UserName": data.field.UserName.trim(),
+                "RealName": data.field.LoginName.trim(),
                 "Mobile": data.field.phone,
                 "OrgID": data.field.OrgId,
                 "IsValid": data.field.IsValid,
@@ -345,7 +348,7 @@ var manageFn = {
                 })
             } else {
                 entityJson.UserID = guid();
-                entityJson.Password = $.md5($.md5($.md5(data.field.password)));
+                entityJson.Password = $.md5($.md5($.md5(data.field.password.trim())));
                 var param = cloneObjectFn(paramList);
                 param["entity"] = getUTF8(entityJson);
                 AjaxRequest(param, "user", "insert").then(function (res) {

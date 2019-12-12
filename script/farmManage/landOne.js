@@ -27,13 +27,13 @@ var landOne = {
     landSure: function () {
         form.on('submit(submitAddland)', function (data) {
             console.log(data);
-            if (!two_tenName.test(data.field.landName)) {
+            if (!two_tenName.test(data.field.landName.trim())) {
                 layer.msg("请输入2-30位英文、数字、汉字组合的地块名称", {
                     time: 1500
                 });
                 return false;
             }
-            if (!one_twoName.test(data.field.landIntroduce)) {
+            if (!one_twoName.test(data.field.landIntroduce.trim())) {
                 layer.msg("请输入1-200位英文、数字、汉字组合的地块介绍", {
                     time: 1500
                 });
@@ -41,10 +41,10 @@ var landOne = {
             }
             if (data.field.landIntroduce != "" && data.field.landName != "") {
                 var entityJson = {
-                    "LandName": data.field.landName,//地块名称
+                    "LandName": data.field.landName.trim(),//地块名称
                     "ResponsiblePerson": $("#landPerson_re").val(),
                     "PlantCrop": $('input[name="raiseCrops_instal"]').val(),
-                    "LandDesc": data.field.landIntroduce,//地块介绍
+                    "LandDesc": data.field.landIntroduce.trim(),//地块介绍
                 }
                 if (landOne.landID == "insert") {
                     entityJson.LandID = guid();

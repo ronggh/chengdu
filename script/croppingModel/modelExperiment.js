@@ -212,7 +212,7 @@ var Modelexperiment = {
             var dayArr = [];
             var dayNum = 0;
             // 模型名称
-            if (!one_Person.test(data.field.landchName)) {
+            if (!one_Person.test(data.field.landchName.trim())) {
                 layer.msg('请输入2-20位英文、数字、汉字组合的模型名称', {
                     time: 1500
                 });
@@ -256,7 +256,7 @@ var Modelexperiment = {
             })
             var param = cloneObjectFn(paramList);
             var entityJson = {
-                "Name": data.field.landchName,
+                "Name": data.field.landchName.trim(),
                 "Day": dayNum,
                 "StartTime": data.field.timechName,
                 "CropID": "469c8d0b-09be-11ea-87af-7cd30ab8a76c",

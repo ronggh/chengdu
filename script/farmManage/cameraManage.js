@@ -119,38 +119,38 @@ var cameraFunction = {
         //监听提交
         form.on('submit(submitAddcamera)', function (data) {
             //摄像头校验
-            if (!two_tenName.test(data.field.cameraNameadd)) {
+            if (!two_tenName.test(data.field.cameraNameadd.trim())) {
                 layer.msg('请输入2-30位英文数字汉字组合的摄像头名称', {
                     time: 1500
                 });
                 return false;
             }
             //序列号校验
-            if (!serNumber.test(data.field.DeviceSerial)) {
+            if (!serNumber.test(data.field.DeviceSerial.trim())) {
                 layer.msg('请输入2-20位英文数字组合的序列号', {
                     time: 1500
                 });
                 return false;
             }
             //通道号校验
-            if (!wayNumber.test(data.field.ChannelNo)) {
+            if (!wayNumber.test(data.field.ChannelNo.trim())) {
                 layer.msg('请输入1-20位数字通道号', {
                     time: 1500
                 });
                 return false;
             }
             //直播地址校验
-            if (!videoUrl.test(data.field.LiveUrl)) {
+            if (!videoUrl.test(data.field.LiveUrl.trim())) {
                 layer.msg('请输入正确的直播URL地址', {
                     time: 1500
                 });
                 return false;
             }
             var entityJson = {
-                "CameraName": data.field.cameraNameadd,
-                "DeviceSerial": data.field.DeviceSerial,
-                "ChannelNo": data.field.ChannelNo,
-                "LiveUrl": data.field.LiveUrl,
+                "CameraName": data.field.cameraNameadd.trim(),
+                "DeviceSerial": data.field.DeviceSerial.trim(),
+                "ChannelNo": data.field.ChannelNo.trim(),
+                "LiveUrl": data.field.LiveUrl.trim(),
             }
             if (opera_type == 'update') {
                 entityJson.CameraID = $('input[name="cameraNameadd"]').attr('camera_id');

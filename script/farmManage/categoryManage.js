@@ -20,15 +20,17 @@ var categoryFn = {
                         type: 'numbers',
                         title: '序号',
                         align: 'center',
-                        width:60,
+                        width:"4%",
                     }, {
                         field: 'CategoryName',
                         title: '类别',
-                        align: 'center'
+                        align: 'center',
+                        width:"38%",
                     }, {
                         field: 'IsValid',
                         title: '状态',
                         align: 'center',
+                        width:"38%",
                         templet: function (d) {
                             if (d.IsValid == 1) {
                                 return '启用'
@@ -38,7 +40,7 @@ var categoryFn = {
                         }
                     }, {
                         title: '操作',
-                        width: 200,
+                        width:"20%",
                         align: 'center',
                         toolbar: '#table_category'
                     }
@@ -110,14 +112,14 @@ var categoryFn = {
                         form.render('select');
                     }
                     form.on('submit(Addcategory)', function (data) {
-                        if (!one_tenName.test(data.field.category_name)) {
+                        if (!one_tenName.test(data.field.category_name.trim())) {
                             layer.msg("请输入1-30位英文、数字、汉字组合的类别名称", {
                                 time: 1500
                             });
                             return false;
                         }
                         var entityJson = {
-                            "CategoryName": data.field.category_name,
+                            "CategoryName": data.field.category_name.trim(),
                             "IsValid": data.field.IsValid,
                         };
                         if (typeIU == "update") {

@@ -108,6 +108,8 @@ var equipmentFn = {
         $("#addEdit_device").css('display', 'block');
         if (type == "insert") {
             $("input[name = deviceName]").val("");
+            // table.render()
+            // $("#DevTypetable").html("")
             $("input[name = device_Remarks]").val("");
             equipmentFn.tagsList([]);
             equipmentFn.EquipmentTypeName();
@@ -250,7 +252,7 @@ var equipmentFn = {
                 soltArr.push(PlugSensorData[index].Slot);
             }
             if (soltArr.indexOf(Slot) != -1) {
-                SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect" class = "deviceSelect">' + '<option value = ' + PlugSensorData[soltArr.indexOf(Slot)].PlugSensor + '>' + PlugSensorData[soltArr.indexOf(Slot)].DevName + '</option>' + '<option value = "0">' + '请选择传感器名称' + '</option>';
+                SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect" class = "deviceSelect">' + '<option value = ' + PlugSensorData[soltArr.indexOf(Slot)].PlugSensor + '>' + PlugSensorData[soltArr.indexOf(Slot)].DevName + '</option>' + '<option value = "">' + '请选择传感器名称' + '</option>';
             } else {
                 var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "0">' + '请选择传感器名称' + '</option>';
             }
@@ -295,14 +297,14 @@ var equipmentFn = {
                 });
                 return false;
             }
-            if (!two_tenName.test(data.field.deviceName)) {
+            if (!two_tenName.test(data.field.deviceName.trim())) {
                 layer.msg("请输入2-30位英文、数字、汉字组合的设备名称", {
                     time: 1500
                 });
                 return false;
             }
             if (data.field.device_Remarks != "") {
-                if (!two_tenName.test(data.field.device_Remarks)) {
+                if (!two_tenName.test(data.field.device_Remarks.trim())) {
                     layer.msg("请输入2-30位英文、数字、汉字组合的设备备注", {
                         time: 1500
                     });
@@ -321,8 +323,8 @@ var equipmentFn = {
             var param = cloneObjectFn(paramList);
             var entityJson = {
                 // "DeviceID":guid(),                                   //设备ID
-                "DeviceName": data.field.deviceName, //设备名称
-                "DeviceDesc": data.field.device_Remarks, //备注
+                "DeviceName": data.field.deviceName.trim(), //设备名称
+                "DeviceDesc": data.field.device_Remarks.trim(), //备注
                 "TerminalNum": equipmentFn.params, //终端号
                 "DeviceTypeID": data.field.device_selectName, //设备类型ID
                 "Tags": tipArrID,
@@ -341,9 +343,12 @@ var equipmentFn = {
                         layer.msg('编辑成功', {
                             time: 2000
                         }, function () {
-                            $("#TerminalManagement").css('display', 'none');
-                            $("#equipmentManagement").css('display', 'block');
-                            $("#addEdit_device").css('display', 'none')
+                            // $("#TerminalManagement").css('display', 'none');
+                            // $("#equipmentManagement").css('display', 'block');
+                            // $("#addEdit_device").css('display', 'none')
+                            var id = decodeURIComponent(atob(location.href.split("&id=")[1]))
+        var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
+        LoadAction(value,"",id)
                         });
                     } else {
                         layer.msg("编辑失败", {
@@ -364,9 +369,12 @@ var equipmentFn = {
                         layer.msg('新增成功', {
                             time: 2000
                         }, function () {
-                            $("#TerminalManagement").css('display', 'none');
-                            $("#equipmentManagement").css('display', 'block');
-                            $("#addEdit_device").css('display', 'none')
+                            // $("#TerminalManagement").css('display', 'none');
+                            // $("#equipmentManagement").css('display', 'block');
+                            // $("#addEdit_device").css('display', 'none');
+                            var id = decodeURIComponent(atob(location.href.split("&id=")[1]))
+        var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
+        LoadAction(value,"",id)
                         });
                     } else {
                         layer.msg("新增失败", {
@@ -438,8 +446,12 @@ var equipmentFn = {
         })
     },
     quxiao: function () {
-        $("#equipmentManagement").css('display', 'block');
-        equipmentFn.DevTypetable(res = [{}])
-        $("#addEdit_device").css('display', 'none');
+        // $("#equipmentManagement").css('display', 'block');
+        // $("#addEdit_device").css('display', 'none');
+        // console.log(location.href.split("&id=")[1]);
+        // console.log(location.href.split("&id=")[0].split("?menu=")[1]);
+        var id = decodeURIComponent(atob(location.href.split("&id=")[1]))
+        var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
+        LoadAction(value,"",id)
     }
 }

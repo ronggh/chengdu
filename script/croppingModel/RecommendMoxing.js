@@ -34,14 +34,17 @@ var standProduct = {
                         type: 'numbers',
                         title: '序号',
                         align: 'center',
+                        width:"4%",
                     }, {
                         field: 'ModelName',
                         title: '名称',
-                        align: 'center'
+                        align: 'center',
+                        width:"45%",
                     }, {
                         field: 'StartTime',
                         title: '创建时间',
                         align: 'center',
+                        width:"45%",
                         templet: function (d) {
                             return "2019-03-20 13:45:20"
                         }
@@ -49,6 +52,7 @@ var standProduct = {
                         title: '操作',
                         toolbar: '#stand_table',
                         align: 'center',
+                        width:"6%",
                     }
                 ]
             ],

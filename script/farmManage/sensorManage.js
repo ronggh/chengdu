@@ -148,21 +148,21 @@ var sensorFn = {
     //修改
     submitsensor: function (opera_type) {
         form.on('submit(submitSensor)', function (data) {
-            if (!two_tenName.test(data.field.sensorName)) {
+            if (!two_tenName.test(data.field.sensorName.trim())) {
                 layer.msg("请输入2-30位英文、数字、汉字组合的传感器名称", {
                     time: 1500
                 });
                 return false;
             }
-            if (!wayNumber.test(data.field.passageway)) {
+            if (!wayNumber.test(data.field.passageway.trim())) {
                 layer.msg("请输入1-20位数字通道号", {
                     time: 1500
                 });
                 return false;
             }
             var entity = {
-                "DevName": data.field.sensorName,
-                "Channel": data.field.passageway,
+                "DevName": data.field.sensorName.trim(),
+                "Channel": data.field.passageway.trim(),
                 "SensorID": data.field.SensorType,
                 "TerminalNum": sensorFn.params,
             }
@@ -181,6 +181,7 @@ var sensorFn = {
             var param = cloneObjectFn(paramList);
             param["entity"] = getUTF8(entity);
             AjaxRequest(param, "sensor", opera_type).then(function (result) {
+                // console.log(result);
                 var res = JSON.parse(result);
                 if (res.result.code == 200) {
                     layer.closeAll();

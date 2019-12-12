@@ -176,6 +176,7 @@ var videoUrl = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]
 var userName = /^[a-z0-9A-Z]{2,20}$/; //用户名
 var two_tenName = /^[a-z0-9A-Z\u4e00-\u9fa5]{2,30}$/; //角色名称、传感器名称、设备名称、摄像头名称、地块名称
 var one_tenName = /^[a-z0-9A-Z\u4e00-\u9fa5]{1,30}$/; //类别、品种、终端号、终端名称
+var zD_tenName = /^[a-z0-9A-Z_]{1,30}$/; //终端号、终端名称
 var one_fiveName = /^[a-z0-9A-Z\u4e00-\u9fa5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]{1,50}$/; //角色说明
 var two_fiveName = /^[a-z0-9A-Z\u4e00-\u9fa5]{2,50}$/; //机构名称、地址、角色说明
 var one_twoName = /^[a-z0-9A-Z\u4e00-\u9fa5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]{1,200}$/; //地块介绍、信息正文
@@ -468,7 +469,7 @@ function iframeW() {
 function echartinitfn(deviceId, slotId, timeDate) {
     var deviceId = deviceId;
     var Unit = "";
-    var time;
+    var time = "";
     if (timeDate.length > 10) {
         time = timeDate.split(" - ")
     }
@@ -499,56 +500,59 @@ function echartinitfn(deviceId, slotId, timeDate) {
             param["slot"] = slotId;
             var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
             postFnajax(postdata).then(function (res) {
-                // console.log("<<<<<<<< 实时数据 >>>>>>>>")
+                // console.log("<<<<<<<< 环境监控实时数据 >>>>>>>>");
+                // console.log(time);
                 // console.log(param);
                 // console.log(res);
                 var result = JSON.parse(res);
                 var data = [];
-                Unit = result.data.Unit;
-                var elcelData = result.data.HistoryData;
-                $.each(result.data.HistoryData, function (i, item) {
-                    XAxisData.push((item.Time).replace(/T/g, " "));
-                    data.push(item.Data);
-                });
-                timeHistoryData = elcelData;
-                series.push(new SetList(result.data.DeviceName, 'line', data));
-                legendData.push(result.data.DeviceName);
-                var ww = iframeW();
-                layer.open({
-                    title: '历史数据',
-                    type: 1,
-                    area: [ww * 0.7 + "px", '520px'],
-                    content: $("#chart"),
-                    btn: ['关闭'],
-                    yes: function (index, layero) {
-                        layer.closeAll();
-                        $("#chart").css("display", "none");
-                        $(".layui-layer-shade").remove();
-                        //按钮【按钮二】的回调
-                        //return false 开启该代码可禁止点击该按钮关闭
-                    },
-                    cancel: function () {
-                        $("#chart").css("display", "none");
-                        $(".layui-layer-shade").remove();
-                    },
-                    success:function(){
-                        $.each($(".layui-layer-shade"),function(index,item){
-                            if(index>0){
-                                $(this).remove();
-                            }
-                        })
-                        var mask = $(".layui-layer-shade");
-                        mask.appendTo($(".OutermostLayer").parent());
-                        //其中：layero是弹层的DOM对象
-                        $(".layui-layer-shade").css({'z-index':2000});
-                        $("#chart").css({'z-index':200000})
-                    },
-                });
-                $("#chart").css("display", "block")
-                $("#echartcontain").css({
-                    "width": ww * 0.65 + "px"
-                });
-                echartfn('', legendData, Unit, XAxisData, series, ec);
+                if (result.result.code == 200) {
+                    Unit = result.data.Unit;
+                    var elcelData = result.data.HistoryData;
+                    $.each(result.data.HistoryData, function (i, item) {
+                        XAxisData.push((item.Time).replace(/T/g, " "));
+                        data.push(item.Data);
+                    });
+                    timeHistoryData = elcelData;
+                    series.push(new SetList(result.data.DeviceName, 'line', data));
+                    legendData.push(result.data.DeviceName);
+                    var ww = iframeW();
+                    layer.open({
+                        title: '历史数据',
+                        type: 1,
+                        area: [ww * 0.7 + "px", '520px'],
+                        content: $("#chart"),
+                        btn: ['关闭'],
+                        yes: function (index, layero) {
+                            layer.closeAll();
+                            $("#chart").css("display", "none");
+                            $(".layui-layer-shade").remove();
+                            //按钮【按钮二】的回调
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        },
+                        cancel: function () {
+                            $("#chart").css("display", "none");
+                            $(".layui-layer-shade").remove();
+                        },
+                        success:function(){
+                            $.each($(".layui-layer-shade"),function(index,item){
+                                if(index>0){
+                                    $(this).remove();
+                                }
+                            })
+                            var mask = $(".layui-layer-shade");
+                            mask.appendTo($(".OutermostLayer").parent());
+                            //其中：layero是弹层的DOM对象
+                            $(".layui-layer-shade").css({'z-index':2000});
+                            $("#chart").css({'z-index':200000})
+                        },
+                    });
+                    $("#chart").css("display", "block")
+                    $("#echartcontain").css({
+                        "width": ww * 0.65 + "px"
+                    });
+                    echartfn('', legendData, Unit, XAxisData, series, ec);
+                }
             });
         }
     );
@@ -635,6 +639,8 @@ function subSomething() {
     if (location.href.indexOf("&id=") != -1 ) {
         id = decodeURIComponent(atob(location.href.split("&id=")[1]))
     }
+    // console.log(value);
+    // console.log(id);
     $.each(twoMenu, function (index, item) {
         if (value == item) {
             if(value == "varieties"){
@@ -658,6 +664,8 @@ function subSomething() {
                 });
             }
             // $("[pagename = '" + value + "']").click();
+            // console.log(value);
+            // console.log(id);
             LoadAction(value,"",id)
         }
     })

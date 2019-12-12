@@ -10,20 +10,6 @@ $(function () {
         $('input[name="modelchName"]').val("");
         ModelEval.getList()
     });
-    $(document).on("click", ".popurMiddle .history", function () {
-        var time = $(this).parent().parent().parent().find(".timeD").html().split("：")[1].split("~");
-        var deviceId = ModelEval.array[$(this).parent().index()].Value;
-        var timeStart = time[0];
-        var timeend = time[1];
-        // 当前时间戳
-        var now = new Date();
-        var old = new Date(timeStart)
-        var inputOne = $(this).parent().find("input").eq(0).val();
-        var inputTwo = $(this).parent().find("input").eq(1).val();
-        if(now > old){
-            echartinitfn(deviceId, timeStart, timeend,inputOne,inputTwo);
-        }
-    });
 });
 var ModelEval = {
     pageLimit: rowCount, //设置本页面的一页显示多少条数据
@@ -39,7 +25,7 @@ var ModelEval = {
                     {
                         type: 'numbers',
                         title: '序号',
-                        align: 'center'
+                        align: 'center',
                     }, {
                         field: 'Name',
                         title: '模型名称',
@@ -225,6 +211,7 @@ var ModelEval = {
                                 }
                             }
                         })
+                        moHistoryClick();
                         if (type == "look") {
                             $('input[name="in"]').val(evaluationData.data.In);
                             $('input[name="out"]').val(evaluationData.data.Out);
@@ -250,7 +237,6 @@ var ModelEval = {
                 },
                 yes: function (index, layero) {
                     layer.close(index);
-                    
                     $(".layui-layer-shade").remove();
                 },
                 cancel: function () {
@@ -315,7 +301,6 @@ var ModelEval = {
         })
     },
     getNewData: function (dateTemp, days, flag = 0, ) {
-        // alert(days)
         var dateTemp = dateTemp.split("-");
         var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //转换为MM-DD-YYYY格式    
         var millSeconds;
@@ -346,8 +331,25 @@ var ModelEval = {
         }
     },
 }
+function moHistoryClick(){
+    $(".popurMiddle .history").on("click", function () {
+        var time = $(this).parent().parent().parent().find(".timeD").html().split("：")[1].split("~");
+        var deviceId = ModelEval.array[$(this).parent().index()].Value;
+        var timeStart = time[0];
+        var timeend = time[1];
+        // 当前时间戳
+        var now = new Date();
+        var old = new Date(timeStart)
+        var inputOne = $(this).parent().find("input").eq(0).val();
+        var inputTwo = $(this).parent().find("input").eq(1).val();
+        if(now > old){
+            moechartinitfn(deviceId, timeStart, timeend,inputOne,inputTwo);
+        }
+    });
+}
+
 //echart表格加载
-function echartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
+function moechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
     var deviceId = deviceId;
     var Unit = "";
     var XAxisData = [];
@@ -426,12 +428,12 @@ function echartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
                 $("#echartcontain").css({
                     "width": ww * 0.65 + "px"
                 });
-                echartfn('', legendData, danwei, XAxisData, data, ec,inputOne,inputTwo);
+                moechartfn('', legendData, danwei, XAxisData, data, ec,inputOne,inputTwo);
             });
         }
     );
 }
-function echartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine) {
+function moechartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine) {
     // console.log(qname);
     // console.log(legendData);
     // console.log(danwei);

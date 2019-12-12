@@ -17,15 +17,18 @@ var varieties = {
                     {
                         type: 'numbers',
                         title: '序号',
-                        align: 'center'
+                        align: 'center',
+                        width:"4%",
                     }, {
                         field: 'CropName',
                         title: '品种',
-                        align: 'center'
+                        align: 'center',
+                        width:"38%",
                     }, {
                         field: 'Status',
                         title: '状态',
                         align: 'center',
+                        width:"38%",
                         templet: function (d) {
                             if (d.Status == 1) {
                                 return '启用'
@@ -35,7 +38,7 @@ var varieties = {
                         }
                     }, {
                         title: '操作',
-                        width: 200,
+                        width:"20%",
                         align: 'center',
                         toolbar: '#table_operate'
                     }
@@ -118,17 +121,17 @@ var varieties = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitAddcategory)', function (data) {
-            if (!one_tenName.test(data.field.CropName)) {
+            if (!one_tenName.test(data.field.CropName.trim())) {
                 layer.msg("请输入1-30位英文、数字、汉字组合的品种名称", {
                     time: 1500
                 });
                 return false;
             }
             var entityJson = {
-                "CropName": data.field.CropName,
+                "CropName": data.field.CropName.trim(),
                 "CropCategory": varieties.params,
                 "Status": data.field.IsValid,
-                "Lands": []
+                "Lands": [],
             };
             if (opera_type == 'update') {
                 entityJson.CropID = data.field.CropID;

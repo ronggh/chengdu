@@ -16,23 +16,28 @@ var TerminalFn = {
                     {
                         type: 'numbers',
                         title: '序号',
+                        width: '4%',
                         align: 'center'
                     }, {
                         field: 'TerminalNum',
                         title: '终端号',
+                        width: '24%',
                         align: 'center'
                     }, {
                         field: 'TerminalName',
                         title: '终端名称',
+                        width: '24%',
                         align: 'center'
                     }, {
                         field: 'CreateTime',
                         title: '创建日期',
+                        width: '24%',
                         align: 'center',
                     }, {
                         title: '操作',
                         toolbar: '#table_Terminal',
                         align: 'center',
+                        width: '24%',
                         templet: function (d) { }
                     }
                 ]
@@ -115,14 +120,14 @@ var TerminalFn = {
         //监听提交
         form.on('submit(submitTerminal)', function (data) {
             // console.log(data)
-            if (!one_tenName.test(data.field.TerminaName)) {
-                layer.msg("请输入1-30位英文、数字、汉字组合的终端名称", {
+            if (!zD_tenName.test(data.field.TerminaName.trim())) {
+                layer.msg("请输入1-30位英文、数字、下划线组合的终端名称", {
                     time: 1500
                 });
                 return false;
             }
-            if (!one_tenName.test(data.field.TerminaNo)) {
-                layer.msg("请输入1-30位英文、数字、汉字组合的终端号", {
+            if (!zD_tenName.test(data.field.TerminaNo.trim())) {
+                layer.msg("请输入1-30位英文、数字、下划线组合的终端号", {
                     time: 1500
                 });
                 return false;
@@ -130,8 +135,8 @@ var TerminalFn = {
             var param = cloneObjectFn(paramList);
             var entity = {
                 "ID": guid(),
-                "TerminalName": data.field.TerminaName,
-                "TerminalNum": data.field.TerminaNo
+                "TerminalName": data.field.TerminaName.trim(),
+                "TerminalNum": data.field.TerminaNo.trim(),
             }
             if (opera_type == "insert") {
                 entity.ID = guid();

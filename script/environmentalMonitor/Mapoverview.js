@@ -19,37 +19,6 @@ $(function () {
     })
 })
 
-//监听键盘事件
-// $(document).keyup(function (event) {
-//     $(".equipment").focus();
-//     if ($("body").width() > 1680) {
-//         if (event.keyCode == 187 || event.keyCode == 107 || event.keyCode == 38) {
-//             keytimeoldplus = 0;
-//             keytimenew = Date.parse(new Date());
-//             if (keytimenew - keytimeold <= 800) {
-//                 if ($("style#biga").length == 1 && $("style#bigb").length != 1) {
-//                     $(".za_conmian").append(bigb);
-//                 } else if ($("style#biga").length != 1 && $("style#bigb").length != 1) {
-//                     $(".za_conmian").append(biga);
-//                 }
-//             }
-//             keytimeold = keytimenew;
-//         }
-//         if (event.keyCode == 189 || event.keyCode == 109 || event.keyCode == 40) {
-//             keytimeold = 0;
-//             keytimenew = Date.parse(new Date());
-//             if (keytimenew - keytimeoldplus <= 800) {
-//                 if ($("style#biga").length == 1 && $("style#bigb").length == 1) {
-//                     bigb = $("style#bigb").detach();
-//                 } else if ($("style#biga").length == 1 && $("style#bigb").length != 1) {
-//                     biga = $("style#biga").detach();
-//                 }
-//             }
-//             keytimeoldplus = keytimenew;
-//         }
-//     }
-// });
-
 //获取所有的地块
 function GetUserAreaList() {
     var param = cloneObjectFn(paramList);

@@ -504,14 +504,14 @@ var rolesmanageFn = {
         //监听提交
         form.on('submit(submitAddRole)', function (data) {
             // console.log(data)
-            if (!two_tenName.test(data.field.RoleName)) {
+            if (!two_tenName.test(data.field.RoleName.trim())) {
                 layer.msg("请输入2-30位英文、数字、汉字组合的角色名称", {
                     time: 1500
                 });
                 return false;
             }
             if ($("#tarea").val() != "") {
-                if (!one_fiveName.test($("#tarea").val())) {
+                if (!one_fiveName.test($("#tarea").val().trim())) {
                     layer.msg("请输入1-50位英文、数字、汉字组合的角色说明", {
                         time: 1500
                     });
@@ -534,13 +534,13 @@ var rolesmanageFn = {
             var entityJson;
             if (opera_type == 'update') {
                 entityJson = {
-                    "RoleName": data.field.RoleName,
+                    "RoleName": data.field.RoleName.trim(),
                     "IsValid": data.field.IsValid,
                     "FuncList": rolesmanageFn.powerResult, //获取权限功能
                     "RoleID": data.field.RoleID,
                     "OrgID": $('input[name="FID"]').val(), //机构ID
                     "UserList": UserList, //机构内角色
-                    "Remark": $("#tarea").val() // 说明
+                    "Remark": $("#tarea").val().trim() // 说明
                 };
                 var param = cloneObjectFn(paramList);
                 param["entity"] = getUTF8(entityJson);
