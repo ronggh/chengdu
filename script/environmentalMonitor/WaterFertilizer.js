@@ -1,4 +1,3 @@
-var Interval = false;
 var timeHistoryData = "";
 var deviceName = "";
 var tabletemp = "";
@@ -15,10 +14,9 @@ $(function () {
         }, 500);
     });
     GetUserAreaList(); //获取地块
-    setInterval(function () {
-        if (Interval) {
-            GetArea($("#area").val());
-        }
+    waterfer = setInterval(function () {
+        clearInterval(waterfer);
+        GetArea($("#area").val());
     }, 180*1000);
     $(document).on("click", ".primary .level_one .operate .alerm", function () {
         serseid = $(this).attr("suid");
@@ -138,6 +136,9 @@ function GetArea(landId) { //, status, loading
         $("#tabNav2").html("");
         $("#qita ul").html("");
         var result = JSON.parse(res);
+        result.data.sort(function (value1,value2) {
+            return value1.DeviceName.localeCompare(value2.DeviceName,'zh-CN') ;
+        });
         $.each(result.data, function (i) {
             if (result.data[i].Tags.length > 0 && result.data[i].Tags[0].Tag == "水肥机" && result.data[i].DeviceCategory == "CONTROLLER") {
                 //     delete result.data[i];
@@ -347,8 +348,8 @@ function SwitchCss(){
         param["action"] = Action;
         var postdata = GetPostData(param, "iot", "sensorControl");
         afterFnajax(postdata).then(function (res) {
-            console.log(param)
-            console.log(res);
+            // console.log(param);
+            // console.log(res);
             var resData = JSON.parse(res);
             if (resData.result.code == 200) { //操作成功
                 var switchindex = temp.index();
@@ -710,36 +711,16 @@ function setUpSubmit(){
         var type= (data.field.MachineID == ""?"insert":"update");
         param['entity'] = getUTF8(entityjson);
         AjaxRequest(param, "machineSettings", type).then(function (res) {
-            console.log(res)
+            // console.log(param);
+            // console.log(entityjson);
+            // console.log(res);
             var result = JSON.parse(res);
             var msg = "";
             if (result.result.code == 200) {
                 layer.closeAll();
                 msg = "操作成功"
             } else {
-                switch(result.result.code){
-                    case 6002:
-                        msg = "设置水肥机EC和PH的命令错误";
-                        break;
-                    case 6003:
-                        msg = "传感器不存在或类型不正确";
-                        break;
-                    case 6004:
-                        msg = "未找到类型匹配的传感器";
-                        break;
-                    case 6005:
-                        msg = "设置水肥机4路施肥速度的命令错误";
-                        break;
-                    case 6006:
-                        msg = "设置水肥机EC和PH的命令执行异常";
-                        break;
-                    case 6007:
-                        msg = "设置水肥机4路施肥速度的命令执行异常";
-                        break;
-                    default:
-                        msg = "发送失败，设备离线或水肥机配置错误";
-                        break;
-                }
+                msg = "发送失败，设备离线或水肥机配置错误";
             }
             layer.msg(msg, {
                 time: 2000

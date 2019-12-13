@@ -10,7 +10,7 @@ $(function () {
         var obj = this;
         setTimeout(function () {
             $(obj).find("img").removeClass("refresh");
-            GetArea($("#area").val())
+            GetAreamap($("#area").val())
         }, 500);
     });
     $(".plants p.tit span").bind('click', function () {
@@ -34,16 +34,16 @@ function GetUserAreaList() {
         })
         $("#area").html(landSelect);
         form.render('select');
-        GetArea($("#area").val()); //进入页面获取地块ID，获取设备渲染页面
+        GetAreamap($("#area").val()); //进入页面获取地块ID，获取设备渲染页面
         form.on('select(quiz)', function (data) { //切换地块获取设备渲染页面
             // console.log(data);
-            GetArea(data.value);
+            GetAreamap(data.value);
         })
     });
 };
 
 //根据地块获ID获取地块内的详细信息
-function GetArea(landId) { //, status, loading
+function GetAreamap(landId) { //, status, loading
     var param = cloneObjectFn(paramList);
     var postdata = GetPostData(param, "iot", "getIotOverView");
     postFnajax(postdata).then(function (res) {

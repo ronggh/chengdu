@@ -160,8 +160,9 @@ $(function () {
         }, 500);
     });
     //自动刷新
-    setInterval(function () {
-        GetArea($("#area").val())
+    sensoreq = setInterval(function () {
+        clearInterval(sensoreq);
+        GetArea($("#area").val());
     }, 180*1000);
 })
 //新增或者编辑报警设置

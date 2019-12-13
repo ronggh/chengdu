@@ -20,10 +20,11 @@ $(function () {
         })
 
         getMassageIsread() //获取消息提醒
-        setInterval(function () {
+        magAlerm = setInterval(function () {
+            clearInterval(magAlerm);
             getMassageIsread();
             alermInfo();
-        }, 20000);
+        }, 60*1000);
         //  获取用户左侧可用菜单栏
         var param = cloneObjectFn(paramList);
         AjaxRequest(param, "function", "getList").then(function (res) {

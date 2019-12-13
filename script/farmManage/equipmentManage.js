@@ -25,6 +25,7 @@ var equipmentFn = {
         param["terminalNum"] = equipmentFn.params;
         var postdata = GetPostData(param, "device", "getDeviceListPage");
         postFnajax(postdata).then(function (result) {
+            // console.log(result)
             var res = JSON.parse(result);
             //分页
             laypage.render({
@@ -66,6 +67,10 @@ var equipmentFn = {
                         title: '设备名称',
                         align: 'center'
                     }, {
+                        field: 'DeviceTypeID',
+                        title: '设备类型ID',
+                        align: 'center'
+                    },{
                         field: 'DeviceTypeName',
                         title: '设备类型名称',
                         align: 'center'
@@ -254,10 +259,10 @@ var equipmentFn = {
             if (soltArr.indexOf(Slot) != -1) {
                 SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect" class = "deviceSelect">' + '<option value = ' + PlugSensorData[soltArr.indexOf(Slot)].PlugSensor + '>' + PlugSensorData[soltArr.indexOf(Slot)].DevName + '</option>' + '<option value = "">' + '请选择传感器名称' + '</option>';
             } else {
-                var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "0">' + '请选择传感器名称' + '</option>';
+                var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "">' + '请选择传感器名称' + '</option>';
             }
         } else {
-            var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "0">' + '请选择传感器名称' + '</option>';
+            var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "">' + '请选择传感器名称' + '</option>';
         }
         $.ajax({
             url: baseUrl + "/v1/iot/Method",
@@ -343,15 +348,12 @@ var equipmentFn = {
                         layer.msg('编辑成功', {
                             time: 2000
                         }, function () {
-                            // $("#TerminalManagement").css('display', 'none');
-                            // $("#equipmentManagement").css('display', 'block');
-                            // $("#addEdit_device").css('display', 'none')
                             var id = decodeURIComponent(atob(location.href.split("&id=")[1]))
-        var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
-        LoadAction(value,"",id)
+                            var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
+                            LoadAction(value,"",id);
                         });
                     } else {
-                        layer.msg("编辑失败", {
+                        layer.msg("编辑失败："+res.result.msg, {
                             time: 2000
                         });
                     }
@@ -369,15 +371,12 @@ var equipmentFn = {
                         layer.msg('新增成功', {
                             time: 2000
                         }, function () {
-                            // $("#TerminalManagement").css('display', 'none');
-                            // $("#equipmentManagement").css('display', 'block');
-                            // $("#addEdit_device").css('display', 'none');
                             var id = decodeURIComponent(atob(location.href.split("&id=")[1]))
-        var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
-        LoadAction(value,"",id)
+                            var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
+                            LoadAction(value,"",id);
                         });
                     } else {
-                        layer.msg("新增失败", {
+                        layer.msg("新增失败："+res.result.msg, {
                             time: 2000
                         });
                     }

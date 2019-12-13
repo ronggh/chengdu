@@ -1,14 +1,12 @@
 var Device = "";
 var ExcelSlotId = "";
-var Interval = false;
 var timeHistoryData = "";
 var deviceName = "";
 $(function () {
     GetUserAreaList(); //获取地块
-    setInterval(function () {
-        if (Interval) {
-            GetArea($("#area").val());
-        }
+    weaterSta = setInterval(function () {
+        clearInterval(weaterSta);
+        GetArea($("#area").val());
     }, 180*1000);
     /*气象站 刷新数据*/
     $(".Refresh").click(function () {

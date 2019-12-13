@@ -1,13 +1,11 @@
-var Interval = false;
 var temp = "";
 var DeviceID = "";
 var title = "";
 $(function () {
     GetUserAreaList(); //获取地块
-    setInterval(function () {
-        if (Interval) {
-            GetArea($("#area").val());
-        }
+    conequi = setInterval(function () {
+        clearInterval(conequi);
+        GetArea($("#area").val());
     }, 180*1000);
     $(".Refresh").click(function () {
         $(this).find("img").addClass("refresh");
@@ -187,8 +185,6 @@ function GetArea(landId) { //, status, loading
             param["deviceId"] = DeviceID;
             param["slot"] = SlotType;
             param["action"] = Action;
-            // console.log(value);
-            // console.log($(this).parent().find('.active').html())
             if (value == $(this).parent().find('.active').html()) {
                 if (value == "开") {
                     layer.msg('不能重复开启', {time: 2000});
@@ -203,10 +199,10 @@ function GetArea(landId) { //, status, loading
                     return false;
                 }
             }
-            
             var postdata = GetPostData(param, "iot", "sensorControl");
-            // console.log(postdata);
             afterFnajax(postdata).then(function (res) {
+            // console.log(param);
+            // console.log(res);
                 var resData = JSON.parse(res);
                 if (resData.result.code == 200) { //操作成功
                     var switchindex = temp.index();

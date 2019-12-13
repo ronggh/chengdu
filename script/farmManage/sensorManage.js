@@ -20,6 +20,7 @@ var sensorFn = {
         param["pageIndex"] = sensorFn.pageCurr;
         param["terminalNum"] = sensorFn.params;
         AjaxRequest(param, "sensor", "getSensorListPage").then(function (result) {
+            // console.log(result)
             var res = JSON.parse(result)
             $.each(res.data, function (index, item) {
                 item.PortTypeName = item.SensorTypeName + "-" + item.PortName;
@@ -56,7 +57,7 @@ var sensorFn = {
         table.render({
             elem: '#SensorTable',
             cols: [
-                [ //标题栏
+                [ //标题栏SensorTypeId
                     {
                         type: 'numbers',
                         title: '序号',
@@ -70,8 +71,12 @@ var sensorFn = {
                         title: '通道',
                         align: 'center'
                     }, {
+                        field: 'SensorTypeId',
+                        title: '传感器类型ID',
+                        align: 'center'
+                    }, {
                         field: 'PortTypeName',
-                        title: '传感器类型',
+                        title: '传感器类型名称',
                         align: 'center'
                     }, {
                         title: '操作',
@@ -214,6 +219,7 @@ var sensorFn = {
                     var param = cloneObjectFn(paramList);
                     param["suid"] = id;
                     AjaxRequest(param, "sensor", "delete").then(function (res) {
+                        // console.log(res);
                         var result = JSON.parse(res);
                         if (result.result.code == 200) {
                             layer.closeAll();
@@ -222,7 +228,7 @@ var sensorFn = {
                                 time: 2000
                             });
                         } else {
-                            layer.msg("删除失败", {
+                            layer.msg("删除失败：" + result.result.msg, {
                                 time: 2000
                             })
                         }
