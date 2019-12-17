@@ -1,4 +1,5 @@
- //引入layui模块
+
+//引入layui模块
  $(function () {
      initLayuifn(['element', 'layer', 'laytpl', ], function () {});
  });
