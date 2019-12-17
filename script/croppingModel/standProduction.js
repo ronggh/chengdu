@@ -48,6 +48,7 @@ var standProduct = {
     timeArrStart: [],
     timeArrEnd: [],
     autoSelectData: "",
+    sensorTypeID:[],
     standProductTable: function (res) {
         table.render({
             elem: '#standTable',
@@ -110,7 +111,6 @@ var standProduct = {
         param["type"] = 3;
         AjaxRequest(param, "model", "getListPage").then(function (res) {
             // console.log("<<<<<<<<标准化生产>>>>>>>>");
-            // console.log(param);
             // console.log(res);
             var modelData = JSON.parse(res);
             laypage.render({
@@ -160,6 +160,7 @@ var standProduct = {
                     $(".site-action").removeClass(Disable);
                     $('.site-action').removeAttr('disabled', 'disabled');
                     if (opera_type == "insert") {
+                        standProduct.sensorTypeID = [];
                         var param = cloneObjectFn(paramList);
                         param['id'] = "469c8d0b-09be-11ea-87af-7cd30ab8a76c"; //番茄的种植模型
                         AjaxRequest(param, "CropStage", "getCropStageInfo").then(function (res) {
@@ -171,6 +172,7 @@ var standProduct = {
                         })
                     }
                     if (opera_type == "update") {
+                        standProduct.sensorTypeID = [];
                         var param = cloneObjectFn(paramList);
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
@@ -187,6 +189,7 @@ var standProduct = {
                         })
                     };
                     if (opera_type == "look") {
+                        standProduct.sensorTypeID = [];
                         var param = cloneObjectFn(paramList);
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
@@ -245,6 +248,7 @@ var standProduct = {
                         "PlarmID": item2.ID,
                         "Value": item2.Value
                     }
+                    standProduct.sensorTypeID.push(item2.Type);
                     standProduct.array.push(temp1);
                     var temp = '<div class="layui-form-item">' +
                         '<label class="layui-form-label deverID" dever_ID = "' + item2.ID + '">' + item2.Name + ' </label>' +
@@ -289,7 +293,6 @@ var standProduct = {
                         temp2.find('.Model_popurBottom').append(temp);
                     }
                     if (item2.Type == 'inputs') {
-                        // console.log(type)
                         var temp = '<div class="popurMiddle"></div>';
                         if (temp2.find('.popurMiddle').length == 0) {
                             temp2.find('.Model_popurBottom').append(temp);
@@ -472,9 +475,7 @@ var standProduct = {
         AjaxRequest(param, "model", "getList").then(function (res) {
             // console.log(res)
             var formalModelData = JSON.parse(res);
-            // if (type_open == "insert") {
-                var standPselect = '<option value="">' + "请选择模型列表" + '</option>';
-            // }
+            var standPselect = '<option value="">' + "请选择模型列表" + '</option>';
             $.each(formalModelData.data, function (index, item) {
                 if (name == item.Name) {
                     standPselect += '<option selected value="' + item.ID + '">' + item.Name + '</option>';
@@ -513,16 +514,13 @@ var standProduct = {
             standProduct.landListData = res;
             if (opera_type == 'insert') {
                 landSelect = '<option value="">' + "请选择种植地块" + '</option>';
-            } else {
-                $.each(landData.data, function (index, item) {
-                    if (item.LandID == id) {
-                        landSelect = '<option value="' + item.LandID + '">' + item.LandName + '</option>';
-                    }
-                })
             }
             $.each(landData.data, function (index, data) {
-                landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
-                    '</option>'
+                if (data.LandID == id) {
+                    landSelect = landSelect + '<option selected value="' + data.LandID + '">' + data.LandName + '</option>'
+                } else {
+                    landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName + '</option>'
+                }
             })
             $("#plandProduction").html(landSelect);
             form.render('select');
@@ -543,13 +541,14 @@ var standProduct = {
         })
     },
     sensorListOption: function () {
+        var selectSensorID = ArrRemoval(standProduct.sensorTypeID);
+        for(var i = 0; i < selectSensorID.length; i++){
+            $("#" + standProduct.sensorTypeID[i]).append('<option value="">' + "请选择传感设备" + '</option>');
+        };
         $.each(standProduct.sensorData.data, function (index, item) {
             var count = $("#" + item.DeviceTypeID).length;
             if (count != 0) {
                 var id = $("#" + item.DeviceTypeID).attr("value");
-                if ($("#" + item.DeviceTypeID).html() == "") {
-                    $("#" + item.DeviceTypeID).append('<option value="">' + "请选择传感设备" + '</option>');
-                }
                 if (id == item.DeviceID) {
                     $("#" + item.DeviceTypeID).append('<option selected value="' + item.DeviceID + '">' + item.DeviceName + '</option>');
                 } else {
@@ -564,13 +563,11 @@ var standProduct = {
         param["pageSize"] = listCount;
         param["pageIndex"] = 1;
         AjaxRequest(param, "automation", "getListPage").then(function (res) {
-            // console.log(res);
             var autoData = JSON.parse(res);
             standProduct.autoSelectData = autoData;
         })
     },
     selectSuto: function (id) {
-        // alert(id);
         var autoSelectId = '<option value="">' + "请选择关联自动化" + '</option>';
         $.each(standProduct.autoSelectData.data, function (index, item) {
             if (id == item.ID) {
@@ -679,10 +676,8 @@ function stechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
             var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
             postFnajax(postdata).then(function (res) {
                 // console.log("<<<<<<<< 实时数据 >>>>>>>>")
-                // console.log(param);
                 // console.log(res);
                 var result = JSON.parse(res);
-                // console.log(result.data.HistoryData.length)
                 if(result.data.HistoryData.length < 1){
                     layer.msg('暂无数据', {
                         time: 2000
@@ -738,13 +733,6 @@ function stechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
     );
 }
 function stechartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine) {
-    // console.log(qname);
-    // console.log(legendData);
-    // console.log(danwei);
-    // console.log(time);
-    // console.log(series);
-    // console.log(obj);
-    // console.log(layui-layer-shade)
     var myChart = obj.init(document.getElementById('echartcontainStand'));
     var option = {
         animation: true,
@@ -826,9 +814,3 @@ function stechartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine
     };
     myChart.setOption(option, true);
 }
-// function SetList(name, type, data, markLine) {
-//     this.name = name;
-//     this.type = type;
-//     this.data = data;
-//     this.markLine = markLine;
-// }

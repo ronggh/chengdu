@@ -191,7 +191,6 @@ var myRegcode = /^[a-z0-9A-Z]{6,12}$/; //限制长度6-12位
 
 /*---------------------------------------- 成都项目 数据请求函数 start ---------------------------------------- */
 // 数据请求接口地址
-// var baseUrl = "http://192.168.2.126:8003";
 // var baseUrl = "http://open.chengdu.nyypt.cn";
 var baseUrl = "http://112.19.241.99:18002";
 var methodUrl = baseUrl + "/api/method";
@@ -218,7 +217,6 @@ function GetPostData(paramList, category, method) {
         method: method,
         url: methodUrl
     };
-    // console.log(JSON.stringify(postdata));
     return postdata;
 };
 // 登录时不需要携带参数Token
@@ -234,7 +232,6 @@ function GetLoginData(paramLoginList, category, method) {
 // 页面ajax
 function AjaxRequest(param, fields, type) {
     var postdata = GetPostData(param, fields, type);
-    // console.log(postdata);
     return postFnajax(postdata)
 }
 //登录ajax
@@ -264,7 +261,7 @@ function postFnajax(postbody) {
 function afterFnajax(postbody) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            beforeSend: function () {layer.msg('加载中...', { icon: 16, shade: 0.01, time: 60 * 1000 }); },
+            beforeSend: function () {layer.msg('发送中...', { icon: 16, shade: 0.01, time: 20 * 1000 }); },
             url: baseUrl + "/v1/iot/Method",
             type: "POST",
             contentType: "application/json",
@@ -501,8 +498,6 @@ function echartinitfn(deviceId, slotId, timeDate) {
             var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
             postFnajax(postdata).then(function (res) {
                 // console.log("<<<<<<<< 环境监控实时数据 >>>>>>>>");
-                // console.log(time);
-                // console.log(param);
                 // console.log(res);
                 var result = JSON.parse(res);
                 var data = [];
@@ -558,14 +553,6 @@ function echartinitfn(deviceId, slotId, timeDate) {
     );
 }
 function echartfn(qname, legendData, danwei, time, series, obj) {
-    // 基于准备好的dom，初始化echarts实例
-    // console.log("<<<<<<<<<<>>>>>>>>>");
-    // console.log(qname);
-    // console.log(legendData);
-    // console.log(danwei);
-    // console.log(time);
-    // console.log(series);
-    // console.log(obj);
     deviceName = legendData;
     var myChart = obj.init(document.getElementById('echartcontain'));
     var option = {
@@ -631,7 +618,10 @@ function echartfn(qname, legendData, danwei, time, series, obj) {
 // 当刷新时判断当前页，展开左侧边栏
 //document.onreadystatechange = subSomething; //当页面加载状态改变的时候执行这个方法.
 function subSomething() {
-    var value = "cameraManage";
+    var value = "";
+    if ($(".sideMenu .nLi").eq(0).find("ul li").eq(0).attr("pagename")) {
+    value = $(".sideMenu .nLi").eq(0).find("ul li").eq(0).attr("pagename");
+    }
     var id = ""
     if (menu != ""){
         value = decodeURIComponent(atob(menu)); //对字段地址进行解码
@@ -639,8 +629,6 @@ function subSomething() {
     if (location.href.indexOf("&id=") != -1 ) {
         id = decodeURIComponent(atob(location.href.split("&id=")[1]))
     }
-    // console.log(value);
-    // console.log(id);
     $.each(twoMenu, function (index, item) {
         if (value == item) {
             if(value == "varieties"){
@@ -663,9 +651,6 @@ function subSomething() {
                     $("[pagename = '" + value + "']").parent(".sub").parent(".nLi").addClass("on");
                 });
             }
-            // $("[pagename = '" + value + "']").click();
-            // console.log(value);
-            // console.log(id);
             LoadAction(value,"",id)
         }
     })
@@ -710,10 +695,11 @@ function SetTitle(url) {
         }
     })
     $("#za_contentTop ul a:first").removeAttr("onclick");
+    $("#za_contentTop ul li:last").html($("#za_contentTop ul li:last").html().substr(0,$("#za_contentTop ul li:last").html().lastIndexOf("/")));
 }
 
 function GetMenu(id, temp) {
-    $.each(menuArray, function (i, item) { //onclick="LoadAction("'+ item.id +'",'0 ')
+    $.each(menuArray, function (i, item) {
         if (item.id == id) {
             var b = GetQueryString("id");
             var a = "<li><a href=\"javascript:void(0)\" onclick=\"LoadAction('" + item.id + "',0,'" + decodeURIComponent(atob(GetQueryString("id"))) + "')\" >" + item.name + "</a>/</li>"

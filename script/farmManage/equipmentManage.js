@@ -17,7 +17,7 @@ var equipmentFn = {
         if (name == "" || name == undefined) {
             delete param.name;
         }
-        if (start == 0 || start == undefined) {
+        if (start == "" || start == undefined) {
             delete param.category;
         }
         param["pageSize"] = equipmentFn.pageLimit;
@@ -116,7 +116,7 @@ var equipmentFn = {
             // table.render()
             // $("#DevTypetable").html("")
             $("input[name = device_Remarks]").val("");
-            equipmentFn.tagsList([]);
+            equipmentFn.tagsList(['352c4595-beb3-4fe9-a315-4b71f2939b8e']);
             equipmentFn.EquipmentTypeName();
             equipmentFn.SensorIDC = "";
             $("input[name = deverID]").val("");
@@ -161,8 +161,6 @@ var equipmentFn = {
         })
         //设备发生改变下方通道表格也发生改变
         form.on('select(device_selectName)', function (data) {
-            // console.log(data.elem); //得到select原始DOM对象
-            // console.log(data.value); //得到被选中的值    //设备类型ID
             equipmentFn.deverTypeid = data.value;
             equipmentFn.passageWayFn(data.value);
         });
@@ -174,17 +172,12 @@ var equipmentFn = {
         postFnajax(postdata).then(function (res) {
             var tagDataSelect = "";
             var tagData = JSON.parse(res);
-            if (tips.length == 0) {
-                tagDataSelect = "<option value = " + '352c4595-beb3-4fe9-a315-4b71f2939b8e' + ">" + '其它类' + "</option>"
-            } else {
-                $.each(tagData.data, function (index, item) {
-                    if (tips[0] == item.ID) {
-                        tagDataSelect = "<option value = " + item.ID + ">" + item.Tag + "</option>"
-                    }
-                })
-            }
             $.each(tagData.data, function (index, item) {
-                tagDataSelect = tagDataSelect + '<option value = "' + item.ID + '">' + item.Tag + '</option>'
+                if (tips[0] == item.ID) {
+                    tagDataSelect = tagDataSelect + '<option selected value = "' + item.ID + '">' + item.Tag + '</option>'
+                }else{
+                    tagDataSelect = tagDataSelect + '<option value = "' + item.ID + '">' + item.Tag + '</option>'
+                }
             })
             $("#tagData").html(tagDataSelect);
             form.render('select');
@@ -215,17 +208,14 @@ var equipmentFn = {
                         field: 'SlotName',
                         title: '通道名'
                     }, {
-                        field: 'SlotGroup',
-                        title: '通道分组',
-                        templet: function (d) {
-                            return d.SlotGroup == null ? '暂无' : d.SlotGroup;
-                        }
+                        field: 'SensorType',
+                        title: '类型ID',
                     }, {
                         field: 'SensorName',
-                        title: '传感器类型名称'
+                        title: '类型名称'
                     }, {
                         field: 'title',
-                        title: '传感器',
+                        title: '传感器/控制器',
                         unresize: true,
                         templet: function (d) {
                             return equipmentFn.SensorTypeSelect(d.SensorType, PlugSensorData, d.Slot);
@@ -257,12 +247,12 @@ var equipmentFn = {
                 soltArr.push(PlugSensorData[index].Slot);
             }
             if (soltArr.indexOf(Slot) != -1) {
-                SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect" class = "deviceSelect">' + '<option value = ' + PlugSensorData[soltArr.indexOf(Slot)].PlugSensor + '>' + PlugSensorData[soltArr.indexOf(Slot)].DevName + '</option>' + '<option value = "">' + '请选择传感器名称' + '</option>';
+                SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect" class = "deviceSelect">' + '<option value = ' + PlugSensorData[soltArr.indexOf(Slot)].PlugSensor + '>' + PlugSensorData[soltArr.indexOf(Slot)].DevName + '</option>' + '<option value = "">' + '请选择' + '</option>';
             } else {
-                var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "">' + '请选择传感器名称' + '</option>';
+                var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "">' + '请选择' + '</option>';
             }
         } else {
-            var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "">' + '请选择传感器名称' + '</option>';
+            var SensorTypeNameSelect = '<select name="deviceSelect" lay-verify="required" id = "deviceSelect"  class = "deviceSelect">' + '<option value = "">' + '请选择' + '</option>';
         }
         $.ajax({
             url: baseUrl + "/v1/iot/Method",
@@ -273,7 +263,6 @@ var equipmentFn = {
             success: function (res) {
                 // console.log("<<<<<<<<下拉列表>>>>>>>")
                 // console.log(res);
-                // console.log(param)
                 var result = JSON.parse(res);
                 $.each(result.data, function (index, item) {
                     SensorTypeNameSelect = SensorTypeNameSelect + '<option value = "' + item.Suid + '">' + item.DevName + '</option>'
@@ -445,10 +434,6 @@ var equipmentFn = {
         })
     },
     quxiao: function () {
-        // $("#equipmentManagement").css('display', 'block');
-        // $("#addEdit_device").css('display', 'none');
-        // console.log(location.href.split("&id=")[1]);
-        // console.log(location.href.split("&id=")[0].split("?menu=")[1]);
         var id = decodeURIComponent(atob(location.href.split("&id=")[1]))
         var  value = decodeURIComponent(atob(location.href.split("&id=")[0].split("?menu=")[1]))
         LoadAction(value,"",id)

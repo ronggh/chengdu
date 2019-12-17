@@ -9,7 +9,7 @@ var landOne = {
     landInfo: function (id) {
         if (id == "insert") {
             landOne.plandSelectList(1); //种植作物
-            landOne.persionSelectList(1); //地块负责人
+            landOne.persionSelectList(""); //地块负责人
         } else {
             var param = cloneObjectFn(paramList);
             param['landId'] = id;
@@ -26,7 +26,7 @@ var landOne = {
     },
     landSure: function () {
         form.on('submit(submitAddland)', function (data) {
-            console.log(data);
+            // console.log(data);
             if (!two_tenName.test(data.field.landName.trim())) {
                 layer.msg("请输入2-30位英文、数字、汉字组合的地块名称", {
                     time: 1500
@@ -83,17 +83,13 @@ var landOne = {
         postFnajax(postdata).then(function (res) {
             var userselectData = JSON.parse(res);
             var landPersonSelect = "";
-            if (landPersonParam == 1) {
-                landPersonSelect = '<option value="">请选择地块负责人</option>';
-            } else {
-                $.each(userselectData.data, function (index, item) {
-                    if (item.id == landPersonParam) {
-                        landPersonSelect = '<option value=' + item.id + '>' + item.name + '</option>';
-                    }
-                })
-            }
+            landPersonSelect = '<option value="">请选择地块负责人</option>';
             $.each(userselectData.data, function (index, item) {
-                landPersonSelect = landPersonSelect + '<option value=' + item.id + '>' + item.name + '</option>';
+                if (item.id == landPersonParam) {
+                    landPersonSelect = landPersonSelect + '<option selected value=' + item.id + '>' + item.name + '</option>';
+                } else {
+                    landPersonSelect = landPersonSelect + '<option value=' + item.id + '>' + item.name + '</option>';
+                }
             })
             $('#landPerson_re').html(landPersonSelect);
             form.render('select');

@@ -45,6 +45,7 @@ var Modelexperiment = {
     timeArrStart: [],
     timeArrEnd: [],
     autoSelectData: "",
+    sensorTypeID:[],
     ModelexperiTable: function (res) {
         table.render({
             elem: '#experimentTable',
@@ -103,7 +104,6 @@ var Modelexperiment = {
         param["type"] = 1;
         AjaxRequest(param, "model", "getListPage").then(function (res) {
             // console.log("<<<<<<<<模型试验>>>>>>>>");
-            // console.log(param);
             // console.log(res);
             var ModelexperiData = JSON.parse(res);
             laypage.render({
@@ -154,6 +154,7 @@ var Modelexperiment = {
                     $('.site-action').removeAttr('disabled', 'disabled');
                     var param = cloneObjectFn(paramList);
                     if (opera_type == "inster") {
+                        Modelexperiment.sensorTypeID = [];
                         param['id'] = "469c8d0b-09be-11ea-87af-7cd30ab8a76c"; //番茄的种植模型
                         AjaxRequest(param, "CropStage", "getCropStageInfo").then(function (res) {
                             // console.log(res);
@@ -164,6 +165,7 @@ var Modelexperiment = {
                         })
                     };
                     if (opera_type == "update") {
+                        Modelexperiment.sensorTypeID = [];
                         var param = cloneObjectFn(paramList);
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
@@ -179,6 +181,7 @@ var Modelexperiment = {
                         })
                     };
                     if (opera_type == "look") {
+                        Modelexperiment.sensorTypeID = [];
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
                             var modelData = JSON.parse(res);
@@ -267,7 +270,7 @@ var Modelexperiment = {
             if (type == "update") {
                 entityJson.ID = id;
             }
-            // console.log(entityJson)；
+
             param["entity"] = getUTF8(entityJson);
             AjaxRequest(param, "model", type).then(function (res) {
                 var res = JSON.parse(res)
@@ -331,6 +334,7 @@ var Modelexperiment = {
                         "PlarmID": item2.ID,
                         "Value": item2.Value
                     }
+                    Modelexperiment.sensorTypeID.push(item2.Type);
                     Modelexperiment.array.push(temp1);
                     var temp = '<div class="layui-form-item">' +
                         '<label class="layui-form-label deverID" dever_ID = "' + item2.ID + '">' + item2.Name + '</label>' +
@@ -480,16 +484,13 @@ var Modelexperiment = {
             Modelexperiment.landListData = res;
             if (opera_type == 'inster') {
                 landSelect = '<option value="">' + "请选择种植地块" + '</option>';
-            } else {
-                $.each(landData.data, function (index, item) {
-                    if (item.LandID == id) {
-                        landSelect = '<option value="' + item.LandID + '">' + item.LandName + '</option>';
-                    }
-                })
             }
             $.each(landData.data, function (index, data) {
-                landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
-                    '</option>'
+                if (data.LandID == id) {
+                    landSelect = landSelect + '<option selected value="' + data.LandID + '">' + data.LandName + '</option>'
+                } else {
+                    landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName + '</option>'
+                }
             })
             $("#plandModelLand").html(landSelect);
             form.render('select');
@@ -513,19 +514,21 @@ var Modelexperiment = {
         var param = cloneObjectFn(paramList);
         param['landId'] = landId;
         AjaxRequest(param, "iot", "getIotDeviceInfo").then(function (res) {
+            // console.log("<<<<<<<<<<<<<<<getIotDeviceInfo>>>>>>>>>>>>>>>>")
+            // console.log(res);
             Modelexperiment.sensorData = JSON.parse(res);
             $("#sensor option").remove();
             Modelexperiment.sensorListOption();
         })
     },
     sensorListOption: function () {
+        for(var i = 0; i < Modelexperiment.sensorTypeID.length; i++){
+            $("#" + Modelexperiment.sensorTypeID[i]).append('<option value="">' + "请选择传感设备" + '</option>');
+        }
         $.each(Modelexperiment.sensorData.data, function (index, item) {
             var count = $("#" + item.DeviceTypeID).length;
             if (count != 0) {
                 var id = $("#" + item.DeviceTypeID).attr("value");
-                if ($("#" + item.DeviceTypeID).html() == "") {
-                    $("#" + item.DeviceTypeID).append('<option value="">' + "请选择传感设备" + '</option>');
-                }
                 if (id == item.DeviceID) {
                     $("#" + item.DeviceTypeID).append('<option selected value="' + item.DeviceID + '">' + item.DeviceName + '</option>');
                 } else {

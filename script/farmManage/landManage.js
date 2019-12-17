@@ -12,9 +12,8 @@ $(function () {
             date_2 = value;
         }
     });
-    var raiseCropSelect = '<option value="">全部</option>';
-    var landPersonSelect = '<option value="">全部</option>';
-    sellstatisticsFn.plandSelectList(raiseCropSelect);
+    var landPersonSelect = '<option value="">所有</option>';
+    sellstatisticsFn.plandSelectList();
     sellstatisticsFn.persionSelectList(landPersonSelect);
 
     //查询
@@ -208,7 +207,7 @@ var sellstatisticsFn = {
         })
     },
     //种植作物
-    plandSelectList: function (raiseCropSelect) {
+    plandSelectList: function () {
         var param = cloneObjectFn(paramList);
         param['pageSize'] = listCount;
         param['pageIndex'] = 1;

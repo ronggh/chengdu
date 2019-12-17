@@ -18,11 +18,10 @@ $(function () {
             $(this).addClass("active");
             LoadAction($(this).attr("pagename"), 0);
         })
-
-        getMassageIsread() //获取消息提醒
         magAlerm = setInterval(function () {
-            clearInterval(magAlerm);
             getMassageIsread();
+        }, 60*1000);
+        magAlermA = setInterval(function () {
             alermInfo();
         }, 60*1000);
         //  获取用户左侧可用菜单栏
@@ -31,7 +30,7 @@ $(function () {
             // console.log(res)
             levelsobj = [];
             $("#za_slide ul").html();
-            var menuRes = JSON.parse(res);
+            menuRes = JSON.parse(res);
             if (menuRes.result.code == 200) {
                 menuobj = menuRes.data;
                 menuobj.forEach(function (item, index) {
@@ -77,6 +76,8 @@ $(function () {
                 $("#za_slide ul").append(menuStr);
                 subSomething();
             }
+            alermInfo();
+            getMassageIsread() //获取消息提醒
         });
         setTimeout(function () {
             $(".sideMenu .nLi i").click(function () {
@@ -101,10 +102,9 @@ $(function () {
                 }
             })
         }, 500)
-        alermInfo();
     });
 })
-
+var menuRes = "";
 //  鼠标经过头像的一系列事件
 $(".za_tc_menu").mouseover(function (eve) {
     $(".user_avatarList").css("display", "block");
@@ -149,7 +149,6 @@ $('.editAvatar').click(function () {
                 $(".checkAvatar").append(originImg);
                 var uploadInst = upload.render({
                     elem: '#uploadAva',
-                    // url: 'http://open.chengdu.nyypt.cn/v1/user/resetImg',
                     url: baseUrl+'/v1/iot/Method',
                     auto: false, //选择文件后不自动上传
                     size: 50,
@@ -255,18 +254,22 @@ function getMassageIsread() {
     param["pageIndex"] = 1;
     param["msgType"] = 1;
     AjaxRequest(param, "message", "getMsgListPage").then(function (res) {
-        var massageNum = JSON.parse(res);
-        var numberMsg = 0;
-        $.each(massageNum.data, function (index, item) {
-            if (item.IsRead == 0) {
-                numberMsg = numberMsg + 1;
+        $.each(menuRes.data,function(index,item){
+            if (item.FuncName == "收件箱") {
+                var massageNum = JSON.parse(res);
+                var numberMsg = 0;
+                $.each(massageNum.data, function (index, item) {
+                    if (item.IsRead == 0) {
+                        numberMsg = numberMsg + 1;
+                    }
+                })
+                if (numberMsg > 0) {
+                    $(".massageAleam i").addClass('bag');
+                } else {
+                    $(".massageAleam i").removeClass('bag');
+                }
             }
         })
-        if (numberMsg > 0) {
-            $(".massageAleam i").addClass('bag');
-        } else {
-            $(".massageAleam i").removeClass('bag');
-        }
     })
 }
 // 用户详细信息
@@ -292,38 +295,44 @@ function alermInfo(){
     var param = cloneObjectFn(paramList);
     var postdata = GetPostData(param, "iot", "getIotOverView");
     postFnajax(postdata).then(function (res) {
-        var alermCount = "";
-        var alermData = JSON.parse(res);
-        $.each(alermData.data,function(i,it){
-            $.each(alermData.data[i].Devices,function(i,item){
-                if (item.DeviceCategory == "SENSOR") {
-                    $.each(item.Slots,function(index1,item1){
-                        if (item1.Alarm != null) {
-                            var EnableHigh = item1.Alarm.EnableHigh;
-                            var HighValue = item1.Alarm.HighValue;
-                            var EnableLow = item1.Alarm.EnableLow;
-                            var LowValue = item1.Alarm.LowValue;
-                            if (EnableHigh == true && HighValue != null && EnableLow == false && LowValue ==null) {
-                                (item1.Data > HighValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
-                            } else if (EnableHigh == false && HighValue == null && EnableLow == true && LowValue != null) {
-                                (item1.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
-                            } else if (EnableHigh == true && HighValue != null && EnableLow == true && LowValue != null) {
-                                if (HighValue < LowValue) {
-                                    (HighValue < item1.Data && item1.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
+        // console.log(res);
+        // console.log(menuRes);
+        $.each(menuRes.data,function(index,item){
+            if (item.FuncName == "传感设备") {
+                var alermCount = "";
+                var alermData = JSON.parse(res);
+                $.each(alermData.data,function(i,it){
+                    $.each(alermData.data[i].Devices,function(i,item){
+                        if (item.DeviceCategory == "SENSOR") {
+                            $.each(item.Slots,function(index1,item1){
+                                if (item1.Alarm != null) {
+                                    var EnableHigh = item1.Alarm.EnableHigh;
+                                    var HighValue = item1.Alarm.HighValue;
+                                    var EnableLow = item1.Alarm.EnableLow;
+                                    var LowValue = item1.Alarm.LowValue;
+                                    if (EnableHigh == true && HighValue != null && EnableLow == false && LowValue ==null) {
+                                        (item1.Data > HighValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
+                                    } else if (EnableHigh == false && HighValue == null && EnableLow == true && LowValue != null) {
+                                        (item1.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
+                                    } else if (EnableHigh == true && HighValue != null && EnableLow == true && LowValue != null) {
+                                        if (HighValue < LowValue) {
+                                            (HighValue < item1.Data && item1.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
+                                        }
+                                        if (HighValue == LowValue) {
+                                            (HighValue == item1.Data) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
+                                        }
+                                        if (HighValue > LowValue) {
+                                            (HighValue < item1.Data || item1.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
+                                        }
+                                    }
                                 }
-                                if (HighValue == LowValue) {
-                                    (HighValue == item1.Data) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
-                                }
-                                if (HighValue > LowValue) {
-                                    (HighValue < item1.Data || item1.Data < LowValue) == true ? alermCount += it.LandName + ":" + item.DeviceName + "报警;" : "";
-                                }
-                            }
+                            })
                         }
-                    })
-                }
-            })   
+                    })   
+                })
+                $(".moveAlarem").html(alermCount);
+            }
         })
-        $(".moveAlarem").html(alermCount);
     })
 }
 

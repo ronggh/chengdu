@@ -161,7 +161,10 @@ $(function () {
     });
     //自动刷新
     sensoreq = setInterval(function () {
-        clearInterval(sensoreq);
+        if($('input[name="sensorTimer"]').length == 0){
+            clearInterval(sensoreq);
+            return;
+        }
         GetArea($("#area").val());
     }, 180*1000);
 })
@@ -354,9 +357,12 @@ function GetArea(landId) { //, status, loading
     postFnajax(postdata).then(function (res) {
         var SENSOR = 0;
         $("#qita ul").html("");
-        // console.log("><<<<<<<<<<<<<")
+        // console.log("<<<<<<<<<<<<<传感器数据>>>>>>>>>>>>");
         // console.log(res)
         var result = JSON.parse(res);
+        result.data.sort(function (value1,value2) {
+            return value1.DeviceName.localeCompare(value2.DeviceName,'zh-CN') ;
+        });
         landDeverData = result;
         $("#qita").css("display", "none");
         $("#qixiang").css("display", "none");

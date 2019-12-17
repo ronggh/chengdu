@@ -25,8 +25,6 @@ $(function () {
         var obj = this;
         setTimeout(function () {
             $(obj).find("img").removeClass("refresh");
-            //alert("刷新数据1");
-            // console.log($("#area").val())
             GetArea($("#area").val())
         }, 500);
     });

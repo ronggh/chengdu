@@ -310,7 +310,7 @@ var organManageFn = {
                             organManageFn.getList();
                             layer.closeAll()
                         } else {
-                            layer.msg('编辑失败')
+                            layer.msg('编辑失败'+res.result.msg)
                         }
                     }
                 });

@@ -1,4 +1,4 @@
-$(function () {
+﻿$(function () {
     form.render();
     messageManageFn.getList();
     messageManageFn.searchForm(); //开启搜索
@@ -186,7 +186,7 @@ var messageManageFn = {
                 yes: function (index, layero) {
                     var param = cloneObjectFn(paramList);
                     param["msgId"] = tableObj.MsgID;
-                    AjaxRequest(param, "message", "delete").then(function (res) {
+                    AjaxRequest(param, "message", "deleteMapping").then(function (res) {
                         var resule = JSON.parse(res);
                         if (resule.result.code == 200) {
                             layer.msg('删除成功');

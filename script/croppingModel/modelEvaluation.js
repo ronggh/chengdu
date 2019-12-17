@@ -67,7 +67,6 @@ var ModelEval = {
         param["type"] = 2;
         AjaxRequest(param, "model", "getListPage").then(function (res) {
             //  console.log("<<<<<<<<模型评价>>>>>>>>");
-            // console.log(param);
             // console.log(res);
             var modelData = JSON.parse(res);
             laypage.render({
@@ -105,12 +104,11 @@ var ModelEval = {
                 type: 1,
                 content: html,
                 title: ["评价", 'font-size:14px;height:40px;line-height:40px;'],
-                area: ['670px', '460px'],
+                area: ['670px', '500px'],
                 success: function (index, layero) {
                     var param = cloneObjectFn(paramList);
                     param['id'] = id;
                     AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
-                        // console.log(res);
                         var evaluationData = JSON.parse(res);
                         ModelEval.startTime = evaluationData.data.StartTime.split("T")[0];
                         $.each(evaluationData.data.CropStages, function (index, item) {
@@ -375,8 +373,6 @@ function moechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
             param["slot"] = "1";
             var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
             postFnajax(postdata).then(function (res) {
-                // console.log("<<<<<<<< 实时数据 >>>>>>>>")
-                // console.log(param);
                 // console.log(res);
                 var result = JSON.parse(res);
                 if(result.data.HistoryData.length < 1){
@@ -434,13 +430,6 @@ function moechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
     );
 }
 function moechartfn(qname, legendData, danwei, time, series, obj,oneLine,twoLine) {
-    // console.log(qname);
-    // console.log(legendData);
-    // console.log(danwei);
-    // console.log(time);
-    // console.log(series);
-    // console.log(obj);
-    // console.log(layui-layer-shade)
     var myChart = obj.init(document.getElementById('echartcontain'));
     var option = {
         animation: true,

@@ -5,7 +5,10 @@ var deviceName = "";
 $(function () {
     GetUserAreaList(); //获取地块
     weaterSta = setInterval(function () {
-        clearInterval(weaterSta);
+        if($('input[name="weaterSTimer"]').length == 0){
+            clearInterval(weaterSta);
+            return;
+        }
         GetArea($("#area").val());
     }, 180*1000);
     /*气象站 刷新数据*/

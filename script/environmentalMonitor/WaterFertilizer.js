@@ -15,7 +15,10 @@ $(function () {
     });
     GetUserAreaList(); //获取地块
     waterfer = setInterval(function () {
-        clearInterval(waterfer);
+        if($('input[name="waterFTimer"]').length == 0){
+            clearInterval(waterfer);
+            return;
+        }
         GetArea($("#area").val());
     }, 180*1000);
     $(document).on("click", ".primary .level_one .operate .alerm", function () {
@@ -710,10 +713,8 @@ function setUpSubmit(){
         }
         var type= (data.field.MachineID == ""?"insert":"update");
         param['entity'] = getUTF8(entityjson);
-        AjaxRequest(param, "machineSettings", type).then(function (res) {
-            // console.log(param);
-            // console.log(entityjson);
-            // console.log(res);
+        var postdata = GetPostData(param, "machineSettings", type);
+        afterFnajax(postdata).then(function (res) {
             var result = JSON.parse(res);
             var msg = "";
             if (result.result.code == 200) {

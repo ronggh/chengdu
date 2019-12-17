@@ -283,9 +283,6 @@ var manageFn = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitAddUser)', function (data) {
-            console.log(data.field.UserName.trim());
-            console.log(data.field.UserName.trim().length)
-            console.log(data.field.UserName.length)
             if (!userName.test(data.field.UserName.trim())) {
                 layer.msg("请输入2-20位英文、数字组合的用户名", {
                     time: 1500
@@ -329,7 +326,7 @@ var manageFn = {
                 AjaxRequest(param, "user", "update").then(function (res) {
                     var res = JSON.parse(res)
                     if (res.Result == false) {
-                        layer.msg("编辑失败", {
+                        layer.msg("编辑失败：" + res.result.msg, {
                             time: 2000
                         });
                     }

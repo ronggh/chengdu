@@ -119,7 +119,9 @@ var sensorFn = {
                                 })
                                 var sensorTypeSelect = '<option value = ' + SensorTypeData.SensorTypeID + '>' + SensorTypeData.SensorTypeID + "-" + SensorTypeData.SensorTypeName + "-" + SensorTypeData.PortName + '</option>'
                                 $.each(resSensorList.data, function (index, item) {
-                                    sensorTypeSelect = sensorTypeSelect + '<option value = "' + item.SensorTypeID + '">' + item.SensorTypeID + "-" + item.SensorTypeName + "-" + item.PortName + '</option>'
+                                    if (SensorTypeData.SensorTypeID != item.SensorTypeID) {
+                                        sensorTypeSelect = sensorTypeSelect + '<option value = "' + item.SensorTypeID + '">' + item.SensorTypeID + "-" + item.SensorTypeName + "-" + item.PortName + '</option>'
+                                    }
                                 })
                                 $("#SensorType").html(sensorTypeSelect);
                                 form.render('select');

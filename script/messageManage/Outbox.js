@@ -194,6 +194,8 @@ var messageManageFn = {
             };
             var param = cloneObjectFn(paramList);
             param["entity"] = getUTF8(entityJson);
+            // console.log(data);
+            // console.log(entityJson);
             AjaxRequest(param, "message", "insert").then(function (res) {
                 // console.log(res)
                 var resule = JSON.parse(res);
@@ -266,6 +268,7 @@ var messageManageFn = {
                         time: 2000
                     });
                 } else {
+                    messageManageFn.userIDname = [];
                     layer.close(UserselectOpen);
                     var name = [];
                     $.each(tree.getChecked('demoId1'), function (index, item) {
@@ -321,8 +324,9 @@ var messageManageFn = {
                     var param = cloneObjectFn(paramList);
                     param["msgId"] = tableObj.ID;
                     AjaxRequest(param, "message", "delete").then(function (res) {
+                        // console.log(res)
                         var resule = JSON.parse(res);
-                        if (resule.result.msg == "ok") {
+                        if (resule.result.code == "200") {
                             layer.msg('删除成功');
                             layer.close(index);
                             if (trLength == 1) {

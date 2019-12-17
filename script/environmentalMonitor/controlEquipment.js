@@ -4,7 +4,10 @@ var title = "";
 $(function () {
     GetUserAreaList(); //获取地块
     conequi = setInterval(function () {
-        clearInterval(conequi);
+        if($('input[name="controlTimer"]').length == 0){
+            clearInterval(conequi);
+            return;
+        }
         GetArea($("#area").val());
     }, 180*1000);
     $(".Refresh").click(function () {
@@ -82,6 +85,9 @@ function GetArea(landId) { //, status, loading
         // console.log(res);
         $("#tabNav2").html("");
         var result = JSON.parse(res);
+        result.data.sort(function (value1,value2) {
+            return value1.DeviceName.localeCompare(value2.DeviceName,'zh-CN') ;
+        });
         if (result.data != null) {
             $.each(result.data, function (i) {
                 if (result.data[i].Tags.length > 0 && result.data[i].Tags[0].Tag == "水肥机") {

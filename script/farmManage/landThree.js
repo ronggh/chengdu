@@ -622,8 +622,6 @@ var threeInfoFn = {
             } else {
                 //判断解析状态
                 if (status == google.maps.GeocoderStatus.OK) {
-                    // console.log("<<<<<<<<<results[0].geometry.location>>>>>>>>>>")
-                    // console.log(results[0].geometry.location);
                     threeInfoFn.map.setCenter(results[0].geometry.location);
                     threeInfoFn.map.setZoom(zoom);
                 } else {
