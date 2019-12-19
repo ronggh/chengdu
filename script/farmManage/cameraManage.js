@@ -10,12 +10,17 @@ var cameraFunction = {
     tableRender: function (res) { //表格数据渲染
         table.render({
             elem: '#cameraTable',
+
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
+                        width:70,
                         title: '序号',
-                        align: 'center'
+                        align: 'center',
+                        templet:function (data) {
+                            return (cameraFunction.pageCurr - 1) * cameraFunction.pageLimit + data.LAY_INDEX;
+                        }
                     }, {
                         field: 'CameraName',
                         title: '摄像头名称',
