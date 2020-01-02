@@ -493,8 +493,13 @@ var threeInfoFn = {
             }
             var param = cloneObjectFn(paramList);
             param["entity"] = getUTF8(entityJson);
+            param["id"] = threeInfoFn.landTwoid;
             var postdata = GetPostData(param, "land", "SetLandDeviceCamera");
             postFnajax(postdata).then(function (res) {
+                // console.log("<<<<<<<<<<<SetLandDeviceCamera>>>>>>>>>>>");
+                // console.log(entityJson);
+                // console.log(param);
+                // console.log(res);
                 var DeviceCameraRes = JSON.parse(res);
                 if (DeviceCameraRes.result.code == 200) {
                     layer.msg("绑定成功", {

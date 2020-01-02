@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7b2f927-90d0-4f6f-87d2-c616c0cdad8e" name="Default" comment="" />
+    <list default="true" id="e7b2f927-90d0-4f6f-87d2-c616c0cdad8e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/page/automaticMonitor/automaticMonitor.html" afterPath="$PROJECT_DIR$/page/automaticMonitor/automaticMonitor.html" />
+      <change beforePath="$PROJECT_DIR$/page/environmentalMonitor/SensorEquipment.html" afterPath="$PROJECT_DIR$/page/environmentalMonitor/SensorEquipment.html" />
+      <change beforePath="$PROJECT_DIR$/page/farmManage/cameraManage.html" afterPath="$PROJECT_DIR$/page/farmManage/cameraManage.html" />
+      <change beforePath="$PROJECT_DIR$/script/common/common.js" afterPath="$PROJECT_DIR$/script/common/common.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/cameraManage.js" afterPath="$PROJECT_DIR$/script/farmManage/cameraManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/landThree.js" afterPath="$PROJECT_DIR$/script/farmManage/landThree.js" />
+      <change beforePath="$PROJECT_DIR$/script/login/login.js" afterPath="$PROJECT_DIR$/script/login/login.js" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -38,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/script/farmManage/cameraManage.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="567">
-              <caret line="87" column="26" lean-forward="false" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="26" />
+              <caret line="82" column="26" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -114,6 +124,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -148,7 +159,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -156,6 +166,7 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -203,6 +214,8 @@
       <workItem from="1576729623005" duration="3085000" />
       <workItem from="1576732861924" duration="79000" />
       <workItem from="1576733410096" duration="142000" />
+      <workItem from="1577150908632" duration="105000" />
+      <workItem from="1577951239091" duration="29000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1575687718019</created>
@@ -264,7 +277,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18048000" />
+    <option name="totallyTimeSpent" value="18182000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -273,12 +286,12 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -671,7 +684,7 @@
     <entry file="file://$PROJECT_DIR$/script/farmManage/cameraManage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
-          <caret line="87" column="26" lean-forward="false" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="26" />
+          <caret line="82" column="26" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="26" />
           <folding />
         </state>
       </provider>

@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------- 成都项目 全局变量 start ---------------------------------------- */
-var rowCount = 3; //每页表格的条数
+var rowCount = 6; //每页表格的条数
 var listCount = 100; // 硬编码，获取部分列表的条数 
 
 var urlaction = "/index.html";
@@ -257,15 +257,36 @@ function postFnajax(postbody) {
     });
 };
 
-// 前置等待ajax
-function afterFnajax(postbody) {
+// 前置等待echesajax
+function echesFnajax(postbody) {
+    var myMsg;
     return new Promise(function (resolve, reject) {
         $.ajax({
-            beforeSend: function () {layer.msg('发送中...', { icon: 16, shade: 0.01, time: 20 * 1000 }); },
             url: baseUrl + "/v1/iot/Method",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(postbody),
+            beforeSend: function () { myMsg = layer.msg('数据请求中...', { icon: 16, shade: 0.1, time:false,}); },
+            success: function (res) {
+                resolve(res);
+                layer.close(myMsg);
+            },
+            error: function (err) {
+                reject(err);
+            }
+        });
+    });
+};
+
+// 前置等待ajax
+function afterFnajax(postbody) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: baseUrl + "/v1/iot/Method",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(postbody),
+            beforeSend: function () {layer.msg('发送中...', { icon: 16, shade: 0.01, time: 20 * 1000 }); },
             success: function (res) {
                 resolve(res);
             },
@@ -496,7 +517,8 @@ function echartinitfn(deviceId, slotId, timeDate) {
             }
             param["slot"] = slotId;
             var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
-            postFnajax(postdata).then(function (res) {
+            // postFnajax(postdata).then(function (res) {
+            echesFnajax(postdata).then(function (res) {
                 // console.log("<<<<<<<< 环境监控实时数据 >>>>>>>>");
                 // console.log(res);
                 var result = JSON.parse(res);
@@ -664,7 +686,6 @@ function GetQueryString(name) {
     } else {
         return "";
     }
-
 }
 // 加载子页面
 function LoadAction(url, urlParameter, paramid) {
@@ -807,4 +828,18 @@ function GetHtml(url, urlParameter) {
     }
     return str;
 }
+
+//所有的input/textarea获取焦点事件
+$(document).on('focus','input',function(){
+    $(this).addClass("borderAlerm");
+})
+$(document).on('blur','input',function(){
+    $(this).removeClass("borderAlerm");
+})
+$(document).on('focus','textarea',function(){
+    $(this).addClass("borderAlerm");
+})
+$(document).on('blur','textarea',function(){
+    $(this).removeClass("borderAlerm");
+})
 /*---------------------------------------- 成都项目end ---------------------------------------- */

@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="../../css/environmentalMonitor/SensorEquipment.css">
 <script src="../../libs/echarts-2.2.7/build/dist/echarts.js"></script>
 <div class="OutermostLayer">
-
     <div class="za_farmheader">
         <div class="za_farmselect">
             <form class="layui-form layui-form-pane" action="">
@@ -68,70 +67,65 @@
 <script type="text/html" id="alerm_popup">
     <div class="layui-tab" style="width:474px; margin-left: auto; margin-right: auto; margin-top:30px;">
         <ul class="layui-tab-title">
-            <li class="layui-this selected"><img src="../../images/automation/higher.png"/><br/>高于某个值时<br/><img
-                    src="../../images/automation/rec.png" style="display: none;" / class="rec">
-            </li>
-            <li><img src="../../images/automation/lower.png"/><br/>低于某个值时<br/><img
-                    src="../../images/automation/rec.png" / class="rec">
-            </li>
-            <li><img src="../../images/automation/between.png"/><br/>在两值之间时<br/><img
-                    src="../../images/automation/rec.png" / class="rec">
-            </li>
-            <li><img src="../../images/automation/equal.png"/><br/>等于某个值时<br/><img
-                    src="../../images/automation/rec.png" / class="rec">
-            </li>
-            <li><img src="../../images/automation/besides.png"/><br/>在两值之外时<br/><img
-                    src="../../images/automation/rec.png" / class="rec">
-            </li>
+            <li class="layui-this selected"><img src="../../images/automation/higher.png" /><br />高于某个值时<br /><img
+                    src="../../images/automation/rec.png" style="display: none;" / class="rec"></li>
+            <li><img src="../../images/automation/lower.png" /><br />低于某个值时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
+            <li><img src="../../images/automation/between.png" /><br />在两值之间时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
+            <li><img src="../../images/automation/equal.png" /><br />等于某个值时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
+            <li><img src="../../images/automation/besides.png" /><br />在两值之外时<br /><img
+                    src="../../images/automation/rec.png" / class="rec"></li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <img src="../../images/automation/higher-p.png"/>
-                <br/>
+                <img src="../../images/automation/higher-p.png" />
+                <br />
                 <div style="margin-left: 33px;">
-                    <input value="" class="layui-input"/>
+                    <input value="" class="layui-input" />
                     <p>阈值</p>
                 </div>
             </div>
             <div class="layui-tab-item">
-                <img src="../../images/automation/lower-p.png"/>
-                <br/>
+                <img src="../../images/automation/lower-p.png" />
+                <br />
                 <div style="margin-left:34px;">
-                    <input value="" class="layui-input"/>
+                    <input value="" class="layui-input" />
                     <p>阈值</p>
                 </div>
             </div>
             <div class="layui-tab-item">
-                <img src="../../images/automation/between-p.png"/>
-                <br/>
+                <img src="../../images/automation/between-p.png" />
+                <br />
                 <div class="">
-                    <input value="" class="layui-input"/>
+                    <input value="" class="layui-input" />
                     <p>低阈值</p>
                 </div>
                 <div class="">
-                    <input value="" class="layui-input"/>
+                    <input value="" class="layui-input" />
                     <p>高阈值</p>
                 </div>
             </div>
 
             <div class="layui-tab-item">
-                <img src="../../images/automation/equal-p.png"/>
-                <br/>
+                <img src="../../images/automation/equal-p.png" />
+                <br />
                 <div class="">
-                    <input value="" class="layui-input"/>
+                    <input value="" class="layui-input" />
                     <p>触发值</p>
                 </div>
             </div>
 
             <div class="layui-tab-item">
-                <img src="../../images/automation/besides-p.png"/>
-                <br/>
+                <img src="../../images/automation/besides-p.png" />
+                <br />
                 <div class="">
-                    <input value="" class="layui-input"/>
+                    <input value="" class="layui-input" />
                     <p>低阈值</p>
                 </div>
                 <div class="">
-                    <input value="" class="layui-input"/>
+                    <input value="" class="layui-input" />
                     <p>高阈值</p>
                 </div>
             </div>
@@ -156,7 +150,7 @@
             <img src="../../images/date.png" alt="" srcset="">
             <input type="text" id="dateTime" placeholder="自定义时间" autocomplete="off">
         </div>
-
+        
         <span class="btnexcel">导出为Excel</span>
     </div>
     <div id='echartcontain'></div>
