@@ -4,6 +4,8 @@ var tabletemp = "";
 var tableDeviceID = "";
 var tabletitle = "";
 var wfDeviceID = "";
+var WatableIndex = 0;
+var WasensorIndex = 0;
 $(function () {
     $(".Refresh").click(function () {
         $(this).find("img").addClass("refresh");
@@ -111,7 +113,6 @@ function GetUserAreaList() {
     param["pageIndex"] = 1;
     var postdata = GetPostData(param, "land", "getLandListPage");
     postFnajax(postdata).then(function (res) {
-        // console.log("00000");
         // console.log(res);
         var landSelect = "";
         var landData = JSON.parse(res);
@@ -351,7 +352,7 @@ function SwitchCss(){
         param["action"] = Action;
         var postdata = GetPostData(param, "iot", "sensorControl");
         afterFnajax(postdata).then(function (res) {
-            // console.log(param);
+
             // console.log(res);
             var resData = JSON.parse(res);
             if (resData.result.code == 200) { //操作成功
@@ -410,7 +411,7 @@ function tableCont(DeviceID, timeDate, temp, title) {
     param["deviceId"] = DeviceID;
     param["slot"] = 1;
     var postdata = GetPostData(param, "iot", "getControlHistory"); //实时数据中的历史记录
-    postFnajax(postdata).then(function (res) {
+    echesFnajax(postdata).then(function (res) {
         var Result = JSON.parse(res);
         if (typeof (Result.result.Msg) != "undefined") {
             location.reload();
@@ -531,16 +532,20 @@ function GetHistory(deviceId, name, slotId, deviceTypeId) {
 }
 // 操作记录
 $(document).on("click", "#switch ul li", function () {
-
     $("#dateTime2").val("");
-    $("#switch tbody").html("");
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
     timeDate = $(this).attr("time");
     if ($(this).index() != 3) {
         $("#dateswitch").hide();
+        if(WatableIndex == $(this).index()){
+            return false;
+        }
+        $("#switch tbody").html("");
+        WatableIndex = $(this).index();
         tableCont(tableDeviceID, timeDate, tabletemp, tabletitle);
     }else{
+        WatableIndex = 3;
         $("#dateswitch").show();
     }
 })
@@ -553,8 +558,13 @@ $(document).on("click", ".chartbtn ul li", function () {
     timeDate = $(this).attr("time");
     if ($(this).index() != 3) {
         $("#dateTimeDiv").hide();
+        if(WasensorIndex == $(this).index()){
+            return false;
+        }
+        WasensorIndex = $(this).index();
         echartinitfn(Device, ExcelSlotId, timeDate);
     }else{
+        WasensorIndex = 3;
         $("#dateTimeDiv").show();
     }
 })

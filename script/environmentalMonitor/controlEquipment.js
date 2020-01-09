@@ -1,6 +1,7 @@
 var temp = "";
 var DeviceID = "";
 var title = "";
+var tableIndex = 0;
 $(function () {
     GetUserAreaList(); //获取地块
     conequi = setInterval(function () {
@@ -22,14 +23,19 @@ $(function () {
 
 $("#switch .switchTime ul li").click(function () {
     $("#dateTime2").val("");
-    $("#switch tbody").html("");
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
     timeDate = $(this).attr("time");
     if ($(this).index() != 3) {
         $("#dateswitch").hide();
+        if(tableIndex == $(this).index()){
+            return false;
+        }
+        $("#switch tbody").html("");
+        tableIndex = $(this).index();
         tableCont(DeviceID, timeDate, temp, title);
     }else{
+        tableIndex = 3;
         $("#dateswitch").show();
     }
 })
@@ -279,7 +285,7 @@ function tableCont(DeviceID, time, temp, title) {
         param["day"] = time;
     }
     var postdata = GetPostData(param, "iot", "getControlHistory"); //实时数据中的历史记录
-    postFnajax(postdata).then(function (res) {
+    echesFnajax(postdata).then(function (res) {
         // console.log(res);
         // console.log(postdata);
         var Result = JSON.parse(res);

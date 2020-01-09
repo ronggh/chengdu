@@ -1,4 +1,4 @@
-$(function () {
+﻿$(function () {
     TerminalFn.getTerminalList(); //获取列表数据
     TerminalFn.searchForm(); //开启搜索终端
     TerminalFn.ResetOutbox();
@@ -14,30 +14,34 @@ var TerminalFn = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
-                        width: '4%',
-                        align: 'center'
-                    }, {
+                        width: '8%',
+                        align: 'center',
+                        templet:function (data) {
+                            return (TerminalFn.pageCurr - 1) * TerminalFn.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                     {
                         field: 'TerminalNum',
                         title: '终端号',
-                        width: '24%',
+                        width: '23%',
                         align: 'center'
                     }, {
                         field: 'TerminalName',
                         title: '终端名称',
-                        width: '24%',
+                        width: '23%',
                         align: 'center'
                     }, {
                         field: 'CreateTime',
                         title: '创建日期',
-                        width: '24%',
+                        width: '23%',
                         align: 'center',
                     }, {
                         title: '操作',
                         toolbar: '#table_Terminal',
                         align: 'center',
-                        width: '24%',
+                        width: '23%',
                         templet: function (d) { }
                     }
                 ]

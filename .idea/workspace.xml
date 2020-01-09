@@ -2,15 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7b2f927-90d0-4f6f-87d2-c616c0cdad8e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/css/environmentalMonitor/resetEnviron.css" afterPath="$PROJECT_DIR$/css/environmentalMonitor/resetEnviron.css" />
+      <change beforePath="$PROJECT_DIR$/css/login/login.css" afterPath="$PROJECT_DIR$/css/login/login.css" />
+      <change beforePath="$PROJECT_DIR$/css/reset.css" afterPath="$PROJECT_DIR$/css/reset.css" />
+      <change beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change beforePath="$PROJECT_DIR$/login.html" afterPath="$PROJECT_DIR$/login.html" />
       <change beforePath="$PROJECT_DIR$/page/automaticMonitor/automaticMonitor.html" afterPath="$PROJECT_DIR$/page/automaticMonitor/automaticMonitor.html" />
-      <change beforePath="$PROJECT_DIR$/page/environmentalMonitor/SensorEquipment.html" afterPath="$PROJECT_DIR$/page/environmentalMonitor/SensorEquipment.html" />
-      <change beforePath="$PROJECT_DIR$/page/farmManage/cameraManage.html" afterPath="$PROJECT_DIR$/page/farmManage/cameraManage.html" />
+      <change beforePath="$PROJECT_DIR$/page/croppingModel/modelEvaluation.html" afterPath="$PROJECT_DIR$/page/croppingModel/modelEvaluation.html" />
+      <change beforePath="$PROJECT_DIR$/page/environmentalMonitor/Mapoverview.html" afterPath="$PROJECT_DIR$/page/environmentalMonitor/Mapoverview.html" />
+      <change beforePath="$PROJECT_DIR$/page/farmManage/landManage.html" afterPath="$PROJECT_DIR$/page/farmManage/landManage.html" />
+      <change beforePath="$PROJECT_DIR$/page/farmManage/landOne.html" afterPath="$PROJECT_DIR$/page/farmManage/landOne.html" />
       <change beforePath="$PROJECT_DIR$/script/common/common.js" afterPath="$PROJECT_DIR$/script/common/common.js" />
+      <change beforePath="$PROJECT_DIR$/script/croppingModel/RecommendMoxing.js" afterPath="$PROJECT_DIR$/script/croppingModel/RecommendMoxing.js" />
+      <change beforePath="$PROJECT_DIR$/script/croppingModel/modelEvaluation.js" afterPath="$PROJECT_DIR$/script/croppingModel/modelEvaluation.js" />
+      <change beforePath="$PROJECT_DIR$/script/croppingModel/modelExperiment.js" afterPath="$PROJECT_DIR$/script/croppingModel/modelExperiment.js" />
+      <change beforePath="$PROJECT_DIR$/script/croppingModel/standProduction.js" afterPath="$PROJECT_DIR$/script/croppingModel/standProduction.js" />
+      <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/Mapoverview.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/Mapoverview.js" />
+      <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js" />
+      <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/WaterFertilizer.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/WaterFertilizer.js" />
+      <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/controlEquipment.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/controlEquipment.js" />
+      <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/weatherStation.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/weatherStation.js" />
       <change beforePath="$PROJECT_DIR$/script/farmManage/cameraManage.js" afterPath="$PROJECT_DIR$/script/farmManage/cameraManage.js" />
-      <change beforePath="$PROJECT_DIR$/script/farmManage/landThree.js" afterPath="$PROJECT_DIR$/script/farmManage/landThree.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/categoryManage.js" afterPath="$PROJECT_DIR$/script/farmManage/categoryManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/deviceMange.js" afterPath="$PROJECT_DIR$/script/farmManage/deviceMange.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/equipmentManage.js" afterPath="$PROJECT_DIR$/script/farmManage/equipmentManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/landManage.js" afterPath="$PROJECT_DIR$/script/farmManage/landManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/landOne.js" afterPath="$PROJECT_DIR$/script/farmManage/landOne.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/sensorManage.js" afterPath="$PROJECT_DIR$/script/farmManage/sensorManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/farmManage/varieties.js" afterPath="$PROJECT_DIR$/script/farmManage/varieties.js" />
       <change beforePath="$PROJECT_DIR$/script/login/login.js" afterPath="$PROJECT_DIR$/script/login/login.js" />
+      <change beforePath="$PROJECT_DIR$/script/systemManage/organManage.js" afterPath="$PROJECT_DIR$/script/systemManage/organManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/systemManage/roleManage.js" afterPath="$PROJECT_DIR$/script/systemManage/roleManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/systemManage/userManage.js" afterPath="$PROJECT_DIR$/script/systemManage/userManage.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/script/farmManage/cameraManage.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="567">
-              <caret line="82" column="26" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="26" />
+              <caret line="85" column="26" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -125,6 +149,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -158,7 +183,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -215,7 +239,9 @@
       <workItem from="1576732861924" duration="79000" />
       <workItem from="1576733410096" duration="142000" />
       <workItem from="1577150908632" duration="105000" />
-      <workItem from="1577951239091" duration="29000" />
+      <workItem from="1577951239091" duration="180000" />
+      <workItem from="1578538358519" duration="30000" />
+      <workItem from="1578562057408" duration="30000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1575687718019</created>
@@ -273,16 +299,24 @@
       <option name="project" value="LOCAL" />
       <updated>1576733527340</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修正common.js，解决因历史数据请求时间较长，切换标签带来的数据不同步及窗口关闭问题。">
+      <created>1577951394561</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1577951394561</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18182000" />
+    <option name="totallyTimeSpent" value="18393000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497349" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497349" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -311,7 +345,9 @@
     <MESSAGE value="init" />
     <MESSAGE value="init2" />
     <MESSAGE value="layui分页序号连续处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="layui分页序号连续处理" />
+    <MESSAGE value="修正common.js，解决因历史数据请求时间较长，切换标签带来的数据不同步及窗口关闭问题。" />
+    <MESSAGE value="20200109commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200109commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -684,7 +720,7 @@
     <entry file="file://$PROJECT_DIR$/script/farmManage/cameraManage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
-          <caret line="82" column="26" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="26" />
+          <caret line="85" column="26" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="26" />
           <folding />
         </state>
       </provider>

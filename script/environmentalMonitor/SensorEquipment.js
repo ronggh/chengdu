@@ -3,6 +3,7 @@ var deviceId = "";
 var landDeverData = "";
 var timeHistoryData = "";
 var deviceName = "";
+var sensorIndex = 0;
 $(function () {
     GetUserAreaList(); //获取地块
     $(document).on("click", ".primary .level_one .operate .alerm", function () {
@@ -258,9 +259,7 @@ function alermSure() {
                 var param = cloneObjectFn(paramList);
                 param["entity"] = getUTF8(entityJson);
                 var postdata = GetPostData(param, "alarm", "update");
-                // console.log(entityJson);
                 postFnajax(postdata).then(function (res) {
-                    // console.log("<<<<<<bianji<<<<<<<<");
                     // console.log(res);
                     var alermRes = JSON.parse(res);
                     if (alermRes.result.code == 200) {
@@ -281,9 +280,7 @@ function alermSure() {
                 var param = cloneObjectFn(paramList);
                 param["entity"] = getUTF8(entityJson);
                 var postdata = GetPostData(param, "alarm", "insert");
-                // console.log(entityJson);
                 postFnajax(postdata).then(function (res) {
-                    // console.log("<<<<<<xinzeng<<<<<<<<");
                     // console.log(res);
                     var alermRes = JSON.parse(res);
                     if (alermRes.result.code == 200) {
@@ -333,8 +330,6 @@ function GetUserAreaList() {
     param["pageIndex"] = 1;
     var postdata = GetPostData(param, "land", "getLandListPage");
     postFnajax(postdata).then(function (res) {
-        // console.log(111111);
-        // console.log(res);
         var landSelect = "";
         var landData = JSON.parse(res);
         $.each(landData.data, function (index, data) {
@@ -569,8 +564,13 @@ $(document).on("click", ".chartbtn ul li", function () {
     timeDate = $(this).attr("time");
     if ($(this).index() != 3) {
         $("#dateTimeDiv").hide();
+        if(sensorIndex == $(this).index()){
+            return false;
+        }
+        sensorIndex = $(this).index()
         echartinitfn(deviceId, ExcelSlotId, timeDate);
     }else{
+        sensorIndex = 3;
         $("#dateTimeDiv").show();
     }
 })
@@ -599,7 +599,6 @@ $(".btnexcel").on("click", function () {
     $.each(timeHistoryData,function(index,item){
         timeHistoryData[index].Time = TimeReplice(timeHistoryData[index].Time);
     })
-    // console.log();
     for (let i = 0; i < timeHistoryData.length; i++) {
         for (let item in timeHistoryData[i]) {
             str += `${timeHistoryData[i][item] + '\t'},`;

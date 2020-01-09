@@ -22,10 +22,14 @@ var manageFn = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
-                        align: 'center'
-                    }, {
+                        align: 'center',
+                        templet:function (data) {
+                            return (manageFn.pageCurr - 1) * manageFn.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'UserName',
                         title: '用户名',
                         align: 'center'
@@ -217,6 +221,7 @@ var manageFn = {
                     };
                     //上级机构点击后的回调
                     function onClickOrg(e, treeId, treeNode) {
+                        $(".PopupLayer .popup_Org").removeClass("borderAlerm");
                         $('.popup_Org .value_ft').html(treeNode.name).addClass('active');
                         $('input[name="OrgId"]').val(treeNode.id);
                         $('#OrgBox').addClass('hidden');
@@ -239,6 +244,7 @@ var manageFn = {
                         })
                     }
                     $('.popup_Org .value_ft').on('click', function () {
+                        $(".PopupLayer .popup_Org").addClass("borderAlerm");
                         showMenuOrg();
                     })
 
@@ -248,6 +254,7 @@ var manageFn = {
                     }
 
                     function hideMenuOrg() {
+                        $(".PopupLayer .popup_Org").removeClass("borderAlerm");
                         $('#OrgBox').addClass('hidden');
                         $("body").unbind("mousedown", onBodyDownOrg);
                     }

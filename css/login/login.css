@@ -184,6 +184,18 @@ input[type="number"] {
   color: red;
   background: #fff url("../../images/login/denglu_04.png") no-repeat center right 10px;
 }
+.formLeft .logoForm .erroPa {
+  border: 1px solid red;
+  color: red;
+  background: #fff url("../../images/login/denglu_04.png") no-repeat center right 80px;
+}
+.borderAlerm {
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(45,140,240,.2);
+}
+.borderAlerm:focus{
+	border-color: #57a3f3!important;
+}
 
 .formLeft .logoForm span {
   position: absolute;

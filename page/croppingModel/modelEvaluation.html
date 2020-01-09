@@ -22,7 +22,7 @@
         <div>
             <span class="btn_primary" onclick="ModelEval.Evaluation('{{d.ID}}','look')">查看</span>
             {{# if(d.Status == "1"){ }}
-            <span class="btn_primary" onclick="ModelEval.Evaluation('{{d.ID}}')">评价</span>
+            <span class="btn_primary" onclick="ModelEval.Evaluation('{{d.ID}}','evaluate')">评价</span>
             {{#} }}
             {{# if(d.Proportion != null && d.Status == "1"){ }}
             <span class="btn_primary" onclick="ModelEval.updateStatus('{{d.ID}}')">生成模型</span>
@@ -33,16 +33,23 @@
     <script type="text/html" id="add_modelEvaluation">
         <div class="layui-form model_Evaluation">
             <div class="layui-form-item">
-                <label class="layui-form-label">总投入</label>
+                <label style="text-align:end;width:60px" class="layui-form-label">总投入</label>
                 <div class="layui-input-block">
-                    <input type="number" name="in" placeholder="请输入总投入金额(万元)" autocomplete="off" class="layui-input">
+                    <input style="width:130px" type="number" name="in" placeholder="两位小数" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">总产出</label>
+                <label style="text-align:end;width:60px" class="layui-form-label">总产出</label>
                 <div class="layui-input-block">
-                    <input name="out" type="number" class="layui-input landTimeIcon" id="plantStart"
-                        placeholder="请总产出金额(万元)">
+                    <input style="width:130px" name="out" type="number" class="layui-input landTimeIcon" id="plantStart"
+                        placeholder="两位小数">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label style="text-align:end;width:60px" class="layui-form-label">总产量</label>
+                <div class="layui-input-block">
+                    <input style="width:130px" name="Yield" type="number" class="layui-input landTimeIcon" id="Yield"
+                        placeholder="两位小数">
                 </div>
             </div>
             <div class="growthStage">

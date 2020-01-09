@@ -23,10 +23,15 @@ var ModelEval = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
                         align: 'center',
-                    }, {
+                        width: '8%',
+                        templet:function (data) {
+                            return (ModelEval.pageCurr - 1) * ModelEval.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'Name',
                         title: '模型名称',
                         align: 'center'
@@ -42,7 +47,11 @@ var ModelEval = {
                         field: 'Proportion',
                         title: '投入产出比',
                         align: 'right'
-                    }, {
+                    },{
+                        field:'Yield',
+                        title: '总产量(Kg)',
+                        align: 'center'
+                    },{
                         title: '操作',
                         toolbar: '#table_operate',
                         align: 'center',
@@ -66,8 +75,6 @@ var ModelEval = {
         param["pageIndex"] = ModelEval.pageCurr;
         param["type"] = 2;
         AjaxRequest(param, "model", "getListPage").then(function (res) {
-            //  console.log("<<<<<<<<模型评价>>>>>>>>");
-            // console.log(res);
             var modelData = JSON.parse(res);
             laypage.render({
                 elem: 'um_pagenation',
@@ -213,12 +220,26 @@ var ModelEval = {
                         if (type == "look") {
                             $('input[name="in"]').val(evaluationData.data.In);
                             $('input[name="out"]').val(evaluationData.data.Out);
+                            $('input[name="Yield"]').val(evaluationData.data.Yield);
                             $("input").each(function () {
                                 $(this).attr("disabled", "disabled");
                             })
                             var Disable = 'layui-btn-disabled';
                             $(".site-action").addClass(Disable);
                             $('.site-action').attr('disabled', 'disabled');
+                            $('input[name="modelchName"]').removeAttr("disabled");
+                        }else if(type == "evaluate"){
+                            $('input[name="in"]').val(evaluationData.data.In);
+                            $('input[name="out"]').val(evaluationData.data.Out);
+                            $('input[name="Yield"]').val(evaluationData.data.Yield);
+                            $("input").each(function () {
+                                $(this).attr("disabled", "disabled");
+                            });
+                            $(".site-action").removeClass(Disable);
+                            $('.site-action').removeAttr('disabled', 'disabled');
+                            $('input[name="in"]').removeAttr("disabled");
+                            $('input[name="out"]').removeAttr("disabled");
+                            $('input[name="Yield"]').removeAttr("disabled");
                             $('input[name="modelchName"]').removeAttr("disabled");
                         } else {
                             $("input").each(function () {
@@ -228,6 +249,7 @@ var ModelEval = {
                             $('.site-action').removeAttr('disabled', 'disabled');
                             $('input[name="in"]').removeAttr("disabled");
                             $('input[name="out"]').removeAttr("disabled");
+                            $('input[name="Yield"]').removeAttr("disabled");
                             $('input[name="modelchName"]').removeAttr("disabled");
                         }
                         ModelEval.submitSure(id);
@@ -246,13 +268,19 @@ var ModelEval = {
     submitSure: function (id) {
         form.on("submit(submitmodel)", function (data) {
             if (!inOut_res.test(data.field.in)) {
-                layer.msg('投入金额有误', {
+                layer.msg('投入金额数值有误或小数位超过两位', {
                     time: 1500
                 });
                 return false;
             }
-            if (!inOut_res.test(data.field.out)) {
-                layer.msg('产出金额有误', {
+            if (!inOut_res.test(data.field.out) || parseFloat(data.field.out) == 0) {
+                layer.msg('产出金额数值有误或小数位超过两位', {
+                    time: 1500
+                });
+                return false;
+            }
+            if (!inOut_res.test(data.field.Yield)) {
+                layer.msg('总产量数值有误或小数位超过两位', {
                     time: 1500
                 });
                 return false;
@@ -260,6 +288,7 @@ var ModelEval = {
             var param = cloneObjectFn(paramList);
             param["in"] = data.field.in;
             param["out"] = data.field.out;
+            param["yield"] = data.field.Yield;
             param["id"] = id;
             AjaxRequest(param, "model", "setProportion").then(function (res) {
                 var res = JSON.parse(res)
@@ -373,7 +402,6 @@ function moechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
             param["slot"] = "1";
             var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
             postFnajax(postdata).then(function (res) {
-                // console.log(res);
                 var result = JSON.parse(res);
                 if(result.data.HistoryData.length < 1){
                     layer.msg('暂无数据', {

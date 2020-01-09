@@ -12,20 +12,24 @@ var standProduct = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
                         align: 'center',
-                        width:"4%",
-                    }, {
+                        width:"8%",
+                        templet:function (data) {
+                            return (standProduct.pageCurr - 1) * standProduct.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'ModelName',
                         title: '名称',
                         align: 'center',
-                        width:"45%",
+                        width:"43%",
                     }, {
                         field: 'StartTime',
                         title: '创建时间',
                         align: 'center',
-                        width:"45%",
+                        width:"43%",
                         templet: function (d) {
                             return "2019-03-20 13:45:20"
                         }

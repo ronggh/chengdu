@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/iconfont.css">
     <link rel="stylesheet" href="./libs/layui/css/layui.css">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/index/index.css?v=1.45">
+    <link rel="stylesheet" href="./css/index/index.css">
 </head>
 <body>
     <div id="za_mian" class="clearfix">
@@ -72,7 +72,6 @@
     <!-- header 鼠标经过的弹窗 -->
     <div id="tip"></div>
 </body>
-<!-- --------------------------------  弹窗   ----------------------------------------- -->
 <!--修改用户密码弹窗-->
 <script type="text/html" id="editUserPass">
     <div class="layui-form PopupLayer edit_pass_popup">
@@ -115,6 +114,8 @@
     </div>
 </script>
 <script src="./libs/jquery.min.js"></script>
+<script src="./libs/laber.js"></script>
+<script src = "https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script src="./libs/jQuery.md5.js"></script>
 <script src="./libs/layui/layui.js"></script>
 <script src="./libs/layui/layui-config.js"></script>
@@ -125,7 +126,7 @@
     async defer>
 </script>
 <script>
-    document.write('<script src="./script/common/common.js?v=' + Date.parse(new Date()) + '"><\/script>');
-    document.write('<script src="./script/index/index.js?v=' + Date.parse(new Date()) + '"><\/script>');
+    document.write('<script src="./script/common/common.js?v=' + new Date().getTime() + '"><\/script>');
+    document.write('<script src="./script/index/index.js?v=' + new Date().getTime() + '"><\/script>');
 </script>
 </html>

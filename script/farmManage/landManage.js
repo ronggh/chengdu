@@ -48,10 +48,14 @@ var sellstatisticsFn = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
-                        align: 'center'
-                    }, {
+                        align: 'center',
+                        templet:function (data) {
+                            return (sellstatisticsFn.pageCurr - 1) * sellstatisticsFn.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'LandName',
                         title: '地块名称',
                         align: 'center'
@@ -259,6 +263,7 @@ var sellstatisticsFn = {
             });
             //上级机构点击后的回调
             function onClickOrg(e, treeId, treeNode) {
+                $("#popup_Org").removeClass("borderAlerm");
                 $('#popup_Org .value_ft').html(treeNode.name).addClass('active');
                 $('input[name="raiseCrops_instal"]').val(treeNode.id);
                 $('#plandBox').addClass('hidden');
@@ -269,11 +274,13 @@ var sellstatisticsFn = {
 
             function showMenuOrg() {
                 $('#plandBox').removeClass('hidden');
+                $("#popup_Org").addClass("borderAlerm");
                 $("body").bind("mousedown", onBodyDownOrg);
             }
 
             function hideMenuOrg() {
                 $('#plandBox').addClass('hidden');
+                $("#popup_Org").removeClass("borderAlerm");
                 $("body").unbind("mousedown", onBodyDownOrg);
             }
 

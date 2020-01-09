@@ -17,20 +17,24 @@ var categoryFn = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
                         align: 'center',
-                        width:"4%",
-                    }, {
+                        width:"8%",
+                        templet:function (data) {
+                            return (categoryFn.pageCurr - 1) * categoryFn.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'CategoryName',
                         title: '类别',
                         align: 'center',
-                        width:"38%",
+                        width:"36%",
                     }, {
                         field: 'IsValid',
                         title: '状态',
                         align: 'center',
-                        width:"38%",
+                        width:"36%",
                         templet: function (d) {
                             if (d.IsValid == 1) {
                                 return '启用'

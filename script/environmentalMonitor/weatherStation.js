@@ -2,6 +2,7 @@ var Device = "";
 var ExcelSlotId = "";
 var timeHistoryData = "";
 var deviceName = "";
+var westIndex = 0;
 $(function () {
     GetUserAreaList(); //获取地块
     weaterSta = setInterval(function () {
@@ -174,9 +175,7 @@ function GetHistory(deviceId, name, slotId, deviceTypeId) {
     var timeDate = -1
     echartinitfn(deviceId, slotId, timeDate);
 }
-// $(document).on("click", ".chartbtn ul li", function () {
-
-// });
+// $(document).on("click", ".chartbtn ul li", function () {westIndex
 $(".chartbtn ul li").click(function () {
     $("#dateTime").val("");
     $(this).siblings().removeClass("active");
@@ -184,8 +183,13 @@ $(".chartbtn ul li").click(function () {
     timeDate = $(this).attr("time");
     if ($(this).index() != 3) {
         $("#dateTimeDiv").hide();
+        if(westIndex == $(this).index()){
+            return false;
+        }
+        westIndex = $(this).index();
         echartinitfn(Device, ExcelSlotId, timeDate);
     }else{
+        westIndex = 3;
         $("#dateTimeDiv").show();
     }
 })

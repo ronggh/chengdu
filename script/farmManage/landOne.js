@@ -156,6 +156,7 @@ var landOne = {
             });
             //上级机构点击后的回调
             function onClickOrg(e, treeId, treeNode) {
+                $("#popup_Org").removeClass("borderAlerm");
                 $('#popup_Org .value_ft').html(treeNode.name).addClass('active');
                 $('input[name="raiseCrops_instal"]').val(treeNode.id);
                 $('#plandBox').addClass('hidden');
@@ -165,12 +166,14 @@ var landOne = {
             })
 
             function showMenuOrg() {
+                $("#popup_Org").addClass("borderAlerm");
                 $('#plandBox').removeClass('hidden');
                 $("body").bind("mousedown", onBodyDownOrg);
             }
 
             function hideMenuOrg() {
                 $('#plandBox').addClass('hidden');
+                $("#popup_Org").removeClass("borderAlerm");
                 $("body").unbind("mousedown", onBodyDownOrg);
             }
 

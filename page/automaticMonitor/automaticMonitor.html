@@ -119,10 +119,14 @@
                 cols: [
                     [ //标题栏
                         {
-                            type: 'numbers',
-                            title: '序号',
-                            align: 'center'
-                        }, {
+                        field:'',
+                        title: '序号',
+                        align: 'center',
+                        templet:function (data) {
+                            return (autoMation.pageIndex - 1) * autoMation.pageSize + data.LAY_INDEX;
+                        }
+                    },
+                        {
                             field: 'Name',
                             title: '自动化名称',
                             align: 'center'

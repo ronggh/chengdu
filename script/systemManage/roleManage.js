@@ -23,10 +23,14 @@ var rolesmanageFn = {
             cols: [
                 [ //标题栏
                     {
-                        type: "numbers",
+                        field:'',
                         title: '序号',
-                        align: 'center'
-                    }, {
+                        align: 'center',
+                        templet:function (data) {
+                            return (rolesmanageFn.pageCurr - 1) * rolesmanageFn.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'RoleName',
                         title: '角色名称',
                         align: 'center'
@@ -222,6 +226,7 @@ var rolesmanageFn = {
             });
             //上级机构点击后的回调
             function onClickOrg(e, treeId, treeNode) {
+                $(".PopupLayer .popup_Org").removeClass("borderAlerm");
                 $('.popup_Org .value_ft').html(treeNode.name).addClass('active');
                 $('input[name="FID"]').val(treeNode.id);
                 $('#OrgBox').addClass('hidden');
@@ -294,6 +299,7 @@ var rolesmanageFn = {
                 }
             }
             $('.popup_Org .value_ft').on('click', function () {
+                $(".PopupLayer .popup_Org").addClass("borderAlerm");
                 showMenuOrg();
             })
 
@@ -304,6 +310,7 @@ var rolesmanageFn = {
 
             function hideMenuOrg() {
                 $('#OrgBox').addClass('hidden');
+                $(".PopupLayer .popup_Org").removeClass("borderAlerm");
                 $("body").unbind("mousedown", onBodyDownOrg);
             }
 

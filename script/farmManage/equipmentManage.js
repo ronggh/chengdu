@@ -59,10 +59,14 @@ var equipmentFn = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
-                        align: 'center'
-                    }, {
+                        align: 'center',
+                        templet:function (data) {
+                            return (equipmentFn.pageCurr - 1) * equipmentFn.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'DeviceName',
                         title: '设备名称',
                         align: 'center'

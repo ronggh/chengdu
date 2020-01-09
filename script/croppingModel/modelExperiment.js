@@ -52,10 +52,14 @@ var Modelexperiment = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
-                        align: 'center'
-                    }, {
+                        align: 'center',
+                        templet:function (data) {
+                            return (Modelexperiment.pageCurr - 1) * Modelexperiment.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'Name',
                         title: '名称',
                         align: 'center'

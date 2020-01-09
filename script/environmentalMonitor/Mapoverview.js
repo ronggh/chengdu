@@ -36,7 +36,6 @@ function GetUserAreaList() {
         form.render('select');
         GetAreamap($("#area").val()); //进入页面获取地块ID，获取设备渲染页面
         form.on('select(quiz)', function (data) { //切换地块获取设备渲染页面
-            // console.log(data);
             GetAreamap(data.value);
         })
     });
@@ -47,9 +46,6 @@ function GetAreamap(landId) { //, status, loading
     var param = cloneObjectFn(paramList);
     var postdata = GetPostData(param, "iot", "getIotOverView");
     postFnajax(postdata).then(function (res) {
-        // console.log("11111111");
-        // console.log(res);
-        // console.log(postdata);
         var result = JSON.parse(res);
         $.each(result.data, function (index, item) {
             if (item.LandID == landId) {
@@ -81,8 +77,6 @@ function GetAreamap(landId) { //, status, loading
                 var cameraout = []; //摄像头离线
 
                 var PointsArr = []; //地块图形坐标
-                // console.log("item>>>>>>>>>>>>>>>>>");
-                // console.log(item);
                 // 传感设备：在线，离线，总数,先清一下数据
                 $("#sensorin").html(sensorDeverzai.length);
                 $("#sensorout").html(sensorDeverli.length);
@@ -202,7 +196,6 @@ function initMap(landRes) {
 function drawdbx(polygonobj) {
     var myTrip = [];
     $.each(polygonobj, function (index, item) {
-        // console.log(item.Latitude, item.Longitude)
         myTrip.push(new google.maps.LatLng(item.Latitude, item.Longitude))
     })
     var mapPoints = new google.maps.Polygon({
@@ -251,3 +244,221 @@ function markerDever(deverData) {
         markerDe.setMap(map);
     })
 }
+
+$(document).ready(function () {
+    /*各种设备tab点击切换列表*/
+    $(".equip_tit li").on('click', function () {
+        var index = $(this).index();
+        var name = $(this).closest('li').attr("class");
+        $(".equip_tit li").eq(index).addClass("on").siblings().removeClass("on");
+        $(".equip_con").find("." + name + "_con").addClass("show").siblings("li").removeClass("show");
+    });
+})
+
+/*传感模块初始化*/
+function sensorinit(data) {
+    var index = 0;
+    $(".equipment .equip_con li.sensor_con  .changeTab .fl img:first").attr("src", "../images/governmenthomedeteal/rootvideo_bplus.png");
+    $(".equipment .equip_con li.sensor_con .commonbox").html("");
+    if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+            var ulobj = $("<ul class='common' titlename=" + data[i].DeviceName + "></ul>");
+            for (var j = 0; j < data[i].Slots.length; j++) {
+                index++;
+                if (isNaN(data[i].Slots[j].Data)) {
+                    var linum = data[i].Slots[j].Data;
+                } else {
+                    var linum = numTofixed(data[i].Slots[j].Data, 2);
+                }
+                var liobj = $("<li class='clearfix'><span class='fl'><img src=" + "../images/sensor_white/" + data[i].Slots[j].SensorTypeID + ".png" + " alt=''>" + data[i].DeviceName + "</span><span class='fr'><i>" + dataEmpty(data[i].Slots[j].Data) + "</i>" + data[i].Slots[j].Unit + "</span></li>")
+                ulobj.append(liobj);
+            }
+            $(".equipment .equip_con li.sensor_con .commonbox").append(ulobj);
+        }
+    } else {
+        //暂无传感设备
+        $(".equipment .equip_con li.sensor_con .commonbox").empty().append("<div class='nodata'><img src='../images/governmenthomedeteal/nosensor.png' alt='暂无传感设备'><p>暂无传感设备</p></div>");
+    }
+    if (data.length > 1) {
+        $(".equipment .equip_con li.sensor_con .changeTab .fr img:first").attr("src", "../images/governmenthomedeteal/rootvideo_a.png");
+        zdyscroll($(".equipment .equip_con li.sensor_con .commonbox"));
+    } else {
+        $(".equipment .equip_con li.sensor_con .changeTab .fr img:first").attr("src", "../images/governmenthomedeteal/rootvideo_aplus.png");
+    }
+}
+
+/*控制设备初始化*/
+function controlinit(data) {
+    var index = 0;
+    $(".equipment .equip_con li.control_con .changeTab .fl img:first").attr("src", "../images/governmenthomedeteal/rootvideo_bplus.png");
+    $(".equipment .equip_con li.control_con .commonbox").html("");
+    if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+            var ulobj = $("<ul class='common' titlename=" + data[i].DeviceName + "></ul>")
+            for (var j = 0; j < data[i].Slots.length; j++) {
+                index++;
+                var status;
+                // 1，开，2或0关，3停
+                if (data[i].Slots[j].Data == 2 || data[i].Slots[j].Data == 0) {
+                    status = "关"
+                    var classname = "close";
+                } else if ((data[i].Slots[j].Data) == 1) {
+                    status = "开"
+                    var classname = "open";
+                } else if ((data[i].Slots[j].Data) == 3) {
+                    status = "停"
+                    var classname = "stop";
+                } else {
+                    status = "离线"
+                    var classname = "unline";
+                }
+                var liobj = $("<li class='clearfix'><span class='fl'>" + data[i].DeviceName + "</span><span class='" + 'fr ' + classname + "'>" + status + "</span></li>")
+                ulobj.append(liobj);
+            }
+            $(".equipment .equip_con li.control_con .commonbox").append(ulobj);
+        }
+        $(".equipment .equip_con li.control_con .commonbox .commoncon ul.common:first").addClass("commonactive");
+    } else {
+        //暂无控制设备
+        $(".equipment .equip_con li.control_con .commonbox").empty().append("<div class='nodata'><img src='../images/governmenthomedeteal/nocontrols.png' alt='暂无控制设备'><p>暂无控制设备</p></div>");
+    }
+    if (data.length > 1) {
+        $(".equipment .equip_con li.control_con .changeTab .fr img:first").attr("src", "../images/governmenthomedeteal/rootvideo_a.png");
+        zdyscroll($(".equipment .equip_con li.control_con .commonbox"));
+    } else {
+        $(".equipment .equip_con li.control_con .changeTab .fr img:first").attr("src", "../images/governmenthomedeteal/rootvideo_aplus.png");
+    }
+}
+
+weather = [];
+/*综合设备初始化*/
+function combineinit(data) {
+    // console.log(data);
+    $(".equipment .equip_con li.combine_con .weather").remove();
+    if (data.length > 0) {
+        $(".equipment .equip_con li.combine_con").empty();
+        for (var i = 0; i < data.length; i++) {
+            // II型气象站 1002
+            if (data[i].DeviceTypeID == 1002) {
+                weather.push(data[i]);
+                if (data[i].IsOnline) {
+                    $(".equipment .equip_con li.combine_con").append("<div class=\"weather\"><div class=\"clearfix\"><span class=\"fl\">气象站</span><span class='fr run'><img src='../images/governmenthomedeteal/run_point.png' alt=''>运行中</span></div><div class=\"view_detail\" onclick=\"viewWeather('" + data[i].DeviceID + "')\">查看详情</div></div>");
+                } else {
+                    $(".equipment .equip_con li.combine_con").append("<div class=\"weather\"><div class=\"clearfix\"><span class=\"fl\">气象站</span><span class='fr unrun'><img src='../images/governmenthomedeteal/unrun_point.png' alt=''>暂未运行</span></div><div class=\"view_detail\" onclick=\"viewWeather('" + data[i].DeviceID + "')\">查看详情</div></div>");
+                }
+                $("#za_weather").css("display", "block");
+            }
+        }
+    }else{
+        $(".equipment .equip_con li.combine_con").empty().append("<div class='nodata'><img src='../images/governmenthomedeteal/nozonghe.png' alt='暂无综合设备'><p>暂无综合设备</p></div>");
+        $("#za_weather").css("display", "block");
+    }
+}
+
+/*摄像头模块初始化*/
+function videoinit(videodata) {
+    var index = 0;
+    $(".equipment .equip_con li.camera_con .changeTab .fl img:first").attr("src", "../images/governmenthomedeteal/rootvideo_bplus.png");
+    $(".equipment .equip_con li.camera_con .commonbox").html("");
+    if (videodata.length > 0) {
+        var videohtml = '';
+        for (var i = 0; i < videodata.length; i++) {
+            var ulobj = $("<ul class='common' titlename=" + videodata[i].CameraName + "></ul>");
+            index++;
+            var status = "在线";
+            var classname = "open";
+            if(videodata[i].IsOnline == 0){
+                status = "离线";
+                classname = "unline";
+            }
+            var liobj = $("<li class='clearfix'><span class='fl'>" + videodata[i].CameraName + "</span><span class='" + 'fr ' + classname + "'>" + status + "</span></li>")
+            ulobj.append(liobj);
+            $(".equipment .equip_con li.camera_con .commonbox").append(ulobj);
+        }
+        $(".equipment .equip_con li.camera_con .commonbox .commoncon ul.common:first").addClass("commonactive");
+        $(".equip_tit li").eq(0).addClass("on").siblings().removeClass("on");
+        $(".equip_con .camera_con").addClass("show").siblings("li").removeClass("show");
+    } else {
+        //暂无视频
+        $(".equipment .equip_con li.camera_con .commonbox").empty().append("<div class='nodata'><img src='../images/governmenthomedeteal/nocarame.png' alt='暂无摄像头'><p>暂无摄像头</p></div>");
+    }
+    if (videodata.length > 1) {
+        $(".equipment .equip_con li.camera_con .changeTab .fr img:first").attr("src", "../images/governmenthomedeteal/rootvideo_a.png");
+        zdyscroll($(".equipment .equip_con li.camera_con .commonbox"));
+    }else {
+        $(".equipment .equip_con li.camera_con .changeTab .fr img:first").attr("src", "../images/governmenthomedeteal/rootvideo_aplus.png")
+    }
+}
+
+//获取 n位小数
+function numTofixed(num,n,per){
+	if(num!=0){
+		if(arguments.length==3 && per){
+			num=num*100;
+			return parseInt(num*Math.pow(10,n)+0.5,10)/Math.pow(10,n)+"%"; 
+		}else{
+			return parseInt(num*Math.pow(10,n)+0.5,10)/Math.pow(10,n); 
+		}
+	}else{
+		if(arguments.length==3 && per){
+			return "0%"; 
+		}else{
+			return 0; 
+		}
+	}
+}
+
+function NullEmpty(str) {
+    if (str == null)
+        return "0";
+    return str;
+}
+
+/*查看气象站*/
+function viewWeather(id) {
+    $.each(weather, function (p, item) {
+        if (item.DeviceID == id) {
+            $.each(item.Slots, function (index, item2) {
+                var value = NullEmpty(item2.Data);
+                var unit = item2.Unit;
+                value = value + unit;
+                if (item2.SlotID == 2) //风向特别处理
+                    value = windDirectioin(item2.Data);
+                $("#SlotID" + item2.SlotID).find("p").eq(1).text(value);
+            })
+            return false;
+        }
+    });
+    layer.open({
+        title: ['气象站', 'font-size:14px;color:#000;'],
+        type: 1,
+        skin: 'layui-layer-demo', //样式类名
+        closeBtn: 1,//显示关闭按钮
+        area: ['850px', '500px'], //宽高
+        content: $('#weather_box')
+    });
+}
+
+/*滚动条初始化*/
+function zdyscroll(obj) {
+    if (!obj.data("scrollstate")) {
+        var height = obj.css("height");
+        if (height != undefined) {
+            obj.slimScroll({
+                width: '320px', //容器宽度,默认无
+                height: 'auto', //容器高度,默认250px
+                size: '5px', //滚动条宽度,默认7px
+                position: 'right', //滚动条位置,可选值:left,right,默认right
+                color: '#666', //滚动条颜色,默认#000000
+                alwaysVisible: true, //是否禁用隐藏滚动条,默认false
+                distance: 0, //距离边框距离,位置由position参数决定,默认1px
+                railColor: '#fff', //滚动条背景轨迹颜色,默认#333333
+                railOpacity: 0.3, //滚动条背景轨迹透明度,默认0.2
+                wheelStep: 10, //滚动条滚动值,默认20
+                allowPageScroll: false
+            });
+        }
+        obj.data("scrollstate", true);
+    }
+}
+

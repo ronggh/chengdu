@@ -59,10 +59,14 @@ var sensorFn = {
             cols: [
                 [ //标题栏SensorTypeId
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
-                        align: 'center'
-                    }, {
+                        align: 'center',
+                        templet:function (data) {
+                            return (sensorFn.pageCurr - 1) * sensorFn.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'DevName',
                         title: '传感器名称',
                         align: 'center'
@@ -123,8 +127,9 @@ var sensorFn = {
                                         sensorTypeSelect = sensorTypeSelect + '<option value = "' + item.SensorTypeID + '">' + item.SensorTypeID + "-" + item.SensorTypeName + "-" + item.PortName + '</option>'
                                     }
                                 })
-                                $("#SensorType").html(sensorTypeSelect);
+                                $("#SensorType").html(sensorTypeSelect).attr("disabled","disabled");
                                 form.render('select');
+                                $(".layui-select-disabled input").attr("readonly","readonly");
                             })
                         })
                     }
@@ -137,7 +142,7 @@ var sensorFn = {
                             $.each(resSensorList.data, function (index, item) {
                                 sensorTypeSelect = sensorTypeSelect + '<option value = "' + item.SensorTypeID + '">' + item.SensorTypeID + "-" + item.SensorTypeName + "-" + item.PortName + '</option>'
                             })
-                            $("#SensorType").html(sensorTypeSelect);
+                            $("#SensorType").html(sensorTypeSelect).removeAttr("disabled");;
                             form.render('select');
                         })
                     }

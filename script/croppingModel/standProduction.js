@@ -55,10 +55,15 @@ var standProduct = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
                         align: 'center',
-                    }, {
+                        width:"8%",
+                        templet:function (data) {
+                            return (standProduct.pageCurr - 1) * standProduct.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'LandName',
                         title: '地块',
                         align: 'center'

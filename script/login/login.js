@@ -74,7 +74,7 @@
              layer.msg("请输入有效密码", {
                  time: 1500
              });
-             $('.password').addClass('erro');
+             $('.password').addClass('erroPa');
              return false;
          }
         //  if (verCodeSwitch != 1) {

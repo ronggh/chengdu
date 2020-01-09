@@ -15,20 +15,24 @@ var varieties = {
             cols: [
                 [ //标题栏
                     {
-                        type: 'numbers',
+                        field:'',
                         title: '序号',
                         align: 'center',
-                        width:"4%",
-                    }, {
+                        width:"8%",
+                        templet:function (data) {
+                            return (varieties.pageCurr - 1) * varieties.pageLimit + data.LAY_INDEX;
+                        }
+                    },
+                    {
                         field: 'CropName',
                         title: '品种',
                         align: 'center',
-                        width:"38%",
+                        width:"36%",
                     }, {
                         field: 'Status',
                         title: '状态',
                         align: 'center',
-                        width:"38%",
+                        width:"36%",
                         templet: function (d) {
                             if (d.Status == 1) {
                                 return '启用'
