@@ -418,7 +418,7 @@ function tableCont(DeviceID, timeDate, temp, title) {
         }
         if (Result.result.code = "200") {
             $("#switch tbody").html("");
-            if (Result.data) {
+            // if (Result.data) {
                 $.each(Result.data, function (i) {
                     var temp = "";
                     temp += "<tr>";
@@ -446,6 +446,7 @@ function tableCont(DeviceID, timeDate, temp, title) {
                     btn: ['关闭'],
                     yes: function (index, layero) {
                         layer.close(index);
+                        WatableIndex = 0;
                         $("#switch").hide();
                         $(".layui-layer-shade").remove();
                         //按钮【按钮二】的回调
@@ -453,12 +454,14 @@ function tableCont(DeviceID, timeDate, temp, title) {
                     },
                     btn2: function (index, layero) {
                         $("#switch").hide();
+                        WatableIndex = 0;
                         $(".layui-layer-shade").remove();
                         //按钮【按钮二】的回调
                         //return false 开启该代码可禁止点击该按钮关闭
                     },
                     cancel: function () {
                         $("#switch").hide();
+                        WatableIndex = 0;
                         $(".layui-layer-shade").remove();
                     },
                     success:function(){
@@ -474,11 +477,11 @@ function tableCont(DeviceID, timeDate, temp, title) {
                         $("#switch").css({'z-index':200000})
                     },
                 });
-            }else{
-                layer.msg("暂无操作记录", {
-                    time: 2500
-                });
-            }
+            // }else{
+            //     layer.msg("暂无操作记录", {
+            //         time: 2500
+            //     });
+            // }
             $("#switch").css("display", "block");
         }
     })

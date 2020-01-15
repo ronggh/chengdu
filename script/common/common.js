@@ -537,10 +537,16 @@ function echartinitfn(deviceId, slotId, timeDate) {
                             layer.closeAll();
                             $("#chart").css("display", "none");
                             $(".layui-layer-shade").remove();
+                            sensorIndex = 0;
+                            WasensorIndex = 0;
+                            westIndex = 0
                             //按钮【按钮二】的回调
                             //return false 开启该代码可禁止点击该按钮关闭
                         },
                         cancel: function () {
+                            sensorIndex = 0;
+                            WasensorIndex = 0;
+                            westIndex = 0
                             $("#chart").css("display", "none");
                             $(".layui-layer-shade").remove();
                         },

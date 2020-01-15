@@ -286,7 +286,7 @@ function tableCont(DeviceID, time, temp, title) {
     }
     var postdata = GetPostData(param, "iot", "getControlHistory"); //实时数据中的历史记录
     echesFnajax(postdata).then(function (res) {
-        console.log(res);
+        // console.log(res);
         // console.log(postdata);
         var Result = JSON.parse(res);
         if (typeof (Result.result.Msg) != "undefined") {
@@ -294,7 +294,7 @@ function tableCont(DeviceID, time, temp, title) {
         }
         if (Result.result.code = "200") {
             $("#switch tbody").html("");
-            if (Result.data) {
+            // if (Result.data) {
                 $.each(Result.data, function (i) {
                     var temp = "";
                     temp += "<tr>";
@@ -322,6 +322,7 @@ function tableCont(DeviceID, time, temp, title) {
                     btn: ['关闭'],
                     yes: function (index, layero) {
                         layer.close(index);
+                        tableIndex = 0;
                         $("#switch").hide();
                         $(".layui-layer-shade").remove();
                         //按钮【按钮二】的回调
@@ -329,12 +330,14 @@ function tableCont(DeviceID, time, temp, title) {
                     },
                     btn2: function (index, layero) {
                         $("#switch").hide();
+                        tableIndex = 0;
                         $(".layui-layer-shade").remove();
                         //按钮【按钮二】的回调
                         //return false 开启该代码可禁止点击该按钮关闭
                     },
                     cancel: function () {
                         $("#switch").hide();
+                        tableIndex = 0;
                         $(".layui-layer-shade").remove();
                     },
                     success:function(){
@@ -350,11 +353,11 @@ function tableCont(DeviceID, time, temp, title) {
                         $("#switch").css({'z-index':200000})
                     },
                 });
-            } else {
-                layer.msg("暂无操作记录", {
-                    time: 2500
-                });
-            }
+            // } else {
+            //     layer.msg("暂无操作记录", {
+            //         time: 2500
+            //     });
+            // }
             $("#switch").css("display", "block");
         }
     })

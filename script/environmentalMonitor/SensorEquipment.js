@@ -562,13 +562,12 @@ $(document).on("click", ".chartbtn ul li", function () {
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
     timeDate = $(this).attr("time");
-    // console.log("timeDate = "+timeDate)
     if ($(this).index() != 3) {
         $("#dateTimeDiv").hide();
         if(sensorIndex == $(this).index()){
             return false;
         }
-        sensorIndex = $(this).index()
+        sensorIndex = $(this).index();
         echartinitfn(deviceId, ExcelSlotId, timeDate);
     }else{
         sensorIndex = 3;
