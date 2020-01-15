@@ -120,7 +120,7 @@ function GetArea(landId) { //, status, loading
                             Device += "<span class=\"conitem\">停</span>";
                             Device += "<span class=\"conitem active\">开</span>";
                             Device +=
-                                "<span class=\"switch\" style=\"left:66.8%;background-color:#5cb948\"></span>";
+                                "<span class=\"switch\" style=\"left:67.8%;background-color:#5cb948\"></span>";
                         } else if (result.data[i].Slots[0].Data == 2) { //关
                             Device += "<span class=\"conitem active\">关</span>";
                             Device += "<span class=\"conitem\">停</span>";
@@ -157,7 +157,7 @@ function GetArea(landId) { //, status, loading
                             Device += "<span class=\"conitem\">关</span>";
                             Device += "<span class=\"conitem active\">开</span>";
                             Device +=
-                                "<span class=\"switch\" style=\"left:66.8%;background-color:#5cb948\"></span>";
+                                "<span class=\"switch\" style=\"left:67.8%;background-color:#5cb948\"></span>";
                         } else if (result.data[i].Slots[0].Data == 0) { //关
                             Device += "<span class=\"conitem active\">关</span>";
                             Device += "<span class=\"conitem\">开</span>";
@@ -226,7 +226,7 @@ function GetArea(landId) { //, status, loading
                             }, 300).css("background-color", "#fe4d4d");
                         } else if (switchindex == 1) {
                             temp.siblings("span.switch").animate({
-                                "left": "67%"
+                                "left": "67.8%"
                             }, 300).css("background-color", "#5cb948");
                         }
                     } else if (switchindex == 1) {
@@ -286,7 +286,7 @@ function tableCont(DeviceID, time, temp, title) {
     }
     var postdata = GetPostData(param, "iot", "getControlHistory"); //实时数据中的历史记录
     echesFnajax(postdata).then(function (res) {
-        // console.log(res);
+        console.log(res);
         // console.log(postdata);
         var Result = JSON.parse(res);
         if (typeof (Result.result.Msg) != "undefined") {
@@ -355,7 +355,6 @@ function tableCont(DeviceID, time, temp, title) {
                     time: 2500
                 });
             }
-            // $(".layui-layer-shade").css("display", "none");
             $("#switch").css("display", "block");
         }
     })

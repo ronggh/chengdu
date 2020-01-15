@@ -30,7 +30,7 @@
      float: left;
      width: 140px;
      line-height: 40px;
-     cursor: pointer;
+     /* cursor: pointer; */
  }
 
  .landnext .landnext1 p,
@@ -46,7 +46,7 @@
      float: left;
      width: 110px;
      line-height: 40px;
-     cursor: pointer;
+     /* cursor: pointer; */
  }
 
  .landnext .landnext2 p {

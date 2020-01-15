@@ -193,7 +193,8 @@ var sensorFn = {
             var param = cloneObjectFn(paramList);
             param["entity"] = getUTF8(entity);
             AjaxRequest(param, "sensor", opera_type).then(function (result) {
-                // console.log(result);
+                // console.log(param);
+                // console.log( entity.SUID);
                 var res = JSON.parse(result);
                 if (res.result.code == 200) {
                     layer.closeAll();

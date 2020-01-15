@@ -3,38 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="e7b2f927-90d0-4f6f-87d2-c616c0cdad8e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/css/environmentalMonitor/resetEnviron.css" afterPath="$PROJECT_DIR$/css/environmentalMonitor/resetEnviron.css" />
-      <change beforePath="$PROJECT_DIR$/css/login/login.css" afterPath="$PROJECT_DIR$/css/login/login.css" />
-      <change beforePath="$PROJECT_DIR$/css/reset.css" afterPath="$PROJECT_DIR$/css/reset.css" />
-      <change beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change beforePath="$PROJECT_DIR$/login.html" afterPath="$PROJECT_DIR$/login.html" />
-      <change beforePath="$PROJECT_DIR$/page/automaticMonitor/automaticMonitor.html" afterPath="$PROJECT_DIR$/page/automaticMonitor/automaticMonitor.html" />
-      <change beforePath="$PROJECT_DIR$/page/croppingModel/modelEvaluation.html" afterPath="$PROJECT_DIR$/page/croppingModel/modelEvaluation.html" />
-      <change beforePath="$PROJECT_DIR$/page/environmentalMonitor/Mapoverview.html" afterPath="$PROJECT_DIR$/page/environmentalMonitor/Mapoverview.html" />
-      <change beforePath="$PROJECT_DIR$/page/farmManage/landManage.html" afterPath="$PROJECT_DIR$/page/farmManage/landManage.html" />
+      <change beforePath="$PROJECT_DIR$/css/environmentalMonitor/controlEquipment.css" afterPath="$PROJECT_DIR$/css/environmentalMonitor/controlEquipment.css" />
+      <change beforePath="$PROJECT_DIR$/css/landManage/landManage.css" afterPath="$PROJECT_DIR$/css/landManage/landManage.css" />
       <change beforePath="$PROJECT_DIR$/page/farmManage/landOne.html" afterPath="$PROJECT_DIR$/page/farmManage/landOne.html" />
+      <change beforePath="$PROJECT_DIR$/page/farmManage/landThree.html" afterPath="$PROJECT_DIR$/page/farmManage/landThree.html" />
+      <change beforePath="$PROJECT_DIR$/page/farmManage/landTwo.html" afterPath="$PROJECT_DIR$/page/farmManage/landTwo.html" />
       <change beforePath="$PROJECT_DIR$/script/common/common.js" afterPath="$PROJECT_DIR$/script/common/common.js" />
-      <change beforePath="$PROJECT_DIR$/script/croppingModel/RecommendMoxing.js" afterPath="$PROJECT_DIR$/script/croppingModel/RecommendMoxing.js" />
-      <change beforePath="$PROJECT_DIR$/script/croppingModel/modelEvaluation.js" afterPath="$PROJECT_DIR$/script/croppingModel/modelEvaluation.js" />
       <change beforePath="$PROJECT_DIR$/script/croppingModel/modelExperiment.js" afterPath="$PROJECT_DIR$/script/croppingModel/modelExperiment.js" />
       <change beforePath="$PROJECT_DIR$/script/croppingModel/standProduction.js" afterPath="$PROJECT_DIR$/script/croppingModel/standProduction.js" />
-      <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/Mapoverview.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/Mapoverview.js" />
       <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js" />
       <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/WaterFertilizer.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/WaterFertilizer.js" />
       <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/controlEquipment.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/controlEquipment.js" />
       <change beforePath="$PROJECT_DIR$/script/environmentalMonitor/weatherStation.js" afterPath="$PROJECT_DIR$/script/environmentalMonitor/weatherStation.js" />
-      <change beforePath="$PROJECT_DIR$/script/farmManage/cameraManage.js" afterPath="$PROJECT_DIR$/script/farmManage/cameraManage.js" />
-      <change beforePath="$PROJECT_DIR$/script/farmManage/categoryManage.js" afterPath="$PROJECT_DIR$/script/farmManage/categoryManage.js" />
       <change beforePath="$PROJECT_DIR$/script/farmManage/deviceMange.js" afterPath="$PROJECT_DIR$/script/farmManage/deviceMange.js" />
-      <change beforePath="$PROJECT_DIR$/script/farmManage/equipmentManage.js" afterPath="$PROJECT_DIR$/script/farmManage/equipmentManage.js" />
-      <change beforePath="$PROJECT_DIR$/script/farmManage/landManage.js" afterPath="$PROJECT_DIR$/script/farmManage/landManage.js" />
-      <change beforePath="$PROJECT_DIR$/script/farmManage/landOne.js" afterPath="$PROJECT_DIR$/script/farmManage/landOne.js" />
       <change beforePath="$PROJECT_DIR$/script/farmManage/sensorManage.js" afterPath="$PROJECT_DIR$/script/farmManage/sensorManage.js" />
-      <change beforePath="$PROJECT_DIR$/script/farmManage/varieties.js" afterPath="$PROJECT_DIR$/script/farmManage/varieties.js" />
-      <change beforePath="$PROJECT_DIR$/script/login/login.js" afterPath="$PROJECT_DIR$/script/login/login.js" />
-      <change beforePath="$PROJECT_DIR$/script/systemManage/organManage.js" afterPath="$PROJECT_DIR$/script/systemManage/organManage.js" />
-      <change beforePath="$PROJECT_DIR$/script/systemManage/roleManage.js" afterPath="$PROJECT_DIR$/script/systemManage/roleManage.js" />
-      <change beforePath="$PROJECT_DIR$/script/systemManage/userManage.js" afterPath="$PROJECT_DIR$/script/systemManage/userManage.js" />
+      <change beforePath="$PROJECT_DIR$/script/index/index.js" afterPath="$PROJECT_DIR$/script/index/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,32 +31,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/login.html">
+      <file leaf-file-name="SensorEquipment.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Page/environmentalMonitor/SensorEquipment.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+            <state relative-caret-position="108">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cameraManage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Page/farmManage/cameraManage.html">
+      <file leaf-file-name="SensorEquipment.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cameraManage.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/script/farmManage/cameraManage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
-              <caret line="85" column="26" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="485">
+              <caret line="569" column="9" lean-forward="true" selection-start-line="569" selection-start-column="9" selection-end-line="569" selection-end-column="9" />
+              <folding>
+                <marker date="1579075450085" expanded="true" signature="18645:18656" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,6 +69,10 @@
       <find>g=a+s.limit*(n-1)+1;</find>
       <find>case&quot;numbers&quot;:return g</find>
       <find>ggg</find>
+      <find>beforeSend</find>
+      <find>baseUrl</find>
+      <find>postFnajax</find>
+      <find>echesFnajax</find>
     </findStrings>
     <dirStrings>
       <dir>F:\MyProject\chengdu_new</dir>
@@ -108,15 +87,15 @@
         <option value="$PROJECT_DIR$/css/iconfont.css" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/script/environmentalMonitor/WaterFertilizer.js" />
-        <option value="$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js" />
         <option value="$PROJECT_DIR$/Page/environmentalMonitor/SensorEquipment.html" />
         <option value="$PROJECT_DIR$/script/login/login.js" />
         <option value="$PROJECT_DIR$/Page/automaticMonitor/automaticMonitor.html" />
-        <option value="$PROJECT_DIR$/script/common/common.js" />
         <option value="$PROJECT_DIR$/Page/farmManage/cameraManage.html" />
         <option value="$PROJECT_DIR$/libs/layui/layui.js" />
         <option value="$PROJECT_DIR$/libs/layui/layui.all.js" />
         <option value="$PROJECT_DIR$/script/farmManage/cameraManage.js" />
+        <option value="$PROJECT_DIR$/script/common/common.js" />
+        <option value="$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js" />
       </list>
     </option>
   </component>
@@ -148,8 +127,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,24 +139,19 @@
             <path>
               <item name="chengdu_new" type="b2602c69:ProjectViewProjectNode" />
               <item name="chengdu_new" type="462c0819:PsiDirectoryNode" />
-              <item name="Page" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chengdu_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chengdu_new" type="462c0819:PsiDirectoryNode" />
-              <item name="Page" type="462c0819:PsiDirectoryNode" />
-              <item name="farmManage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chengdu_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chengdu_new" type="462c0819:PsiDirectoryNode" />
               <item name="script" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="chengdu_new" type="b2602c69:ProjectViewProjectNode" />
               <item name="chengdu_new" type="462c0819:PsiDirectoryNode" />
               <item name="script" type="462c0819:PsiDirectoryNode" />
-              <item name="farmManage" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chengdu_new" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chengdu_new" type="462c0819:PsiDirectoryNode" />
+              <item name="script" type="462c0819:PsiDirectoryNode" />
+              <item name="environmentalMonitor" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -241,7 +215,11 @@
       <workItem from="1577150908632" duration="105000" />
       <workItem from="1577951239091" duration="180000" />
       <workItem from="1578538358519" duration="30000" />
-      <workItem from="1578562057408" duration="30000" />
+      <workItem from="1578562057408" duration="104000" />
+      <workItem from="1578898180759" duration="680000" />
+      <workItem from="1578899622612" duration="146000" />
+      <workItem from="1578900204076" duration="306000" />
+      <workItem from="1579074879789" duration="570000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1575687718019</created>
@@ -306,17 +284,23 @@
       <option name="project" value="LOCAL" />
       <updated>1577951394561</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="20200109commit">
+      <created>1578562089263</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1578562089264</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18393000" />
+    <option name="totallyTimeSpent" value="20169000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497349" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497349" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -358,7 +342,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -373,7 +356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -388,7 +370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -403,7 +384,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="6" column="21" lean-forward="true" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -418,7 +398,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -440,7 +419,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -455,7 +433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -470,7 +447,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -485,7 +461,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="15" column="14" lean-forward="false" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -535,7 +510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="15" column="14" lean-forward="false" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -578,7 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -638,20 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4374">
-          <caret line="162" column="33" lean-forward="false" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Page/environmentalMonitor/SensorEquipment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script/login/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
@@ -666,14 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/layui/lay/modules/table.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -685,21 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/common/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Page/farmManage/cameraManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -721,7 +657,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
           <caret line="85" column="26" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Page/farmManage/cameraManage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/common/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="262" column="22" lean-forward="false" selection-start-line="262" selection-start-column="15" selection-end-line="262" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Page/environmentalMonitor/SensorEquipment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/environmentalMonitor/SensorEquipment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="569" column="9" lean-forward="true" selection-start-line="569" selection-start-column="9" selection-end-line="569" selection-end-column="9" />
+          <folding>
+            <marker date="1579075450085" expanded="true" signature="18645:18656" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

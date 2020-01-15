@@ -512,7 +512,7 @@ $(".btnexcel").on("click", function () {
 
 function NullEmpty(str) {
     if (str == null)
-        return "";
+        return "0";
     return str;
 }
 

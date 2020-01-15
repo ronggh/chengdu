@@ -138,6 +138,7 @@ function NullEmpty(str) {
         return "0";
     return str;
 }
+
 var windDirectioin = function (degree) {
     var direction = "";
     if (degree > 22.5 && degree <= 67.5) { //东北风

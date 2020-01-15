@@ -296,7 +296,6 @@ function alermInfo(){
     var postdata = GetPostData(param, "iot", "getIotOverView");
     postFnajax(postdata).then(function (res) {
         // console.log(res);
-        // console.log(menuRes);
         $.each(menuRes.data,function(index,item){
             if (item.FuncName == "传感设备") {
                 var alermCount = "";

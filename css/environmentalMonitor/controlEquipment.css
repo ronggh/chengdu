@@ -63,7 +63,7 @@
 
 #equirementcontrol .equirecon .equireitem span.controlswitch {
     width: 33%;
-    height: 32px;
+    height: 33px;
     border: 1px solid #b5b5b5;
     border-radius: 15px;
     margin-top: 10px;
@@ -90,9 +90,9 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 30px;
+    width: 35px;
     display: block;
-    height: 30px;
+    height: 31px;
     background-color: red;
     border-radius: 50%;
     z-index: 1;

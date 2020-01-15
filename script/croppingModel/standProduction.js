@@ -157,7 +157,7 @@ var standProduct = {
                 type: 1,
                 content: html,
                 title: [title, 'font-size:14px;height:40px;line-height:40px;'],
-                area: ['670px', '730px'],
+                area: ['700px', '97%'],
                 success: function (index, layero) {
                     $("input").removeAttr("disabled", "disabled");
                     $("select").removeAttr("disabled", "disabled");

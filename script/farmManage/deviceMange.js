@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     TerminalFn.getTerminalList(); //获取列表数据
     TerminalFn.searchForm(); //开启搜索终端
     TerminalFn.ResetOutbox();

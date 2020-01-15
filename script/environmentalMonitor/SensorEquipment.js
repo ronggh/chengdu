@@ -454,7 +454,7 @@ function GetArea(landId) { //, status, loading
                 }
                 Device += "</div>";
                 if (item.IsOnline != 1) {
-                    Device += " <div class=\"fr hidden\">" + NullEmpty(item.Slots[0].Time) +
+                    Device += " <div class=\"fr hidden\">" + timeago(NullEmpty(item.Slots[0].Time)) +
                         "</div>";
                 } else {
                     Device += " <div class=\"fr\">" + timeago(NullEmpty(item.Slots[0].Time)) +
@@ -537,7 +537,7 @@ function SensorNumException(num) {
 
 function NullEmpty(str) {
     if (str == null)
-        return "";
+        return "0";
     return str;
 }
 
@@ -562,6 +562,7 @@ $(document).on("click", ".chartbtn ul li", function () {
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
     timeDate = $(this).attr("time");
+    // console.log("timeDate = "+timeDate)
     if ($(this).index() != 3) {
         $("#dateTimeDiv").hide();
         if(sensorIndex == $(this).index()){
