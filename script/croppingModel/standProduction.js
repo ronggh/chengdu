@@ -115,8 +115,6 @@ var standProduct = {
         param["pageIndex"] = standProduct.pageCurr;
         param["type"] = 3;
         AjaxRequest(param, "model", "getListPage").then(function (res) {
-            // console.log("<<<<<<<<标准化生产>>>>>>>>");
-            // console.log(res);
             var modelData = JSON.parse(res);
             laypage.render({
                 elem: 'um_pagenation',
@@ -181,7 +179,6 @@ var standProduct = {
                         var param = cloneObjectFn(paramList);
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
-                            // console.log(res);
                             var modelData = JSON.parse(res);
                             standProduct.menuTop(modelData.data.CropStages, "update");
                             standProduct.submitPopup('update', id);
@@ -198,7 +195,6 @@ var standProduct = {
                         var param = cloneObjectFn(paramList);
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
-                            // console.log(res);
                             var modelData = JSON.parse(res);
                             standProduct.menuTop(modelData.data.CropStages, "look");
                             standProduct.submitPopup('look', id);
@@ -217,8 +213,6 @@ var standProduct = {
                             var Disable = 'layui-btn-disabled';
                             $(".site-action").addClass(Disable);
                             $('.site-action').attr('disabled', 'disabled');
-                            // $('input[name="modelchName"]').removeAttr("disabled");
-                            // $('input[name="timechName"]').removeAttr("disabled");
                         })
                     };
                 },
@@ -235,7 +229,6 @@ var standProduct = {
     },
     // 渲染弹窗
     menuTop: function (modelData, type) {
-        // console.log(modelData);
         $("#stage li").remove();
         $("#stage_params li").remove();
         $.each(modelData, function (index, item) {
@@ -259,7 +252,6 @@ var standProduct = {
                         '<label class="layui-form-label deverID" dever_ID = "' + item2.ID + '">' + item2.Name + ' </label>' +
                         '<div class="layui-input-block">' +
                         '<select lay-verify="required" id="' + item2.Type + '" type="' + item2.Type + '" name = "' + item2.ID + '" lay-filter="' + item2.ID + '" value="' + (type=="insert"?'':item2.Value) + '">' +
-
                         '</select>' +
                         '</div>' +
                         '</div>';
@@ -286,7 +278,6 @@ var standProduct = {
                     '<div class="Model_popurBottom">' +
                     '</div>' +
                     '</li>');
-
                 var group = 0;
                 $.each(item.Params, function (index2, item2) {
                     if (item2.Type == 'input') {
@@ -350,7 +341,6 @@ var standProduct = {
         });
         $(".popurBottom select").each(function (i) {
             var index = standProduct.index;
-            // console.log(index);
             var filter = $(this).attr("lay-filter");
             var PlarmID = $(this).attr("PlarmID");
             var StageID = $(this).attr("StageID");
@@ -425,7 +415,6 @@ var standProduct = {
                 area: ['450px', '200px'],
                 btn: ['确定', '取消'],
                 yes: function (index, layero) {
-                    // console.log(tableObj);
                     var param = cloneObjectFn(paramList);
                     param["id"] = tableObj.ID;
                     AjaxRequest(param, "model", "delete").then(function (res) {
@@ -478,7 +467,6 @@ var standProduct = {
     modelList: function (name) {
         var param = cloneObjectFn(paramList);
         AjaxRequest(param, "model", "getList").then(function (res) {
-            // console.log(res)
             var formalModelData = JSON.parse(res);
             var standPselect = '<option value="">' + "请选择模型列表" + '</option>';
             $.each(formalModelData.data, function (index, item) {
@@ -539,7 +527,6 @@ var standProduct = {
         var param = cloneObjectFn(paramList);
         param['landId'] = landId;
         AjaxRequest(param, "iot", "getIotDeviceInfo").then(function (res) {
-            // console.log(res);
             standProduct.sensorData = JSON.parse(res);
             $("#sensor option").remove();
             standProduct.sensorListOption();
@@ -637,8 +624,6 @@ var standProduct = {
 function stHistoryClick(){
     $(".popurMiddle .history").on("click", function () {
         var time = $(this).parent().parent().parent().find(".timeD").html().split("：")[1].split("~");
-        // console.log(time);
-        // console.log($(this).parent().index())
         var deviceId = standProduct.lookArray[$(this).parent().index()].Value;
         var timeStart = time[0];
         var timeend = time[1];
@@ -681,7 +666,6 @@ function stechartinitfn(deviceId, timeStart, timeend, inputOne, inputTwo) {
             var postdata = GetPostData(param, "iot", "getDeviceSlotHistory"); //实时数据中的历史记录
             postFnajax(postdata).then(function (res) {
                 // console.log("<<<<<<<< 实时数据 >>>>>>>>")
-                // console.log(res);
                 var result = JSON.parse(res);
                 if(result.data.HistoryData.length < 1){
                     layer.msg('暂无数据', {

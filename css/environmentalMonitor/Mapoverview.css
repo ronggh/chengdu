@@ -400,7 +400,17 @@ body {
 .maps #rootsmap #mapcontain {
     width: 99%;
     height: 100%;
+    z-index: 9;
 }
+
+/* 隐藏地图logo */
+.leaflet-top,.leaflet-bottom{
+    display: none !important;
+}
+.leaflet-bar a,.leaflet-control a{
+    display: none !important;
+}
+
 
 .maps #rootsmap .canshuvideo .videojk {
     width: 100%;
@@ -441,6 +451,7 @@ body {
     border-radius: 5px;
     overflow: hidden;
     background-color: rgba(11, 49, 74, 0.8);
+    z-index: 999;
 }
 
 .maps .plants .tit {
@@ -462,6 +473,7 @@ body {
     height: 325px;
     border-radius: 5px;
     overflow: hidden;
+    z-index: 999;
 }
 
 .maps .equipment .equip_tit{

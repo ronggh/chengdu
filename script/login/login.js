@@ -1,6 +1,6 @@
  //引入layui模块
  $(function () {
-     initLayuifn(['element', 'layer', 'laytpl', ], function () {});
+     initLayuifn(['element', 'layer', 'laytpl',], function () {});
  });
 
  var userSeitch = 0;
@@ -42,21 +42,21 @@
      } else {
          passwordSeitch = 1;
      };
-    //  if ($('.verCode').val() == "") {
-    //      verCodeSwitch = 0;
-    //  } else {
-    //      var res = VCode.validate($('.verCode').val());
-    //      if (res) {
-    //          verCodeSwitch = 1;
-    //      } else {
-    //          $('.verCode').addClass('erro');
-    //          layer.msg("验证码错误", {
-    //              time: 1500
-    //          });
-    //          verCodeSwitch = 0;
-    //      }
-    //  }
-     if (userSeitch == 1 && passwordSeitch == 1) { //&& verCodeSwitch == 1
+     if ($('.verCode').val() == "") {
+         verCodeSwitch = 0;
+     } else {
+         var res = VCode.validate($('.verCode').val());
+         if (res) {
+             verCodeSwitch = 1;
+         } else {
+             $('.verCode').addClass('erro');
+             layer.msg("验证码错误", {
+                 time: 1500
+             });
+             verCodeSwitch = 0;
+         }
+     }
+     if (userSeitch == 1 && passwordSeitch == 1 && verCodeSwitch == 1) {
          var pwd = CryptoJS.MD5($(".password").val()).toString();
          pwd = CryptoJS.MD5(pwd).toString();
          pwd = CryptoJS.MD5(pwd).toString();
@@ -77,13 +77,13 @@
              $('.password').addClass('erroPa');
              return false;
          }
-        //  if (verCodeSwitch != 1) {
-        //      layer.msg("验证码错误", {
-        //          time: 1500
-        //      });
-        //      $('.verCode').addClass('erro');
-        //      return false;
-        //  }
+         if (verCodeSwitch != 1) {
+             layer.msg("验证码错误", {
+                 time: 1500
+             });
+             $('.verCode').addClass('erro');
+             return false;
+         }
      }
  }
  //登录事件
@@ -93,7 +93,6 @@
      param["username"] = userName;
      param["password"] = password;
      loginAjaxRequest(param, "sys", "getAccessToken").then(function (res) {
-        //  console.log(res);
          var result = JSON.parse(res);
          if (result.result.code == 200) {
              layer.msg("登陆成功", {
@@ -115,7 +114,6 @@
  }
  //忘记密码
  function forgetPass() {
-
      var ForGet_popup_tpl = document.getElementById('ForGet_popup').innerHTML;
      laytpl(ForGet_popup_tpl).render({}, function (html) {
          var forgetOpen = layer.open({

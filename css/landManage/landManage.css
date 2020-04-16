@@ -173,9 +173,9 @@ textarea::-ms-input-placeholder {
 }
 
 /* 隐藏地图logo */
-#createmaparea>div>.gm-style>div>a>div>img {
-display: none;
+.leaflet-top,.leaflet-bottom{
+    display: none !important;
 }
-#createmaparea .gmnoprint {
+.leaflet-bar a,.leaflet-control a{
     display: none !important;
 }

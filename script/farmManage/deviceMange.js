@@ -123,7 +123,6 @@ var TerminalFn = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitTerminal)', function (data) {
-            // console.log(data)
             if (!zD_tenName.test(data.field.TerminaName.trim())) {
                 layer.msg("请输入1-30位英文、数字、下划线组合的终端名称", {
                     time: 1500

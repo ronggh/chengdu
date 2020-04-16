@@ -25,7 +25,6 @@ var equipmentFn = {
         param["terminalNum"] = equipmentFn.params;
         var postdata = GetPostData(param, "device", "getDeviceListPage");
         postFnajax(postdata).then(function (result) {
-            // console.log(result)
             var res = JSON.parse(result);
             //分页
             laypage.render({
@@ -117,8 +116,6 @@ var equipmentFn = {
         $("#addEdit_device").css('display', 'block');
         if (type == "insert") {
             $("input[name = deviceName]").val("");
-            // table.render()
-            // $("#DevTypetable").html("")
             $("input[name = device_Remarks]").val("");
             equipmentFn.tagsList(['352c4595-beb3-4fe9-a315-4b71f2939b8e']);
             equipmentFn.EquipmentTypeName();
@@ -135,8 +132,6 @@ var equipmentFn = {
         param["deviceId"] = id;
         var postdata = GetPostData(param, "device", "getDeviceInfo");
         postFnajax(postdata).then(function (res) {
-            // console.log("<<<<<<<<<设备详情>>>>>>>>");
-            // console.log(res);
             var deverInfoData = JSON.parse(res);
             $("input[name = deviceName]").val(deverInfoData.data.DeviceName); //设备名称
             $("input[name = device_Remarks]").val(deverInfoData.data.DeviceDesc); //设备备注
@@ -147,7 +142,6 @@ var equipmentFn = {
     },
     //获取设备类型名称
     EquipmentTypeName: function (id, deverName) {
-        // alert()
         var param = cloneObjectFn(paramList);
         var postdata = GetPostData(param, "device", "getDeviceTypeList");
         postFnajax(postdata).then(function (res) {
@@ -193,8 +187,6 @@ var equipmentFn = {
         param["deviceType"] = DeviceTypeID;
         var postdata = GetPostData(param, "device", "getSlotTemplateList");
         postFnajax(postdata).then(function (res) {
-            // console.log(param)
-            // console.log(res);
             var result = JSON.parse(res);
             equipmentFn.DevTypetable(result, PlugSensorData);
         })
@@ -243,7 +235,6 @@ var equipmentFn = {
         param["type"] = SensorType;
         param["terminalNum"] = equipmentFn.params;
         var postdata = GetPostData(param, "device", "getSensorListPage");
-        // var test = "";
         // //如果是修改 并且 设备类型
         if (PlugSensorData != undefined) {
             var soltArr = []
@@ -266,7 +257,6 @@ var equipmentFn = {
             data: JSON.stringify(postdata),
             success: function (res) {
                 // console.log("<<<<<<<<下拉列表>>>>>>>")
-                // console.log(res);
                 var result = JSON.parse(res);
                 $.each(result.data, function (index, item) {
                     SensorTypeNameSelect = SensorTypeNameSelect + '<option value = "' + item.Suid + '">' + item.DevName + '</option>'
@@ -320,7 +310,7 @@ var equipmentFn = {
             tipArrID.push(data.field.device_tagData);
             var param = cloneObjectFn(paramList);
             var entityJson = {
-                // "DeviceID":guid(),                                   //设备ID
+                // "DeviceID":guid(),                       //设备ID
                 "DeviceName": data.field.deviceName.trim(), //设备名称
                 "DeviceDesc": data.field.device_Remarks.trim(), //备注
                 "TerminalNum": equipmentFn.params, //终端号
@@ -333,8 +323,6 @@ var equipmentFn = {
                 param['entity'] = getUTF8(entityJson);
                 var postdata = GetPostData(param, "device", "update");
                 postFnajax(postdata).then(function (res) {
-                    // console.log(res)
-                    // console.log(entityJson);
                     var res = JSON.parse(res);
                     if (res.result.code == 200) {
                         equipmentFn.equipmentPageList();
@@ -356,8 +344,6 @@ var equipmentFn = {
                 param['entity'] = getUTF8(entityJson);
                 var postdata = GetPostData(param, "device", "insert");
                 postFnajax(postdata).then(function (res) {
-                    // console.log(entityJson)
-                    // console.log(res);
                     var res = JSON.parse(res);
                     if (res.result.code == 200) {
                         equipmentFn.equipmentPageList();
@@ -398,8 +384,6 @@ var equipmentFn = {
                     param["deviceId"] = DeviceID;
                     var postdata = GetPostData(param, "device", "delete");
                     postFnajax(postdata).then(function (res) {
-                        // console.log("<<<<<<删除设备>>>>>")
-                        // console.log(res)
                         var result = JSON.parse(res);
                         if (result.result.code == 200) {
                             layer.closeAll();
@@ -422,7 +406,6 @@ var equipmentFn = {
     // 设备查询
     deversearc: function () { //搜索条件
         form.on('submit(equipment_formSearch)', function (data) {
-            // console.log(data)
             equipmentFn.pageCurr = 1;
             equipmentFn.equipmentPageList(data.field.equipment_searchName, data.field.select_form); //equipmentType,equipment_searchName
         })

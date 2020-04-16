@@ -32,8 +32,9 @@ function GetUserAreaList() {
         var landSelect = "";
         var landData = JSON.parse(res);
         $.each(landData.data, function (index, data) {
-            landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
-                '</option>'
+            if (data.IntegratedCount > 0) {
+                landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +'</option>';
+            }
         })
         $("#area").html(landSelect);
         form.render('select');

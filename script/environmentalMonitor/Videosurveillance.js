@@ -61,12 +61,21 @@ $(function () {
 
 function GetUserAreaList() {
     var param = cloneObjectFn(paramList);
-    var postdata = GetPostData(param, "iot", "getIotOverView");
+    param["pageSize"] = 100;
+    param["pageIndex"] = 1;
+    var postdata = GetPostData(param, "land", "getLandListPage");
     postFnajax(postdata).then(function (res) {
+        // console.log(res);
+        // console.log("video")
         var landSelect = "";
         landData = JSON.parse(res);
         $.each(landData.data, function (index, item) {
-            landSelect = landSelect + '<option value="' + item.LandID + '">' + item.LandName + '</option>'
+            if (item.CameraCount > 0) {
+                landSelect = landSelect + '<option value="' + item.LandID + '">' + item.LandName + '</option>'
+            } else {
+                console.log(item.LandName)
+            }
+            
         })
         $("#area").html(landSelect);
         form.render('select');
@@ -108,7 +117,7 @@ function SetPlayer(url, name, deviceSerial, channelNo) {
         }
         var href = 'http://hls.open.ys7.com/openlive/' + urlstr + '.hd.m3u8';
     }
-    waittimer = setInterval(function () {
+    var waittimer = setInterval(function () {
         if (window.TcPlayer) {
             clearInterval(waittimer);
             //初始化
@@ -140,7 +149,6 @@ function StartCameraPtz(direction) {
 
         });
     }
-
 }
 
 function initVideo(opt) {

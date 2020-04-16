@@ -20,9 +20,9 @@
     <!--操作-->
     <script type="text/html" id="table_operate">
         <div>
-            <span class="btn_primary" onclick="ModelEval.Evaluation('{{d.ID}}','look')">查看</span>
+            <span class="btn_primary" onclick="ModelEval.Evaluation('{{d.ID}}','look','{{d.Yield}}')">查看</span>
             {{# if(d.Status == "1"){ }}
-            <span class="btn_primary" onclick="ModelEval.Evaluation('{{d.ID}}','evaluate')">评价</span>
+            <span class="btn_primary" onclick="ModelEval.Evaluation('{{d.ID}}','evaluate','{{d.Yield}}')">评价</span>
             {{#} }}
             {{# if(d.Proportion != null && d.Status == "1"){ }}
             <span class="btn_primary" onclick="ModelEval.updateStatus('{{d.ID}}')">生成模型</span>

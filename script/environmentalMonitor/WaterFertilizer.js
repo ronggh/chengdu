@@ -117,8 +117,10 @@ function GetUserAreaList() {
         var landSelect = "";
         var landData = JSON.parse(res);
         $.each(landData.data, function (index, data) {
-            landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
+            if(data.FertilizerSensorCount != 0 || data.FertilizerControllerCount != 0){
+                landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
                 '</option>'
+            }
         })
         $("#area").html(landSelect);
         form.render('select');
@@ -352,8 +354,6 @@ function SwitchCss(){
         param["action"] = Action;
         var postdata = GetPostData(param, "iot", "sensorControl");
         afterFnajax(postdata).then(function (res) {
-
-            // console.log(res);
             var resData = JSON.parse(res);
             if (resData.result.code == 200) { //操作成功
                 var switchindex = temp.index();
@@ -488,7 +488,6 @@ function tableCont(DeviceID, timeDate, temp, title) {
 }
 
 $(".btnexcel").on("click", function () {
-    // alert("12121");
     //列标题，逗号隔开，每一个逗号就是隔开一个单元格
     let str = `日期,数值\n`;
     //增加\t为了不让表格显示科学计数法或者其他格式
@@ -521,8 +520,8 @@ function NullEmpty(str) {
 
 function GetHistory(deviceId, name, slotId, deviceTypeId) {
     $("#dateTime").val("");
-    $(".chartbtn ul li").removeClass("active");
-    $(".chartbtn ul li").eq(0).addClass("active");
+    $(".chartbtn1 ul li").removeClass("active");
+    $(".chartbtn1 ul li").eq(0).addClass("active");
     ExcelSlotId = slotId;
     ExcelTypeID = deviceTypeId;
     Device = deviceId;
@@ -531,6 +530,7 @@ function GetHistory(deviceId, name, slotId, deviceTypeId) {
     var id = deviceId + ":" + slotId + ",";
     ExcelDeviceId = id;
     var timeDate = -1
+    // console.log(Device);
     echartinitfn(deviceId, slotId, timeDate);
 }
 // 操作记录
@@ -554,7 +554,7 @@ $(document).on("click", "#switch ul li", function () {
 })
 
 // 历史记录
-$(document).on("click", ".chartbtn ul li", function () {
+$(document).on("click", ".chartbtn1 ul li", function () {
     $("#dateTime").val("");
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
@@ -565,6 +565,7 @@ $(document).on("click", ".chartbtn ul li", function () {
             return false;
         }
         WasensorIndex = $(this).index();
+        // console.log(Device);
         echartinitfn(Device, ExcelSlotId, timeDate);
     }else{
         WasensorIndex = 3;

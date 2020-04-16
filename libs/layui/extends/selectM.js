@@ -221,12 +221,10 @@ layui.define(['jquery', 'layer'], function(exports){
 			$('.lay-ext-mulitsel').not(c.elem).removeClass('layui-form-selected');
 			if($(c.elem).is('.layui-form-selected')){
 				$(c.elem).removeClass('layui-form-selected');
-				
 				$(document).off('click',mEvent);
 			}
 			else{
 				$(c.elem).addClass('layui-form-selected');
-				
 				$(document).on('click',mEvent);	
 			}
 		});

@@ -74,9 +74,6 @@
             param["pageIndex"] = autoMation.pageIndex;
             var postdata = GetPostData(param, "automation", "getListPage");
             postFnajax(postdata).then(function (res) {
-                // console.log(":><<<<<<")
-                // console.log(res)
-                // console.log(param)
                 var result = JSON.parse(res);
                 laypage.render({
                     elem: 'paging',
@@ -85,7 +82,6 @@
                     curr: autoMation.pageIndex,
                     layout: ['count', 'prev', 'page', 'next', 'skip'],
                     jump: function (obj, first) {
-                        // console.log(obj);
                         if (!first) {
                             autoMation.pageIndex = obj.curr;
                             var param = cloneObjectFn(paramList);
@@ -107,9 +103,7 @@
                         }
                     }
                 })
-                // }
                 autoMation.createList(result);
-                // }
             })
         },
         //获取自动化列表后动态创建
@@ -212,7 +206,6 @@
             param["status"] = status == "ACTIVATED" ? "DEACTIVATED" : "ACTIVATED";
             var postdata = GetPostData(param, "automation", "updateStatus");
             postFnajax(postdata).then(function (res) {
-                // console.log("66666666")
                 var res = JSON.parse(res);
                 // console.log(res);
                 if (res.result.code == 200) {
@@ -3375,7 +3368,6 @@
             $(".operate_after").append(equiptriggerobj);
         else {
             $('.operate_after li').eq(sort).html(equiptriggerobj.html());
-            // alert(type);
             $('.operate_after li').eq(sort).attr("category", type);
         }
         init(); //初始化 右边箭头

@@ -29,16 +29,13 @@ var threeInfoFn = {
     pageLimit: 12, //设置本页面的一页显示多少条数据
     pageCurr: 1,
     map: null,
-    allShape: [],
-    oldclimate: [],
-    allmarker: [],
-    vameraArr: [],
+    polygonLayer:null,
+    markerCameraLayers:[],//摄像头的图层集合
+    markerDeverLayers:[],//设备的图层集合
+    cameraLayer:[],//存储摄像头点的图层
+    DeverLayer:[],//存储设备点的图层
+    vameraArr: [],//存储摄像头的数组
     deverceaArr: [], //设备坐标表格数据   //设备打出的点的集合
-    cameraMarker: [], //摄像头点
-    deverceMarker: [], //设备点
-    nowmarkerindex: 0,
-    markersdata: [],
-    newpolygon: "",
     camSelectData: "", // 初始化时存储摄像头的数据
     devSelectData: "", //初始化时存储设备的数据
     cameraPintData: "", //记录打的点
@@ -53,11 +50,8 @@ var threeInfoFn = {
         param['landId'] = threeInfoFn.landTwoid;
         var postdata = GetPostData(param, "land", "getLandInfo");
         postFnajax(postdata).then(function (res) {
-            // console.log(res);
             var landTwoData = JSON.parse(res);
-            threeInfoFn.initMap(landTwoData)
             threeInfoFn.initMap(landTwoData); //初始化地图
-            threeInfoFn.removefirsthelp(false); // // 不是首次绘制
             var path = []; // 对地块坐标进行整合
             var arr = [];
             $.each(landTwoData.data.LandPoints, function (index, item) {
@@ -66,147 +60,100 @@ var threeInfoFn = {
             for (let i = 0; i < arr.length / 2; i++) {
                 path.push(arr.slice(2 * i, 2 + 2 * i))
             };
-            // 点击编辑绘制对应的地块
+            // 绘制对应的地块
             threeInfoFn.drawdbx(path);
-            threeInfoFn.markerCamera(landTwoData.data.LandCameras);
-            threeInfoFn.markerDever(landTwoData.data.LandDevices)
+            threeInfoFn.markerCamera(landTwoData.data.LandCameras);//摄像头标记
+            threeInfoFn.markerDever(landTwoData.data.LandDevices);  //设备标记
         })
     },
     //初始化地图
     initMap: function (landRes) {
+        var satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {  
+            maxZoom: 22,  
+            minZoom: 5  
+        });
+        var googleimga = L.tileLayer.chinaProvider('Google.Satellite.Annotion', {  
+                maxZoom: 22,  
+                minZoom: 5  
+            });
+        var googleimage = L.layerGroup([satelliteMap, googleimga]);  
+        if (landRes == undefined) {
+            landRes = {
+                "data": {
+                    "Longitude": "39.90484185919572",
+                    "Latitude": "116.4108939005555",
+                    "MapZoom": 12,
+                }
+            }
+        }
         var myLatLng = {
             lat: Number(landRes.data.Longitude),
             lng: Number(landRes.data.Latitude)
         };
-        threeInfoFn.map = new google.maps.Map(document.getElementById('createmaparea'), {
-            zoom: Number(landRes.data.MapZoom),
-            center: myLatLng,
-            scaleControl: true, //地图比例控件
-            disableDefaultUI: true, //默认UI
-            panControl: true,
-            mapTypeControl: true,
-            streetViewControl: true,
-            overviewMapControl: true,
-            rotateControl: true,
-            mapTypeId: google.maps.MapTypeId.HYBRID,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL
-            }
-        });
-    },
-    //地图首次绘制提示事件 <-- 创建地块时地图上的绘制提示事件 -->
-    removefirsthelp: function (bind) {
-        if (bind) {
-            $("#createmap").bind('mouseenter', function () {
-                $("#createmap .maphelp").stop().fadeOut('150', function () {
-                    $("#createmap .maphelptext").slideDown('fast');
-                    $("#createmap .mapcomplete").fadeIn('fast');
-                });
-            })
-            $("#createmap").bind('mouseleave', function () {
-                $("#createmap .maphelp").stop().fadeIn('150');
-                $("#createmap .maphelptext").slideUp('fast');
-                $("#createmap .mapcomplete").fadeOut('fast');
-            })
-        } else {
-            $("#createmap").unbind('mouseenter');
-            $("#createmap").unbind('mouseleave');
-            $("#createmap").unbind('click');
-            $("#createmap .maphelp").remove();
-        }
+        threeInfoFn.map = L.map("createmaparea", {  
+            center: myLatLng,  
+            zoom: Number(landRes.data.MapZoom),  
+            layers: [googleimage],  
+            zoomControl: false,
+            editable: true,
+        });  
     },
     //根据设备点绘制设备及摄像头位置
     markerCamera: function (cameraData) {
-        // console.log("<<<<<<<< 编辑时摄像头点cameraData >>>>>>>>>>>")
-        // console.log(cameraData);
-        $.each(cameraData, function (index, item) {
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: Number(item.Latitude),
-                    lng: Number(item.Longitude)
-                },
-                map: threeInfoFn.map,
-                name: item.CameraName,
-                value: item.CameraID,
-                lat: item.Latitude,
-                lng: item.Longitude,
-                icon: './images/shexiangtouhong@2x.png'
+        threeInfoFn.vameraArr = [];
+        for (var i = 0; i < cameraData.length; i++) {
+            var icon3 = L.icon({
+                iconUrl: './images/shexiangtouhong@2x.png',
+                iconSize: [20, 26],
+                CameraID:cameraData[i].ID
             });
-            marker.setMap(threeInfoFn.map);
-            threeInfoFn.cameraMarker.push(marker);
-            nowmarkerindex = threeInfoFn.cameraMarker.length - 1;
-            threeInfoFn.vameraArr = [];
-            $.each(threeInfoFn.cameraMarker, function (index, item) {
-                var cameraJson = {};
-                cameraJson.CameraID = item.value;
-                cameraJson.CameraName = item.name;
-                cameraJson.Latitude = item.lat;
-                cameraJson.Longitude = item.lng;
-                threeInfoFn.vameraArr.push(cameraJson)
-            });
-            threeInfoFn.cameraPintArr.push([item]);
-        })
-        $("#createmap .mapeditarea .carameedit").find("input,textarea").val("");
-        // console.log(threeInfoFn.vameraArr)
-
+            var marker3 =L.marker([cameraData[i].Latitude,cameraData[i].Longitude], { icon: icon3 });//(小值、大值)
+            threeInfoFn.markerCameraLayers.push(marker3);
+            threeInfoFn.cameraLayer = L.layerGroup(threeInfoFn.markerCameraLayers);
+            threeInfoFn.map.addLayer(threeInfoFn.cameraLayer);
+            // 对已有的摄像头点进行格式转换
+            var cameraJson = {};
+            cameraJson.CameraID = cameraData[i].ID;
+            cameraJson.CameraName = cameraData[i].CameraName;
+            cameraJson.Latitude = cameraData[i].Latitude;
+            cameraJson.Longitude = cameraData[i].Longitude;
+            threeInfoFn.vameraArr.push(cameraJson);
+            threeInfoFn.cameraPintArr.push([cameraJson]);
+        }
         threeInfoFn.cameraTableFn(threeInfoFn.vameraArr);
     },
     markerDever: function (deverData) {
-        // console.log("<<<<<<<< 编辑时设备点deverData >>>>>>>>>>>")
-        // console.log(deverData);
-        $.each(deverData, function (index, item) {
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: Number(item.Latitude),
-                    lng: Number(item.Longitude)
-                },
-                map: threeInfoFn.map,
-                name: item.DeviceName,
-                value: item.DeviceID,
-                lat: item.Latitude,
-                lng: item.Longitude,
-                icon: './images/shebei@2x.png'
+        threeInfoFn.deverceaArr = [];
+        for (var i = 0; i < deverData.length; i++) {
+            var icon3 = L.icon({
+                iconUrl: './images/shebei@2x.png',
+                iconSize: [20, 26],
+                DeviceID: deverData[i].DeviceID,
             });
-            marker.setMap(threeInfoFn.map);
-            threeInfoFn.deverceMarker.push(marker);
-            nowmarkerindex = threeInfoFn.deverceMarker.length - 1;
-            threeInfoFn.deverceaArr = [];
-            //根据设备标记绘制对应的设备表格
-            $.each(threeInfoFn.deverceMarker, function (index, item) {
-                var deverceJson = {};
-                deverceJson.DeviceID = item.value;
-                deverceJson.DeviceName = item.name;
-                deverceJson.Latitude = item.lat;
-                deverceJson.Longitude = item.lng;
-                threeInfoFn.deverceaArr.push(deverceJson)
-            })
-            threeInfoFn.deverPintArr.push([item]);
-        })
-        $("#createmap .mapeditarea .carameedit").find("input,textarea").val("");
+            var deverMarker3 = L.marker([deverData[i].Latitude,deverData[i].Longitude], { icon: icon3 });//(小值、大值)
+            threeInfoFn.markerDeverLayers.push(deverMarker3);
+            threeInfoFn.DeverLayer = L.layerGroup(threeInfoFn.markerDeverLayers);
+            threeInfoFn.map.addLayer(threeInfoFn.DeverLayer);
+            //设备点坐标结构重绘制
+            var deverceJson = {};
+            deverceJson.DeviceID = deverData[i].DeviceID;
+            deverceJson.DeviceName = deverData[i].DeviceName;
+            deverceJson.Latitude = deverData[i].Latitude;
+            deverceJson.Longitude = deverData[i].Longitude;
+            threeInfoFn.deverceaArr.push(deverceJson);
+            threeInfoFn.deverPintArr.push([deverceJson]);
+        }
         threeInfoFn.deverTableFn(threeInfoFn.deverceaArr);
     },
 
     //  编辑绘制对应的地块
     drawdbx: function (polygonobj) {
-        var myTrip = [];
-        for (var i in polygonobj) {
-            var item = new google.maps.LatLng(polygonobj[i][0], polygonobj[i][1]);
-            myTrip.push(item);
-        }
-        // console.log(myTrip)
-        threeInfoFn.newpolygon = new google.maps.Polygon({
-            path: myTrip,
-            strokeColor: "#1e9fff",
-            strokeOpacity: 1,
-            strokeWeight: 2,
-            fillColor: "#1e9fff",
-            fillOpacity: 0.5,
-            editable: false,
-            geodesic: true,
-        });
-        threeInfoFn.newpolygon.addListener('click', function (event) {
-            //摄像头打点操作
+        threeInfoFn.polygonLayer = L.polygon(polygonobj);
+        threeInfoFn.map.addLayer(threeInfoFn.polygonLayer);
+
+        threeInfoFn.polygonLayer.addEventListener('click', function (event) {
+            // console.log(event);
+        //     //摄像头打点操作
             if (threeInfoFn.cameraPintData) {
                 threeInfoFn.addmarkerpointerfn(event, threeInfoFn.cameraPintData);
                 var indexArr = '';
@@ -219,8 +166,8 @@ var threeInfoFn = {
                 threeInfoFn.selectFunction(threeInfoFn.devSelectData, threeInfoFn.camSelectData)
                 threeInfoFn.cameraPintData = "";
             }
-            //设备打点操作
-            if (threeInfoFn.deverPintData) {
+        //     //设备打点操作
+            if (threeInfoFn.deverPintData) {//threeInfoFn.deverPintData 设备ID  设备名称
                 threeInfoFn.addmarkerDevercefn(event, threeInfoFn.deverPintData);
                 var indexArr = "";
                 $.each(threeInfoFn.devSelectData.data, function (index, item) {
@@ -233,54 +180,32 @@ var threeInfoFn = {
                 threeInfoFn.deverPintData = "";
             }
         });
-
-        //摄像头下拉框每改变一次可在地块上安装一个
-        threeInfoFn.newpolygon.setMap(threeInfoFn.map);
-        threeInfoFn.newpolygon.edit = true;
-        threeInfoFn.newpolygon.areaname = polygonobj.areaname;
-        if (polygonobj.colorindex) {
-            threeInfoFn.newpolygon.colorindex = polygonobj.colorindex;
-        } else {
-            threeInfoFn.newpolygon.colorindex = 0;
-        }
-        threeInfoFn.allShape.push(threeInfoFn.newpolygon);
     },
     //   地块上摄像头标记的初始化  <-- 添加摄像头的点 -->
     addmarkerpointerfn: function (pointer, editinit) {
         $("#landManage .CameraTab").css('display', 'block');
-        // console.log(editinit)
         var cameraArr = editinit.split(",");
-        var marker = new google.maps.Marker({
-            position: {
-                lat: pointer.latLng.lat(),
-                lng: pointer.latLng.lng()
-            },
-            map: threeInfoFn.map,
-            name: cameraArr[1],
-            value: cameraArr[0],
-            icon: './images/shexiangtouhong@2x.png'
+        var icon3 = L.icon({
+            iconUrl: './images/shexiangtouhong@2x.png',
+            iconSize: [20, 26],
+            CameraID:cameraArr[0],
         });
-        marker.lat = pointer.latLng.lat();
-        marker.lng = pointer.latLng.lng();
-        marker.setMap(threeInfoFn.map);
-        threeInfoFn.cameraMarker.push(marker); //摄像头坐标点集合
-        nowmarkerindex = threeInfoFn.cameraMarker.length - 1;
-        threeInfoFn.vameraArr = [];
-        $.each(threeInfoFn.cameraMarker, function (index, item) {
-            var cameraJson = {};
-            cameraJson.CameraID = item.value;
-            cameraJson.CameraName = item.name;
-            cameraJson.Latitude = item.lat;
-            cameraJson.Longitude = item.lng;
-            threeInfoFn.vameraArr.push(cameraJson)
-        });
-        $("#createmap .mapeditarea .carameedit").find("input,textarea").val("");
+        var marker3 =L.marker([pointer.latlng.lat,pointer.latlng.lng], { icon: icon3 });//(小值、大值)
+        threeInfoFn.markerCameraLayers.push(marker3);
+        threeInfoFn.cameraLayer = L.layerGroup(threeInfoFn.markerCameraLayers);
+        threeInfoFn.map.addLayer(threeInfoFn.cameraLayer);
+        // 对摄像头点进行格式转换
+        var cameraJson = {};
+        cameraJson.CameraID = cameraArr[0];
+        cameraJson.CameraName = cameraArr[1];
+        cameraJson.Latitude = pointer.latlng.lat;
+        cameraJson.Longitude = pointer.latlng.lng;
+        threeInfoFn.vameraArr.push(cameraJson);
+        threeInfoFn.cameraPintArr.push([cameraJson]);
         threeInfoFn.cameraTableFn(threeInfoFn.vameraArr);
     },
     //绘制摄像头表格
     cameraTableFn: function (cvameraArrdata) {
-        // console.log("<<<<<<<<<<<<<  CameraTable的数据 >>>>>>>>>>");
-        // console.log(cvameraArrdata);
         table.render({
             elem: '#cameraTab',
             cols: [
@@ -331,12 +256,13 @@ var threeInfoFn = {
             table.reload('cameraTab', {
                 data: oldData
             });
-
             //地块上对应icon的删除
-            for (var index = 0; index < threeInfoFn.cameraMarker.length; index++) {
-                if (obj.data.CameraID == threeInfoFn.cameraMarker[index].value) {
-                    threeInfoFn.cameraMarker[index].setMap(null); //删除坐标点
-                    threeInfoFn.cameraMarker.splice(index, 1); //原数组数据
+            for (var index = 0; index < threeInfoFn.markerCameraLayers.length; index++) {
+                if (obj.data.CameraID == threeInfoFn.markerCameraLayers[index].options.icon.options.CameraID) {
+                    threeInfoFn.cameraLayer.clearLayers()
+                    threeInfoFn.markerCameraLayers.splice(index, 1); //原数组数据
+                    threeInfoFn.cameraLayer = L.layerGroup(threeInfoFn.markerCameraLayers);
+                    threeInfoFn.map.addLayer(threeInfoFn.cameraLayer);
                 }
             }
             //还原摄像头下拉列表
@@ -347,8 +273,6 @@ var threeInfoFn = {
                     threeInfoFn.vameraArr.splice(index, 1)
                 }
             }
-            // console.log("<<<<<<<<< 删除table后摄像头数据 >>>>>>>>>>");
-            // console.log(threeInfoFn.camSelectData);
             threeInfoFn.selectFunction(threeInfoFn.devSelectData, threeInfoFn.camSelectData)
         })
     },
@@ -356,37 +280,26 @@ var threeInfoFn = {
     addmarkerDevercefn: function (pointer, editinit) {
         $("#landManage .deverceTab").css('display', 'block');
         var devArr = editinit.split(",");
-        var marker = new google.maps.Marker({ //每个设备标记的对象
-            position: {
-                lat: pointer.latLng.lat(),
-                lng: pointer.latLng.lng()
-            },
-            map: threeInfoFn.map,
-            name: devArr[1],
-            value: devArr[0],
-            icon: './images/shebei@2x.png'
+        var icon3 = L.icon({
+            iconUrl: './images/shebei@2x.png',
+            iconSize: [20, 26],
+            DeviceID: devArr[0],
         });
-        marker.lat = pointer.latLng.lat();
-        marker.lng = pointer.latLng.lng();
-        marker.setMap(threeInfoFn.map);
-        threeInfoFn.deverceMarker.push(marker);
-        nowmarkerindex = threeInfoFn.deverceMarker.length - 1;
-        threeInfoFn.deverceaArr = [];
-        //根据设备标记绘制对应的设备表格
-        $.each(threeInfoFn.deverceMarker, function (index, item) {
-            var deverceJson = {};
-            deverceJson.DeviceID = item.value;
-            deverceJson.DeviceName = item.name;
-            deverceJson.Latitude = item.lat;
-            deverceJson.Longitude = item.lng;
-            threeInfoFn.deverceaArr.push(deverceJson)
-        })
-        $("#createmap .mapeditarea .carameedit").find("input,textarea").val("");
+        var deverMarker3 = L.marker([pointer.latlng.lat,pointer.latlng.lng], { icon: icon3 });//(小值、大值)
+        threeInfoFn.markerDeverLayers.push(deverMarker3);
+        threeInfoFn.DeverLayer = L.layerGroup(threeInfoFn.markerDeverLayers);
+        threeInfoFn.map.addLayer(threeInfoFn.DeverLayer);
+         //设备点坐标结构重绘制
+        var deverceJson = {};
+        deverceJson.DeviceID = devArr[0];
+        deverceJson.DeviceName = devArr[1];
+        deverceJson.Latitude = pointer.latlng.lat;
+        deverceJson.Longitude = pointer.latlng.lng;
+        threeInfoFn.deverceaArr.push(deverceJson);
+        threeInfoFn.deverPintArr.push([deverceJson]);
         threeInfoFn.deverTableFn(threeInfoFn.deverceaArr);
     },
     deverTableFn: function (deverceaTableArr) {
-        // console.log(deverceaTableArr);
-        // console.log(deverceaTableArr.length);
         table.render({
             elem: '#deverceTab',
             cols: [
@@ -438,12 +351,15 @@ var threeInfoFn = {
                 data: oldData
             });
             //地块上对应icon的删除
-            for (var index = 0; index < threeInfoFn.deverceMarker.length; index++) {
-                if (obj.data.DeviceID == threeInfoFn.deverceMarker[index].value) {
-                    threeInfoFn.deverceMarker[index].setMap(null); //删除坐标点
-                    threeInfoFn.deverceMarker.splice(index, 1); //删除原数组数据
+            for (var index = 0; index < threeInfoFn.markerDeverLayers.length; index++) {
+                if (obj.data.DeviceID == threeInfoFn.markerDeverLayers[index].options.icon.options.DeviceID) {
+                    threeInfoFn.DeverLayer.clearLayers()
+                    threeInfoFn.markerDeverLayers.splice(index, 1); //原数组数据
+                    threeInfoFn.DeverLayer = L.layerGroup(threeInfoFn.markerDeverLayers);
+                    threeInfoFn.map.addLayer(threeInfoFn.DeverLayer);
                 }
             }
+
             //还原设备下拉列表
             for (var index = 0; index < threeInfoFn.deverPintArr.length; index++) {
                 if (obj.data.DeviceID == threeInfoFn.deverPintArr[index][0].DeviceID) {
@@ -459,9 +375,7 @@ var threeInfoFn = {
 
     //地图第三步提交数据
     threeSure: function () {
-        // console.log(threeInfoFn.cameraMarker)          //摄像头的坐标点
-        // console.log(threeInfoFn.deverceMarker)          //设备的坐标点
-        if (threeInfoFn.cameraMarker.length == 0 && threeInfoFn.deverceMarker == 0) {
+        if (threeInfoFn.vameraArr.length == 0 && threeInfoFn.deverceaArr == 0) {
             layer.msg("请至少选择一个设备或摄像头", {
                 time: 1500
             })
@@ -469,21 +383,21 @@ var threeInfoFn = {
         } else {
             var cameraMarkerArr = [];
             var deverceMarkerArr = [];
-            $.each(threeInfoFn.cameraMarker, function (index, item) {
+            $.each(threeInfoFn.vameraArr, function (index, item) {
                 var cameraMarkerData = {
-                    "CameraID": item.value,
+                    "CameraID": item.CameraID,
                     "LandID": threeInfoFn.landTwoid,
-                    "Longitude": item.lng,
-                    "Latitude": item.lat,
+                    "Longitude": item.Longitude,
+                    "Latitude": item.Latitude,
                 };
                 cameraMarkerArr.push(cameraMarkerData);
             })
-            $.each(threeInfoFn.deverceMarker, function (index, item) {
+            $.each(threeInfoFn.deverceaArr, function (index, item) {
                 var deverceMarkerData = {
-                    "DeviceID": item.value,
+                    "DeviceID": item.DeviceID,
                     "LandID": threeInfoFn.landTwoid,
-                    "Longitude": item.lng,
-                    "Latitude": item.lat,
+                    "Longitude": item.Longitude,
+                    "Latitude": item.Latitude,
                 };
                 deverceMarkerArr.push(deverceMarkerData);
             })
@@ -491,15 +405,13 @@ var threeInfoFn = {
                 "LandCameras": cameraMarkerArr,
                 "LandDevices": deverceMarkerArr,
             }
+            console.log(entityJson);
             var param = cloneObjectFn(paramList);
             param["entity"] = getUTF8(entityJson);
             param["id"] = threeInfoFn.landTwoid;
             var postdata = GetPostData(param, "land", "SetLandDeviceCamera");
             postFnajax(postdata).then(function (res) {
-                // console.log("<<<<<<<<<<<SetLandDeviceCamera>>>>>>>>>>>");
-                // console.log(entityJson);
-                // console.log(param);
-                // console.log(res);
+                console.log(res);
                 var DeviceCameraRes = JSON.parse(res);
                 if (DeviceCameraRes.result.code == 200) {
                     layer.msg("绑定成功", {
@@ -515,13 +427,13 @@ var threeInfoFn = {
 
         }
     },
+    // 设备摄像头下拉框数据
     devCam: function () {
         //设备
         var param = cloneObjectFn(paramList);
         param['status'] = 0;
         var postdata = GetPostData(param, "land", "getDeviceList");
         postFnajax(postdata).then(function (res) {
-            // console.log("设备");
             // console.log(res);
             var deviceSelectData = JSON.parse(res);
             threeInfoFn.devSelectData = deviceSelectData;
@@ -530,109 +442,25 @@ var threeInfoFn = {
             param['status'] = 0;
             var postdata = GetPostData(param, "land", "getCameraList"); //status 0
             postFnajax(postdata).then(function (res) {
-                // console.log("摄像头");
-                // console.log(res);
-                // console.log(postdata);
                 var cameraSelectData = JSON.parse(res);
                 threeInfoFn.camSelectData = cameraSelectData;
                 threeInfoFn.selectFunction(threeInfoFn.devSelectData, threeInfoFn.camSelectData)
             });
         });
     },
-    //threeInfoFn.DeverCaneraIcon()
-    //编辑时重新渲染设备以及摄像头121.87591207512901  ,31.074156893879596
-    DeverCaneraIcon: function () {
-        var marker = new google.maps.Marker({
-            position: {
-                lat: 31.074156893879596,
-                lng: 121.87591207512901
-            },
-            map: threeInfoFn.map,
-            icon: './images/shexiangtouhong@2x.png'
-        });
-        marker.lat = pointer[0];
-        marker.lng = pointer[1];
-        marker.setMap(threeInfoFn.map);
-    },
 
     //渲染设备和摄像头下拉列表
     selectFunction: function (deviceSelectData, cameraSelectData) {
         var deviceSelect = '<option value="">请选择设备</option>';
         var cameraSelect = '<option value="">请选择摄像头</option>';
-        // console.log(">>>>>>>>>>>>>>>>>>>>>");
-        // console.log(deviceSelectData);
-        // console.log(cameraSelectData);
         $.each(deviceSelectData.data, function (index, item) {
             deviceSelect = deviceSelect + '<option value=' + item.DeviceID + "," + item.DeviceName + '>' + item.DeviceName + '</option>';
         })
         $.each(cameraSelectData.data, function (index, item) {
             cameraSelect = cameraSelect + '<option value=' + item.CameraID + "," + item.CameraName + '>' + item.CameraName + '</option>';
         })
-        // console.log("<<<<<<<<<<<<<<<<<<<");
-        // console.log(deviceSelect);
-        // console.log(cameraSelect);
         $('#deviceSelect').html(deviceSelect);
         $('#cameraData').html(cameraSelect);
         form.render('select');
-    },
-    textmorefn: function (inputobj, textnum, helpobj, nextfn) {
-        var flag = true;
-        inputobj.on('compositionstart', function () {
-            flag = false;
-        })
-        inputobj.on('compositionend', function () {
-            flag = true;
-        })
-        inputobj.on('input', function () {
-            if (helpobj) {
-                inputobj.css("border", "1px solid #eee");
-            }
-            var _this = this;
-            setTimeout(function () {
-                if (flag) {
-                    textchangefn(inputobj, textnum, helpobj, nextfn);
-                }
-            }, 0)
-        })
-        threeInfoFn.textchangefn(inputobj, textnum, helpobj, nextfn);
-    },
-    textchangefn: function (inputobj, textnum, helpobj, nextfn) {
-        // var textarr = inputobj.val().split('');
-        // var textlength = $.trim(inputobj.val()).length;
-        // if (textlength > textnum) {
-        //     inputobj.val($.trim(inputobj.val()).substring(0, textnum));
-        //     textlength = textnum;
-        // }
-        // if (helpobj) {
-        //     helpobj.html("<i>" + textlength + "</i>" + "/" + textnum);
-        //     if (textlength >= textnum) {
-        //         helpobj.find("i").css("color", "red");
-        //     } else {
-        //         helpobj.find("i").css("color", "#c6c6c6");
-        //     }
-        // }
-        // if (nextfn) { nextfn(inputobj); }
-    },
-    //改变地图中心，重新
-    mapLatLngchange: function (zoom) {
-        var address = $("#companypicker select.pa").val() + $("#companypicker select.pb").val() + $("#companypicker select.pc").val() + $("#whiteaddress").val();
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-            address: address
-        }, function (results, status) {
-            if (results.length == 0 || status == "ZERO_RESULTS") {
-                layer.msg('未搜索到该地址', {
-                    time: 1500
-                });
-            } else {
-                //判断解析状态
-                if (status == google.maps.GeocoderStatus.OK) {
-                    threeInfoFn.map.setCenter(results[0].geometry.location);
-                    threeInfoFn.map.setZoom(zoom);
-                } else {
-                    return false;
-                }
-            }
-        });
     },
 }

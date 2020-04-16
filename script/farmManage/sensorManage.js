@@ -20,7 +20,6 @@ var sensorFn = {
         param["pageIndex"] = sensorFn.pageCurr;
         param["terminalNum"] = sensorFn.params;
         AjaxRequest(param, "sensor", "getSensorListPage").then(function (result) {
-            // console.log(result)
             var res = JSON.parse(result)
             $.each(res.data, function (index, item) {
                 item.PortTypeName = item.SensorTypeName + "-" + item.PortName;
@@ -193,8 +192,6 @@ var sensorFn = {
             var param = cloneObjectFn(paramList);
             param["entity"] = getUTF8(entity);
             AjaxRequest(param, "sensor", opera_type).then(function (result) {
-                // console.log(param);
-                // console.log( entity.SUID);
                 var res = JSON.parse(result);
                 if (res.result.code == 200) {
                     layer.closeAll();
@@ -227,7 +224,6 @@ var sensorFn = {
                     var param = cloneObjectFn(paramList);
                     param["suid"] = id;
                     AjaxRequest(param, "sensor", "delete").then(function (res) {
-                        // console.log(res);
                         var result = JSON.parse(res);
                         if (result.result.code == 200) {
                             layer.closeAll();
@@ -248,7 +244,6 @@ var sensorFn = {
     //传感器的搜索
     sensorsearc: function () { //搜索条件
         form.on('submit(sensor_formSearch)', function (data) {
-            // console.log(data);
             sensorFn.pageCurr = 1;
             sensorFn.sensorPageList(data.field.sensor_searchName);
         })

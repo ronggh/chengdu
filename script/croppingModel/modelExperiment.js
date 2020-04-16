@@ -108,7 +108,6 @@ var Modelexperiment = {
         param["type"] = 1;
         AjaxRequest(param, "model", "getListPage").then(function (res) {
             // console.log("<<<<<<<<模型试验>>>>>>>>");
-            // console.log(res);
             var ModelexperiData = JSON.parse(res);
             laypage.render({
                 elem: 'um_pagenation',
@@ -161,7 +160,6 @@ var Modelexperiment = {
                         Modelexperiment.sensorTypeID = [];
                         param['id'] = "469c8d0b-09be-11ea-87af-7cd30ab8a76c"; //番茄的种植模型
                         AjaxRequest(param, "CropStage", "getCropStageInfo").then(function (res) {
-                            // console.log(res);
                             var modelData = JSON.parse(res);
                             Modelexperiment.menuTop(modelData.data, "inster");
                             Modelexperiment.submitPopup('insert');
@@ -173,7 +171,6 @@ var Modelexperiment = {
                         var param = cloneObjectFn(paramList);
                         param['id'] = id;
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
-                            // console.log(res);
                             var modelData = JSON.parse(res);
                             Modelexperiment.date_2 = modelData.data.StartTime.split("T")[0];
                             Modelexperiment.menuTop(modelData.data.CropStages, "update");
@@ -205,8 +202,8 @@ var Modelexperiment = {
                             var Disable = 'layui-btn-disabled';
                             $(".site-action").addClass(Disable);
                             $('.site-action').attr('disabled', 'disabled');
-                            $('input[name="timechName"]').removeAttr("disabled");
-                            $('input[name="modelchName"]').removeAttr("disabled");
+                            // $('input[name="timechName"]').removeAttr("disabled");
+                            // $('input[name="modelchName"]').removeAttr("disabled");
                         })
                     };
                 }
@@ -452,7 +449,6 @@ var Modelexperiment = {
         Modelexperiment.SetDateTime();
         $("#stage li").on("click", function (event) {
             Modelexperiment.tabIndex = $(this).index();
-            // console.log(Modelexperiment.tabIndex);
             Modelexperiment.SetDateTime();
             var index = $(this).index();
             $("#stage li").removeClass('first_current').removeClass('centerki_complete').removeClass('lastki_current').removeClass('center_complete');
@@ -518,8 +514,6 @@ var Modelexperiment = {
         var param = cloneObjectFn(paramList);
         param['landId'] = landId;
         AjaxRequest(param, "iot", "getIotDeviceInfo").then(function (res) {
-            // console.log("<<<<<<<<<<<<<<<getIotDeviceInfo>>>>>>>>>>>>>>>>")
-            // console.log(res);
             Modelexperiment.sensorData = JSON.parse(res);
             $("#sensor option").remove();
             Modelexperiment.sensorListOption();

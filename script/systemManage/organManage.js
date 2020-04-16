@@ -116,8 +116,6 @@ var organManageFn = {
             delete postdata.params.status
         };
         postFnajax(postdata).then(function (res) {
-            // console.log("<<<<<<<<<<<<list>>>>>>>>>>>")
-            // console.log(res);
             var res = JSON.parse(res)
             laypage.render({
                 elem: 'og_pagenation',
@@ -267,7 +265,6 @@ var organManageFn = {
     tijiao: function (opera_type) {
         //提交
         form.on('submit(submitAddOrg)', function (data) {
-            // console.log(data)
             if (!two_fiveName.test(data.field.OrgName.trim())) {
                 layer.msg("请输入2-50位英文、数字、汉字组合的机构名称", {
                     time: 1500

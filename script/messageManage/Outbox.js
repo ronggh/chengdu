@@ -110,7 +110,6 @@ var messageManageFn = {
         param["pageIndex"] = messageManageFn.pageCurr;
         param["msgType"] = messageManageFn.msgType;
         AjaxRequest(param, "message", "getMsgListPage").then(function (res) {
-            // console.log(res)
             var messagRes = JSON.parse(res);
             messageManageFn.messageArr = messagRes;
             $.each(messagRes.data, function (index, item) {
@@ -194,10 +193,7 @@ var messageManageFn = {
             };
             var param = cloneObjectFn(paramList);
             param["entity"] = getUTF8(entityJson);
-            // console.log(data);
-            // console.log(entityJson);
             AjaxRequest(param, "message", "insert").then(function (res) {
-                // console.log(res)
                 var resule = JSON.parse(res);
                 if (resule.result.code == 200) {
                     layer.close(messageManageFn.addmessageTip);
@@ -272,7 +268,6 @@ var messageManageFn = {
                     layer.close(UserselectOpen);
                     var name = [];
                     $.each(tree.getChecked('demoId1'), function (index, item) {
-                        // console.log(tree.getChecked('demoId1'));
                         var IDname = [];
                         name.push(item.name)
                         IDname.push(item.id)
@@ -324,7 +319,6 @@ var messageManageFn = {
                     var param = cloneObjectFn(paramList);
                     param["msgId"] = tableObj.ID;
                     AjaxRequest(param, "message", "delete").then(function (res) {
-                        // console.log(res)
                         var resule = JSON.parse(res);
                         if (resule.result.code == "200") {
                             layer.msg('删除成功');

@@ -67,7 +67,6 @@ var standProduct = {
                         var param = cloneObjectFn(paramList);
                         param['id'] = "1cbea027-9286-45d2-a25e-5b1cfcd8485f";
                         AjaxRequest(param, "model", "getmodelInfo").then(function (res) {
-                            // console.log(res);
                             var modelData = JSON.parse(res);
                             standProduct.menuTop(modelData.data.CropStages, "update");
                         })
@@ -78,7 +77,6 @@ var standProduct = {
     },
     // 渲染弹窗
     menuTop: function (modelData, type) {
-        // console.log(modelData);
         $("#stage li").remove();
         $("#stage_params li").remove();
         $.each(modelData, function (index, item) {

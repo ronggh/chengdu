@@ -26,7 +26,7 @@
 }
 
 #equirementcontrol .equirecon .equireitem {
-    min-width: 338px;
+    min-width: 310px;
     border: 1px solid #bebebe;
     float: left;
     font-size: 14px;
@@ -45,7 +45,7 @@
 }
 
 #equirementcontrol .equirecon .equireitem>span:first-child {
-    width: 44%;
+    width: 40%;
     height: 50px;
     font-size: 14px;
     align-items: center;
@@ -90,7 +90,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 35px;
+    width: 31px;
     display: block;
     height: 31px;
     background-color: red;

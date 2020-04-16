@@ -218,7 +218,6 @@ var varieties = {
     // // 品种的搜索
     categorySearch: function () { //搜索条件
         form.on('submit(um_formSearch)', function (data) {
-            // console.log(data)
             varieties.pageCurr = 1;
             varieties.getList(data.field.um_searchName, data.field.um_searchState); //获取品类列表
         })

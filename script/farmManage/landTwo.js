@@ -2,25 +2,25 @@ $(function () {
     landTwo.twoLandInfo();
     landTwo.selectChange();
 })
+var temp;
 var landTwo = {
     map: null,
-    drawingManager: [],
-    allShape: [],
-    shape: [],
-    nowareaindex: 0,
-    newpolygon: "",
+    points:[],                  //存储点击的经纬度
+    polygonLayer: null,         //绘制的多边形图层
+    lines:null,                 //实线的样式
+    tempLines: null,            //虚线的样式
+    plotCoordinates: null,      //存储后台需要的多边形经纬度点
     landTwoid: decodeURIComponent(atob((location.href).split("&id=")[1])),
     twoLandInfo: function () {
         var param = cloneObjectFn(paramList);
         param['landId'] = landTwo.landTwoid;
         var postdata = GetPostData(param, "land", "getLandInfo");
         postFnajax(postdata).then(function (res) {
+            // console.log(res);
             var landTwoData = JSON.parse(res);
             if (landTwoData.data.LandPoints.length == 0) {
-                // alert()
                 landTwo.initMap()
                 landTwo.removefirsthelp(true); //首次绘制
-                // landTwo.fistLandState = true;
             } else {
                 landTwo.fistLandState = false;
                 landTwo.initMap(landTwoData); //初始化地图
@@ -40,7 +40,16 @@ var landTwo = {
     },
     // 初始化地图
     initMap: function (landTwoData) {
-        // alert("222")
+        // console.log(landTwoData);
+        var satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {  
+            maxZoom: 22,  
+            minZoom: 5  
+        });
+        var googleimga = L.tileLayer.chinaProvider('Google.Satellite.Annotion', {  
+                maxZoom: 22,  
+                minZoom: 5  
+            });
+        var googleimage = L.layerGroup([satelliteMap, googleimga]);  
         if (landTwoData == undefined) {
             landTwoData = {
                 "data": {
@@ -54,22 +63,15 @@ var landTwo = {
             lat: Number(landTwoData.data.Longitude),
             lng: Number(landTwoData.data.Latitude)
         };
-        landTwo.map = new google.maps.Map(document.getElementById('createmaparea'), {
-            zoom: Number(landTwoData.data.MapZoom),
-            center: myLatLng,
-            scaleControl: true, //地图比例控件
-            disableDefaultUI: true, //默认UI
-            panControl: true,
-            mapTypeControl: true,
-            streetViewControl: true,
-            overviewMapControl: true,
-            rotateControl: true,
-            mapTypeId: google.maps.MapTypeId.HYBRID,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL
-            }
-        });
+        landTwo.map = L.map("createmaparea", {  
+            center: myLatLng,  
+            zoom: Number(landTwoData.data.MapZoom),  
+            layers: [googleimage],  
+            zoomControl: false,
+            editable: true,
+            zoomControl: false,//放大缩小控件，不显示
+            attributionControl: false//右下角属性控件，不显示
+        });  
     },
     //地图首次绘制提示事件 <-- 创建地块时地图上的绘制提示事件 -->
     removefirsthelp: function (bind) {
@@ -94,7 +96,7 @@ var landTwo = {
     },
     //  开始绘制地块
     newpolygonareafn: function () {
-        $("#createmap .maphelptext").find("span").html("依次打点以绘制地块,鼠标左键双击或地块轮廓闭合时可结束绘制,结束后可拖拽边界点来修改轮廓。");
+        $("#createmap .maphelptext").find("span").html("依次打点以绘制地块,鼠标左键双击可结束绘制,结束后可拖拽边界点来修改轮廓。");
         $("#createmap .mapcomplete span.mc_edit_new").remove();
         $("#createmap .mapcomplete span.mc_edit").css({
             "display": "none"
@@ -109,90 +111,81 @@ var landTwo = {
         }, 200);
     },
     drawPolygonMap: function () {
-        var newdrawingManager = new google.maps.drawing.DrawingManager({
-            drawingMode: google.maps.drawing.OverlayType.POLYGON,
-            drawingControl: true,
-            drawingControlOptions: {
-                position: google.maps.ControlPosition.TOP_CENTER,
-                drawingModes: ['polygon']
-            },
-            markerOptions: {
-                icon: './pointer.png'
-            },
-            polygonOptions: {
-                strokeColor: "#399afb",
-                fillColor: "#399afb",
-                fillOpacity: 0.5,
-                strokeWeight: 2,
-                clickable: true,
-                editable: true,
-                strokeStyle: 'dashed',
-                zIndex: (landTwo.drawingManager.length) + 1
+        // 单击后确定的实线
+        landTwo.lines = new L.polyline([],{
+            weight: 3,
+            color: '#399afb',
+        });
+        // 跟随鼠标的虚线
+        landTwo.tempLines = new L.polyline([],{
+            weight: 3,
+            color: '#399afb',
+            dashArray: 5,
+        });
+        landTwo.map.on('click',function(e){
+            landTwo.points.push([e.latlng.lat, e.latlng.lng]);//点击的点所在的经纬度
+            landTwo.lines.addLatLng(e.latlng);
+            landTwo.map.addLayer(landTwo.tempLines);
+            landTwo.map.addLayer(landTwo.lines);
+        });
+        landTwo.map.on('mousemove',function(e){
+            // 鼠标移动跟随鼠标移动的虚线
+            if (landTwo.points.length > 0) {
+                ls = [landTwo.points[landTwo.points.length - 1], [e.latlng.lat, e.latlng.lng], landTwo.points[0]]
+                landTwo.tempLines.setLatLngs(ls);
             }
         });
-        newdrawingManager.setMap(landTwo.map);
-        newdrawingManager.addListener('polygoncomplete', landTwo.shapecomplete); //添加完成事件事件监听
-        newdrawingManager.addListener('overlaycomplete', landTwo.overlaycomplete); //添加编辑事件监听
-        landTwo.drawingManager.push(newdrawingManager);
-    },
-    // 多边形 闭合时回调    //绘制的多边形地块闭合后 可拖拽地块点改变地块形状
-    shapecomplete: function (e) {
-        var index = e.zIndex - 1;
-        landTwo.drawingManager[index].setDrawingMode(null);
-        if (landTwo.shape[index] != null) {
-            landTwo.shape[index].setMap(null);
-        }
-        //清除上一个围栏叠加层
-        landTwo.shape[index] = e;
-        landTwo.shape[index].setMap(landTwo.map);
-        $("#createmap .maphelptext span").html("可拖拽边界点来修改轮廓");
-        $("#createmap .mapcomplete span.mc_edit").css({
-            "display": "inline-block"
+        landTwo.map.on('dblclick',function(e){
+            // console.log(landTwo.points);
+            landTwo.plotCoordinates = landTwo.points.slice(0,landTwo.points.length-1);//删除双击产生的冗余坐标
+            if(landTwo.plotCoordinates.length >= 2){
+                // console.log(landTwo.plotCoordinates);
+                landTwo.polygonLayer = L.polygon(landTwo.plotCoordinates);
+                landTwo.map.addLayer(landTwo.polygonLayer);
+                landTwo.map.removeLayer(landTwo.lines); //删除实线
+                landTwo.map.removeLayer(landTwo.tempLines); //删除虚线
+                landTwo.map.off('click');   // 关闭点击地图绘制地块事件
+                $("#createmap .maphelptext span").html("依次打点以绘制地块,鼠标左键双击可结束绘制,结束后可拖拽边界点来修改轮廓。。");
+                $("#createmap .mapcomplete span.mc_edit").css({
+                    "display": "inline-block"
+                });
+                $("#createmap .mapcomplete").fadeIn('fast');
+            }
         });
-        $("#createmap .mapcomplete").fadeIn('fast');
     },
-    // 绘制地块完成闭合后触发
-    overlaycomplete: function (e) {
-        if (e.type == google.maps.drawing.OverlayType.POLYGON) {
-            var newShape = e.overlay;
-            newShape.colorindex = 0;
-            landTwo.allShape.push(newShape);
-            landTwo.nowareaindex = landTwo.allShape.length - 1;
-            newShape.type = e.type;
-            var array = newShape.getPath().getArray();
-            google.maps.event.addListener(newShape, 'click', function () {});
-            google.maps.event.addListener(newShape.getPath(), 'insert_at', function () {});
-            google.maps.event.addListener(newShape.getPath(), 'set_at', function () {});
-        }
-        $("#createmap").unbind('mouseenter');
-        $("#createmap").unbind('mouseleave');
-        $("#createmap").unbind('click');
-        $("#createmap .maphelp").remove();
+
+    //  闭合后 重新绘制   <--点击 重新绘制 执行 -->
+    exitpolygonpathfn: function () {
+        $("#createmap .mapcomplete").fadeOut('fast');
+        $('g').empty()
+        landTwo.map.removeLayer(landTwo.polygonLayer);//删除地块图层
+        landTwo.plotCoordinates = null;
+        landTwo.points = [];
+        landTwo.polygonLayer = null;
+        landTwo.lines = null;
+        landTwo.tempLines = null;
+        landTwo.removefirsthelp(false); // // 不是首次绘制
+        landTwo.drawPolygonMap();
     },
-    //   绘制地块闭合后  点击下一步执行     //提交地块信息(第二步)
+
+    //  闭合后 点击下一步执行     //提交地块信息(第二步)
     savepolygonpathfn: function () {
-        landTwo.editareamenu(landTwo.allShape[landTwo.nowareaindex]);
-        if (landTwo.allShape[landTwo.nowareaindex].edit) {
-            landTwo.editpolygonstate(landTwo.allShape[landTwo.nowareaindex], landTwo.allShape[landTwo.nowareaindex].strokeColor, false);
-        } else {
-            landTwo.editpolygonfn(landTwo.allShape[landTwo.nowareaindex], false);
-        }
-        var coordinateData = landTwo.ReturnLonLat();
+        // console.log(landTwo.polygonLayer);
+        // console.log(landTwo.map);
         var param = cloneObjectFn(paramList);
         var entityJson = {
             "LandID": landTwo.landTwoid,
-            "Longitude": coordinateData[1].center[0], //经度数值大
-            "Latitude": coordinateData[1].center[1],
-            "MapZoom": coordinateData[1].zoom,
+            "Longitude": (landTwo.polygonLayer._bounds._southWest.lat + landTwo.polygonLayer._bounds._northEast.lat)/2, //经度数值大
+            "Latitude": (landTwo.polygonLayer._bounds._southWest.lng + landTwo.polygonLayer._bounds._northEast.lng)/2,
+            "MapZoom": landTwo.map._zoom,
         }
-        var coordinatePath = coordinateData[0][0].path;
         var landPoint = []
-        for (var i = 0; i < coordinatePath.length; i++) {
+        for (var i = 0; i < landTwo.polygonLayer._latlngs[0].length; i++) {
             var landPoints = {
                 "LandID": landTwo.landTwoid,
                 "Index": i + 1,
-                "Longitude": coordinatePath[i][1],
-                "Latitude": coordinatePath[i][0]
+                "Longitude": landTwo.polygonLayer._latlngs[0][i].lng,
+                "Latitude": landTwo.polygonLayer._latlngs[0][i].lat
             }
             landPoint.push(landPoints);
         }
@@ -214,125 +207,23 @@ var landTwo = {
             }
         });
     },
-    //   修改普通多边形状态
-    editpolygonstate: function (obj, edit) {
-        obj.setOptions({
-            strokeColor: "#399afb",
-            fillColor: "#399afb",
-            editable: edit,
-        })
-        obj.strokeColor = "#399afb";
-        obj.editable = edit;
+
+    //  点击编辑绘制对应的地块
+    drawdbx: function (polygonobj) {
+        $("#createmap .maphelptext").slideDown('fast');
+        $("#createmap .maphelptext span").html("可拖拽边界点来修改轮廓");
+        $("#createmap .mapcomplete span.mc_edit_new").remove();
+        $("#createmap .mapcomplete span.mc_edit").css({
+            "display": "inline-block"
+        });
+        $("#createmap .mapcomplete").fadeIn('fast');
+        // console.log(polygonobj);
+        landTwo.polygonLayer = L.polygon(polygonobj);
+        landTwo.map.addLayer(landTwo.polygonLayer);
+        landTwo.polygonLayer.enableEdit();
     },
-    // 修改地块状态，，由可编辑变成不可编辑
-    editpolygonfn: function (obj, edit) {
-        obj.setOptions({
-            strokeColor: "#399afb",
-            fillColor: "#399afb",
-            fillOpacity: 0.5,
-            strokeWeight: 2,
-            clickable: true,
-            editable: edit,
-            strokeStyle: 'dashed'
-        })
-    },
-    //     //闭合后 修改点的回调 统计点坐标
-    ReturnLonLat: function () {
-        var farmobj = {};
-        var polygondata = [];
-        var bounds = new google.maps.LatLngBounds();
-        for (var i = 0; i < landTwo.allShape.length; i++) {
-            var arr = landTwo.allShape[i].getPath().getArray();
-            var polygonobj = {
-                "path": []
-            };
-            for (var j = 0; j < arr.length; j++) {
-                bounds.extend(arr[j]);
-                var pathpointer = []
-                pathpointer.push(arr[j].lat());
-                pathpointer.push(arr[j].lng());
-                (polygonobj.path).push(pathpointer);
-            };
-            polygonobj.areacolor = landTwo.allShape[i].strokeColor;
-            polygonobj.colorindex = landTwo.allShape[i].colorindex;
-            polygonobj.areaname = landTwo.allShape[i].areaname;
-            polygondata.push(polygonobj);
-        }
-        farmobj.center = [];
-        farmobj.center.push(bounds.getCenter().lat());
-        farmobj.center.push(bounds.getCenter().lng());
-        farmobj.zoom = landTwo.map.getZoom();
-        return [polygondata, farmobj];
-    },
-    //  闭合后 重新绘制   <--点击 重新绘制 执行 -->
-    exitpolygonpathfn: function () {
-        $("#createmap .mapcomplete").fadeOut('fast');
-        if ($("#createmap .mapcomplete span.mc_edit_exit").html() == "取消本次修改") {
 
-            $("#createmap .mapeditlist").css("right", "-210px");
-            $("#createmap .mapeditarea .areaedit").show().siblings(".carameedit").hide();
-            $("#createmap .mapeditarea").animate({
-                "right": "0px"
-            }, 200, function () {
-                $("#createmap .mapcomplete span.mc_edit_exit").html("放弃本次编辑");
-            });
-            $("#createmap .maphelptext").slideUp('fast');
-            if (landTwo.allShape[landTwo.nowareaindex].edit) {
-
-                landTwo.allShape[landTwo.nowareaindex].setPaths(temppath);
-                landTwo.editpolygonstate(landTwo.allShape[landTwo.nowareaindex], landTwo.allShape[landTwo.nowareaindex].strokeColor, true)
-            } else {
-
-                landTwo.allShape[landTwo.nowareaindex].setPaths(temppath);
-                landTwo.editpolygonfn(landTwo.allShape[landTwo.nowareaindex], true);
-            }
-        } else if ($("#createmap .mapcomplete span.mc_edit_exit").html() != "取消本次修改" && $("#createmap .mapeditlist .maplistcon ul li").length > 0) {
-
-            $("#createmap .maphelptext").slideUp('fast');
-            $("#createmap .mapeditarea").css("right", "-210px");
-            $("#createmap .mapeditlist").animate({
-                "right": "0px"
-            }, 200);
-            if (!landTwo.allShape[landTwo.nowareaindex].edit) {
-
-                landTwo.allShape[landTwo.nowareaindex].setMap(null);
-                landTwo.allShape.splice(landTwo.nowareaindex, 1);
-            }
-        } else {
-
-            $("#createmap .maphelptext").find("span").html("依次打点以绘制地块,鼠标左键双击或地块轮廓闭合时可结束绘制,结束后可拖拽边界点来修改轮廓。");
-            if (!landTwo.allShape[landTwo.nowareaindex].edit) {
-
-                landTwo.allShape[landTwo.nowareaindex].setMap(null);
-                landTwo.allShape.splice(landTwo.nowareaindex, 1);
-            }
-            layer.msg('请在地图上打点重新绘制', {
-                time: 1500
-            });
-            landTwo.drawPolygonMap();
-        }
-    },
-    //   地块编辑 初始化 和修改
-    editareamenu: function (obj) {
-        // console.log(6666)
-        // console.log(arguments)
-        if (arguments.length == 0) {
-            $("#createmap .mapeditarea input.polygonname").val();
-            $("#createmap .mapeditnc .polygoncolors span:first").addClass("colorbtnactive").siblings("span").removeClass("colorbtnactive");
-        } else {
-            if (obj) {
-                // console.log(obj)
-                $("#createmap .mapeditnc>p.mapareanamebox span.planttextlength").html("");
-                if ($("#createmap .mapeditarea").data("mapeditareaname") && $("#createmap .mapeditarea").data("mapeditareaname") != "") {
-                    $("#createmap .mapeditarea input.polygonname").val($("#createmap .mapeditarea").data("mapeditareaname"));
-                } else {
-                    $("#createmap .mapeditarea input.polygonname").val(obj.areaname);
-                }
-                $("#createmap .mapeditnc .polygoncolors span").eq(obj.colorindex).addClass("colorbtnactive").siblings("span").removeClass("colorbtnactive");
-            }
-        }
-    },
-    //地区三级联动监听
+    // //地区三级联动监听
     selectChange: function () {
         $("#companypicker select").bind('click', function () {
             $("#companypicker select").css("color", "#666");
@@ -354,60 +245,19 @@ var landTwo = {
             landTwo.mapLatLngchange(17);
         })
     },
-    //改变地图中心，重新
+    // //改变地图中心，重新
     mapLatLngchange: function (zoom) {
         var address = $("#companypicker select.pa").val() + $("#companypicker select.pb").val() + $("#companypicker select.pc").val() + $("#whiteaddress").val();
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-            address: address
-        }, function (results, status) {
-            if (results.length == 0 || status == "ZERO_RESULTS") {
+        var geocoder = new AMap.Geocoder();
+        geocoder.getLocation(address, function(status, result) {
+            if (status === 'complete'&& result.geocodes.length) {
+                var lnglat = result.geocodes[0].location;
+                landTwo.map.panTo({lat: lnglat.lat, lng: lnglat.lng})
+            }else{
                 layer.msg('未搜索到该地址', {
                     time: 1500
                 });
-            } else {
-                //判断解析状态
-                if (status == google.maps.GeocoderStatus.OK) {
-                    landTwo.map.setCenter(results[0].geometry.location);
-                    landTwo.map.setZoom(zoom);
-                } else {
-                    return false;
-                }
             }
-        });
-    }, //  点击编辑绘制对应的地块
-    drawdbx: function (polygonobj) {
-        $("#createmap .maphelptext").slideDown('fast');
-        $("#createmap .maphelptext span").html("可拖拽边界点来修改轮廓");
-        $("#createmap .mapcomplete span.mc_edit_new").remove();
-        $("#createmap .mapcomplete span.mc_edit").css({
-            "display": "inline-block"
-        });
-        $("#createmap .mapcomplete").fadeIn('fast');
-        var myTrip = [];
-        for (var i in polygonobj) {
-            var item = new google.maps.LatLng(polygonobj[i][0], polygonobj[i][1]);
-            myTrip.push(item);
-        }
-
-        landTwo.newpolygon = new google.maps.Polygon({
-            path: myTrip,
-            strokeColor: "#1e9fff",
-            strokeOpacity: 1,
-            strokeWeight: 2,
-            fillColor: "#1e9fff",
-            fillOpacity: 0.5,
-            editable: true,
-            geodesic: true,
-        });
-        landTwo.newpolygon.setMap(landTwo.map);
-        landTwo.newpolygon.edit = true;
-        landTwo.newpolygon.areaname = polygonobj.areaname;
-        if (polygonobj.colorindex) {
-            landTwo.newpolygon.colorindex = polygonobj.colorindex;
-        } else {
-            landTwo.newpolygon.colorindex = 0;
-        }
-        landTwo.allShape.push(landTwo.newpolygon);
-    },
+        })
+    }, 
 }

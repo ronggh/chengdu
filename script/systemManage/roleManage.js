@@ -510,7 +510,6 @@ var rolesmanageFn = {
     submitPopup: function (opera_type) { //提交/编辑弹窗
         //监听提交
         form.on('submit(submitAddRole)', function (data) {
-            // console.log(data)
             if (!two_tenName.test(data.field.RoleName.trim())) {
                 layer.msg("请输入2-30位英文、数字、汉字组合的角色名称", {
                     time: 1500

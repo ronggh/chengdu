@@ -26,7 +26,6 @@ var landOne = {
     },
     landSure: function () {
         form.on('submit(submitAddland)', function (data) {
-            // console.log(data);
             if (!two_tenName.test(data.field.landName.trim())) {
                 layer.msg("请输入2-30位英文、数字、汉字组合的地块名称", {
                     time: 1500

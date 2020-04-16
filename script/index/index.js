@@ -27,7 +27,6 @@ $(function () {
         //  获取用户左侧可用菜单栏
         var param = cloneObjectFn(paramList);
         AjaxRequest(param, "function", "getList").then(function (res) {
-            // console.log(res)
             levelsobj = [];
             $("#za_slide ul").html();
             menuRes = JSON.parse(res);
@@ -79,29 +78,27 @@ $(function () {
             alermInfo();
             getMassageIsread() //获取消息提醒
         });
-        setTimeout(function () {
-            $(".sideMenu .nLi i").click(function () {
-                if ($(this).parent(".nLi").hasClass("on")) {
-                    $(this).next(".sub").slideUp(300, function () {
-                        $(this).parent(".nLi").removeClass("on");
-                    });
-                    $(this).find("span").removeClass("icon-xiala");
-                    $(this).find("span").addClass("icon-xiala1");
-                } else {
-                    $(this).parent(".nLi").siblings().find(".sub").slideUp(300, function () {
-                        $(this).parent(".nLi").siblings().removeClass("on");
-                    });
-                    $(this).find("span").removeClass("icon-xiala1");
-                    $(this).find("span").addClass("icon-xiala");
-                    $(this).next(".sub").slideDown(300, function () {
-                        $(this).parent(".nLi").addClass("on");
-                    });
-                    if ($(this).next(".sub").length == 0) {
-                        LoadAction('automaticMonitor', 0);
-                    }
+        $(document).on("click", ".sideMenu .nLi i", function () {
+            if ($(this).parent(".nLi").hasClass("on")) {
+                $(this).next(".sub").slideUp(300, function () {
+                    $(this).parent(".nLi").removeClass("on");
+                });
+                $(this).find("span").removeClass("icon-xiala");
+                $(this).find("span").addClass("icon-xiala1");
+            } else {
+                $(this).parent(".nLi").siblings().find(".sub").slideUp(300, function () {
+                    $(this).parent(".nLi").siblings().removeClass("on");
+                });
+                $(this).find("span").removeClass("icon-xiala1");
+                $(this).find("span").addClass("icon-xiala");
+                $(this).next(".sub").slideDown(300, function () {
+                    $(this).parent(".nLi").addClass("on");
+                });
+                if ($(this).next(".sub").length == 0) {
+                    LoadAction('automaticMonitor', 0);
                 }
-            })
-        }, 500)
+            }
+        })
     });
 })
 var menuRes = "";
@@ -277,7 +274,6 @@ function getUserInfoAll() {
     var param = cloneObjectFn(paramList);
     param["userID"] = localStorage.getItem('USER_ID');
     AjaxRequest(param, "user", "getUserInfo").then(function (res) {
-        // console.log(res);
         var userLogin = JSON.parse(res);
         $("input[name = orgid]").val(userLogin.data.OrgID);
         $("input[name = orgNameone]").val(userLogin.data.OrgName);
@@ -295,7 +291,6 @@ function alermInfo(){
     var param = cloneObjectFn(paramList);
     var postdata = GetPostData(param, "iot", "getIotOverView");
     postFnajax(postdata).then(function (res) {
-        // console.log(res);
         $.each(menuRes.data,function(index,item){
             if (item.FuncName == "传感设备") {
                 var alermCount = "";

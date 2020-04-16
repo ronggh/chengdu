@@ -103,7 +103,7 @@
 .secondary .level_two .detail {
     height: 132px;
     box-sizing: border-box;
-    padding: 25px 50px 15px;
+    padding: 25px 45px 15px;
 }
 
 .secondary .level_two .offline_detail {
@@ -112,7 +112,10 @@
 }
 
 .secondary .level_two .detail .creact_num {
-    height: 45px;
+    /* height: 45px; */
+    width: 138px;
+    line-height: 45px;
+    text-align: center;
     font-size: 30px;
     font-weight: 700;
     color: #389bff;
@@ -122,7 +125,7 @@
     font-size: 14px;
     color: #c6c6c6;
     font-weight: 400;
-    padding: 0 0 0 5px;
+    padding: 0 0 0 3px;
 }
 
 .secondary .level_two .detail .progress_line {

@@ -262,7 +262,7 @@
             .secondary .level_two .detail {
                 height: 132px;
                 box-sizing: border-box;
-                padding: 25px 50px 15px;
+                padding: 25px 45px 15px;
             }
     
             .secondary .level_two .offline_detail {
@@ -271,7 +271,10 @@
             }
     
             .secondary .level_two .detail .creact_num {
-                height: 45px;
+                /* height: 45px; */
+                width: 138px;
+                line-height: 45px;
+                text-align: center;
                 font-size: 30px;
                 font-weight: 700;
                 color: #389bff;
@@ -503,4 +506,64 @@
         float: right;
         width: 50%;
         height: 160px;
+    }
+    #chart .chartbtn1 {
+        margin: 20px 0px;
+    }
+#chart .chartbtn1 ul {
+        float: left;
+        border-radius: 3px;
+        border: 1px solid #999;
+        margin-left: 30px;
+    }
+#chart .chartbtn1 ul li {
+        width: 80px;
+        float: left;
+        border-right: 1px solid #999;
+        line-height: 25px;
+        padding: 0px;
+        text-align: center;
+        margin-left: 0px;
+    }
+#chart .chartbtn1 ul li:hover {
+        /* background-color: #389bff; */
+        color: #389bff;
+        /* border: 0px; */
+    }
+    
+    #chart .chartbtn1 ul li.active {
+        background-color: #389bff;
+        color: #fff;
+        border: 0px;
+    }
+#chart .chartbtn1 ul li:last-child {
+        border-right: none;
+    }
+    
+    #chart .chartbtn1 span {
+        float: right;
+        margin-right: 20px;
+        line-height: 25px;
+        width: 100px;
+        background-color: #389bff;
+        color: #fff;
+        text-align: center;
+        border-radius: 3px;
+    }
+#chart .chartbtn1 #dateTimeDiv{
+        height: 25px;
+        width: 180px;
+        position: relative;
+        float: left;
+    }
+#chart .chartbtn1 #dateTimeDiv img{
+        position: absolute;
+        left: 15px;
+        top: 5px;
+    }
+#chart .chartbtn1 #dateTime {
+        height: 25px;
+        width: 180px;
+        padding-left: 30px;
+        margin-left: 10px;
     }

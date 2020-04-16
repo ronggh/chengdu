@@ -1,79 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
     <title>成都研究院</title>
-    <link rel="stylesheet" href="./css/iconfont.css">
-    <link rel="stylesheet" href="./libs/layui/css/layui.css">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/index/index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./css/iconfont.css" />
+    <link rel="stylesheet" href="./libs/layui/css/layui.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/index/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+  </head>
+  <body>
     <div id="za_mian" class="clearfix">
-        <input type="hidden" name="orgid">
-        <input type="hidden" name="orgNameone">
-        <!-- header -->
-        <div id="za_title" class="clearfix">
-            <!--   header 左侧logo部分 -->
-            <div class="za_tc_logo">
-                <span class="za_li_ation"><img class="logoimg" src="./images/index/index_logo.png" alt=""
-                        width="30"></span>
-                <span class="title_plus">中国移动农业AI大脑</span>
-            </div>
-            <div class="za_tc_middle">
-                <marquee behavior=scroll scrollamount="5"  class="moveAlarem"></marquee>
-            </div>
-            <!--   header 右侧部分 -->
-            <div class="za_tc_menu">
-                <div class="user_avatar">
-                    <img src="./images/za_user_a.png" alt="">
-                    <span class="pyc"></span>
-                </div>
-                <div class="user_avatarList">
-                    <ul>
-                        <li class="orgName pyc"><i class="iconfont icon-jigou"></i><a href="#"></a></li>
-                        <li class="editAvatar"><i class="iconfont icon-touxiang-copy-copy-copy"></i>修改头像 </li>
-                        <li class="editPassword"><i class="iconfont icon-mima"></i>修改密码</li>
-                        <li class="exitLogin"><i class="iconfont icon-tuichu"></i>退出登录 </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="massageAleam">
-                <span class="iconfont icon-lingdang"></span>
-                <i class="massageNum"></i>
-            </div>
+      <input type="hidden" name="orgid" />
+      <input type="hidden" name="orgNameone" />
+      <!-- header -->
+      <div id="za_title" class="clearfix">
+        <!--   header 左侧logo部分 -->
+        <div class="za_tc_logo">
+          <span class="za_li_ation"
+            ><img
+              class="logoimg"
+              src="./images/index/index_logo.png"
+              alt=""
+              width="30"
+          /></span>
+
+          <span class="title_plus">中国移动农业AI大脑</span>
         </div>
-        <!-- 左侧导航栏部分 -->
-        <div id="za_slide" class="sideMenu">
+        <div class="za_tc_middle">
+          <marquee
+            behavior="scroll"
+            scrollamount="5"
+            class="moveAlarem"
+          ></marquee>
+        </div>
+        <!--   header 右侧部分 -->
+        <div class="za_tc_menu">
+          <div class="user_avatar">
+            <img src="./images/za_user_a.png" alt="" />
+            <span class="pyc"></span>
+          </div>
+          <div class="user_avatarList">
             <ul>
-                <!-- <li class="nLi"><i class="iconfont icon-999999" pid="7aac5fe6-b976-9c8a-b6d5-0b8982e90bd9"
-                        pagename="farmManage">农场管理<span class="iconfont icon-xiala1"></span></i>
-                    <ul class="sub">
-                        <li pagename="cameraManage"><a href="javascript:void(0)">摄像头管理</a> </li>
-                        <li pagename="deviceManage"><a href="javascript:void(0)">设备管理</a> </li>
-                        <li pagename="landManage"><a href="javascript:void(0)">地块管理</a> </li>
-                        <li pagename="categoryManage"><a href="javascript:void(0)">品类管理</a> </li>
-                    </ul>
-                </li>-->
+              <li class="orgName pyc">
+                <i class="iconfont icon-jigou"></i><a href="#"></a>
+              </li>
+              <li class="editAvatar">
+                <i class="iconfont icon-touxiang-copy-copy-copy"></i>修改头像
+              </li>
+              <li class="editPassword">
+                <i class="iconfont icon-mima"></i>修改密码
+              </li>
+              <li class="exitLogin">
+                <i class="iconfont icon-tuichu"></i>退出登录
+              </li>
             </ul>
+          </div>
         </div>
-        <div id="za_content_cont" class="clearfix">
-            <!-- 右侧中间说明 -->
-            <div id="za_contentTop">
-            </div>
-            <!-- 详细内容 -->
-            <div id="za_content">
-            </div>
+        <div class="massageAleam">
+          <span class="iconfont icon-lingdang"></span>
+          <i class="massageNum"></i>
         </div>
+      </div>
+      <!-- 左侧导航栏部分 -->
+      <div id="za_slide" class="sideMenu">
+        <ul></ul>
+      </div>
+      <div id="za_content_cont" class="clearfix">
+        <!-- 右侧中间说明 -->
+        <div id="za_contentTop"></div>
+        <!-- 详细内容 -->
+        <div id="za_content"></div>
+      </div>
     </div>
     <!-- header 鼠标经过的弹窗 -->
     <div id="tip"></div>
-</body>
-<!--修改用户密码弹窗-->
-<script type="text/html" id="editUserPass">
+  </body>
+  <!--修改用户密码弹窗-->
+  <script type="text/html" id="editUserPass">
     <div class="layui-form PopupLayer edit_pass_popup">
         <div class="layui-form-item">
             <label class="layui-form-label"><span class="c_red">*&nbsp;</span>旧密码</label>
@@ -101,9 +115,9 @@
             <button class="layui-btn" lay-submit lay-filter="submitEditPass">确定</button>
         </div>
     </div>
-</script>
-<!-- 上传头像uploadSure -->
-<script type="text/html" id="uploadAvatar">
+  </script>
+  <!-- 上传头像uploadSure -->
+  <script type="text/html" id="uploadAvatar">
     <div class="layui-upload upload_pop PopupLayer uploadHeadImg">
         <div class="layui-btn" id="uploadAva">点击上传</div>
         <div class="checkAvatar" style="width:460px;height:150px;"></div>
@@ -112,21 +126,42 @@
             <button id='uploadSureBtn' class="layui-btn layui-btn-normal">确定</button>
         </div>
     </div>
-</script>
-<script src="./libs/jquery.min.js"></script>
-<script src="./libs/laber.js"></script>
-<script src = "https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-<script src="./libs/jQuery.md5.js"></script>
-<script src="./libs/layui/layui.js"></script>
-<script src="./libs/layui/layui-config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js" type="text/javascript" charset="utf-8"></script>
-<script
-    src="http://ditu.google.cn/maps/api/js?v=3.25&key=AIzaSyDAqZRYTWTlGZtQbF9bj7qWSePgcfn13R0&&libraries=places&&libraries=drawing"
-    async defer>
-</script>
-<script>
-    document.write('<script src="./script/common/common.js?v=' + new Date().getTime() + '"><\/script>');
-    document.write('<script src="./script/index/index.js?v=' + new Date().getTime() + '"><\/script>');
-</script>
+  </script>
+  <script src="./libs/jquery.min.js"></script>
+  <script src="./libs/laber.js"></script>
+  <script src="./libs/jQuery.md5.js"></script>
+  <script src="./libs/layui/layui.js"></script>
+  <script src="./libs/layui/layui-config.js"></script>
+  <script
+    src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+
+  <script
+    src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""
+  ></script>
+  <script src="./libs/leaflet.ChineseTmsProviders.js"></script>
+  <script src="./libs/Leaflet.Editable.js"></script>
+  <!-- 高德地图的jsAPI -->
+  <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+  <script
+    type="text/javascript"
+    src="https://webapi.amap.com/maps?v=1.4.15&key=8010097315ab501d7866f25f2a8e0c4e&plugin=AMap.Geocoder"
+  ></script>
+
+  <script>
+    document.write(
+      '<script src="./script/common/common.js?v=' +
+        new Date().getTime() +
+        '"><\/script>'
+    );
+    document.write(
+      '<script src="./script/index/index.js?v=' +
+        new Date().getTime() +
+        '"><\/script>'
+    );
+  </script>
 </html>

@@ -18,7 +18,6 @@ $(function () {
 
     //查询
     form.on('submit(land_formSearch)', function (data) {
-        // console.log(data)
         var name = data.field.landchName;
         var crop = $('input[name="raiseCrops_instal"]').val();
         var person = data.field.personchName;
@@ -125,8 +124,6 @@ var sellstatisticsFn = {
         }
         var postdata = GetPostData(param, "land", "getLandListPage");
         postFnajax(postdata).then(function (res) {
-            // console.log(res);
-            // console.log(param)
             var res = JSON.parse(res);
             $.each(res.data, function (index, item) {
                 item.CreateTime = item.CreateTime.replace("T", " ");
@@ -170,7 +167,6 @@ var sellstatisticsFn = {
                 area: ['450px', '200px'],
                 btn: ['确定', '取消'],
                 yes: function (index, layero) {
-                    // console.log(landId)
                     var param = cloneObjectFn(paramList);
                     param["operation"] = "delete";
                     param["landId"] = landId.LandID;
@@ -217,7 +213,6 @@ var sellstatisticsFn = {
         param['pageIndex'] = 1;
         var postdata = GetPostData(param, "crop", "getCropListPage");
         postFnajax(postdata).then(function (res) {
-            // console.log(res);
             var res = JSON.parse(res);
             setTimeout(function () {
                 form.render();

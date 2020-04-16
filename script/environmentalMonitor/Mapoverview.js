@@ -3,6 +3,7 @@ var keytimeold = 0;
 var keytimeoldplus = 0;
 var biga = $("style#biga").detach();
 var bigb = $("style#bigb").detach();
+var map;
 $(function () {
     GetUserAreaList(); //获取地块
     $(".Refresh").click(function () {
@@ -10,6 +11,7 @@ $(function () {
         var obj = this;
         setTimeout(function () {
             $(obj).find("img").removeClass("refresh");
+            map.remove();//删除地图及上面所有的图层
             GetAreamap($("#area").val())
         }, 500);
     });
@@ -26,16 +28,20 @@ function GetUserAreaList() {
     param["pageIndex"] = 1;
     var postdata = GetPostData(param, "land", "getLandListPage");
     postFnajax(postdata).then(function (res) {
+        // console.log(res);
         var landSelect = "";
         var landData = JSON.parse(res);
         $.each(landData.data, function (index, data) {
-            landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
+            if(data.SensorCount > 0 || data.ControllerCount > 0 || data.IntegratedCount > 0 || data.CameraCount > 0){
+                landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
                 '</option>'
+            }
         })
         $("#area").html(landSelect);
         form.render('select');
         GetAreamap($("#area").val()); //进入页面获取地块ID，获取设备渲染页面
         form.on('select(quiz)', function (data) { //切换地块获取设备渲染页面
+            map.remove();
             GetAreamap(data.value);
         })
     });
@@ -161,11 +167,20 @@ function GetAreamap(landId) { //, status, loading
 
 //google地图初始化
 function initMap(landRes) {
+    var satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {  
+        maxZoom: 22,  
+        minZoom: 5  
+    });
+    var googleimga = L.tileLayer.chinaProvider('Google.Satellite.Annotion', {  
+            maxZoom: 22,  
+            minZoom: 5  
+        });
+    var googleimage = L.layerGroup([satelliteMap, googleimga]);  
     if (landRes == undefined) {
         landRes = {
             "data": {
-                "Longitude": "31.044888689703832",
-                "Latitude": "121.93403497870327",
+                "Longitude": "39.90484185919572",
+                "Latitude": "116.4108939005555",
                 "MapZoom": 12,
             }
         }
@@ -174,74 +189,46 @@ function initMap(landRes) {
         lat: Number(landRes.Longitude),
         lng: Number(landRes.Latitude)
     };
-    map = new google.maps.Map(document.getElementById('mapcontain'), {
-        zoom: Number(landRes.MapZoom),
-        center: myLatLng,
-        scaleControl: true, //地图比例控件
-        disableDefaultUI: true, //默认UI
-        panControl: true,
-        mapTypeControl: true,
-        streetViewControl: true,
-        overviewMapControl: true,
-        rotateControl: true,
-        mapTypeId: google.maps.MapTypeId.HYBRID,
-        zoomControl: true,
-        zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.SMALL
-        }
-    });
+
+    map = L.map("mapcontain", {  
+        center: myLatLng,  
+        zoom: Number(landRes.MapZoom),  
+        layers: [googleimage],  
+        zoomControl: false,
+        editable: true,
+    }); 
 }
 
 //根据提供的坐标绘制地块
 function drawdbx(polygonobj) {
     var myTrip = [];
     $.each(polygonobj, function (index, item) {
-        myTrip.push(new google.maps.LatLng(item.Latitude, item.Longitude))
-    })
-    var mapPoints = new google.maps.Polygon({
-        path: myTrip,
-        strokeColor: "#1e9fff",
-        strokeOpacity: 1,
-        strokeWeight: 2,
-        fillColor: "#1e9fff",
-        fillOpacity: 0.5,
-        editable: false,
-        // geodesic: true,
-    })
-    mapPoints.setMap(map);
+        myTrip.push([item.Latitude, item.Longitude])
+    });
+    polygonLayer = L.polygon(myTrip);
+    map.addLayer(polygonLayer);
 }
 
 //根据设备点绘制设备及摄像头位置
 function markerCamera(cameraData) {
     $.each(cameraData, function (index, item) {
-        // console.log(Number item.Latitude);
-        var markerCa = new google.maps.Marker({
-            position: {
-                lat: Number(item.Latitude),
-                lng: Number(item.Longitude)
-            },
-            map: map,
-            name: item.CameraName,
-            value: item.CameraID,
-            icon: '../../images/shexiangtouhong@2x.png'
+        var icon3 = L.icon({
+            iconUrl: './images/shexiangtouhong@2x.png',
+            iconSize: [20, 26],
+            DeviceID: item.CameraID,
         });
-        markerCa.setMap(map);
+        L.marker([item.Latitude,item.Longitude], { icon: icon3 }).addTo(map);
     })
 }
 
 function markerDever(deverData) {
     $.each(deverData, function (index, item) {
-        var markerDe = new google.maps.Marker({
-            position: {
-                lat: Number(item.Latitude),
-                lng: Number(item.Longitude)
-            },
-            map: map,
-            name: item.DeviceName,
-            value: item.DeviceID,
-            icon: '../images/shebei@2x.png'
+        var icon3 = L.icon({
+            iconUrl: './images/shebei@2x.png',
+            iconSize: [20, 26],
+            DeviceID: item.DeviceID,
         });
-        markerDe.setMap(map);
+        L.marker([item.Latitude,item.Longitude], { icon: icon3 }).addTo(map);
     })
 }
 
@@ -333,7 +320,6 @@ function controlinit(data) {
 weather = [];
 /*综合设备初始化*/
 function combineinit(data) {
-    // console.log(data);
     $(".equipment .equip_con li.combine_con .weather").remove();
     if (data.length > 0) {
         $(".equipment .equip_con li.combine_con").empty();

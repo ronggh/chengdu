@@ -54,7 +54,6 @@ initLayuifn(['element', 'form', 'table', 'layer', 'laytpl', 'laypage', 'laydate'
             } else {
                 layer.msg("查询日期不能跨年",{time:1500})
             }
-            
         }
     });
 })
@@ -69,8 +68,11 @@ function GetUserAreaList() {
         var landSelect = "";
         var landData = JSON.parse(res);
         $.each(landData.data, function (index, data) {
-            landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
+            if(data.ControllerCount > 0 && data.FertilizerControllerCount == 0){
+                console.log(data.LandName);
+                landSelect = landSelect + '<option value="' + data.LandID + '">' + data.LandName +
                 '</option>'
+            }
         })
         $("#area").html(landSelect);
         form.render('select');
@@ -87,8 +89,6 @@ function GetArea(landId) { //, status, loading
     var postdata = GetPostData(param, "iot", "getIotDeviceInfo");
     postFnajax(postdata).then(function (res) {
         var CONTROLLER = 0;
-        // console.log("<<<<<<<<<控制设备>>>>>>");
-        // console.log(res);
         $("#tabNav2").html("");
         var result = JSON.parse(res);
         result.data.sort(function (value1,value2) {
@@ -213,8 +213,6 @@ function GetArea(landId) { //, status, loading
             }
             var postdata = GetPostData(param, "iot", "sensorControl");
             afterFnajax(postdata).then(function (res) {
-            // console.log(param);
-            // console.log(res);
                 var resData = JSON.parse(res);
                 if (resData.result.code == 200) { //操作成功
                     var switchindex = temp.index();
@@ -286,8 +284,6 @@ function tableCont(DeviceID, time, temp, title) {
     }
     var postdata = GetPostData(param, "iot", "getControlHistory"); //实时数据中的历史记录
     echesFnajax(postdata).then(function (res) {
-        // console.log(res);
-        // console.log(postdata);
         var Result = JSON.parse(res);
         if (typeof (Result.result.Msg) != "undefined") {
             location.reload();

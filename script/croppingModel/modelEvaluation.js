@@ -104,13 +104,14 @@ var ModelEval = {
     },
 
     // 评价  // 查看
-    Evaluation: function (id, type) {
+    Evaluation: function (id, type,Yield) {
+        var titleT = type == "look"?"查看":"评价";
         var fun_popup_tpl = document.getElementById('add_modelEvaluation').innerHTML;
         laytpl(fun_popup_tpl).render({}, function (html) {
             layer.open({
                 type: 1,
                 content: html,
-                title: ["评价", 'font-size:14px;height:40px;line-height:40px;'],
+                title: [titleT, 'font-size:14px;height:40px;line-height:40px;'],
                 area: ['670px', '500px'],
                 success: function (index, layero) {
                     var param = cloneObjectFn(paramList);
@@ -220,7 +221,7 @@ var ModelEval = {
                         if (type == "look") {
                             $('input[name="in"]').val(evaluationData.data.In);
                             $('input[name="out"]').val(evaluationData.data.Out);
-                            $('input[name="Yield"]').val(evaluationData.data.Yield);
+                            $('input[name="Yield"]').val(Yield);
                             $("input").each(function () {
                                 $(this).attr("disabled", "disabled");
                             })
@@ -231,7 +232,7 @@ var ModelEval = {
                         }else if(type == "evaluate"){
                             $('input[name="in"]').val(evaluationData.data.In);
                             $('input[name="out"]').val(evaluationData.data.Out);
-                            $('input[name="Yield"]').val(evaluationData.data.Yield);
+                            $('input[name="Yield"]').val(Yield);
                             $("input").each(function () {
                                 $(this).attr("disabled", "disabled");
                             });
